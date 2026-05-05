@@ -1,0 +1,49 @@
+[gd_scene load_steps=7 format=3 uid="uid://d2yi0cqbfih7l"]
+
+[ext_resource type="Script" uid="uid://cw0fb5kagdow8" path="res://scripts/player.gd" id="1_3vyb7"]
+[ext_resource type="Script" uid="uid://bo62pjdudrqw2" path="res://scripts/trail.gd" id="2_g2els"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6w21d"]
+size = Vector2(9, 6)
+
+[sub_resource type="Gradient" id="Gradient_65dh0"]
+offsets = PackedFloat32Array(0, 0.188525, 0.631148)
+colors = PackedColorArray(0.517184, 0.517184, 0.517184, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_g2gm7"]
+gradient = SubResource("Gradient_65dh0")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_p2ug2"]
+particle_flag_disable_z = true
+angle_min = -720.0
+angle_max = 720.0
+initial_velocity_min = -500.0
+gravity = Vector3(0, 0, 0)
+scale_min = 32.0
+scale_max = 48.0
+color = Color(1, 0.14902, 0.105882, 1)
+color_ramp = SubResource("GradientTexture1D_g2gm7")
+
+[node name="Player" type="Area2D"]
+collision_mask = 2
+script = ExtResource("1_3vyb7")
+
+[node name="shape" type="Polygon2D" parent="."]
+scale = Vector2(0.578947, 0.578947)
+color = Color(1, 0.151344, 0.108333, 1)
+polygon = PackedVector2Array(120, 0, -5, -58.196, 5.576, 0, -5, 58.196)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(5.5, 0)
+shape = SubResource("RectangleShape2D_6w21d")
+
+[node name="grounded" type="GPUParticles2D" parent="."]
+z_index = -1
+emitting = false
+amount = 15
+lifetime = 1.5
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_p2ug2")
+
+[node name="trail" type="Line2D" parent="."]
+script = ExtResource("2_g2els")

@@ -1,21 +1,57 @@
-[gd_scene load_steps=3 format=3 uid="uid://btrtpdonnmiig"]
+[gd_scene load_steps=4 format=3 uid="uid://btrtpdonnmiig"]
 
 [ext_resource type="PackedScene" uid="uid://d2yi0cqbfih7l" path="res://scenes/player.tscn" id="1_uwrxv"]
 [ext_resource type="Script" uid="uid://dy525wqc8vffw" path="res://scripts/gamemanager.gd" id="1_yqjtg"]
+[ext_resource type="Script" uid="uid://bo62pjdudrqw2" path="res://scripts/trail.gd" id="2_lnu2h"]
 
 [node name="game" type="Node2D" node_paths=PackedStringArray("player")]
 script = ExtResource("1_yqjtg")
 player = NodePath("Player")
 
+[node name="bg" type="Parallax2D" parent="."]
+repeat_size = Vector2(1567, 983)
+
+[node name="black" type="ColorRect" parent="bg"]
+offset_right = 1567.0
+offset_bottom = 983.0
+color = Color(0, 0, 0, 1)
+
+[node name="trail" type="Line2D" parent="." node_paths=PackedStringArray("player")]
+width = 20.0
+script = ExtResource("2_lnu2h")
+player = NodePath("../Player")
+
 [node name="Player" parent="." instance=ExtResource("1_uwrxv")]
-script = null
 
 [node name="Camera2D" type="Camera2D" parent="."]
 top_level = true
 
-[node name="bg" type="ColorRect" parent="."]
-offset_left = -744.0
-offset_top = -531.0
-offset_right = 823.0
-offset_bottom = 452.0
-color = Color(0, 0, 0, 1)
+[node name="Polygon2D" type="Polygon2D" parent="."]
+position = Vector2(424, 502)
+color = Color(0, 1, 1, 1)
+polygon = PackedVector2Array(710, -145, 719, 169, 487, 166, 481, -170)
+
+[node name="Polygon2D2" type="Polygon2D" parent="."]
+position = Vector2(1039, 144)
+color = Color(0, 1, 1, 1)
+polygon = PackedVector2Array(710, -145, 719, 169, 487, 166, 481, -170)
+
+[node name="Polygon2D3" type="Polygon2D" parent="."]
+position = Vector2(1434, 529)
+color = Color(0, 1, 1, 1)
+polygon = PackedVector2Array(710, -145, 719, 169, 487, 166, 481, -170)
+
+[node name="Polygon2D4" type="Polygon2D" parent="."]
+position = Vector2(2049, 171)
+color = Color(0, 1, 1, 1)
+polygon = PackedVector2Array(710, -145, 719, 169, 487, 166, 481, -170)
+
+[node name="Polygon2D5" type="Polygon2D" parent="."]
+position = Vector2(2471, 609)
+color = Color(0, 1, 1, 1)
+polygon = PackedVector2Array(710, -145, 719, 169, 487, 166, 481, -170)
+
+[node name="Polygon2D6" type="Polygon2D" parent="."]
+position = Vector2(3086, 251)
+color = Color(0, 1, 1, 1)
+polygon = PackedVector2Array(710, -145, 719, 169, 487, 166, 481, -170)

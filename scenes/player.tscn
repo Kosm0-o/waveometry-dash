@@ -1,7 +1,6 @@
-[gd_scene load_steps=7 format=3 uid="uid://d2yi0cqbfih7l"]
+[gd_scene load_steps=6 format=3 uid="uid://d2yi0cqbfih7l"]
 
 [ext_resource type="Script" uid="uid://cw0fb5kagdow8" path="res://scripts/player.gd" id="1_3vyb7"]
-[ext_resource type="Script" uid="uid://bo62pjdudrqw2" path="res://scripts/trail.gd" id="2_g2els"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6w21d"]
 size = Vector2(9, 6)
@@ -29,9 +28,10 @@ collision_mask = 2
 script = ExtResource("1_3vyb7")
 
 [node name="shape" type="Polygon2D" parent="."]
+position = Vector2(-35, 0)
 scale = Vector2(0.578947, 0.578947)
 color = Color(1, 0.151344, 0.108333, 1)
-polygon = PackedVector2Array(120, 0, -5, -58.196, 5.576, 0, -5, 58.196)
+polygon = PackedVector2Array(120, 0, -15, -58.196, 5, 0, -15, 58.196)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(5.5, 0)
@@ -44,6 +44,3 @@ amount = 15
 lifetime = 1.5
 local_coords = true
 process_material = SubResource("ParticleProcessMaterial_p2ug2")
-
-[node name="trail" type="Line2D" parent="."]
-script = ExtResource("2_g2els")

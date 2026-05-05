@@ -1,4 +1,5 @@
 extends Area2D
+class_name Player
 
 signal clamped(b)
 
@@ -12,7 +13,7 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	position.x += speed * delta
 	position.y -= dir * speed * delta
-	$shape.rotation_degrees = -45 * dir
+	rotation_degrees = -45 * dir
 	if Input.is_action_pressed("click"):
 		dir = 1
 	else:

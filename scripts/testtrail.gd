@@ -1,8 +1,9 @@
-extends Line2D
+extends Polygon2D
 
+"""
 @export var player : Player
 @export var between_length : float = 10.0
-@export var og_width : float = 21.0
+@export var og_width : float = 25.0
 
 var last_point_pos : Vector2 = Vector2.ZERO
 
@@ -21,3 +22,4 @@ func _process(delta: float) -> void:
 		last_point_pos = pos
 
 	points[points.size() - 1] = pos
+"""

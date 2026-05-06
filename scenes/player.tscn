@@ -28,10 +28,11 @@ collision_mask = 2
 script = ExtResource("1_3vyb7")
 
 [node name="shape" type="Polygon2D" parent="."]
-position = Vector2(-35, 0)
-scale = Vector2(0.578947, 0.578947)
+position = Vector2(-25, 0)
+scale = Vector2(0.5, 0.5)
 color = Color(1, 0.151344, 0.108333, 1)
-polygon = PackedVector2Array(120, 0, -15, -58.196, 5, 0, -15, 58.196)
+invert_border = 0.1
+polygon = PackedVector2Array(100, 0, -40, -60, 0, 0, -40, 60)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(5.5, 0)

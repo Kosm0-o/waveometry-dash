@@ -1,30 +1,42 @@
-[gd_scene load_steps=4 format=3 uid="uid://btrtpdonnmiig"]
+[gd_scene load_steps=5 format=3 uid="uid://btrtpdonnmiig"]
 
 [ext_resource type="PackedScene" uid="uid://d2yi0cqbfih7l" path="res://scenes/player.tscn" id="1_uwrxv"]
 [ext_resource type="Script" uid="uid://dy525wqc8vffw" path="res://scripts/gamemanager.gd" id="1_yqjtg"]
 [ext_resource type="Script" uid="uid://bo62pjdudrqw2" path="res://scripts/trail.gd" id="2_lnu2h"]
+[ext_resource type="Script" uid="uid://boiyb54qyfsae" path="res://scripts/testtrail.gd" id="3_lbhrr"]
 
 [node name="game" type="Node2D" node_paths=PackedStringArray("player")]
 script = ExtResource("1_yqjtg")
 player = NodePath("Player")
 
 [node name="bg" type="Parallax2D" parent="."]
-repeat_size = Vector2(1567, 983)
+repeat_size = Vector2(4000, 2500)
 
 [node name="black" type="ColorRect" parent="bg"]
-offset_right = 1567.0
-offset_bottom = 983.0
+offset_left = -528.0
+offset_top = -346.0
+offset_right = 3472.0
+offset_bottom = 2154.0
 color = Color(0, 0, 0, 1)
 
 [node name="trail" type="Line2D" parent="." node_paths=PackedStringArray("player")]
-width = 20.0
+z_as_relative = false
+width = 21.0
 script = ExtResource("2_lnu2h")
 player = NodePath("../Player")
 
+[node name="trail2" type="Polygon2D" parent="."]
+visible = false
+z_as_relative = false
+script = ExtResource("3_lbhrr")
+
 [node name="Player" parent="." instance=ExtResource("1_uwrxv")]
+z_index = 1
+z_as_relative = false
 
 [node name="Camera2D" type="Camera2D" parent="."]
 top_level = true
+zoom = Vector2(0.5, 0.5)
 
 [node name="Polygon2D" type="Polygon2D" parent="."]
 position = Vector2(424, 502)

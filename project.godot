@@ -44,3 +44,7 @@ click={
 2d_physics/layer_3="obstacle"
 2d_physics/layer_4="block/neutral"
 2d_physics/layer_5="deco"
+
+[rendering]
+
+environment/defaults/default_clear_color=Color(0, 0, 0, 1)

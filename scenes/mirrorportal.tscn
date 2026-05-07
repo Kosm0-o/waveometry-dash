@@ -1,17 +1,16 @@
-[gd_scene load_steps=4 format=3 uid="uid://dr1xtmfnp78gl"]
+[gd_scene load_steps=4 format=3 uid="uid://c4sqlto7kttv1"]
 
-[ext_resource type="Script" uid="uid://bs2n242lcgaj5" path="res://scripts/gravityportal.gd" id="1_fcftj"]
-[ext_resource type="Texture2D" uid="uid://b3lpe43pxjov4" path="res://assets/down gravity portal.svg" id="2_fcftj"]
+[ext_resource type="Script" uid="uid://cv3op6lfynjmu" path="res://scripts/mirrorportal.gd" id="1_d56r6"]
+[ext_resource type="Texture2D" uid="uid://hlkk32a0wt24" path="res://assets/flipped mirror portal.svg" id="2_wsa65"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4shoe"]
 size = Vector2(79, 829)
 
-[node name="gravityportal" type="Node2D"]
-script = ExtResource("1_fcftj")
+[node name="mirrorportal" type="Node2D"]
+script = ExtResource("1_d56r6")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_fcftj")
-flip_v = true
+texture = ExtResource("2_wsa65")
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 2

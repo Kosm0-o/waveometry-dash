@@ -20,17 +20,24 @@ func _process(delta: float) -> void:
 	var tempangle = deg_to_rad(angle)
 	var base = sin(deg_to_rad(45.0))
 	
-	var am : int
 	if angle == 45:
 		position.x += speed * speedmod * delta
 		position.y += (sin(tempangle) / base) * speed * dir * speedmod * delta
 		scale = Vector2(1,1)
-		am = -1
+	elif angle == 15:
+		position.x += speed * speedmod * delta
+		position.y += (sin(15) / base) * speed * dir * speedmod * 0.8 * delta
+		scale = Vector2(1.55,1.55)
 	else:
 		position.x += speed * speedmod * delta
-		position.y += (sin(63.5) / base) * speed * dir * speedmod * 2 * delta
+		position.y += (sin(67.5) / base) * speed * dir * speedmod * -2.5 * delta
 		scale = Vector2(0.6,0.6)
-		am = 1
 	
-	
-	rotation_degrees = lerpf(rotation_degrees,angle * dir, 20 * delta)
+	var ycheck : bool= position.y > -630 and position.y < 630
+	if ycheck:
+		var mult : float = 1.0 if angle != 15 else 2.0
+		rotation_degrees = lerpf(rotation_degrees, angle * dir * mult, 20 * delta)
+	else:
+		rotation_degrees = lerpf(rotation_degrees, 0, 20 * delta)
+	$grounded.emitting = not ycheck
+	position.y = clamp(position.y,-630,630)

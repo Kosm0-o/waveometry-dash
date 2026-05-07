@@ -14,7 +14,7 @@ var angleinfo : Array[Dictionary] = [
 	{
 	"anglemod": 15,
 	"texture": load("res://assets/mega portal.svg")
-	},
+	}
 ]
 
 func _ready() -> void:

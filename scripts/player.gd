@@ -20,11 +20,11 @@ func _process(delta: float) -> void:
 	var tempangle = deg_to_rad(angle)
 	var base = sin(deg_to_rad(45.0))
 	
-	if angle == 45:
+	if abs(angle) == 45:
 		position.x += speed * speedmod * delta
 		position.y += (sin(tempangle) / base) * speed * dir * speedmod * delta
 		scale = Vector2(1,1)
-	elif angle == 15:
+	elif abs(angle) == 15:
 		position.x += speed * speedmod * delta
 		position.y += (sin(15) / base) * speed * dir * speedmod * 0.8 * delta
 		scale = Vector2(1.55,1.55)

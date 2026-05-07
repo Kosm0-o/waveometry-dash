@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://btrtpdonnmiig"]
+[gd_scene load_steps=8 format=3 uid="uid://btrtpdonnmiig"]
 
 [ext_resource type="PackedScene" uid="uid://d2yi0cqbfih7l" path="res://scenes/player.tscn" id="1_uwrxv"]
 [ext_resource type="Script" uid="uid://dy525wqc8vffw" path="res://scripts/gamemanager.gd" id="1_yqjtg"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://boiyb54qyfsae" path="res://scripts/testtrail.gd" id="3_lbhrr"]
 [ext_resource type="PackedScene" uid="uid://ipq8o2gmoibw" path="res://scenes/speed_portal.tscn" id="5_iywne"]
 [ext_resource type="PackedScene" uid="uid://w8nqdwu7crdh" path="res://scenes/sizeportal.tscn" id="6_p57ef"]
+[ext_resource type="PackedScene" uid="uid://dr1xtmfnp78gl" path="res://scenes/gravityportal.tscn" id="7_u5sy4"]
 
 [node name="game" type="Node2D" node_paths=PackedStringArray("player")]
 script = ExtResource("1_yqjtg")
@@ -96,3 +97,22 @@ size = 0
 
 [node name="sizeportal3" parent="." instance=ExtResource("6_p57ef")]
 position = Vector2(6203, 0)
+
+[node name="gravityportal" parent="." instance=ExtResource("7_u5sy4")]
+position = Vector2(8193, 0)
+gravity = 0
+
+[node name="gravityportal2" parent="." instance=ExtResource("7_u5sy4")]
+position = Vector2(11846, 0)
+
+[node name="gravityportal3" parent="." instance=ExtResource("7_u5sy4")]
+position = Vector2(13807, 0)
+gravity = 2
+
+[node name="gravityportal4" parent="." instance=ExtResource("7_u5sy4")]
+position = Vector2(14783, 0)
+gravity = 2
+
+[node name="gravityportal5" parent="." instance=ExtResource("7_u5sy4")]
+position = Vector2(15410, 0)
+gravity = 2

@@ -13,6 +13,7 @@ colors = PackedColorArray(0.517184, 0.517184, 0.517184, 1, 1, 1, 1, 1, 1, 1, 1, 
 gradient = SubResource("Gradient_65dh0")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_p2ug2"]
+resource_local_to_scene = true
 particle_flag_disable_z = true
 angle_min = -720.0
 angle_max = 720.0

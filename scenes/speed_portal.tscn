@@ -12,6 +12,7 @@ script = ExtResource("1_qw0bg")
 speed = 1
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0.219501, 0.219501, 0.219501, 1)
 texture = ExtResource("2_qw0bg")
 
 [node name="Area2D" type="Area2D" parent="."]

@@ -1,16 +1,47 @@
-[gd_scene load_steps=4 format=3 uid="uid://dr1xtmfnp78gl"]
+[gd_scene load_steps=10 format=3 uid="uid://dr1xtmfnp78gl"]
 
 [ext_resource type="Script" uid="uid://bs2n242lcgaj5" path="res://scripts/gravityportal.gd" id="1_fcftj"]
-[ext_resource type="Texture2D" uid="uid://b3lpe43pxjov4" path="res://assets/down gravity portal.svg" id="2_fcftj"]
+[ext_resource type="Texture2D" uid="uid://b5d1hr2tt63vn" path="res://assets/flip gravity portal.svg" id="2_0cebx"]
+[ext_resource type="Texture2D" uid="uid://dc5luvhx3oew6" path="res://assets/particlesquare.svg" id="3_e1bu2"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4shoe"]
 size = Vector2(79, 829)
+
+[sub_resource type="Gradient" id="Gradient_28a1h"]
+colors = PackedColorArray(1, 1, 1, 0.698039, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_yea2u"]
+gradient = SubResource("Gradient_28a1h")
+
+[sub_resource type="Curve" id="Curve_13j7o"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.544118, 0.786517), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_87xa6"]
+curve = SubResource("Curve_13j7o")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_osuda"]
+particle_flag_disable_z = true
+emission_shape_offset = Vector3(-50, 0, 0)
+emission_shape = 3
+emission_box_extents = Vector3(50, 125, 1)
+spread = 75.0
+gravity = Vector3(0, 0, 0)
+radial_accel_min = -100.0
+radial_accel_max = -100.0
+tangential_accel_min = -2.23517e-06
+tangential_accel_max = 25.0
+scale_min = 1.5
+scale_max = 2.0
+scale_curve = SubResource("CurveTexture_87xa6")
+color_ramp = SubResource("GradientTexture1D_yea2u")
 
 [node name="gravityportal" type="Node2D"]
 script = ExtResource("1_fcftj")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_fcftj")
+position = Vector2(0, 7)
+texture = ExtResource("2_0cebx")
 flip_v = true
 
 [node name="Area2D" type="Area2D" parent="."]
@@ -19,5 +50,12 @@ collision_layer = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(-3.5, 2.5)
 shape = SubResource("RectangleShape2D_4shoe")
+
+[node name="particles" type="GPUParticles2D" parent="."]
+modulate = Color(0.0352941, 0.980392, 0, 1)
+position = Vector2(-14, 5)
+texture = ExtResource("3_e1bu2")
+speed_scale = 1.5
+process_material = SubResource("ParticleProcessMaterial_osuda")
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

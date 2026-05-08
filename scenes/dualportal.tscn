@@ -1,11 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://c4sqlto7kttv1"]
+[gd_scene load_steps=10 format=3 uid="uid://de38yi3l0x16g"]
 
-[ext_resource type="Script" uid="uid://cv3op6lfynjmu" path="res://scripts/mirrorportal.gd" id="1_d56r6"]
-[ext_resource type="Texture2D" uid="uid://hlkk32a0wt24" path="res://assets/flipped mirror portal.svg" id="2_wsa65"]
-[ext_resource type="Texture2D" uid="uid://dc5luvhx3oew6" path="res://assets/particlesquare.svg" id="3_wsa65"]
+[ext_resource type="Script" uid="uid://bdtpuanlv4471" path="res://scripts/dualportal.gd" id="1_pwaq1"]
+[ext_resource type="Texture2D" uid="uid://hp1hu1jp5rcs" path="res://assets/dual portal sprite.svg" id="2_jxrae"]
+[ext_resource type="Texture2D" uid="uid://dc5luvhx3oew6" path="res://assets/particlesquare.svg" id="3_mxppa"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4shoe"]
-size = Vector2(79, 829)
+size = Vector2(79, 217)
 
 [sub_resource type="Gradient" id="Gradient_2p77d"]
 colors = PackedColorArray(1, 1, 1, 0.698039, 1, 1, 1, 0)
@@ -20,11 +20,11 @@ point_count = 3
 [sub_resource type="CurveTexture" id="CurveTexture_2p77d"]
 curve = SubResource("Curve_j1gqx")
 
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_0spls"]
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_mxppa"]
 particle_flag_disable_z = true
 emission_shape_offset = Vector3(-50, 0, 0)
 emission_shape = 3
-emission_box_extents = Vector3(50, 100, 1)
+emission_box_extents = Vector3(25, 75, 1)
 spread = 75.0
 gravity = Vector3(0, 0, 0)
 radial_accel_min = -100.0
@@ -35,23 +35,24 @@ scale_max = 1.5
 scale_curve = SubResource("CurveTexture_2p77d")
 color_ramp = SubResource("GradientTexture1D_wsa65")
 
-[node name="mirrorportal" type="Node2D"]
-script = ExtResource("1_d56r6")
+[node name="dualportal" type="Node2D"]
+script = ExtResource("1_pwaq1")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_wsa65")
+texture = ExtResource("2_jxrae")
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(-3.5, 2.5)
+position = Vector2(-3.5, -1.5)
 shape = SubResource("RectangleShape2D_4shoe")
 
 [node name="particles" type="GPUParticles2D" parent="."]
 modulate = Color(0.882353, 0.545098, 0.0117647, 1)
-position = Vector2(-23, 36)
-texture = ExtResource("3_wsa65")
-process_material = SubResource("ParticleProcessMaterial_0spls")
+position = Vector2(3, 7)
+amount = 12
+texture = ExtResource("3_mxppa")
+process_material = SubResource("ParticleProcessMaterial_mxppa")
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

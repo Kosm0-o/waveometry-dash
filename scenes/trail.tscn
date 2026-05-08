@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://by6pfre2pgapx"]
+
+[ext_resource type="Script" uid="uid://bo62pjdudrqw2" path="res://scripts/trail.gd" id="1_rsj4o"]
+
+[node name="trail" type="Line2D"]
+z_as_relative = false
+width = 21.0
+script = ExtResource("1_rsj4o")

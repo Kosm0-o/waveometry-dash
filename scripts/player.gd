@@ -9,6 +9,9 @@ var speed : float = 900
 var dir : int = 0
 var angle : float = 45
 var speedmod : float = 1
+var ogspeedmod : float = 1
+var dual : bool = false
+var trail_node : Line2D = null
 
 func _ready() -> void:
 	await get_tree().create_timer(5.0).timeout
@@ -16,7 +19,8 @@ func _ready() -> void:
 	
 func _process(delta: float) -> void:
 	dir = -1 if Input.is_action_pressed("click") else 1
-		
+	dir = dir * -1 if dual else dir
+	
 	var tempangle = deg_to_rad(angle)
 	var base = sin(deg_to_rad(45.0))
 	

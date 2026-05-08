@@ -1,17 +1,14 @@
-[gd_scene load_steps=9 format=3 uid="uid://btrtpdonnmiig"]
+[gd_scene load_steps=6 format=3 uid="uid://btrtpdonnmiig"]
 
 [ext_resource type="PackedScene" uid="uid://d2yi0cqbfih7l" path="res://scenes/player.tscn" id="1_uwrxv"]
 [ext_resource type="Script" uid="uid://dy525wqc8vffw" path="res://scripts/gamemanager.gd" id="1_yqjtg"]
-[ext_resource type="Script" uid="uid://bo62pjdudrqw2" path="res://scripts/trail.gd" id="2_lnu2h"]
+[ext_resource type="PackedScene" uid="uid://by6pfre2pgapx" path="res://scenes/trail.tscn" id="2_iywne"]
 [ext_resource type="Script" uid="uid://boiyb54qyfsae" path="res://scripts/testtrail.gd" id="3_lbhrr"]
-[ext_resource type="PackedScene" uid="uid://ipq8o2gmoibw" path="res://scenes/speed_portal.tscn" id="5_iywne"]
-[ext_resource type="PackedScene" uid="uid://w8nqdwu7crdh" path="res://scenes/sizeportal.tscn" id="6_p57ef"]
-[ext_resource type="PackedScene" uid="uid://dr1xtmfnp78gl" path="res://scenes/gravityportal.tscn" id="7_u5sy4"]
-[ext_resource type="PackedScene" uid="uid://c4sqlto7kttv1" path="res://scenes/mirrorportal.tscn" id="8_gee14"]
+[ext_resource type="PackedScene" uid="uid://de38yi3l0x16g" path="res://scenes/dualportal.tscn" id="5_iywne"]
 
 [node name="game" type="Node2D" node_paths=PackedStringArray("player")]
 script = ExtResource("1_yqjtg")
-player = NodePath("Player")
+player = NodePath("players/Player")
 
 [node name="bg" type="Parallax2D" parent="."]
 repeat_size = Vector2(4000, 2500)
@@ -23,19 +20,18 @@ offset_right = 3472.0
 offset_bottom = 2154.0
 color = Color(0, 0, 0, 1)
 
-[node name="trail" type="Line2D" parent="." node_paths=PackedStringArray("player")]
-z_as_relative = false
-width = 21.0
-script = ExtResource("2_lnu2h")
-player = NodePath("../Player")
+[node name="trail" parent="." node_paths=PackedStringArray("player") instance=ExtResource("2_iywne")]
+player = NodePath("../players/Player")
 
 [node name="trail2" type="Polygon2D" parent="."]
 visible = false
 z_as_relative = false
 script = ExtResource("3_lbhrr")
 
-[node name="Player" parent="." instance=ExtResource("1_uwrxv")]
+[node name="players" type="Node2D" parent="."]
 z_index = 1
+
+[node name="Player" parent="players" instance=ExtResource("1_uwrxv")]
 z_as_relative = false
 
 [node name="Camera2D" type="Camera2D" parent="."]
@@ -72,59 +68,9 @@ position = Vector2(2934, 40)
 color = Color(0, 1, 1, 1)
 polygon = PackedVector2Array(710, -145, 719, 169, 487, 166, 481, -170)
 
-[node name="SpeedPortal" parent="." instance=ExtResource("5_iywne")]
-position = Vector2(646, 0)
-speed = 0
+[node name="dualportal" parent="." instance=ExtResource("5_iywne")]
+position = Vector2(1352, 0)
 
-[node name="SpeedPortal3" parent="." instance=ExtResource("5_iywne")]
-position = Vector2(3109, 0)
-speed = 2
-
-[node name="SpeedPortal4" parent="." instance=ExtResource("5_iywne")]
-position = Vector2(4448, 0)
-speed = 3
-
-[node name="SpeedPortal5" parent="." instance=ExtResource("5_iywne")]
-position = Vector2(6032, 0)
-speed = 4
-
-[node name="sizeportal" parent="." instance=ExtResource("6_p57ef")]
-position = Vector2(1708, 0)
-size = 2
-
-[node name="sizeportal2" parent="." instance=ExtResource("6_p57ef")]
-position = Vector2(4582, 0)
-size = 0
-
-[node name="sizeportal3" parent="." instance=ExtResource("6_p57ef")]
-position = Vector2(6203, 0)
-
-[node name="gravityportal" parent="." instance=ExtResource("7_u5sy4")]
-position = Vector2(8193, 0)
-gravity = 0
-
-[node name="gravityportal2" parent="." instance=ExtResource("7_u5sy4")]
-position = Vector2(11846, 0)
-
-[node name="gravityportal3" parent="." instance=ExtResource("7_u5sy4")]
-position = Vector2(13413, 0)
-gravity = 2
-
-[node name="gravityportal4" parent="." instance=ExtResource("7_u5sy4")]
-position = Vector2(14783, 0)
-gravity = 2
-
-[node name="gravityportal5" parent="." instance=ExtResource("7_u5sy4")]
-position = Vector2(15410, 0)
-gravity = 2
-
-[node name="gravityportal6" parent="." instance=ExtResource("7_u5sy4")]
-position = Vector2(14102, 0)
-gravity = 2
-
-[node name="mirrorportal" parent="." instance=ExtResource("8_gee14")]
-position = Vector2(16744, 0)
-
-[node name="mirrorportal2" parent="." instance=ExtResource("8_gee14")]
-position = Vector2(19189, 0)
-flip = 0
+[node name="dualportal2" parent="." instance=ExtResource("5_iywne")]
+position = Vector2(2659, 0)
+dual = 1

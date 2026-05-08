@@ -7,9 +7,15 @@ var textures : Array[Texture2D] = [
 	load("res://assets/down gravity portal.svg"),
 	load("res://assets/flip gravity portal.svg")
 ]
+var colors : Array[Color] = [
+	Color("#fff200"),
+	Color("#00dfff"),
+	Color("#09fa00")
+]
 
 func _ready() -> void:
 	$Sprite2D.texture = textures[gravity]
+	$particles.modulate = colors[gravity]
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
 	if gravity == TYPES.FLIP:

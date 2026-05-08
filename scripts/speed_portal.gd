@@ -1,6 +1,6 @@
 extends Node2D
 
-enum SPEEDS {SLOW, NORMAL, DOUBLE, TRIPLE, QUAD}
+enum SPEEDS {SLOW, NORMAL, DOUBLE, TRIPLE, QUAD, BURST}
 @export var speed : SPEEDS
 var speedinfo : Array[Dictionary] = [
 	{
@@ -22,11 +22,30 @@ var speedinfo : Array[Dictionary] = [
 	{
 	"speedmod": 2.19,
 	"texture": load("res://assets/quad speed sprite.svg")
-	}
+	},
+	{
+	"speedmod": 2.5,
+	"texture": load("res://assets/burst speed sprite.svg")
+	},
 ]
 
 func _ready() -> void:
 	$Sprite2D.texture = speedinfo[speed]["texture"]
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
-	area.speedmod = speedinfo[speed]["speedmod"]
+	flash_tween()
+	if not speed == SPEEDS.BURST:
+		area.speedmod = speedinfo[speed]["speedmod"]
+		area.ogspeedmod = speedinfo[speed]["speedmod"]
+	else:
+		area.speedmod = speedinfo[speed]["speedmod"]
+		await get_tree().create_timer(1.0).timeout
+		var tween = create_tween().set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_EXPO)
+		tween.tween_property(area, "speedmod", area.ogspeedmod, 1.0)
+
+func flash_tween():
+	var tween = create_tween()
+	var og = $Sprite2D.modulate
+	tween.tween_property($Sprite2D, "modulate", Color.GHOST_WHITE, 0.1).set_ease(Tween.EASE_IN)
+	tween.tween_property($Sprite2D, "modulate", og, 0.4).set_ease(Tween.EASE_OUT)
+	await tween.finished

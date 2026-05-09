@@ -1,0 +1,61 @@
+[gd_scene load_steps=10 format=3 uid="uid://cv8gnfhudm0yc"]
+
+[ext_resource type="Script" uid="uid://bek172t7s8k55" path="res://scripts/teleportal.gd" id="1_sliox"]
+[ext_resource type="Texture2D" uid="uid://bxiolgk6f4fl" path="res://assets/enter teleportal sprite.svg" id="2_60hy6"]
+[ext_resource type="Texture2D" uid="uid://dc5luvhx3oew6" path="res://assets/particlesquare.svg" id="3_sojjy"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4shoe"]
+size = Vector2(79, 217)
+
+[sub_resource type="Gradient" id="Gradient_2p77d"]
+colors = PackedColorArray(1, 1, 1, 0.698039, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_wsa65"]
+gradient = SubResource("Gradient_2p77d")
+
+[sub_resource type="Curve" id="Curve_j1gqx"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.544118, 0.786517), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_2p77d"]
+curve = SubResource("Curve_j1gqx")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_sojjy"]
+particle_flag_disable_z = true
+emission_shape_offset = Vector3(-50, 0, 0)
+emission_shape = 3
+emission_box_extents = Vector3(50, 100, 1)
+spread = 75.0
+gravity = Vector3(0, 0, 0)
+linear_accel_min = -2.23517e-06
+linear_accel_max = -2.23517e-06
+radial_accel_min = -100.0
+radial_accel_max = -100.0
+tangential_accel_min = -2.23517e-06
+tangential_accel_max = 100.0
+scale_max = 1.5
+scale_curve = SubResource("CurveTexture_2p77d")
+color_ramp = SubResource("GradientTexture1D_wsa65")
+
+[node name="teleportal" type="Node2D"]
+script = ExtResource("1_sliox")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_60hy6")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-3.5, -1.5)
+shape = SubResource("RectangleShape2D_4shoe")
+
+[node name="particles" type="GPUParticles2D" parent="."]
+modulate = Color(0.882353, 0.545098, 0.0117647, 1)
+position = Vector2(-27, 0)
+amount = 20
+texture = ExtResource("3_sojjy")
+speed_scale = 2.0
+process_material = SubResource("ParticleProcessMaterial_sojjy")
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

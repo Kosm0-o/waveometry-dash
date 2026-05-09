@@ -1,8 +1,23 @@
-[gd_scene load_steps=2 format=3 uid="uid://by6pfre2pgapx"]
+[gd_scene load_steps=4 format=3 uid="uid://cc2x03pdfnfcu"]
 
+[ext_resource type="Script" uid="uid://83yovdphpbri" path="res://scripts/maintrail.gd" id="1_2tjbc"]
 [ext_resource type="Script" uid="uid://bo62pjdudrqw2" path="res://scripts/trail.gd" id="1_rsj4o"]
 
-[node name="trail" type="Line2D"]
-z_as_relative = false
-width = 21.0
+[sub_resource type="Curve" id="Curve_2tjbc"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.117021, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[node name="trail" type="Node2D"]
+script = ExtResource("1_2tjbc")
+
+[node name="line2" type="Line2D" parent="."]
+width_curve = SubResource("Curve_2tjbc")
+default_color = Color(0, 0.807108, 0.11935, 0.72549)
 script = ExtResource("1_rsj4o")
+og_width = 28.0
+
+[node name="line1" type="Line2D" parent="."]
+width_curve = SubResource("Curve_2tjbc")
+default_color = Color(1, 1, 1, 0.882353)
+script = ExtResource("1_rsj4o")
+og_width = 18.0

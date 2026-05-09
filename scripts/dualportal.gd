@@ -20,6 +20,7 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 	if global.dualing and dual == MODES.SINGLE:
 		for p in pnode.get_children():
 			if p.dual:
+				await fade_tween(p, p.trail_node)
 				p.trail_node.queue_free()
 				p.queue_free()
 				break
@@ -33,3 +34,9 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 		pnode.add_child(b)
 		pnode.get_parent().add_child(c)
 		global.dualing = true
+
+func fade_tween(p : Player, t : Trail):
+	var tween = create_tween().parallel().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC)
+	tween.tween_property(p, "modulate:a", 0, 0.1)
+	tween.tween_property(t, "modulate:a", 0, 0.1)
+	await tween.finished

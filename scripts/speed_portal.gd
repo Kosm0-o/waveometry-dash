@@ -24,7 +24,7 @@ var speedinfo : Array[Dictionary] = [
 	"texture": load("res://assets/quad speed sprite.svg")
 	},
 	{
-	"speedmod": 2.5,
+	"speedmod": 2.3,
 	"texture": load("res://assets/burst speed sprite.svg")
 	},
 ]
@@ -35,13 +35,17 @@ func _ready() -> void:
 func _on_area_2d_area_entered(area: Area2D) -> void:
 	flash_tween()
 	if not speed == SPEEDS.BURST:
-		area.speedmod = speedinfo[speed]["speedmod"]
-		area.ogspeedmod = speedinfo[speed]["speedmod"]
+		for p in global.players:
+			p.ogspeedmod = p.speedmod
+			p.speedmod = speedinfo[speed]["speedmod"]
+
 	else:
-		area.speedmod = speedinfo[speed]["speedmod"]
+		for p in global.players:
+			p.speedmod = speedinfo[speed]["speedmod"]
 		await get_tree().create_timer(1.0).timeout
-		var tween = create_tween().set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_EXPO)
-		tween.tween_property(area, "speedmod", area.ogspeedmod, 1.0)
+		for p in global.players:
+			var tween = create_tween().set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_EXPO)
+			tween.tween_property(p, "speedmod", p.ogspeedmod, 1.0)
 
 func flash_tween():
 	var tween = create_tween()

@@ -1,10 +1,12 @@
-[gd_scene load_steps=6 format=3 uid="uid://btrtpdonnmiig"]
+[gd_scene load_steps=8 format=3 uid="uid://btrtpdonnmiig"]
 
 [ext_resource type="PackedScene" uid="uid://d2yi0cqbfih7l" path="res://scenes/player.tscn" id="1_uwrxv"]
 [ext_resource type="Script" uid="uid://dy525wqc8vffw" path="res://scripts/gamemanager.gd" id="1_yqjtg"]
-[ext_resource type="PackedScene" uid="uid://by6pfre2pgapx" path="res://scenes/trail.tscn" id="2_iywne"]
+[ext_resource type="PackedScene" uid="uid://cc2x03pdfnfcu" path="res://scenes/trail.tscn" id="2_iywne"]
 [ext_resource type="Script" uid="uid://boiyb54qyfsae" path="res://scripts/testtrail.gd" id="3_lbhrr"]
 [ext_resource type="PackedScene" uid="uid://de38yi3l0x16g" path="res://scenes/dualportal.tscn" id="5_iywne"]
+[ext_resource type="PackedScene" uid="uid://cv8gnfhudm0yc" path="res://scenes/teleportal.tscn" id="6_p57ef"]
+[ext_resource type="PackedScene" uid="uid://ipq8o2gmoibw" path="res://scenes/speed_portal.tscn" id="7_u5sy4"]
 
 [node name="game" type="Node2D" node_paths=PackedStringArray("player")]
 script = ExtResource("1_yqjtg")
@@ -38,39 +40,21 @@ z_as_relative = false
 top_level = true
 zoom = Vector2(0.5, 0.5)
 
-[node name="Polygon2D" type="Polygon2D" parent="."]
-position = Vector2(272, 291)
-color = Color(0, 1, 1, 1)
-polygon = PackedVector2Array(710, -145, 719, 169, 487, 166, 481, -170)
-
-[node name="Polygon2D2" type="Polygon2D" parent="."]
-position = Vector2(887, -67)
-color = Color(0, 1, 1, 1)
-polygon = PackedVector2Array(710, -145, 719, 169, 487, 166, 481, -170)
-
-[node name="Polygon2D3" type="Polygon2D" parent="."]
-position = Vector2(1282, 318)
-color = Color(0, 1, 1, 1)
-polygon = PackedVector2Array(710, -145, 719, 169, 487, 166, 481, -170)
-
-[node name="Polygon2D4" type="Polygon2D" parent="."]
-position = Vector2(1897, -40)
-color = Color(0, 1, 1, 1)
-polygon = PackedVector2Array(710, -145, 719, 169, 487, 166, 481, -170)
-
-[node name="Polygon2D5" type="Polygon2D" parent="."]
-position = Vector2(2319, 398)
-color = Color(0, 1, 1, 1)
-polygon = PackedVector2Array(710, -145, 719, 169, 487, 166, 481, -170)
-
-[node name="Polygon2D6" type="Polygon2D" parent="."]
-position = Vector2(2934, 40)
-color = Color(0, 1, 1, 1)
-polygon = PackedVector2Array(710, -145, 719, 169, 487, 166, 481, -170)
-
 [node name="dualportal" parent="." instance=ExtResource("5_iywne")]
 position = Vector2(1352, 0)
 
 [node name="dualportal2" parent="." instance=ExtResource("5_iywne")]
-position = Vector2(2659, 0)
+position = Vector2(4513, 0)
 dual = 1
+
+[node name="teleportal" parent="." instance=ExtResource("6_p57ef")]
+position = Vector2(2561, -217)
+
+[node name="teleportal2" parent="." instance=ExtResource("6_p57ef")]
+position = Vector2(2550, 148)
+portal = 1
+flipped = true
+
+[node name="SpeedPortal" parent="." instance=ExtResource("7_u5sy4")]
+position = Vector2(2013, -256)
+speed = 5

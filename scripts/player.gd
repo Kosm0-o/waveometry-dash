@@ -6,12 +6,13 @@ signal clamped(b)
 
 
 var speed : float = 900
-var dir : int = 0
+var dir : int = 1
 var angle : float = 45
 var speedmod : float = 1
 var ogspeedmod : float = 1
 var dual : bool = false
 var trail_node : Trail = null
+var flipper : bool = false
 
 
 func _ready() -> void:
@@ -19,8 +20,11 @@ func _ready() -> void:
 	
 	
 func _process(delta: float) -> void:
-	dir = -1 if Input.is_action_pressed("click") else 1
-	dir = dir * -1 if dual else dir
+	if not flipper:
+		dir = -1 if Input.is_action_pressed("click") else 1
+		dir = dir * -1 if dual else dir
+	elif Input.is_action_just_pressed("click"):
+		dir *= -1
 
 	
 	var tempangle = deg_to_rad(angle)

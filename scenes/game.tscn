@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://btrtpdonnmiig"]
+[gd_scene load_steps=9 format=3 uid="uid://btrtpdonnmiig"]
 
 [ext_resource type="PackedScene" uid="uid://d2yi0cqbfih7l" path="res://scenes/player.tscn" id="1_uwrxv"]
 [ext_resource type="Script" uid="uid://dy525wqc8vffw" path="res://scripts/gamemanager.gd" id="1_yqjtg"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://de38yi3l0x16g" path="res://scenes/dualportal.tscn" id="5_iywne"]
 [ext_resource type="PackedScene" uid="uid://cv8gnfhudm0yc" path="res://scenes/teleportal.tscn" id="6_p57ef"]
 [ext_resource type="PackedScene" uid="uid://ipq8o2gmoibw" path="res://scenes/speed_portal.tscn" id="7_u5sy4"]
+[ext_resource type="PackedScene" uid="uid://dcnw2ni1n582x" path="res://scenes/gamemodeportal.tscn" id="8_gee14"]
 
 [node name="game" type="Node2D" node_paths=PackedStringArray("player")]
 script = ExtResource("1_yqjtg")
@@ -58,3 +59,6 @@ flipped = true
 [node name="SpeedPortal" parent="." instance=ExtResource("7_u5sy4")]
 position = Vector2(2013, -256)
 speed = 5
+
+[node name="gamemodeportal" parent="." instance=ExtResource("8_gee14")]
+position = Vector2(2296, 145)

@@ -56,6 +56,28 @@ position = Vector2(2550, 148)
 portal = 1
 flipped = true
 
+[node name="teleportal3" parent="." instance=ExtResource("6_p57ef")]
+position = Vector2(5219, 14)
+target_group_id = 1
+
+[node name="teleportal4" parent="." instance=ExtResource("6_p57ef")]
+position = Vector2(5792, -270)
+portal = 1
+group_id = 1
+flipped = true
+
+[node name="teleportal5" parent="." instance=ExtResource("6_p57ef")]
+position = Vector2(5792, 223)
+portal = 1
+group_id = 1
+flipped = true
+
+[node name="teleportal6" parent="." instance=ExtResource("6_p57ef")]
+position = Vector2(5792, -22)
+portal = 1
+group_id = 1
+flipped = true
+
 [node name="SpeedPortal" parent="." instance=ExtResource("7_u5sy4")]
 position = Vector2(2013, -256)
 speed = 5

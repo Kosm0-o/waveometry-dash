@@ -23,6 +23,7 @@ var teledata : Dictionary = {}
 func _ready() -> void:
 	if portal == PORTALS.EXIT:
 		global.exit_teleportals.append(self)
+		global.exit_teleportals.shuffle()
 		scale.x = -1 if flipped else 1
 	$Sprite2D.texture = textures[portal]
 	$particles.modulate = colors[portal]

@@ -1,8 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://cv8gnfhudm0yc"]
+[gd_scene load_steps=11 format=3 uid="uid://cv8gnfhudm0yc"]
 
 [ext_resource type="Script" uid="uid://bek172t7s8k55" path="res://scripts/teleportal.gd" id="1_sliox"]
 [ext_resource type="Texture2D" uid="uid://bxiolgk6f4fl" path="res://assets/enter teleportal sprite.svg" id="2_60hy6"]
 [ext_resource type="Texture2D" uid="uid://dc5luvhx3oew6" path="res://assets/particlesquare.svg" id="3_sojjy"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_sliox"]
+light_mode = 1
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4shoe"]
 size = Vector2(79, 217)
@@ -38,6 +41,7 @@ scale_curve = SubResource("CurveTexture_2p77d")
 color_ramp = SubResource("GradientTexture1D_wsa65")
 
 [node name="teleportal" type="Node2D"]
+material = SubResource("CanvasItemMaterial_sliox")
 script = ExtResource("1_sliox")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -57,5 +61,9 @@ amount = 20
 texture = ExtResource("3_sojjy")
 speed_scale = 2.0
 process_material = SubResource("ParticleProcessMaterial_sojjy")
+
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
+position = Vector2(2, -0.499998)
+scale = Vector2(6.14286, 11.05)
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

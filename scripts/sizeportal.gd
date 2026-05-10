@@ -21,4 +21,4 @@ func _ready() -> void:
 	$Sprite2D.texture = angleinfo[size]["texture"]
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
-	area.angle = angleinfo[size]["anglemod"]
+	area.angle = angleinfo[size]["anglemod"] * sign(area.angle)

@@ -1,8 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://dcnw2ni1n582x"]
+[gd_scene load_steps=11 format=3 uid="uid://dcnw2ni1n582x"]
 
 [ext_resource type="Script" uid="uid://l8brn0klavvo" path="res://scripts/gamemodeportal.gd" id="1_3wu3l"]
-[ext_resource type="Texture2D" uid="uid://tlgq7ewhao87" path="res://assets/flipper portal sprite.svg" id="2_we7b8"]
+[ext_resource type="Texture2D" uid="uid://tau850m1b4s7" path="res://assets/ricochet portal sprite.svg" id="2_3wu3l"]
 [ext_resource type="Texture2D" uid="uid://dc5luvhx3oew6" path="res://assets/particlesquare.svg" id="3_j7xi8"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_3wu3l"]
+light_mode = 1
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4shoe"]
 size = Vector2(79, 829)
@@ -37,11 +40,12 @@ scale_curve = SubResource("CurveTexture_87xa6")
 color_ramp = SubResource("GradientTexture1D_yea2u")
 
 [node name="gamemodeportal" type="Node2D"]
+material = SubResource("CanvasItemMaterial_3wu3l")
 script = ExtResource("1_3wu3l")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, 7)
-texture = ExtResource("2_we7b8")
+texture = ExtResource("2_3wu3l")
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 2
@@ -51,10 +55,14 @@ position = Vector2(-3.5, 2.5)
 shape = SubResource("RectangleShape2D_4shoe")
 
 [node name="particles" type="GPUParticles2D" parent="."]
-modulate = Color(0.0352941, 0.980392, 0, 1)
-position = Vector2(-14, 5)
+modulate = Color(0.933333, 0.278431, 0.278431, 1)
+position = Vector2(-24, 30)
 texture = ExtResource("3_j7xi8")
 speed_scale = 1.5
 process_material = SubResource("ParticleProcessMaterial_osuda")
+
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
+position = Vector2(3, 8.99999)
+scale = Vector2(8, 10.3)
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

@@ -31,4 +31,5 @@ func _process(delta: float) -> void:
 			if frames == 0:
 				remove_point(0)
 				frames = NEWFRAMES
-	points[points.size() - 1] = pos
+	if points.size() > 0:
+		points[points.size() - 1] = pos

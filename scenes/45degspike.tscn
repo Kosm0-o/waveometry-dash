@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://8kpddd58gs6d"]
+
+[ext_resource type="Script" uid="uid://coa7c8o2o00jy" path="res://scripts/obstacle.gd" id="1_13xme"]
+[ext_resource type="Texture2D" uid="uid://ci6q87ydsnxiu" path="res://assets/anotherone.svg" id="2_13xme"]
+
+[sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_t0130"]
+points = PackedVector2Array(-40.5, -108, 41.5, -108, 134.5, 70, -148.5, 61)
+
+[node name="45DegSpike" type="Area2D"]
+collision_layer = 4
+script = ExtResource("1_13xme")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_13xme")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(8.5, 26)
+shape = SubResource("ConvexPolygonShape2D_t0130")
+
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="CollisionShape2D"]
+position = Vector2(5.99998, -19)
+scale = Vector2(19.65, 12.1)
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]

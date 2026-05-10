@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://d2yi0cqbfih7l"]
+[gd_scene load_steps=7 format=3 uid="uid://d2yi0cqbfih7l"]
 
 [ext_resource type="Script" uid="uid://cw0fb5kagdow8" path="res://scripts/player.gd" id="1_3vyb7"]
+[ext_resource type="AudioStream" uid="uid://5j5ws1vswys6" path="res://assets/467339_At_the_Speed_of_Light_FINA.mp3" id="2_g2els"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6w21d"]
 size = Vector2(28, 13)
@@ -48,3 +49,6 @@ amount = 15
 lifetime = 1.5
 local_coords = true
 process_material = SubResource("ParticleProcessMaterial_p2ug2")
+
+[node name="atsol" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_g2els")

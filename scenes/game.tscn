@@ -1,17 +1,36 @@
-[gd_scene load_steps=9 format=3 uid="uid://btrtpdonnmiig"]
+[gd_scene load_steps=16 format=3 uid="uid://btrtpdonnmiig"]
 
 [ext_resource type="PackedScene" uid="uid://d2yi0cqbfih7l" path="res://scenes/player.tscn" id="1_uwrxv"]
 [ext_resource type="Script" uid="uid://dy525wqc8vffw" path="res://scripts/gamemanager.gd" id="1_yqjtg"]
 [ext_resource type="PackedScene" uid="uid://cc2x03pdfnfcu" path="res://scenes/trail.tscn" id="2_iywne"]
 [ext_resource type="Script" uid="uid://boiyb54qyfsae" path="res://scripts/testtrail.gd" id="3_lbhrr"]
-[ext_resource type="PackedScene" uid="uid://de38yi3l0x16g" path="res://scenes/dualportal.tscn" id="5_iywne"]
-[ext_resource type="PackedScene" uid="uid://cv8gnfhudm0yc" path="res://scenes/teleportal.tscn" id="6_p57ef"]
+[ext_resource type="PackedScene" uid="uid://dtqy8g00cuqob" path="res://scenes/spike.tscn" id="5_iywne"]
+[ext_resource type="AudioStream" uid="uid://5j5ws1vswys6" path="res://assets/467339_At_the_Speed_of_Light_FINA.mp3" id="6_gee14"]
+[ext_resource type="PackedScene" uid="uid://w8nqdwu7crdh" path="res://scenes/sizeportal.tscn" id="6_p57ef"]
 [ext_resource type="PackedScene" uid="uid://ipq8o2gmoibw" path="res://scenes/speed_portal.tscn" id="7_u5sy4"]
 [ext_resource type="PackedScene" uid="uid://dcnw2ni1n582x" path="res://scenes/gamemodeportal.tscn" id="8_gee14"]
+[ext_resource type="PackedScene" uid="uid://8kpddd58gs6d" path="res://scenes/45degspike.tscn" id="9_vtaks"]
+[ext_resource type="PackedScene" uid="uid://1akf0w80fwso" path="res://scenes/timmon.tscn" id="10_kvpfn"]
+[ext_resource type="PackedScene" uid="uid://dr1xtmfnp78gl" path="res://scenes/gravityportal.tscn" id="11_kvpfn"]
+[ext_resource type="PackedScene" uid="uid://cv8gnfhudm0yc" path="res://scenes/teleportal.tscn" id="13_kvuet"]
+[ext_resource type="PackedScene" uid="uid://du3f13qmlicv5" path="res://scenes/saw.tscn" id="15_ir15t"]
+
+[sub_resource type="Environment" id="Environment_trtic"]
+background_mode = 3
+glow_enabled = true
+glow_levels/3 = 0.0
+glow_levels/4 = 0.11
+glow_levels/5 = 0.0
+glow_levels/7 = 0.18
+glow_bloom = 0.11
+glow_blend_mode = 0
 
 [node name="game" type="Node2D" node_paths=PackedStringArray("player")]
 script = ExtResource("1_yqjtg")
 player = NodePath("players/Player")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_trtic")
 
 [node name="bg" type="Parallax2D" parent="."]
 repeat_size = Vector2(4000, 2500)
@@ -41,46 +60,375 @@ z_as_relative = false
 top_level = true
 zoom = Vector2(0.5, 0.5)
 
-[node name="dualportal" parent="." instance=ExtResource("5_iywne")]
-position = Vector2(1352, 0)
+[node name="playtesting" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_gee14")
+max_distance = 1e+08
 
-[node name="dualportal2" parent="." instance=ExtResource("5_iywne")]
-position = Vector2(4513, 0)
-dual = 1
+[node name="Spike" parent="." instance=ExtResource("5_iywne")]
+position = Vector2(265, 331)
+scale = Vector2(8.95, 8.95)
 
-[node name="teleportal" parent="." instance=ExtResource("6_p57ef")]
-position = Vector2(2561, -217)
+[node name="Spike9" parent="." instance=ExtResource("5_iywne")]
+position = Vector2(455, -90)
+scale = Vector2(8.95, 8.95)
 
-[node name="teleportal2" parent="." instance=ExtResource("6_p57ef")]
-position = Vector2(2550, 148)
-portal = 1
-flipped = true
+[node name="Spike2" parent="." instance=ExtResource("5_iywne")]
+position = Vector2(749, -93)
+scale = Vector2(8.95, -8.95)
 
-[node name="teleportal3" parent="." instance=ExtResource("6_p57ef")]
-position = Vector2(5219, 14)
-target_group_id = 1
+[node name="Spike3" parent="." instance=ExtResource("5_iywne")]
+position = Vector2(1042, -97)
+scale = Vector2(8.95, 8.95)
 
-[node name="teleportal4" parent="." instance=ExtResource("6_p57ef")]
-position = Vector2(5792, -270)
-portal = 1
-group_id = 1
-flipped = true
+[node name="Spike6" parent="." instance=ExtResource("5_iywne")]
+position = Vector2(1481, -366)
+scale = Vector2(8.95, -8.95)
 
-[node name="teleportal5" parent="." instance=ExtResource("6_p57ef")]
-position = Vector2(5792, 223)
-portal = 1
-group_id = 1
-flipped = true
+[node name="Spike7" parent="." instance=ExtResource("5_iywne")]
+position = Vector2(1250, 358)
+scale = Vector2(8.95, 8.95)
 
-[node name="teleportal6" parent="." instance=ExtResource("6_p57ef")]
-position = Vector2(5792, -22)
-portal = 1
-group_id = 1
-flipped = true
+[node name="Spike4" parent="." instance=ExtResource("5_iywne")]
+position = Vector2(2598, 331)
+scale = Vector2(8.95, 8.95)
+
+[node name="Spike15" parent="." instance=ExtResource("5_iywne")]
+position = Vector2(2788, -90)
+scale = Vector2(8.95, 8.95)
+
+[node name="Spike5" parent="." instance=ExtResource("5_iywne")]
+position = Vector2(3082, -93)
+scale = Vector2(8.95, -8.95)
+
+[node name="Spike16" parent="." instance=ExtResource("5_iywne")]
+position = Vector2(3375, -97)
+scale = Vector2(8.95, 8.95)
+
+[node name="Spike17" parent="." instance=ExtResource("5_iywne")]
+position = Vector2(3583, 358)
+scale = Vector2(8.95, 8.95)
+
+[node name="Spike10" parent="." instance=ExtResource("5_iywne")]
+position = Vector2(1919, -42)
+scale = Vector2(8.95, 8.95)
+
+[node name="Spike8" parent="." instance=ExtResource("5_iywne")]
+position = Vector2(2341, -338)
+scale = Vector2(8.95, -8.95)
+
+[node name="Spike11" parent="." instance=ExtResource("5_iywne")]
+position = Vector2(1629, -28)
+scale = Vector2(8.95, -8.95)
+
+[node name="Spike12" parent="." instance=ExtResource("5_iywne")]
+position = Vector2(2212, -45)
+scale = Vector2(8.95, -8.95)
+
+[node name="Spike14" parent="." instance=ExtResource("5_iywne")]
+position = Vector2(3924, -359)
+scale = Vector2(8.95, -8.95)
+
+[node name="Spike20" parent="." instance=ExtResource("5_iywne")]
+position = Vector2(4092, -2.99997)
+scale = Vector2(8.95, -8.95)
+
+[node name="Spike21" parent="." instance=ExtResource("5_iywne")]
+position = Vector2(4192, 221)
+scale = Vector2(8.95, -8.95)
+
+[node name="Spike22" parent="." instance=ExtResource("5_iywne")]
+position = Vector2(9619, 141)
+scale = Vector2(8.95, 8.95)
+
+[node name="Spike28" parent="." instance=ExtResource("5_iywne")]
+position = Vector2(10488, 571)
+rotation = 0.244346
+scale = Vector2(8.95, 8.95)
+
+[node name="Spike23" parent="." instance=ExtResource("5_iywne")]
+position = Vector2(9491, -145)
+scale = Vector2(8.95, 8.95)
+
+[node name="Spike27" parent="." instance=ExtResource("5_iywne")]
+position = Vector2(11211, 854)
+rotation = 3.14159
+scale = Vector2(7.88, 5.235)
+
+[node name="Spike25" parent="." instance=ExtResource("5_iywne")]
+position = Vector2(11215, -847)
+scale = Vector2(7.88, 5.235)
+
+[node name="sizeportal" parent="." instance=ExtResource("6_p57ef")]
+position = Vector2(70, -19)
+size = 0
+
+[node name="sizeportal3" parent="." instance=ExtResource("6_p57ef")]
+position = Vector2(11724, -4)
+size = 2
+
+[node name="sizeportal4" parent="." instance=ExtResource("6_p57ef")]
+position = Vector2(13228, 38)
+
+[node name="sizeportal2" parent="." instance=ExtResource("6_p57ef")]
+position = Vector2(4118, 587)
 
 [node name="SpeedPortal" parent="." instance=ExtResource("7_u5sy4")]
-position = Vector2(2013, -256)
+position = Vector2(97, 11)
+speed = 0
+
+[node name="SpeedPortal2" parent="." instance=ExtResource("7_u5sy4")]
+position = Vector2(4305, 628)
+speed = 2
+
+[node name="SpeedPortal3" parent="." instance=ExtResource("7_u5sy4")]
+position = Vector2(11379, 16)
 speed = 5
 
+[node name="SpeedPortal5" parent="." instance=ExtResource("7_u5sy4")]
+position = Vector2(10657, 5)
+speed = 3
+
+[node name="45DegSpike" parent="." instance=ExtResource("9_vtaks")]
+position = Vector2(4878, 452)
+scale = Vector2(2.675, 2.675)
+
+[node name="45DegSpike4" parent="." instance=ExtResource("9_vtaks")]
+position = Vector2(5551, 750)
+scale = Vector2(2.675, 2.675)
+
+[node name="45DegSpike7" parent="." instance=ExtResource("9_vtaks")]
+position = Vector2(6283, 628)
+scale = Vector2(2.675, 2.675)
+
+[node name="45DegSpike2" parent="." instance=ExtResource("9_vtaks")]
+position = Vector2(4530, -141)
+rotation = 3.14159
+scale = Vector2(2.675, 2.675)
+
+[node name="45DegSpike3" parent="." instance=ExtResource("9_vtaks")]
+position = Vector2(5359, -117)
+rotation = 3.14159
+scale = Vector2(2.675, 2.675)
+
+[node name="45DegSpike5" parent="." instance=ExtResource("9_vtaks")]
+position = Vector2(5939, -69)
+rotation = 3.14159
+scale = Vector2(2.675, 2.675)
+
+[node name="45DegSpike6" parent="." instance=ExtResource("9_vtaks")]
+position = Vector2(6691, 7)
+rotation = 3.14159
+scale = Vector2(2.675, 2.675)
+
+[node name="45DegSpike8" parent="." instance=ExtResource("9_vtaks")]
+position = Vector2(7157, 1126)
+rotation = 3.14159
+scale = Vector2(2.675, 2.675)
+
+[node name="TimMonster" parent="." instance=ExtResource("10_kvpfn")]
+position = Vector2(5575, -200)
+scale = Vector2(3.6, 3.6)
+
+[node name="TimMonster2" parent="." instance=ExtResource("10_kvpfn")]
+position = Vector2(7191, 20)
+scale = Vector2(3.6, 3.6)
+
+[node name="gravityportal" parent="." instance=ExtResource("11_kvpfn")]
+position = Vector2(5855, 407)
+gravity = 0
+
+[node name="gravityportal11" parent="." instance=ExtResource("11_kvpfn")]
+position = Vector2(6, 4)
+
+[node name="gravityportal2" parent="." instance=ExtResource("11_kvpfn")]
+position = Vector2(7378, 552)
+
+[node name="45DegSpike9" parent="." instance=ExtResource("9_vtaks")]
+position = Vector2(7857, 1117)
+scale = Vector2(2.675, 2.675)
+
+[node name="45DegSpike18" parent="." instance=ExtResource("9_vtaks")]
+position = Vector2(12103, 561)
+scale = Vector2(2.675, 2.675)
+
+[node name="45DegSpike10" parent="." instance=ExtResource("9_vtaks")]
+position = Vector2(8191, -438)
+rotation = 3.14159
+scale = Vector2(2.675, 2.675)
+
+[node name="45DegSpike11" parent="." instance=ExtResource("9_vtaks")]
+position = Vector2(7789, -294)
+rotation = 3.14159
+scale = Vector2(2.675, 2.675)
+
+[node name="45DegSpike12" parent="." instance=ExtResource("9_vtaks")]
+position = Vector2(8545, 960)
+rotation = 3.14159
+scale = Vector2(2.675, 2.675)
+
+[node name="45DegSpike13" parent="." instance=ExtResource("9_vtaks")]
+position = Vector2(8604, -570)
+rotation = 3.14159
+scale = Vector2(2.675, 2.675)
+
+[node name="45DegSpike14" parent="." instance=ExtResource("9_vtaks")]
+position = Vector2(8876, 812)
+rotation = 3.14159
+scale = Vector2(2.675, 2.675)
+
+[node name="45DegSpike15" parent="." instance=ExtResource("9_vtaks")]
+position = Vector2(9025, -760)
+rotation = 3.14159
+scale = Vector2(2.675, 2.675)
+
+[node name="45DegSpike16" parent="." instance=ExtResource("9_vtaks")]
+position = Vector2(9183, 708)
+rotation = 3.14159
+scale = Vector2(2.675, 2.675)
+
+[node name="45DegSpike17" parent="." instance=ExtResource("9_vtaks")]
+position = Vector2(12135, -528)
+rotation = 3.14159
+scale = Vector2(2.675, 2.675)
+
+[node name="45DegSpike19" parent="." instance=ExtResource("9_vtaks")]
+position = Vector2(12606, 501)
+scale = Vector2(2.675, 2.675)
+
+[node name="45DegSpike20" parent="." instance=ExtResource("9_vtaks")]
+position = Vector2(12649, -456)
+rotation = 3.14159
+scale = Vector2(2.675, 2.675)
+
+[node name="45DegSpike21" parent="." instance=ExtResource("9_vtaks")]
+position = Vector2(13103, 459)
+scale = Vector2(2.675, 2.675)
+
+[node name="45DegSpike22" parent="." instance=ExtResource("9_vtaks")]
+position = Vector2(13148, -377)
+rotation = 3.14159
+scale = Vector2(2.675, 2.675)
+
+[node name="45DegSpike23" parent="." instance=ExtResource("9_vtaks")]
+position = Vector2(13561, 456)
+scale = Vector2(2.675, 2.675)
+
+[node name="45DegSpike24" parent="." instance=ExtResource("9_vtaks")]
+position = Vector2(13672, -381)
+rotation = 3.14159
+scale = Vector2(2.675, 2.675)
+
+[node name="TimMonster3" parent="." instance=ExtResource("10_kvpfn")]
+position = Vector2(10074, -989)
+scale = Vector2(3.6, 3.6)
+
+[node name="gravityportal3" parent="." instance=ExtResource("11_kvpfn")]
+position = Vector2(12335, 18)
+gravity = 2
+
+[node name="gravityportal4" parent="." instance=ExtResource("11_kvpfn")]
+position = Vector2(12803, 44)
+gravity = 2
+
+[node name="gravityportal5" parent="." instance=ExtResource("11_kvpfn")]
+position = Vector2(12926, 48)
+gravity = 2
+
+[node name="gravityportal6" parent="." instance=ExtResource("11_kvpfn")]
+position = Vector2(13345, 33)
+gravity = 2
+
+[node name="gravityportal7" parent="." instance=ExtResource("11_kvpfn")]
+position = Vector2(13455, 37)
+gravity = 2
+
+[node name="gravityportal8" parent="." instance=ExtResource("11_kvpfn")]
+position = Vector2(13555, 37)
+gravity = 2
+
+[node name="gravityportal9" parent="." instance=ExtResource("11_kvpfn")]
+position = Vector2(13655, 37)
+gravity = 2
+
+[node name="gravityportal10" parent="." instance=ExtResource("11_kvpfn")]
+position = Vector2(13755, 37)
+gravity = 2
+
 [node name="gamemodeportal" parent="." instance=ExtResource("8_gee14")]
-position = Vector2(2296, 145)
+position = Vector2(7495, 480)
+gamemode = 2
+
+[node name="gamemodeportal3" parent="." instance=ExtResource("8_gee14")]
+position = Vector2(10411, 181)
+gamemode = 0
+
+[node name="gamemodeportal4" parent="." instance=ExtResource("8_gee14")]
+position = Vector2(13911, 15)
+
+[node name="SpeedPortal4" parent="." instance=ExtResource("7_u5sy4")]
+position = Vector2(10251, 388)
+
+[node name="gamemodeportal2" parent="." instance=ExtResource("8_gee14")]
+position = Vector2(106, -40)
+gamemode = 0
+
+[node name="teleportal" parent="." instance=ExtResource("13_kvuet")]
+position = Vector2(10828, 20)
+scale = Vector2(2.79, 4.515)
+
+[node name="teleportal3" parent="." instance=ExtResource("13_kvuet")]
+position = Vector2(11115, -404)
+target_group_id = 1
+
+[node name="teleportal5" parent="." instance=ExtResource("13_kvuet")]
+position = Vector2(11156, 364)
+target_group_id = 2
+
+[node name="teleportal2" parent="." instance=ExtResource("13_kvuet")]
+position = Vector2(11024, -402)
+portal = 1
+flipped = true
+
+[node name="teleportal4" parent="." instance=ExtResource("13_kvuet")]
+position = Vector2(11066, 357)
+portal = 1
+group_id = 1
+flipped = true
+
+[node name="teleportal6" parent="." instance=ExtResource("13_kvuet")]
+position = Vector2(11294, 8)
+portal = 1
+group_id = 2
+flipped = true
+
+[node name="saw3" parent="." instance=ExtResource("15_ir15t")]
+position = Vector2(14242, 435)
+scale = Vector2(5.585, 5.585)
+
+[node name="saw4" parent="." instance=ExtResource("15_ir15t")]
+position = Vector2(14707, 478)
+scale = Vector2(5.585, 5.585)
+
+[node name="saw5" parent="." instance=ExtResource("15_ir15t")]
+position = Vector2(15207, 540)
+scale = Vector2(5.585, 5.585)
+
+[node name="saw6" parent="." instance=ExtResource("15_ir15t")]
+position = Vector2(14270, -350)
+scale = Vector2(5.585, 5.585)
+
+[node name="saw7" parent="." instance=ExtResource("15_ir15t")]
+position = Vector2(14769, -390)
+scale = Vector2(5.585, 5.585)
+
+[node name="saw8" parent="." instance=ExtResource("15_ir15t")]
+position = Vector2(15256, -477)
+scale = Vector2(5.585, 5.585)
+
+[node name="CeilingRefernce" parent="." instance=ExtResource("5_iywne")]
+position = Vector2(15807, -366)
+scale = Vector2(8.95, -8.95)
+
+[node name="Floor Reference" parent="." instance=ExtResource("5_iywne")]
+position = Vector2(15810, 358)
+scale = Vector2(8.95, 8.95)

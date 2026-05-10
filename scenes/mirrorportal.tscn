@@ -1,8 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://c4sqlto7kttv1"]
+[gd_scene load_steps=11 format=3 uid="uid://c4sqlto7kttv1"]
 
 [ext_resource type="Script" uid="uid://cv3op6lfynjmu" path="res://scripts/mirrorportal.gd" id="1_d56r6"]
 [ext_resource type="Texture2D" uid="uid://hlkk32a0wt24" path="res://assets/flipped mirror portal.svg" id="2_wsa65"]
 [ext_resource type="Texture2D" uid="uid://dc5luvhx3oew6" path="res://assets/particlesquare.svg" id="3_wsa65"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_wsa65"]
+light_mode = 1
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4shoe"]
 size = Vector2(79, 829)
@@ -36,6 +39,7 @@ scale_curve = SubResource("CurveTexture_2p77d")
 color_ramp = SubResource("GradientTexture1D_wsa65")
 
 [node name="mirrorportal" type="Node2D"]
+material = SubResource("CanvasItemMaterial_wsa65")
 script = ExtResource("1_d56r6")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -53,5 +57,9 @@ modulate = Color(0.882353, 0.545098, 0.0117647, 1)
 position = Vector2(-23, 36)
 texture = ExtResource("3_wsa65")
 process_material = SubResource("ParticleProcessMaterial_0spls")
+
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
+position = Vector2(0.499994, 5)
+scale = Vector2(8.05, 10.2)
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

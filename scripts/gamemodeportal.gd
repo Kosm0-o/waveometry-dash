@@ -1,15 +1,18 @@
 extends Node2D
 
-enum GAMEMODES {NORMAL, FLIPPER}
-@export var gamemode : GAMEMODES = GAMEMODES.FLIPPER
+enum GAMEMODES {NORMAL, FLUX, STAIRSMASTER, RICOCHET}
+@export var gamemode : GAMEMODES = GAMEMODES.FLUX
 var textures : Array[Texture2D] = [
 	load("res://assets/normal mode portal sprite.svg"),
 	load("res://assets/flipper portal sprite.svg"),
+	load("res://assets/stairsmaster portal sprite.svg"),
+	load("res://assets/ricochet portal sprite.svg")
 ]
 var colors : Array[Color] = [
-	Color("#fff200"),
-	Color("#00dfff"),
-	Color("#09fa00")
+	Color("#a0e544"),
+	Color("#ae47e0"),
+	Color("#47ecb2"),
+	Color("#ee4747")
 ]
 
 func _ready() -> void:
@@ -19,7 +22,19 @@ func _ready() -> void:
 func _on_area_2d_area_entered(area: Area2D) -> void:
 	match gamemode:
 		GAMEMODES.NORMAL:
-			area.flipper = false
-		GAMEMODES.FLIPPER:
-			area.flipper = true
+			area.flux = false
+			area.stairsmaster.active = false
+			area.ricochet.active = false
+		GAMEMODES.FLUX:
+			area.flux = true
+			area.stairsmaster.active = false
+			area.ricochet.active = false
+		GAMEMODES.STAIRSMASTER:
+			area.flux = false
+			area.stairsmaster.active = true
+			area.ricochet.active = false
+		GAMEMODES.RICOCHET:
+			area.flux = false
+			area.stairsmaster.active = false
+			area.ricochet.active = true
 		

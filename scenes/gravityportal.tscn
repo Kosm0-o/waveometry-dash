@@ -1,8 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://dr1xtmfnp78gl"]
+[gd_scene load_steps=11 format=3 uid="uid://dr1xtmfnp78gl"]
 
 [ext_resource type="Script" uid="uid://bs2n242lcgaj5" path="res://scripts/gravityportal.gd" id="1_fcftj"]
 [ext_resource type="Texture2D" uid="uid://b5d1hr2tt63vn" path="res://assets/flip gravity portal.svg" id="2_0cebx"]
 [ext_resource type="Texture2D" uid="uid://dc5luvhx3oew6" path="res://assets/particlesquare.svg" id="3_e1bu2"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_0cebx"]
+light_mode = 1
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4shoe"]
 size = Vector2(79, 829)
@@ -37,6 +40,7 @@ scale_curve = SubResource("CurveTexture_87xa6")
 color_ramp = SubResource("GradientTexture1D_yea2u")
 
 [node name="gravityportal" type="Node2D"]
+material = SubResource("CanvasItemMaterial_0cebx")
 script = ExtResource("1_fcftj")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -57,5 +61,9 @@ position = Vector2(-14, 5)
 texture = ExtResource("3_e1bu2")
 speed_scale = 1.5
 process_material = SubResource("ParticleProcessMaterial_osuda")
+
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
+position = Vector2(2, 3.5)
+scale = Vector2(6.14286, 13.95)
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

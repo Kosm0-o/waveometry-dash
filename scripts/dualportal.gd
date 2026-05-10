@@ -30,9 +30,15 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 		var c = preload("res://scenes/trail.tscn").instantiate()
 		b.dual = true
 		b.global_position = area.global_position
-		if area.flipper:
-			b.flipper = true
+		if area.flux:
+			b.flux = true
 			b.dir = -1 * area.dir
+		b.stairsmaster.active = area.stairsmaster.active
+		b.ricochet.active = area.ricochet.active
+		b.speedmod = area.speedmod
+		b.ogspeedmod = area.ogspeedmod
+		b.angle = area.angle
+		b.trail_node = c
 		c.player = b
 		pnode.add_child(b)
 		pnode.get_parent().add_child(c)

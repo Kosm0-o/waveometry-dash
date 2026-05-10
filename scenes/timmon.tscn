@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://1akf0w80fwso"]
+
+[ext_resource type="Script" uid="uid://coa7c8o2o00jy" path="res://scripts/obstacle.gd" id="1_s3tlc"]
+[ext_resource type="Texture2D" uid="uid://btesens1jqgxo" path="res://assets/tim.svg" id="2_s3tlc"]
+
+[sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_t0130"]
+points = PackedVector2Array(-23.5, -110, 13.5, -109, 44, 72, -54, 69)
+
+[node name="TimMonster" type="Area2D"]
+collision_layer = 4
+script = ExtResource("1_s3tlc")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_s3tlc")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(6, 22)
+shape = SubResource("ConvexPolygonShape2D_t0130")
+
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
+position = Vector2(2.99999, 7.99999)
+scale = Vector2(8.1, 11.2)
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]

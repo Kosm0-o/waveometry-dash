@@ -1,0 +1,40 @@
+[gd_scene load_steps=6 format=3 uid="uid://du3f13qmlicv5"]
+
+[ext_resource type="Script" uid="uid://coa7c8o2o00jy" path="res://scripts/obstacle.gd" id="1_kprxg"]
+[ext_resource type="Texture2D" uid="uid://cw442jsjymtcb" path="res://assets/RegularSawblade01.svg" id="2_kprxg"]
+
+[sub_resource type="Gradient" id="Gradient_kprxg"]
+offsets = PackedFloat32Array(0, 0.525974)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_846d5"]
+gradient = SubResource("Gradient_kprxg")
+fill = 1
+fill_from = Vector2(0.5, 0.486239)
+fill_to = Vector2(0, 0)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_846d5"]
+size = Vector2(44, 51)
+
+[node name="saw" type="Area2D"]
+collision_layer = 4
+script = ExtResource("1_kprxg")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(5, 1)
+scale = Vector2(1.4082, 1.21094)
+energy = 22.85
+texture = SubResource("GradientTexture2D_846d5")
+
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="PointLight2D"]
+position = Vector2(-1.06519, -0.825807)
+scale = Vector2(3.72815, 3.96387)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_kprxg")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1, 0.5)
+shape = SubResource("RectangleShape2D_846d5")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]

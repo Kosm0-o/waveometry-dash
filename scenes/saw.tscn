@@ -19,6 +19,7 @@ size = Vector2(44, 51)
 [node name="saw" type="Area2D"]
 collision_layer = 4
 script = ExtResource("1_kprxg")
+saw = true
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
 position = Vector2(5, 1)

@@ -42,7 +42,7 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 	else:
 		for p in global.players:
 			p.speedmod = speedinfo[speed]["speedmod"]
-		await get_tree().create_timer(0.35).timeout
+		await get_tree().create_timer(0.25).timeout
 		for p in global.players:
 			print(p.name)
 			var tween = create_tween().set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_EXPO)

@@ -54,7 +54,7 @@ collision_layer = 2
 position = Vector2(-3.5, 2.5)
 shape = SubResource("RectangleShape2D_4shoe")
 
-[node name="particles" type="GPUParticles2D" parent="."]
+[node name="particles" type="GPUParticles2D" parent="." groups=["particles"]]
 modulate = Color(0.933333, 0.278431, 0.278431, 1)
 position = Vector2(-24, 30)
 texture = ExtResource("3_j7xi8")

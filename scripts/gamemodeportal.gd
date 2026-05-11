@@ -23,18 +23,18 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 	match gamemode:
 		GAMEMODES.NORMAL:
 			area.flux = false
-			area.stairsmaster.active = false
-			area.ricochet.active = false
+			area.stairsmaster = {"active": false, "fall": false, "holding": 0, "stopframes": 10}
+			area.ricochet = {"active": false, "falling": false}
 		GAMEMODES.FLUX:
 			area.flux = true
-			area.stairsmaster.active = false
-			area.ricochet.active = false
+			area.stairsmaster = {"active": false, "fall": false, "holding": 0, "stopframes": 10}
+			area.ricochet = {"active": false, "falling": false}
 		GAMEMODES.STAIRSMASTER:
 			area.flux = false
-			area.stairsmaster.active = true
-			area.ricochet.active = false
+			area.stairsmaster = {"active": true, "fall": false, "holding": 0, "stopframes": 10}
+			area.ricochet = {"active": false, "falling": false}
 		GAMEMODES.RICOCHET:
 			area.flux = false
-			area.stairsmaster.active = false
-			area.ricochet.active = true
+			area.stairsmaster = {"active": false, "fall": false, "holding": 0, "stopframes": 10}
+			area.ricochet = {"active": true, "falling": false}
 		

@@ -72,11 +72,11 @@ func _process(delta: float) -> void:
 		scale = Vector2(1,1)
 	elif abs(angle) == 15:
 		position.x += speed * speedmod * delta
-		position.y += (sin(15) / base) * speed * dir * speedmod * 0.8 * delta
+		position.y += (sin(15) / base) * speed * dir * speedmod * 1.0 * delta #og 0.8
 		scale = Vector2(1.55,1.55)
 	else:
 		position.x += speed * speedmod * delta
-		position.y += (sin(67.5) / base) * speed * dir * speedmod * -2.5 * delta
+		position.y += (sin(67.5) / base) * speed * dir * speedmod * -2 * delta #og -2.5
 		scale = Vector2(0.6,0.6)
 	
 	var ycheck : bool = position.y > -global.bounds and position.y < global.bounds
@@ -94,10 +94,10 @@ func die():
 		trail_node.queue_free()
 		queue_free()
 	$atsol.stop()
-	$atsol.play()
+	$atsol.play(20.0)
 	ogspeedmod = 1
 	speedmod = 1
 	angle = 45
-	global_position = Vector2.ZERO
+	global_position = Vector2(27422.0, -30.0)#Vector2.ZERO
 	trail_node.clear_points()
 	

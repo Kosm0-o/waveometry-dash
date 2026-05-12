@@ -94,10 +94,10 @@ func die():
 		trail_node.queue_free()
 		queue_free()
 	$atsol.stop()
-	$atsol.play(20.0)
+	$atsol.play()
 	ogspeedmod = 1
 	speedmod = 1
 	angle = 45
-	global_position = Vector2(27422.0, -30.0)#Vector2.ZERO
+	global_position = Vector2.ZERO
 	trail_node.clear_points()
 	

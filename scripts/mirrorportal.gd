@@ -2,19 +2,20 @@ extends Node2D
 
 enum FLIPS {NORMAL, BACKWARD}
 @export var flip : FLIPS = FLIPS.BACKWARD
-var textures : Array[Texture2D] = [
-	load("res://assets/normal mirror portal.svg"),
-	load("res://assets/flipped mirror portal.svg")
-]
-var colors : Array[Color] = [
-	Color("#009dd9"),
-	Color("#e18b03")
-	
+var mirrorinfo : Array[Dictionary] = [
+	{
+	"name": "normal",
+	"color": Color("#009dd9")
+	},
+	{
+	"name": "backwards",
+	"color": Color("#e18b03")
+	}
 ]
 
 func _ready() -> void:
-	$Sprite2D.texture = textures[flip]
-	$particles.modulate = colors[flip]
+	$sprites.play(mirrorinfo[flip]["name"])
+	$particles.modulate = mirrorinfo[flip]["color"]
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
 	while global.mirror_tweening:

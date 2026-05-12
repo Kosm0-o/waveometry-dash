@@ -3,7 +3,7 @@ extends Line2D
 var player : Player
 @export var between_length : float = 10.0
 @export var og_width : float = 21.0
-var starter_frames : int = 100
+var starter_frames : int = 250
 const NEWFRAMES : int = 1
 var frames : int = NEWFRAMES
 

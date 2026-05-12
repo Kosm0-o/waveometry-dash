@@ -1,23 +1,100 @@
-[gd_scene load_steps=5 format=3 uid="uid://ipq8o2gmoibw"]
+[gd_scene load_steps=12 format=3 uid="uid://ipq8o2gmoibw"]
 
 [ext_resource type="Script" uid="uid://qexhc2vtpk7e" path="res://scripts/speed_portal.gd" id="1_qw0bg"]
-[ext_resource type="Texture2D" uid="uid://ddquoshujy2a4" path="res://assets/normal speed sprite.svg" id="2_qw0bg"]
+[ext_resource type="Texture2D" uid="uid://5jvrrbutemvg" path="res://assets/spritesheet.png" id="2_qw0bg"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_qw0bg"]
 light_mode = 1
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sdseg"]
+atlas = ExtResource("2_qw0bg")
+region = Rect2(0, 0, 137, 296)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aeaor"]
+atlas = ExtResource("2_qw0bg")
+region = Rect2(411, 0, 137, 296)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qxe5q"]
+atlas = ExtResource("2_qw0bg")
+region = Rect2(548, 0, 137, 296)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t1ifu"]
+atlas = ExtResource("2_qw0bg")
+region = Rect2(137, 0, 137, 296)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_et2b0"]
+atlas = ExtResource("2_qw0bg")
+region = Rect2(685, 0, 137, 296)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3wvrp"]
+atlas = ExtResource("2_qw0bg")
+region = Rect2(274, 0, 137, 296)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_6tpj1"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sdseg")
+}],
+"loop": false,
+"name": &"burst",
+"speed": 0.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_aeaor")
+}],
+"loop": false,
+"name": &"double",
+"speed": 0.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qxe5q")
+}],
+"loop": false,
+"name": &"normal",
+"speed": 0.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t1ifu")
+}],
+"loop": false,
+"name": &"quad",
+"speed": 0.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_et2b0")
+}],
+"loop": false,
+"name": &"slow",
+"speed": 0.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3wvrp")
+}],
+"loop": false,
+"name": &"triple",
+"speed": 0.0
+}]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_aeaor"]
 size = Vector2(54, 597)
 
 [node name="SpeedPortal" type="Node2D"]
+modulate = Color(0.219608, 0.219608, 0.219608, 1)
 material = SubResource("CanvasItemMaterial_qw0bg")
 scale = Vector2(1.75, 1.75)
 script = ExtResource("1_qw0bg")
 speed = 1
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-modulate = Color(0.219501, 0.219501, 0.219501, 1)
-texture = ExtResource("2_qw0bg")
+[node name="sprites" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_6tpj1")
+animation = &"double"
+offset = Vector2(3.375, 95)
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 2

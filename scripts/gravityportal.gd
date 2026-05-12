@@ -2,20 +2,28 @@ extends Node2D
 
 enum TYPES {UP, DOWN, FLIP}
 @export var gravity : TYPES = TYPES.DOWN
-var textures : Array[Texture2D] = [
-	load("res://assets/up gravity portal.svg"),
-	load("res://assets/down gravity portal.svg"),
-	load("res://assets/flip gravity portal.svg")
-]
-var colors : Array[Color] = [
-	Color("#fff200"),
-	Color("#00dfff"),
-	Color("#09fa00")
+var gravityinfo : Array[Dictionary] = [
+	{
+	"name": "up",
+	"color": Color("#fff200"),
+	"frontpos": Vector2(51, -1.205)
+	},
+	{
+	"name": "down",
+	"color": Color("#00dfff"),
+	"frontpos": Vector2(51, 0)
+	},
+	{
+	"name": "flip",
+	"color": Color("#09fa00"),
+	"frontpos": Vector2(48.59, 3.614)
+	}
 ]
 
 func _ready() -> void:
-	$Sprite2D.texture = textures[gravity]
-	$particles.modulate = colors[gravity]
+	$sprites.play(gravityinfo[gravity]["name"])
+	$particles.modulate = gravityinfo[gravity]["color"]
+	$sprites/fronthalf.position = gravityinfo[gravity]["frontpos"]
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
 	if gravity == TYPES.FLIP:

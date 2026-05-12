@@ -1,11 +1,66 @@
-[gd_scene load_steps=11 format=3 uid="uid://c4sqlto7kttv1"]
+[gd_scene load_steps=18 format=3 uid="uid://c4sqlto7kttv1"]
 
 [ext_resource type="Script" uid="uid://cv3op6lfynjmu" path="res://scripts/mirrorportal.gd" id="1_d56r6"]
-[ext_resource type="Texture2D" uid="uid://hlkk32a0wt24" path="res://assets/flipped mirror portal.svg" id="2_wsa65"]
+[ext_resource type="Script" uid="uid://cbef427tmh2pe" path="res://scripts/sprites.gd" id="2_2p77d"]
 [ext_resource type="Texture2D" uid="uid://dc5luvhx3oew6" path="res://assets/particlesquare.svg" id="3_wsa65"]
+[ext_resource type="Texture2D" uid="uid://5jvrrbutemvg" path="res://assets/spritesheet.png" id="3_yea2u"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_wsa65"]
 light_mode = 1
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j1gqx"]
+atlas = ExtResource("3_yea2u")
+region = Rect2(1096, 592, 137, 296)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_87xa6"]
+atlas = ExtResource("3_yea2u")
+region = Rect2(822, 592, 137, 296)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0spls"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j1gqx")
+}],
+"loop": false,
+"name": &"backwards",
+"speed": 0.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_87xa6")
+}],
+"loop": false,
+"name": &"normal",
+"speed": 0.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rcro6"]
+atlas = ExtResource("3_yea2u")
+region = Rect2(1233, 592, 137, 296)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qb4ww"]
+atlas = ExtResource("3_yea2u")
+region = Rect2(959, 592, 137, 296)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_njrt8"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rcro6")
+}],
+"loop": false,
+"name": &"backwards",
+"speed": 0.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qb4ww")
+}],
+"loop": false,
+"name": &"normal",
+"speed": 0.0
+}]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4shoe"]
 size = Vector2(79, 829)
@@ -42,8 +97,23 @@ color_ramp = SubResource("GradientTexture1D_wsa65")
 material = SubResource("CanvasItemMaterial_wsa65")
 script = ExtResource("1_d56r6")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_wsa65")
+[node name="sprites" type="Node2D" parent="."]
+position = Vector2(-20, -58)
+scale = Vector2(1.06, 1.06)
+script = ExtResource("2_2p77d")
+
+[node name="backhalf" type="AnimatedSprite2D" parent="sprites"]
+position = Vector2(12.048, 0)
+sprite_frames = SubResource("SpriteFrames_0spls")
+animation = &"backwards"
+offset = Vector2(3.375, 95)
+
+[node name="fronthalf" type="AnimatedSprite2D" parent="sprites"]
+z_index = 3
+position = Vector2(49.3976, -3.61444)
+sprite_frames = SubResource("SpriteFrames_njrt8")
+animation = &"backwards"
+offset = Vector2(3.375, 95)
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 2

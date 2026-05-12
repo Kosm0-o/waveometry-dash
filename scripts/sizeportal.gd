@@ -4,21 +4,21 @@ enum SIZES {MINI, NORMAL, MEGA}
 @export var size : SIZES = SIZES.NORMAL
 var angleinfo : Array[Dictionary] = [
 	{
-	"anglemod": 67.5,
-	"texture": load("res://assets/mini portal.svg")
+	"name": "mini",
+	"anglemod": 67.5
 	},
 	{
-	"anglemod": 45,
-	"texture": load("res://assets/normal portal.svg")
+	"name": "normal",
+	"anglemod": 45
 	},
 	{
-	"anglemod": 15,
-	"texture": load("res://assets/mega portal.svg")
+	"name": "mega",
+	"anglemod": 15
 	}
 ]
 
 func _ready() -> void:
-	$Sprite2D.texture = angleinfo[size]["texture"]
+	$sprites.play(angleinfo[size]["name"])
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
 	area.angle = angleinfo[size]["anglemod"] * sign(area.angle)

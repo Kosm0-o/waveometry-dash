@@ -8,6 +8,7 @@ _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.117021, 1), 0.0, 0.0, 0, 0, Ve
 point_count = 3
 
 [node name="trail" type="Node2D"]
+z_index = 1
 script = ExtResource("1_2tjbc")
 
 [node name="line2" type="Line2D" parent="."]

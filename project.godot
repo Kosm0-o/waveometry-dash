@@ -11,6 +11,7 @@ config_version=5
 [application]
 
 config/name="Waveometry Dash"
+run/main_scene="uid://btrtpdonnmiig"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
 
@@ -20,6 +21,7 @@ global="*res://scripts/global.gd"
 
 [display]
 
+window/stretch/mode="viewport"
 window/vsync/vsync_mode=3
 
 [editor_plugins]
@@ -29,6 +31,8 @@ enabled=PackedStringArray("res://addons/godot_super-wakatime/plugin.cfg")
 [file_customization]
 
 folder_colors={
+"res://Resources/": "teal",
+"res://addons/": "yellow",
 "res://assets/": "red",
 "res://scenes/": "blue",
 "res://scripts/": "green"

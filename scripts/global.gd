@@ -5,7 +5,7 @@ var dualing : bool = false
 var exit_teleportals : Array[Teleportal] = []
 var players : Array = []
 var bounds : float = 630
-var lowdetailmode : bool = true
+var lowdetailmode : bool = false
 var complete_details : bool = false
 
 # remember to change portal sprites in to 2 parts, front and back, for entering through illusion

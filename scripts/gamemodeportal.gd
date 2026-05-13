@@ -2,22 +2,34 @@ extends Node2D
 
 enum GAMEMODES {NORMAL, FLUX, STAIRSMASTER, RICOCHET}
 @export var gamemode : GAMEMODES = GAMEMODES.FLUX
-var textures : Array[Texture2D] = [
-	load("res://assets/normal mode portal sprite.svg"),
-	load("res://assets/flipper portal sprite.svg"),
-	load("res://assets/stairsmaster portal sprite.svg"),
-	load("res://assets/ricochet portal sprite.svg")
-]
-var colors : Array[Color] = [
-	Color("#a0e544"),
-	Color("#ae47e0"),
-	Color("#47ecb2"),
-	Color("#ee4747")
+var modeinfo : Array[Dictionary] = [
+	{
+	"name": "normal",
+	"color": Color("#a0e544"),
+	"frontpos": Vector2(39.759, 2)
+	},
+	{
+	"name": "flux",
+	"color": Color("#ae47e0"),
+	"frontpos": Vector2(39.759, 2.41)
+	},
+	{
+	"name": "stairsmaster",
+	"color": Color("#47ecb2"),
+	"frontpos": Vector2(39.3, 1.5)
+	},
+	{
+	"name": "ricochet",
+	"color": Color("#ee4747"),
+	"frontpos": Vector2(38.554, 0.795)
+	}
 ]
 
+
 func _ready() -> void:
-	$Sprite2D.texture = textures[gamemode]
-	$particles.modulate = colors[gamemode]
+	$sprites.play(modeinfo[gamemode]["name"])
+	$particles.modulate = modeinfo[gamemode]["color"]
+	$sprites/fronthalf.position = modeinfo[gamemode]["frontpos"]
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
 	match gamemode:

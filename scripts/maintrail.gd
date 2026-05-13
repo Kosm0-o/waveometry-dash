@@ -8,7 +8,7 @@ class_name Trail
 func _ready() -> void:
 	player.trail_node = self
 
-func clear_points():
+func reset():
 	for l in get_children():
 		l.clear_points()
-		l.starter_frames = 100
+		l.starter_frames = 250

@@ -1,11 +1,66 @@
-[gd_scene load_steps=11 format=3 uid="uid://cv8gnfhudm0yc"]
+[gd_scene load_steps=18 format=3 uid="uid://cv8gnfhudm0yc"]
 
 [ext_resource type="Script" uid="uid://bek172t7s8k55" path="res://scripts/teleportal.gd" id="1_sliox"]
-[ext_resource type="Texture2D" uid="uid://bxiolgk6f4fl" path="res://assets/enter teleportal sprite.svg" id="2_60hy6"]
+[ext_resource type="Script" uid="uid://cbef427tmh2pe" path="res://scripts/sprites.gd" id="2_60hy6"]
+[ext_resource type="Texture2D" uid="uid://5jvrrbutemvg" path="res://assets/spritesheet.png" id="3_0tmfk"]
 [ext_resource type="Texture2D" uid="uid://dc5luvhx3oew6" path="res://assets/particlesquare.svg" id="3_sojjy"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_sliox"]
 light_mode = 1
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kxsgm"]
+atlas = ExtResource("3_0tmfk")
+region = Rect2(822, 296, 137, 296)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mimer"]
+atlas = ExtResource("3_0tmfk")
+region = Rect2(548, 296, 137, 296)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_w7x21"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kxsgm")
+}],
+"loop": false,
+"name": &"entrance",
+"speed": 0.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mimer")
+}],
+"loop": false,
+"name": &"exit",
+"speed": 0.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j82lg"]
+atlas = ExtResource("3_0tmfk")
+region = Rect2(959, 296, 137, 296)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tbc2w"]
+atlas = ExtResource("3_0tmfk")
+region = Rect2(685, 296, 137, 296)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_v6v0m"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j82lg")
+}],
+"loop": false,
+"name": &"entrance",
+"speed": 0.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tbc2w")
+}],
+"loop": false,
+"name": &"exit",
+"speed": 0.0
+}]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4shoe"]
 size = Vector2(79, 217)
@@ -44,14 +99,29 @@ color_ramp = SubResource("GradientTexture1D_wsa65")
 material = SubResource("CanvasItemMaterial_sliox")
 script = ExtResource("1_sliox")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_60hy6")
+[node name="sprites" type="Node2D" parent="."]
+position = Vector2(30, -72)
+scale = Vector2(1.06, 1.06)
+script = ExtResource("2_60hy6")
+
+[node name="backhalf" type="AnimatedSprite2D" parent="sprites"]
+position = Vector2(-2.83019, 10.3774)
+sprite_frames = SubResource("SpriteFrames_w7x21")
+animation = &"exit"
+offset = Vector2(3.375, 95)
+
+[node name="fronthalf" type="AnimatedSprite2D" parent="sprites"]
+z_index = 3
+position = Vector2(27.3585, 5.66038)
+sprite_frames = SubResource("SpriteFrames_v6v0m")
+animation = &"exit"
+offset = Vector2(3.375, 95)
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(-3.5, -1.5)
+position = Vector2(97, -1)
 shape = SubResource("RectangleShape2D_4shoe")
 
 [node name="particles" type="GPUParticles2D" parent="." groups=["particles"]]

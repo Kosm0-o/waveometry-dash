@@ -2,19 +2,28 @@ extends Node2D
 
 enum MODES {DUAL, SINGLE}
 @export var dual : MODES = MODES.DUAL
-var textures : Array[Texture2D] = [
-	load("res://assets/dual portal sprite.svg"),
-	load("res://assets/single portal sprite.svg")
+var dualinfo : Array[Dictionary] = [
+	{
+	"name": "dual",
+	"color": Color("#e18b03"),
+	"mainpos": Vector2(30, -72),
+	"frontpos": Vector2(-14.151, 19.811)
+	},
+	{
+	"name": "single",
+	"color": Color("#009dd9"),
+	"mainpos": Vector2(9, -54),
+	"frontpos": Vector2(12.3, -2.831)
+	}
 ]
-var colors : Array[Color] = [
-	Color("#e18b03"),
-	Color("#009dd9")
-]
+
 @onready var pnode : Node2D = get_tree().current_scene.get_node("players")
 
 func _ready() -> void:
-	$Sprite2D.texture = textures[dual]
-	$particles.modulate = colors[dual]
+	$sprites.play(dualinfo[dual]["name"])
+	$particles.modulate = dualinfo[dual]["color"]
+	$sprites.position = dualinfo[dual]["mainpos"]
+	$sprites/fronthalf.position = dualinfo[dual]["frontpos"]
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
 	if global.dualing and dual == MODES.SINGLE:

@@ -99,5 +99,5 @@ func die():
 	speedmod = 1
 	angle = 45
 	global_position = Vector2.ZERO
-	trail_node.clear_points()
+	trail_node.reset()
 	

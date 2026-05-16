@@ -26,6 +26,7 @@ func _ready() -> void:
 	$sprites/fronthalf.position = gravityinfo[gravity]["frontpos"]
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
+	global.portal_entered.emit(self)
 	if gravity == TYPES.FLIP:
 		area.angle *= -1
 	else:

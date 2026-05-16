@@ -17,7 +17,7 @@ var dualinfo : Array[Dictionary] = [
 	}
 ]
 
-@onready var pnode : Node2D = get_tree().current_scene.get_node("players")
+@onready var pnode : Node2D = get_tree().current_scene.get_node("Map").get_node("players")
 
 func _ready() -> void:
 	$sprites.play(dualinfo[dual]["name"])

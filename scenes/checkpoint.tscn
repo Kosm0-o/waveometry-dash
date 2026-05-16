@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://b8p7pmrx2w56v"]
+
+[ext_resource type="Script" uid="uid://bakmxglufeseu" path="res://scripts/checkpoint.gd" id="1_ywqth"]
+[ext_resource type="Texture2D" uid="uid://ccfbw316dc6xv" path="res://icon.svg" id="2_vsimk"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_yqsag"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_vsimk")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Checkpoint" type="Node2D"]
+script = ExtResource("1_ywqth")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_yqsag")
+
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
+position = Vector2(5.72205e-06, 7.62939e-06)
+scale = Vector2(6.8, 7)

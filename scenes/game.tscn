@@ -1,11 +1,14 @@
-[gd_scene load_steps=8 format=3 uid="uid://btrtpdonnmiig"]
+[gd_scene load_steps=11 format=3 uid="uid://btrtpdonnmiig"]
 
 [ext_resource type="PackedScene" uid="uid://d2yi0cqbfih7l" path="res://scenes/player.tscn" id="1_uwrxv"]
 [ext_resource type="Script" uid="uid://dy525wqc8vffw" path="res://scripts/gamemanager.gd" id="1_yqjtg"]
 [ext_resource type="PackedScene" uid="uid://cc2x03pdfnfcu" path="res://scenes/trail.tscn" id="2_iywne"]
 [ext_resource type="Script" uid="uid://boiyb54qyfsae" path="res://scripts/testtrail.gd" id="3_lbhrr"]
-[ext_resource type="PackedScene" uid="uid://dcnw2ni1n582x" path="res://scenes/gamemodeportal.tscn" id="6_p57ef"]
+[ext_resource type="PackedScene" uid="uid://dtqy8g00cuqob" path="res://scenes/spike.tscn" id="6_p57ef"]
+[ext_resource type="PackedScene" uid="uid://w8nqdwu7crdh" path="res://scenes/sizeportal.tscn" id="7_gee14"]
 [ext_resource type="PackedScene" uid="uid://ipq8o2gmoibw" path="res://scenes/speed_portal.tscn" id="7_u5sy4"]
+[ext_resource type="PackedScene" uid="uid://de38yi3l0x16g" path="res://scenes/dualportal.tscn" id="8_gee14"]
+[ext_resource type="PackedScene" uid="uid://dcnw2ni1n582x" path="res://scenes/gamemodeportal.tscn" id="9_0tnpc"]
 
 [sub_resource type="Environment" id="Environment_trtic"]
 background_mode = 3
@@ -18,7 +21,7 @@ glow_blend_mode = 0
 
 [node name="game" type="Node2D" node_paths=PackedStringArray("player")]
 script = ExtResource("1_yqjtg")
-player = NodePath("players/Player")
+player = NodePath("Map/players/Player")
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 
@@ -37,38 +40,58 @@ color = Color(0, 0, 0, 1)
 metadata/_edit_use_anchors_ = true
 
 [node name="trail" parent="." node_paths=PackedStringArray("player") instance=ExtResource("2_iywne")]
-player = NodePath("../players/Player")
+player = NodePath("../Map/players/Player")
 
 [node name="trail2" type="Polygon2D" parent="."]
 visible = false
 z_as_relative = false
 script = ExtResource("3_lbhrr")
 
-[node name="players" type="Node2D" parent="."]
-z_index = 1
-
-[node name="Player" parent="players" instance=ExtResource("1_uwrxv")]
-z_as_relative = false
-
 [node name="Camera2D" type="Camera2D" parent="."]
 top_level = true
 zoom = Vector2(0.5, 0.5)
 
-[node name="SpeedPortal" parent="." instance=ExtResource("7_u5sy4")]
-position = Vector2(164, 0)
+[node name="Map" type="Node2D" parent="."]
+
+[node name="players" type="Node2D" parent="Map"]
+z_index = 1
+
+[node name="Player" parent="Map/players" instance=ExtResource("1_uwrxv")]
+z_as_relative = false
+
+[node name="border1" type="Line2D" parent="Map"]
+position = Vector2(0, 648)
+width = 50.0
+
+[node name="border2" type="Line2D" parent="Map"]
+position = Vector2(0, -642)
+width = 50.0
+
+[node name="sizeportal" parent="Map" instance=ExtResource("7_gee14")]
+position = Vector2(1217, -18)
+
+[node name="Spike" parent="Map" instance=ExtResource("6_p57ef")]
+position = Vector2(4328, -39)
+scale = Vector2(13.87, 13.87)
+
+[node name="Spike2" parent="Map" instance=ExtResource("6_p57ef")]
+position = Vector2(8258, -39)
+scale = Vector2(13.87, 13.87)
+
+[node name="SpeedPortal" parent="Map" instance=ExtResource("7_u5sy4")]
+position = Vector2(364, 0)
 speed = 0
 
-[node name="gamemodeportal" parent="." instance=ExtResource("6_p57ef")]
-position = Vector2(1657, 0)
+[node name="SpeedPortal2" parent="Map" instance=ExtResource("7_u5sy4")]
+position = Vector2(2246, 0)
+speed = 2
 
-[node name="gamemodeportal2" parent="." instance=ExtResource("6_p57ef")]
-position = Vector2(3535, 0)
-gamemode = 2
+[node name="dualportal" parent="Map" instance=ExtResource("8_gee14")]
+position = Vector2(1517, 0)
 
-[node name="gamemodeportal3" parent="." instance=ExtResource("6_p57ef")]
-position = Vector2(5449, 0)
-gamemode = 3
+[node name="dualportal2" parent="Map" instance=ExtResource("8_gee14")]
+position = Vector2(2955, 0)
+dual = 1
 
-[node name="gamemodeportal4" parent="." instance=ExtResource("6_p57ef")]
-position = Vector2(7742, 0)
-gamemode = 0
+[node name="gamemodeportal" parent="Map" instance=ExtResource("9_0tnpc")]
+position = Vector2(670, 0)

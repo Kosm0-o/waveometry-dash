@@ -1,64 +1,64 @@
-[gd_scene load_steps=18 format=3 uid="uid://c4sqlto7kttv1"]
+[gd_scene load_steps=18 format=3 uid="uid://bbeqebimbdanf"]
 
-[ext_resource type="Script" uid="uid://cv3op6lfynjmu" path="res://scripts/mirrorportal.gd" id="1_d56r6"]
-[ext_resource type="Script" uid="uid://cbef427tmh2pe" path="res://scripts/sprites.gd" id="2_2p77d"]
-[ext_resource type="Texture2D" uid="uid://dc5luvhx3oew6" path="res://assets/particlesquare.svg" id="3_wsa65"]
-[ext_resource type="Texture2D" uid="uid://5jvrrbutemvg" path="res://assets/spritesheet.png" id="3_yea2u"]
+[ext_resource type="Script" uid="uid://cia04hoig84a4" path="res://scripts/rotationportal.gd" id="1_1ien7"]
+[ext_resource type="Script" uid="uid://cbef427tmh2pe" path="res://scripts/sprites.gd" id="2_47718"]
+[ext_resource type="Texture2D" uid="uid://5jvrrbutemvg" path="res://assets/spritesheet.png" id="3_6gpjs"]
+[ext_resource type="Texture2D" uid="uid://dc5luvhx3oew6" path="res://assets/particlesquare.svg" id="4_wkrae"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_wsa65"]
 light_mode = 1
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_j1gqx"]
-atlas = ExtResource("3_yea2u")
-region = Rect2(1096, 592, 137, 296)
+[sub_resource type="AtlasTexture" id="AtlasTexture_47718"]
+atlas = ExtResource("3_6gpjs")
+region = Rect2(274, 592, 137, 296)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_87xa6"]
-atlas = ExtResource("3_yea2u")
-region = Rect2(822, 592, 137, 296)
+[sub_resource type="AtlasTexture" id="AtlasTexture_6gpjs"]
+atlas = ExtResource("3_6gpjs")
+region = Rect2(548, 592, 137, 296)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_0spls"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_wkrae"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_j1gqx")
+"texture": SubResource("AtlasTexture_47718")
 }],
 "loop": false,
-"name": &"backwards",
+"name": &"180",
 "speed": 0.0
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_87xa6")
+"texture": SubResource("AtlasTexture_6gpjs")
 }],
 "loop": false,
-"name": &"normal",
+"name": &"90",
 "speed": 0.0
 }]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_rcro6"]
-atlas = ExtResource("3_yea2u")
-region = Rect2(1233, 592, 137, 296)
+[sub_resource type="AtlasTexture" id="AtlasTexture_2k7pr"]
+atlas = ExtResource("3_6gpjs")
+region = Rect2(411, 592, 137, 296)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_qb4ww"]
-atlas = ExtResource("3_yea2u")
-region = Rect2(959, 592, 137, 296)
+[sub_resource type="AtlasTexture" id="AtlasTexture_hilru"]
+atlas = ExtResource("3_6gpjs")
+region = Rect2(685, 592, 137, 296)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_njrt8"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_rf8ji"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_rcro6")
+"texture": SubResource("AtlasTexture_2k7pr")
 }],
 "loop": false,
-"name": &"backwards",
+"name": &"180",
 "speed": 0.0
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_qb4ww")
+"texture": SubResource("AtlasTexture_hilru")
 }],
 "loop": false,
-"name": &"normal",
+"name": &"90",
 "speed": 0.0
 }]
 
@@ -93,26 +93,25 @@ scale_max = 1.5
 scale_curve = SubResource("CurveTexture_2p77d")
 color_ramp = SubResource("GradientTexture1D_wsa65")
 
-[node name="mirrorportal" type="Node2D"]
+[node name="rotationportal" type="Node2D"]
 material = SubResource("CanvasItemMaterial_wsa65")
-script = ExtResource("1_d56r6")
+script = ExtResource("1_1ien7")
 
 [node name="sprites" type="Node2D" parent="."]
-position = Vector2(-20, -58)
 scale = Vector2(1.06, 1.06)
-script = ExtResource("2_2p77d")
+script = ExtResource("2_47718")
 
 [node name="backhalf" type="AnimatedSprite2D" parent="sprites"]
-position = Vector2(12.048, 0)
-sprite_frames = SubResource("SpriteFrames_0spls")
-animation = &"backwards"
+position = Vector2(12.048, -32.0755)
+sprite_frames = SubResource("SpriteFrames_wkrae")
+animation = &"180"
 offset = Vector2(3.375, 95)
 
 [node name="fronthalf" type="AnimatedSprite2D" parent="sprites"]
 z_index = 3
-position = Vector2(49.3976, -3.61444)
-sprite_frames = SubResource("SpriteFrames_njrt8")
-animation = &"backwards"
+position = Vector2(50.341, -30.1887)
+sprite_frames = SubResource("SpriteFrames_rf8ji")
+animation = &"180"
 offset = Vector2(3.375, 95)
 
 [node name="Area2D" type="Area2D" parent="."]
@@ -125,7 +124,7 @@ shape = SubResource("RectangleShape2D_4shoe")
 [node name="particles" type="GPUParticles2D" parent="." groups=["particles"]]
 modulate = Color(0.882353, 0.545098, 0.0117647, 1)
 position = Vector2(-23, 36)
-texture = ExtResource("3_wsa65")
+texture = ExtResource("4_wkrae")
 process_material = SubResource("ParticleProcessMaterial_0spls")
 
 [node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]

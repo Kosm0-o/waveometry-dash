@@ -21,4 +21,5 @@ func _ready() -> void:
 	$sprites.play(angleinfo[size]["name"])
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
+	global.portal_entered.emit(self)
 	area.angle = angleinfo[size]["anglemod"] * sign(area.angle)

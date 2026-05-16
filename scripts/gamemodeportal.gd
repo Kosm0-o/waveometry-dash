@@ -32,6 +32,7 @@ func _ready() -> void:
 	$sprites/fronthalf.position = modeinfo[gamemode]["frontpos"]
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
+	global.portal_entered.emit(self)
 	match gamemode:
 		GAMEMODES.NORMAL:
 			area.flux = false

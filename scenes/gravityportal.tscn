@@ -87,7 +87,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4shoe"]
-size = Vector2(79, 829)
+size = Vector2(79, 307)
 
 [sub_resource type="Gradient" id="Gradient_28a1h"]
 colors = PackedColorArray(1, 1, 1, 0.698039, 1, 1, 1, 0)
@@ -144,7 +144,7 @@ offset = Vector2(3.375, 95)
 collision_layer = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(-3.5, 2.5)
+position = Vector2(34, -55.5)
 shape = SubResource("RectangleShape2D_4shoe")
 
 [node name="particles" type="GPUParticles2D" parent="." groups=["particles"]]

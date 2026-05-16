@@ -119,7 +119,7 @@ offset = Vector2(3.375, 95)
 collision_layer = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(-3.5, -1.5)
+position = Vector2(39, -1.5)
 shape = SubResource("RectangleShape2D_4shoe")
 
 [node name="particles" type="GPUParticles2D" parent="." groups=["particles"]]

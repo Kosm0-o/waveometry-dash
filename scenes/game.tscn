@@ -1,14 +1,16 @@
-[gd_scene load_steps=11 format=3 uid="uid://btrtpdonnmiig"]
+[gd_scene load_steps=13 format=3 uid="uid://btrtpdonnmiig"]
 
 [ext_resource type="PackedScene" uid="uid://d2yi0cqbfih7l" path="res://scenes/player.tscn" id="1_uwrxv"]
 [ext_resource type="Script" uid="uid://dy525wqc8vffw" path="res://scripts/gamemanager.gd" id="1_yqjtg"]
 [ext_resource type="PackedScene" uid="uid://cc2x03pdfnfcu" path="res://scenes/trail.tscn" id="2_iywne"]
+[ext_resource type="AudioStream" uid="uid://5j5ws1vswys6" path="res://assets/467339_At_the_Speed_of_Light_FINA.mp3" id="2_vtaks"]
 [ext_resource type="Script" uid="uid://boiyb54qyfsae" path="res://scripts/testtrail.gd" id="3_lbhrr"]
 [ext_resource type="PackedScene" uid="uid://dtqy8g00cuqob" path="res://scenes/spike.tscn" id="6_p57ef"]
 [ext_resource type="PackedScene" uid="uid://w8nqdwu7crdh" path="res://scenes/sizeportal.tscn" id="7_gee14"]
 [ext_resource type="PackedScene" uid="uid://ipq8o2gmoibw" path="res://scenes/speed_portal.tscn" id="7_u5sy4"]
 [ext_resource type="PackedScene" uid="uid://de38yi3l0x16g" path="res://scenes/dualportal.tscn" id="8_gee14"]
 [ext_resource type="PackedScene" uid="uid://dcnw2ni1n582x" path="res://scenes/gamemodeportal.tscn" id="9_0tnpc"]
+[ext_resource type="PackedScene" uid="uid://cv8gnfhudm0yc" path="res://scenes/teleportal.tscn" id="11_kvpfn"]
 
 [sub_resource type="Environment" id="Environment_trtic"]
 background_mode = 3
@@ -23,7 +25,10 @@ glow_blend_mode = 0
 script = ExtResource("1_yqjtg")
 player = NodePath("Map/players/Player")
 
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+[node name="song" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_vtaks")
+autoplay = true
+attenuation = 1e-05
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_trtic")
@@ -51,6 +56,11 @@ script = ExtResource("3_lbhrr")
 top_level = true
 zoom = Vector2(0.5, 0.5)
 
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="Camera2D"]
+remote_path = NodePath("../../song")
+update_rotation = false
+update_scale = false
+
 [node name="Map" type="Node2D" parent="."]
 
 [node name="players" type="Node2D" parent="Map"]
@@ -58,14 +68,6 @@ z_index = 1
 
 [node name="Player" parent="Map/players" instance=ExtResource("1_uwrxv")]
 z_as_relative = false
-
-[node name="border1" type="Line2D" parent="Map"]
-position = Vector2(0, 648)
-width = 50.0
-
-[node name="border2" type="Line2D" parent="Map"]
-position = Vector2(0, -642)
-width = 50.0
 
 [node name="sizeportal" parent="Map" instance=ExtResource("7_gee14")]
 position = Vector2(1217, -18)
@@ -95,3 +97,10 @@ dual = 1
 
 [node name="gamemodeportal" parent="Map" instance=ExtResource("9_0tnpc")]
 position = Vector2(670, 0)
+
+[node name="teleportal" parent="Map" instance=ExtResource("11_kvpfn")]
+position = Vector2(3327, 0)
+
+[node name="teleportal2" parent="Map" instance=ExtResource("11_kvpfn")]
+position = Vector2(4899, -805)
+portal = 1

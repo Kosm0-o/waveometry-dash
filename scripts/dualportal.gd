@@ -22,10 +22,13 @@ var dualinfo : Array[Dictionary] = [
 func _ready() -> void:
 	$sprites.play(dualinfo[dual]["name"])
 	$particles.modulate = dualinfo[dual]["color"]
+	$boop.modulate = dualinfo[dual]["color"]
+	$boop.modulate.a = 2
 	$sprites.position = dualinfo[dual]["mainpos"]
 	$sprites/fronthalf.position = dualinfo[dual]["frontpos"]
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
+	$boop.emitting = true
 	if global.dualing and dual == MODES.SINGLE:
 		for p in pnode.get_children():
 			if p.dual:

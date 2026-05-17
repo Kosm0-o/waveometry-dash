@@ -23,9 +23,12 @@ var gravityinfo : Array[Dictionary] = [
 func _ready() -> void:
 	$sprites.play(gravityinfo[gravity]["name"])
 	$particles.modulate = gravityinfo[gravity]["color"]
+	$boop.modulate = gravityinfo[gravity]["color"]
+	$boop.modulate.a = 2
 	$sprites/fronthalf.position = gravityinfo[gravity]["frontpos"]
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
+	$boop.emitting = true
 	global.portal_entered.emit(self)
 	if gravity == TYPES.FLIP:
 		area.angle *= -1

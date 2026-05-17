@@ -16,8 +16,11 @@ var mirrorinfo : Array[Dictionary] = [
 func _ready() -> void:
 	$sprites.play(mirrorinfo[flip]["name"])
 	$particles.modulate = mirrorinfo[flip]["color"]
+	$boop.modulate = mirrorinfo[flip]["color"]
+	$boop.modulate.a = 2
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
+	$boop.emitting = true
 	while global.mirror_tweening:
 		await get_tree().process_frame
 	var cam = get_tree().current_scene.cam

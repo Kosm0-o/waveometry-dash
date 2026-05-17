@@ -1,9 +1,10 @@
-[gd_scene load_steps=18 format=3 uid="uid://c4sqlto7kttv1"]
+[gd_scene load_steps=24 format=3 uid="uid://c4sqlto7kttv1"]
 
 [ext_resource type="Script" uid="uid://cv3op6lfynjmu" path="res://scripts/mirrorportal.gd" id="1_d56r6"]
 [ext_resource type="Script" uid="uid://cbef427tmh2pe" path="res://scripts/sprites.gd" id="2_2p77d"]
 [ext_resource type="Texture2D" uid="uid://dc5luvhx3oew6" path="res://assets/particlesquare.svg" id="3_wsa65"]
 [ext_resource type="Texture2D" uid="uid://5jvrrbutemvg" path="res://assets/spritesheet.png" id="3_yea2u"]
+[ext_resource type="Texture2D" uid="uid://bf86uqk1hbnh5" path="res://assets/boopparticlesprite.svg" id="5_yea2u"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_wsa65"]
 light_mode = 1
@@ -93,6 +94,30 @@ scale_max = 1.5
 scale_curve = SubResource("CurveTexture_2p77d")
 color_ramp = SubResource("GradientTexture1D_wsa65")
 
+[sub_resource type="Gradient" id="Gradient_j1gqx"]
+offsets = PackedFloat32Array(0.590909, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_87xa6"]
+gradient = SubResource("Gradient_j1gqx")
+
+[sub_resource type="Curve" id="Curve_0spls"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.286765, 1), 0.0509363, -1.57054, 0, 1, Vector2(1, 0.505618), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_rcro6"]
+curve = SubResource("Curve_0spls")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_qb4ww"]
+particle_flag_disable_z = true
+direction = Vector3(0, 0, 0)
+gravity = Vector3(0, 0, 0)
+scale_min = 0.7
+scale_max = 0.7
+scale_curve = SubResource("CurveTexture_rcro6")
+color = Color(1, 1, 1, 0.619608)
+color_ramp = SubResource("GradientTexture1D_87xa6")
+
 [node name="mirrorportal" type="Node2D"]
 material = SubResource("CanvasItemMaterial_wsa65")
 script = ExtResource("1_d56r6")
@@ -131,5 +156,16 @@ process_material = SubResource("ParticleProcessMaterial_0spls")
 [node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
 position = Vector2(0.499994, 5)
 scale = Vector2(8.05, 10.2)
+
+[node name="boop" type="GPUParticles2D" parent="." groups=["particles"]]
+modulate = Color(1, 1, 1, 0.490196)
+position = Vector2(-29, -5)
+emitting = false
+amount = 1
+texture = ExtResource("5_yea2u")
+lifetime = 0.25
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_qb4ww")
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

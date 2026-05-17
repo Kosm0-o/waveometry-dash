@@ -1,6 +1,7 @@
 extends Node
 
 signal portal_entered(portal)
+signal died()
 
 var mirror_tweening : bool = false
 var rotation_tweening : bool = false

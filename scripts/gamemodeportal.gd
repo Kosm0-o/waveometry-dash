@@ -29,9 +29,12 @@ var modeinfo : Array[Dictionary] = [
 func _ready() -> void:
 	$sprites.play(modeinfo[gamemode]["name"])
 	$particles.modulate = modeinfo[gamemode]["color"]
+	$boop.modulate = modeinfo[gamemode]["color"]
+	$boop.modulate.a = 2
 	$sprites/fronthalf.position = modeinfo[gamemode]["frontpos"]
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
+	$boop.emitting = true
 	global.portal_entered.emit(self)
 	match gamemode:
 		GAMEMODES.NORMAL:

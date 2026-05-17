@@ -28,11 +28,15 @@ func _ready() -> void:
 		scale.x = -1
 	$sprites.play(teleportinfo[portal]["name"])
 	$particles.modulate = teleportinfo[portal]["color"]
+	$boop.modulate = teleportinfo[portal]["color"]
+	$boop.modulate.a = 2
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
+	$boop.emitting = true
 	if portal == PORTALS.ENTRANCE:
 		for t in global.exit_teleportals:
 			if t.group_id == target_group_id:
 				area.global_position = t.global_position - Vector2(50, 0)
+				global.portal_entered.emit(t)
 				break
 		area.trail_node.reset()

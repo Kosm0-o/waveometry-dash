@@ -1,9 +1,10 @@
-[gd_scene load_steps=20 format=3 uid="uid://dr1xtmfnp78gl"]
+[gd_scene load_steps=26 format=3 uid="uid://dr1xtmfnp78gl"]
 
 [ext_resource type="Script" uid="uid://bs2n242lcgaj5" path="res://scripts/gravityportal.gd" id="1_fcftj"]
 [ext_resource type="Script" uid="uid://cbef427tmh2pe" path="res://scripts/sprites.gd" id="2_e1bu2"]
 [ext_resource type="Texture2D" uid="uid://5jvrrbutemvg" path="res://assets/spritesheet.png" id="3_28a1h"]
 [ext_resource type="Texture2D" uid="uid://dc5luvhx3oew6" path="res://assets/particlesquare.svg" id="3_e1bu2"]
+[ext_resource type="Texture2D" uid="uid://bf86uqk1hbnh5" path="res://assets/boopparticlesprite.svg" id="5_28a1h"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_0cebx"]
 light_mode = 1
@@ -92,14 +93,14 @@ size = Vector2(79, 307)
 [sub_resource type="Gradient" id="Gradient_28a1h"]
 colors = PackedColorArray(1, 1, 1, 0.698039, 1, 1, 1, 0)
 
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_yea2u"]
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_13j7o"]
 gradient = SubResource("Gradient_28a1h")
 
 [sub_resource type="Curve" id="Curve_13j7o"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.544118, 0.786517), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 3
 
-[sub_resource type="CurveTexture" id="CurveTexture_87xa6"]
+[sub_resource type="CurveTexture" id="CurveTexture_osuda"]
 curve = SubResource("Curve_13j7o")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_osuda"]
@@ -115,8 +116,32 @@ tangential_accel_min = -2.23517e-06
 tangential_accel_max = 25.0
 scale_min = 1.5
 scale_max = 2.0
-scale_curve = SubResource("CurveTexture_87xa6")
-color_ramp = SubResource("GradientTexture1D_yea2u")
+scale_curve = SubResource("CurveTexture_osuda")
+color_ramp = SubResource("GradientTexture1D_13j7o")
+
+[sub_resource type="Gradient" id="Gradient_wrmuw"]
+offsets = PackedFloat32Array(0.590909, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_g7h6c"]
+gradient = SubResource("Gradient_wrmuw")
+
+[sub_resource type="Curve" id="Curve_g7ehg"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.286765, 1), 0.0509363, -1.57054, 0, 1, Vector2(1, 0.505618), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_2uums"]
+curve = SubResource("Curve_g7ehg")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_43iv6"]
+particle_flag_disable_z = true
+direction = Vector3(0, 0, 0)
+gravity = Vector3(0, 0, 0)
+scale_min = 0.7
+scale_max = 0.7
+scale_curve = SubResource("CurveTexture_2uums")
+color = Color(1, 1, 1, 0.619608)
+color_ramp = SubResource("GradientTexture1D_g7h6c")
 
 [node name="gravityportal" type="Node2D"]
 material = SubResource("CanvasItemMaterial_0cebx")
@@ -157,5 +182,16 @@ process_material = SubResource("ParticleProcessMaterial_osuda")
 [node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
 position = Vector2(2, 3.5)
 scale = Vector2(6.14286, 13.95)
+
+[node name="boop" type="GPUParticles2D" parent="." groups=["particles"]]
+modulate = Color(1, 1, 1, 0.490196)
+position = Vector2(-29, -5)
+emitting = false
+amount = 1
+texture = ExtResource("5_28a1h")
+lifetime = 0.25
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_43iv6")
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

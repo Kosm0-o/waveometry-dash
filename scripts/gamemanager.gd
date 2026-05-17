@@ -9,12 +9,20 @@ var cam_y_point : float = 0
 var past_rotation_tweening : bool = false
 var frames : int = 0
 var target_shift_pos : Vector2 = Vector2.ZERO
+@onready var song: AudioStreamPlayer2D = $song
+
 
 func _ready() -> void:
 	global.portal_entered.connect(_shift_camera)
+	global.died.connect(func(): song.playing = false; song.play())
 
 
 func _process(delta: float) -> void:
+	if Engine.time_scale >= 0.99 and Engine.time_scale != 1:
+		Engine.time_scale = 1.0
+	elif Engine.time_scale < 1:
+		Engine.time_scale = lerp(Engine.time_scale, 1.0, 3 * delta)
+		
 	global.cam_offset = cam.global_position.y
 	map.rotation_degrees = global.layout_rotation
 	var offset : float
@@ -44,11 +52,11 @@ func _process(delta: float) -> void:
 		
 	
 	if global.lowdetailmode and not global.complete_details:
-		Engine.max_fps = 60
+		Engine.max_fps = 144
 		DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_MAILBOX)
 		
 		$WorldEnvironment.environment.glow_enabled = false
-		for pr in get_tree().get_nodes_in_group("particles"):
+		for pr in get_tree().get_nodes_in_group("particles"): 
 			if pr is GPUParticles2D:
 				pr.emitting = false
 				pr.hide()

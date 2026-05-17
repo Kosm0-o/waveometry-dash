@@ -1,7 +1,6 @@
-[gd_scene load_steps=11 format=3 uid="uid://d2yi0cqbfih7l"]
+[gd_scene load_steps=10 format=3 uid="uid://d2yi0cqbfih7l"]
 
 [ext_resource type="Script" uid="uid://cw0fb5kagdow8" path="res://scripts/player.gd" id="1_3vyb7"]
-[ext_resource type="AudioStream" uid="uid://5j5ws1vswys6" path="res://assets/467339_At_the_Speed_of_Light_FINA.mp3" id="2_g2els"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6w21d"]
 size = Vector2(28, 13)
@@ -23,7 +22,7 @@ initial_velocity_min = -750.0
 gravity = Vector3(0, 0, 0)
 scale_min = 16.0
 scale_max = 32.0
-color = Color(1, 0.14902, 0.105882, 1)
+color = Color(0, 0.909804, 0.952941, 1)
 color_ramp = SubResource("GradientTexture1D_g2gm7")
 
 [sub_resource type="InputEventKey" id="InputEventKey_g2els"]
@@ -58,7 +57,7 @@ polygon = PackedVector2Array(100, 0, -40, -60, 0, 0, -40, 60)
 position = Vector2(-7, 0)
 shape = SubResource("RectangleShape2D_6w21d")
 
-[node name="grounded" type="GPUParticles2D" parent="."]
+[node name="grounded" type="GPUParticles2D" parent="." groups=["particles"]]
 z_index = -1
 position = Vector2(-27, 0)
 emitting = false
@@ -66,9 +65,6 @@ amount = 25
 lifetime = 1.5
 local_coords = true
 process_material = SubResource("ParticleProcessMaterial_p2ug2")
-
-[node name="atsol" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("2_g2els")
 
 [node name="UI" type="CanvasLayer" parent="."]
 

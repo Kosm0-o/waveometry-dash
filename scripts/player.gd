@@ -3,6 +3,7 @@ class_name Player
 
 
 
+const norm_speed : float = 900
 var speed : float = 900
 var dir : int = 1
 var angle : float = 45
@@ -15,6 +16,9 @@ var stairsmaster : Dictionary = {"active": false, "fall": false, "holding": 0, "
 var ricochet : Dictionary = {"active": false, "falling": false} # bouncy, bouncy, STOP
 var checkpoint_time : float = 3.0
 var checkpoint_timer : float = 0.0
+var respawning : bool = false
+var respawn_timer : float = 0.0
+const respawn_cooldown : float = 0.4
 
 func _ready() -> void:
 	$UI/CheckpointsUI/add.pressed.connect(place_checkpoint)
@@ -28,6 +32,16 @@ func _ready() -> void:
 	
 	
 func _process(delta: float) -> void:
+	
+	if respawning:
+		print(Engine.time_scale)
+		respawn_timer += delta
+		modulate.a = sin(respawn_timer * 25.0) * 0.4
+		if Engine.time_scale == 1.0:
+			respawning = false
+			modulate.a = 1
+			respawn_timer = 0.0
+	
 	if not (flux or stairsmaster.active or ricochet.active):
 		dir = -1 if Input.is_action_pressed("click") else 1
 		dir = dir * -1 if dual else dir
@@ -112,21 +126,33 @@ func bounds_checking(ycheck : bool, xcheck : bool, yangle : bool, xangle : bool,
 	position.y = clamp(position.y,-global.bounds + global.cam_offset,global.bounds + global.cam_offset)
 
 func die():
+	visible = false
+	trail_node.visible = false
+	speed = 0
+	await get_tree().create_timer(respawn_cooldown).timeout
 	if global.practice_mode and global.all_checkpoints.size() > 0:
 		go_to_checkpoint(global.all_checkpoints.back())
-		return
-	if dual: 
-		global.players.filter(func(p): return p != self).front().die()
-		trail_node.queue_free()
-		queue_free()
-	$atsol.stop()
-	$atsol.play()
-	ogspeedmod = 1
-	speedmod = 1
-	angle = 45
-	global_position = Vector2.ZERO
-	trail_node.reset()
-
+	else:
+		if dual: 
+			global.players.filter(func(p): return p != self).front().die()
+			trail_node.queue_free()
+			queue_free()
+		flux = false # switch gravity on click
+		stairsmaster = {"active": false, "fall": false, "holding": 0, "stopframes": 10} # climb the stairs, fall to the bottom, start again
+		ricochet = {"active": false, "falling": false}
+		ogspeedmod = 1
+		speedmod = 1
+		angle = 45
+		global_position = Vector2.ZERO
+		trail_node.reset()
+	visible = true
+	trail_node.visible = true
+	if global.practice_mode:
+		Engine.time_scale = 0.5
+	speed = norm_speed
+	respawning = true
+	global.died.emit()
+	
 func remove_current_checkpoint():
 	var cur = global.all_checkpoints.back() if global.all_checkpoints.size() > 0 else null
 	if is_instance_valid(cur):
@@ -134,6 +160,7 @@ func remove_current_checkpoint():
 		cur.queue_free()
 
 func go_to_checkpoint(c):
+	checkpoint_timer = checkpoint_time
 	var dual_player : Player = global.players.filter(func(p): return p != self).front() if global.dualing else null
 	angle = c.data.angle
 	speedmod = c.data.speedmod

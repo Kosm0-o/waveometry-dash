@@ -27,7 +27,8 @@ func _ready() -> void:
 	$sprites.position = dualinfo[dual]["mainpos"]
 	$sprites/fronthalf.position = dualinfo[dual]["frontpos"]
 
-func _on_area_2d_area_entered(area: Area2D) -> void:
+func _on_area_2d_area_entered(area) -> void:
+	area = area.get_parent()
 	$boop.emitting = true
 	if global.dualing and dual == MODES.SINGLE:
 		for p in pnode.get_children():

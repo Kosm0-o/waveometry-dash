@@ -1,25 +1,43 @@
-[gd_scene load_steps=4 format=3 uid="uid://b8p7pmrx2w56v"]
+[gd_scene load_steps=6 format=3 uid="uid://b8p7pmrx2w56v"]
 
 [ext_resource type="Script" uid="uid://bakmxglufeseu" path="res://scripts/checkpoint.gd" id="1_ywqth"]
-[ext_resource type="Texture2D" uid="uid://ccfbw316dc6xv" path="res://icon.svg" id="2_vsimk"]
+[ext_resource type="Texture2D" uid="uid://b3rl17jtvbpoq" path="res://assets/pausemenuspritesheet.png" id="2_ywqth"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vsimk"]
+atlas = ExtResource("2_ywqth")
+region = Rect2(0, 312, 144, 156)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yqsag"]
+atlas = ExtResource("2_ywqth")
+region = Rect2(144, 312, 144, 156)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_yqsag"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("2_vsimk")
+"texture": SubResource("AtlasTexture_vsimk")
 }],
-"loop": true,
-"name": &"default",
-"speed": 5.0
+"loop": false,
+"name": &"2d",
+"speed": 0.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yqsag")
+}],
+"loop": false,
+"name": &"3d",
+"speed": 0.0
 }]
 
-[node name="Checkpoint" type="Node2D"]
+[node name="Checkpoint" type="Node2D" groups=["checkpoint"]]
 script = ExtResource("1_ywqth")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.8, 0.8)
 sprite_frames = SubResource("SpriteFrames_yqsag")
+animation = &"3d"
 
 [node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
 position = Vector2(5.72205e-06, 7.62939e-06)
-scale = Vector2(6.8, 7)
+scale = Vector2(6.165, 6.347)

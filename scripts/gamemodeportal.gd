@@ -33,7 +33,8 @@ func _ready() -> void:
 	$boop.modulate.a = 2
 	$sprites/fronthalf.position = modeinfo[gamemode]["frontpos"]
 
-func _on_area_2d_area_entered(area: Area2D) -> void:
+func _on_area_2d_area_entered(area) -> void:
+	area = area.get_parent()
 	$boop.emitting = true
 	global.portal_entered.emit(self)
 	match gamemode:

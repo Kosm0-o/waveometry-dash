@@ -13,7 +13,7 @@ var teleportinfo : Array[Dictionary] = [
 	"color": Color("#e18b03")
 	}
 ]
-@onready var pnode : Node2D = get_tree().current_scene.get_node("players")
+@onready var pnode : Node2D = get_tree().current_scene.get_node("Map").get_node("players")
 @export_category("ENTRANCE PORTAL ONLY")
 @export var target_group_id : int
 @export_category("EXIT PORTAL ONLY")
@@ -31,7 +31,8 @@ func _ready() -> void:
 	$boop.modulate = teleportinfo[portal]["color"]
 	$boop.modulate.a = 2
 
-func _on_area_2d_area_entered(area: Area2D) -> void:
+func _on_area_2d_area_entered(area) -> void:
+	area = area.get_parent()
 	$boop.emitting = true
 	if portal == PORTALS.ENTRANCE:
 		for t in global.exit_teleportals:

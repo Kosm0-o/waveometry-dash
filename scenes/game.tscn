@@ -1,16 +1,19 @@
-[gd_scene load_steps=13 format=3 uid="uid://btrtpdonnmiig"]
+[gd_scene load_steps=29 format=3 uid="uid://btrtpdonnmiig"]
 
 [ext_resource type="PackedScene" uid="uid://d2yi0cqbfih7l" path="res://scenes/player.tscn" id="1_uwrxv"]
 [ext_resource type="Script" uid="uid://dy525wqc8vffw" path="res://scripts/gamemanager.gd" id="1_yqjtg"]
 [ext_resource type="PackedScene" uid="uid://cc2x03pdfnfcu" path="res://scenes/trail.tscn" id="2_iywne"]
 [ext_resource type="AudioStream" uid="uid://5j5ws1vswys6" path="res://assets/467339_At_the_Speed_of_Light_FINA.mp3" id="2_vtaks"]
 [ext_resource type="Script" uid="uid://boiyb54qyfsae" path="res://scripts/testtrail.gd" id="3_lbhrr"]
+[ext_resource type="Script" uid="uid://ditedlujyd1k2" path="res://scripts/gamegui.gd" id="5_kvuet"]
 [ext_resource type="PackedScene" uid="uid://dtqy8g00cuqob" path="res://scenes/spike.tscn" id="6_p57ef"]
+[ext_resource type="Texture2D" uid="uid://b3rl17jtvbpoq" path="res://assets/pausemenuspritesheet.png" id="6_trtic"]
 [ext_resource type="PackedScene" uid="uid://w8nqdwu7crdh" path="res://scenes/sizeportal.tscn" id="7_gee14"]
 [ext_resource type="PackedScene" uid="uid://ipq8o2gmoibw" path="res://scenes/speed_portal.tscn" id="7_u5sy4"]
 [ext_resource type="PackedScene" uid="uid://de38yi3l0x16g" path="res://scenes/dualportal.tscn" id="8_gee14"]
 [ext_resource type="PackedScene" uid="uid://dcnw2ni1n582x" path="res://scenes/gamemodeportal.tscn" id="9_0tnpc"]
 [ext_resource type="PackedScene" uid="uid://cv8gnfhudm0yc" path="res://scenes/teleportal.tscn" id="11_kvpfn"]
+[ext_resource type="PackedScene" uid="uid://yb37xbjlif6d" path="res://scenes/block.tscn" id="14_trtic"]
 
 [sub_resource type="Environment" id="Environment_trtic"]
 background_mode = 3
@@ -21,12 +24,66 @@ glow_levels/7 = 0.65
 glow_bloom = 0.11
 glow_blend_mode = 0
 
+[sub_resource type="InputEventKey" id="InputEventKey_kvuet"]
+device = -1
+keycode = 4194305
+
+[sub_resource type="Shortcut" id="Shortcut_trtic"]
+events = [SubResource("InputEventKey_kvuet")]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ir15t"]
+atlas = ExtResource("6_trtic")
+region = Rect2(324, 354, 71, 71)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ca42v"]
+bg_color = Color(0.162066, 0.162066, 0.162066, 0.321569)
+corner_radius_top_left = 35
+corner_radius_top_right = 35
+corner_radius_bottom_right = 35
+corner_radius_bottom_left = 35
+
+[sub_resource type="LabelSettings" id="LabelSettings_rysoc"]
+font_size = 46
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ssvqc"]
+atlas = ExtResource("6_trtic")
+region = Rect2(432, 156, 144, 156)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_264po"]
+atlas = ExtResource("6_trtic")
+region = Rect2(288, 156, 144, 156)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1kice"]
+atlas = ExtResource("6_trtic")
+region = Rect2(288, 0, 144, 156)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5newe"]
+atlas = ExtResource("6_trtic")
+region = Rect2(0, 156, 144, 156)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_37s47"]
+atlas = ExtResource("6_trtic")
+region = Rect2(144, 0, 144, 156)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bt5mj"]
+atlas = ExtResource("6_trtic")
+region = Rect2(0, 0, 144, 156)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e1j6l"]
+atlas = ExtResource("6_trtic")
+region = Rect2(144, 156, 144, 156)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pl11u"]
+atlas = ExtResource("6_trtic")
+region = Rect2(432, 0, 144, 156)
+
 [node name="game" type="Node2D" node_paths=PackedStringArray("player")]
 script = ExtResource("1_yqjtg")
 player = NodePath("Map/players/Player")
 
 [node name="song" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("2_vtaks")
+volume_db = -80.0
 autoplay = true
 attenuation = 1e-05
 
@@ -61,16 +118,104 @@ remote_path = NodePath("../../song")
 update_rotation = false
 update_scale = false
 
+[node name="GUI" type="CanvasLayer" parent="."]
+process_mode = 3
+script = ExtResource("5_kvuet")
+
+[node name="PauseBtn" type="TextureButton" parent="GUI"]
+offset_left = 1090.0
+offset_top = 14.0
+offset_right = 1161.0
+offset_bottom = 85.0
+scale = Vector2(0.88, 0.88)
+focus_mode = 0
+shortcut = SubResource("Shortcut_trtic")
+texture_normal = SubResource("AtlasTexture_ir15t")
+
+[node name="PauseMenu" type="Control" parent="GUI"]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Panel" type="Panel" parent="GUI/PauseMenu"]
+layout_mode = 0
+offset_left = 93.0
+offset_top = 56.0
+offset_right = 1056.0
+offset_bottom = 584.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_ca42v")
+
+[node name="LevelTitle" type="Label" parent="GUI/PauseMenu"]
+layout_mode = 0
+offset_left = 441.0
+offset_top = 92.0
+offset_right = 664.0
+offset_bottom = 156.0
+text = "Level Title"
+label_settings = SubResource("LabelSettings_rysoc")
+
+[node name="Buttons" type="Control" parent="GUI/PauseMenu"]
+anchors_preset = 0
+offset_left = 243.0
+offset_top = 308.0
+offset_right = 283.0
+offset_bottom = 348.0
+
+[node name="HboxContainer" type="HBoxContainer" parent="GUI/PauseMenu/Buttons"]
+layout_mode = 2
+offset_left = 3.0
+offset_top = 15.87
+offset_right = 737.0
+offset_bottom = 196.87
+scale = Vector2(0.92, 0.92)
+theme_override_constants/separation = 45
+
+[node name="PracticeModeBtn" type="TextureButton" parent="GUI/PauseMenu/Buttons/HboxContainer"]
+layout_mode = 2
+focus_mode = 0
+toggle_mode = true
+texture_normal = SubResource("AtlasTexture_ssvqc")
+texture_pressed = SubResource("AtlasTexture_264po")
+
+[node name="Substitute" type="Control" parent="GUI/PauseMenu/Buttons/HboxContainer"]
+custom_minimum_size = Vector2(167.76, 181.74)
+layout_mode = 2
+
+[node name="MenuBtn" type="TextureButton" parent="GUI/PauseMenu/Buttons/HboxContainer"]
+layout_mode = 2
+focus_mode = 0
+texture_normal = SubResource("AtlasTexture_1kice")
+texture_pressed = SubResource("AtlasTexture_5newe")
+
+[node name="RestartBtn" type="TextureButton" parent="GUI/PauseMenu/Buttons/HboxContainer"]
+layout_mode = 2
+focus_mode = 0
+texture_normal = SubResource("AtlasTexture_37s47")
+texture_pressed = SubResource("AtlasTexture_bt5mj")
+
+[node name="PlayBtn" type="TextureButton" parent="GUI/PauseMenu/Buttons"]
+layout_mode = 2
+offset_left = 172.48
+offset_top = 3.0
+offset_right = 316.48
+offset_bottom = 159.0
+scale = Vector2(1.165, 1.165)
+focus_mode = 0
+texture_normal = SubResource("AtlasTexture_e1j6l")
+texture_pressed = SubResource("AtlasTexture_pl11u")
+
 [node name="Map" type="Node2D" parent="."]
 
 [node name="players" type="Node2D" parent="Map"]
 z_index = 1
 
 [node name="Player" parent="Map/players" instance=ExtResource("1_uwrxv")]
-z_as_relative = false
 
 [node name="sizeportal" parent="Map" instance=ExtResource("7_gee14")]
 position = Vector2(1217, -18)
+size = 0
 
 [node name="Spike" parent="Map" instance=ExtResource("6_p57ef")]
 position = Vector2(4328, -39)
@@ -104,3 +249,11 @@ position = Vector2(3327, 0)
 [node name="teleportal2" parent="Map" instance=ExtResource("11_kvpfn")]
 position = Vector2(4899, -805)
 portal = 1
+
+[node name="block" parent="Map" instance=ExtResource("14_trtic")]
+position = Vector2(924, 398)
+scale = Vector2(29.37, 1)
+
+[connection signal="toggled" from="GUI/PauseMenu/Buttons/HboxContainer/PracticeModeBtn" to="GUI" method="_on_practice_mode_btn_toggled"]
+[connection signal="pressed" from="GUI/PauseMenu/Buttons/HboxContainer/MenuBtn" to="GUI" method="_on_menu_btn_pressed"]
+[connection signal="pressed" from="GUI/PauseMenu/Buttons/HboxContainer/RestartBtn" to="GUI" method="_on_restart_btn_pressed"]

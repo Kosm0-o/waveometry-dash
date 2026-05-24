@@ -6,5 +6,6 @@ func _process(delta: float) -> void:
 	if saw:
 		rotation_degrees += 1
 
-func _on_area_entered(area: Area2D) -> void:
+func _on_area_entered(area) -> void:
+	area = area.get_parent()
 	area.die()

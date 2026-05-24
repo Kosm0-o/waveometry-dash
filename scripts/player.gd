@@ -1,4 +1,4 @@
-extends Area2D
+extends CharacterBody2D
 class_name Player
 
 
@@ -19,6 +19,9 @@ var checkpoint_timer : float = 0.0
 var respawning : bool = false
 var respawn_timer : float = 0.0
 const respawn_cooldown : float = 0.4
+var y_boost : float = 0.0 # for jump pads
+var dashing : bool = false
+var sliding : bool = false
 
 func _ready() -> void:
 	$UI/CheckpointsUI/add.pressed.connect(place_checkpoint)
@@ -28,21 +31,23 @@ func _ready() -> void:
 		die()
 	else:
 		name = "Player2"
-	await get_tree().create_timer(5.0).timeout
+	await get_tree().create_timer(7.5).timeout
 	
 	
-func _process(delta: float) -> void:
+func _physics_process(delta: float) -> void:
+	y_boost = lerpf(y_boost, 0, 15 * delta)
 	
 	if respawning:
-		print(Engine.time_scale)
 		respawn_timer += delta
-		modulate.a = sin(respawn_timer * 25.0) * 0.4
+		modulate.a = sin(respawn_timer * 25.0) * 0.4 + 0.5
 		if Engine.time_scale == 1.0:
 			respawning = false
 			modulate.a = 1
 			respawn_timer = 0.0
 	
-	if not (flux or stairsmaster.active or ricochet.active):
+	if dashing:
+		dir = 0
+	elif not (flux or stairsmaster.active or ricochet.active):
 		dir = -1 if Input.is_action_pressed("click") else 1
 		dir = dir * -1 if dual else dir
 	elif Input.is_action_just_pressed("click") and flux:
@@ -96,22 +101,37 @@ func _process(delta: float) -> void:
 	var tempangle = deg_to_rad(angle)
 	var base = sin(deg_to_rad(45.0))
 	
+	var move : Vector2 = Vector2.ZERO
+
 	if abs(angle) == 45:
-		position.x += speed * speedmod * delta
-		position.y += (sin(tempangle) / base) * speed * dir * speedmod * delta
-		scale = Vector2(1,1)
+		move.x = speed * speedmod
+		move.y = (sin(tempangle) / base) * speed * dir * speedmod - y_boost
+		scale = Vector2.ONE
 	elif abs(angle) == 15:
-		position.x += speed * speedmod * delta
-		position.y += (sin(15) / base) * speed * dir * speedmod * 1.0 * delta #og 0.8
+		move.x = speed * speedmod
+		move.y = (sin(15) / base) * speed * dir * speedmod
 		scale = Vector2(1.55,1.55)
 	else:
-		position.x += speed * speedmod * delta
-		position.y += (sin(67.5) / base) * speed * dir * speedmod * -2 * delta #og -2.5
+		move.x = speed * speedmod
+		move.y = (sin(63.425) / base) * speed * dir * speedmod * 2
 		scale = Vector2(0.6,0.6)
+	
+	
+
+	
+	velocity = move
+	
+	move_and_slide()
+	
+	sliding = is_on_wall() and not Input.is_action_pressed("click")
+	
+	if sliding: velocity = velocity.normalized() * speed * speedmod
 	
 	var ycheck : bool = position.y > -global.bounds + global.cam_offset and position.y < global.bounds + global.cam_offset
 	var xcheck : bool = position.x > -global.bounds + global.cam_offset and position.x < global.bounds + global.cam_offset
 	bounds_checking(ycheck, xcheck, global.yangle, global.xangle, delta)
+	
+
 
 
 func bounds_checking(ycheck : bool, xcheck : bool, yangle : bool, xangle : bool, delta):
@@ -119,11 +139,15 @@ func bounds_checking(ycheck : bool, xcheck : bool, yangle : bool, xangle : bool,
 #	print(str(ycheck) + " " + str(xangle) + "    " + str(xcheck) + " " + str(yangle))
 	if (ycheck and xangle) or (xcheck and yangle):
 		var mult : float = 1.0 if angle != 15 else 2.0
-		rotation_degrees = lerpf(rotation_degrees, angle * dir * mult, 20 * delta)
+		mult = 1.0 if angle != 63.425 else 0.85
+		if sliding:
+			rotation_degrees = lerpf(rotation_degrees, 0, 20 * delta)
+		else:
+			rotation_degrees = lerpf(rotation_degrees, angle * dir * mult, 20 * delta)
 	else:
 		rotation_degrees = lerpf(rotation_degrees, 0, 20 * delta)
 	$grounded.emitting = not ycheck if xangle else not xcheck
-	position.y = clamp(position.y,-global.bounds + global.cam_offset,global.bounds + global.cam_offset)
+	global_position.y = clamp(global_position.y,-global.bounds + global.cam_offset,global.bounds + global.cam_offset)
 
 func die():
 	visible = false
@@ -148,7 +172,7 @@ func die():
 	visible = true
 	trail_node.visible = true
 	if global.practice_mode:
-		Engine.time_scale = 0.5
+		Engine.time_scale = 0.3
 	speed = norm_speed
 	respawning = true
 	global.died.emit()
@@ -207,3 +231,13 @@ func place_checkpoint():
 								}
 	get_tree().current_scene.get_node("Map").add_child(checkpoint)
 	checkpoint.global_position = global_position
+
+func down(amount : float):
+	$topcast.enabled = sign(amount) == 1
+	$bottomcast.enabled = not $topcast.enabled
+	var raycast = $topcast if $topcast.enabled else $bottomcast
+	while true:
+		y_boost = amount
+		if raycast.is_colliding():
+			break
+		await get_tree().process_frame

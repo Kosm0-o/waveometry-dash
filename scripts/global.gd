@@ -15,10 +15,9 @@ var complete_details : bool = false
 var layout_rotation : float = 0.0 # in degrees
 var xangle : bool = layout_rotation == 0 or layout_rotation == 180 # when you travel horizontally
 var yangle : bool = layout_rotation == 90 or layout_rotation == 270 # when you travel vertically
-var practice_mode : bool = true
+var practice_mode : bool = false
 var all_checkpoints : Array = []
 
-# remember to change portal sprites in to 2 parts, front and back, for entering through illusion
 
 func _process(delta: float) -> void:
 	xangle = layout_rotation == 0 or layout_rotation == 180

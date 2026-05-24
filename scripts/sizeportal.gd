@@ -5,7 +5,7 @@ enum SIZES {MINI, NORMAL, MEGA}
 var angleinfo : Array[Dictionary] = [
 	{
 	"name": "mini",
-	"anglemod": 67.5,
+	"anglemod": 63.425,
 	"color": Color("#ff7cf9")
 	},
 	{
@@ -26,7 +26,8 @@ func _ready() -> void:
 	$boop.modulate = angleinfo[size]["color"]
 	$boop.modulate.a = 2
 
-func _on_area_2d_area_entered(area: Area2D) -> void:
+func _on_area_2d_area_entered(area) -> void:
+	area = area.get_parent()
 	$boop.emitting = true
 	global.portal_entered.emit(self)
 	area.angle = angleinfo[size]["anglemod"] * sign(area.angle)

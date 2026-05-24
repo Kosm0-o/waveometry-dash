@@ -19,7 +19,7 @@ func _ready() -> void:
 	$boop.modulate = mirrorinfo[flip]["color"]
 	$boop.modulate.a = 2
 
-func _on_area_2d_area_entered(area: Area2D) -> void:
+func _on_area_2d_area_entered(area) -> void:
 	$boop.emitting = true
 	while global.mirror_tweening:
 		await get_tree().process_frame

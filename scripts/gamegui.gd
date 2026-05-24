@@ -1,0 +1,55 @@
+extends CanvasLayer
+
+@onready var practice_mode_btn: TextureButton = $PauseMenu/Buttons/HboxContainer/PracticeModeBtn
+@onready var menu_btn: TextureButton = $PauseMenu/Buttons/HboxContainer/MenuBtn
+@onready var restart_btn: TextureButton = $PauseMenu/Buttons/HboxContainer/RestartBtn
+@onready var play_btn: TextureButton = $PauseMenu/Buttons/PlayBtn
+
+
+func _ready() -> void:
+	$PauseBtn.pressed.connect(_handle_pausing.bind(true))
+	$PauseMenu/Buttons/PlayBtn.pressed.connect(_handle_pausing.bind(false))
+	practice_mode_btn.mouse_entered.connect(_scale_tween.bind(practice_mode_btn, true))
+	practice_mode_btn.mouse_exited.connect(_scale_tween.bind(practice_mode_btn, false))
+	menu_btn.mouse_entered.connect(_scale_tween.bind(menu_btn, true))
+	menu_btn.mouse_exited.connect(_scale_tween.bind(menu_btn, false))
+	restart_btn.mouse_entered.connect(_scale_tween.bind(restart_btn, true))
+	restart_btn.mouse_exited.connect(_scale_tween.bind(restart_btn, false))
+	play_btn.mouse_entered.connect(_scale_tween.bind(play_btn, true))
+	play_btn.mouse_exited.connect(_scale_tween.bind(play_btn, false))
+
+
+func _on_practice_mode_btn_toggled(toggled_on: bool) -> void:
+	_handle_pausing(false)
+	if not toggled_on:
+		for c in get_tree().get_nodes_in_group("checkpoint"):
+			global.all_checkpoints.erase(c)
+			c.queue_free()
+		global.players.front().die()
+	else:
+		global.players.front().place_checkpoint()
+	global.practice_mode = toggled_on
+
+func _on_menu_btn_pressed() -> void:
+	# go to menu scene 
+	pass
+
+func _on_restart_btn_pressed() -> void:
+	_handle_pausing(false)
+	global.players.front().die()
+
+
+func _handle_pausing(paused : bool):
+	get_tree().paused = paused
+	$PauseBtn.visible = not paused
+	$PauseMenu.visible = paused
+
+func _scale_tween(button, hover : bool):
+	var m = 1 if not hover else 1.15
+	var c = Color(1.15,1.15,1.15) if hover else Color.WHITE
+	if button.name == $PauseMenu/Buttons/PlayBtn.name:
+		m = 1.165 if not hover else 1.25
+	var tween = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC).set_parallel()
+	tween.tween_property(button, "scale", Vector2.ONE * m, 0.2)
+	tween.tween_property(button, "modulate", c, 0.2)
+	await tween.finished

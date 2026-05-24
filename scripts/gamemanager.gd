@@ -1,6 +1,6 @@
 extends Node2D
 
-@export var player : Area2D
+@export var player : CharacterBody2D
 @onready var cam: Camera2D = $Camera2D
 @onready var players: Node2D = $Map/players
 var cam_x_point : float = 0
@@ -21,7 +21,7 @@ func _process(delta: float) -> void:
 	if Engine.time_scale >= 0.99 and Engine.time_scale != 1:
 		Engine.time_scale = 1.0
 	elif Engine.time_scale < 1:
-		Engine.time_scale = lerp(Engine.time_scale, 1.0, 3 * delta)
+		Engine.time_scale = lerp(Engine.time_scale, 1.0, 5 * delta)
 		
 	global.cam_offset = cam.global_position.y
 	map.rotation_degrees = global.layout_rotation

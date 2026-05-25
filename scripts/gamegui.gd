@@ -40,6 +40,7 @@ func _on_restart_btn_pressed() -> void:
 
 
 func _handle_pausing(paused : bool):
+	$PauseBtn.release_focus()
 	get_tree().paused = paused
 	$PauseBtn.visible = not paused
 	$PauseMenu.visible = paused

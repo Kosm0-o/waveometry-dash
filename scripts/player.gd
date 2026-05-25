@@ -20,8 +20,10 @@ var respawning : bool = false
 var respawn_timer : float = 0.0
 const respawn_cooldown : float = 0.4
 var y_boost : float = 0.0 # for jump pads
+var orbing : bool = false
 var dashing : bool = false
-var sliding : bool = false
+var downsliding : bool = false
+var upsliding : bool = false
 
 func _ready() -> void:
 	$UI/CheckpointsUI/add.pressed.connect(place_checkpoint)
@@ -31,11 +33,16 @@ func _ready() -> void:
 		die()
 	else:
 		name = "Player2"
-	await get_tree().create_timer(7.5).timeout
+	await get_tree().create_timer(1.5).timeout
+	#down(100000)
 	
 	
 func _physics_process(delta: float) -> void:
-	y_boost = lerpf(y_boost, 0, 15 * delta)
+	y_boost = lerpf(y_boost, 0, 10 * delta)
+
+	orbing = true if abs(y_boost) > 450 else false
+	if not orbing:
+		y_boost = 0
 	
 	if respawning:
 		respawn_timer += delta
@@ -45,7 +52,7 @@ func _physics_process(delta: float) -> void:
 			modulate.a = 1
 			respawn_timer = 0.0
 	
-	if dashing:
+	if orbing or dashing:
 		dir = 0
 	elif not (flux or stairsmaster.active or ricochet.active):
 		dir = -1 if Input.is_action_pressed("click") else 1
@@ -56,9 +63,9 @@ func _physics_process(delta: float) -> void:
 			var og_player : Player = global.players.filter(func(p): return p != self).front()
 			dir = 1 if og_player.dir == -1 else -1
 	elif stairsmaster.active:
-		if position.y <= -global.bounds + 25:
+		if (upsliding and not dual) or (downsliding and dual):
 			stairsmaster.fall = true if not dual else false
-		elif position.y >= global.bounds - 25:
+		elif (downsliding and not dual) or (upsliding and dual):
 			stairsmaster.fall = false if not dual else true
 		if stairsmaster.fall:
 			dir = 1 if not dual else -1
@@ -77,11 +84,9 @@ func _physics_process(delta: float) -> void:
 			dir = 0
 			stairsmaster.holding = 0
 	elif ricochet.active:
-		if dual:
-			print(ricochet.falling)
-		if position.y <= -global.bounds + 25:
+		if (is_on_wall() and not ricochet.falling and not dual) or (is_on_wall() and ricochet.falling and dual):
 			ricochet.falling = true if not dual else false
-		elif position.y >= global.bounds - 25:
+		elif (is_on_wall() and ricochet.falling and not dual) or (is_on_wall() and not ricochet.falling and dual):
 			ricochet.falling = false if not dual else true
 		if Input.is_action_pressed("click"):
 			dir = 0
@@ -119,13 +124,16 @@ func _physics_process(delta: float) -> void:
 	
 
 	
+	if upsliding or downsliding:
+		move = move.normalized() * speed * speedmod * 1.15
+
 	velocity = move
-	
+
 	move_and_slide()
+
+	downsliding = is_on_wall() and not Input.is_action_pressed("click")
+	upsliding = is_on_wall() and Input.is_action_pressed("click")
 	
-	sliding = is_on_wall() and not Input.is_action_pressed("click")
-	
-	if sliding: velocity = velocity.normalized() * speed * speedmod
 	
 	var ycheck : bool = position.y > -global.bounds + global.cam_offset and position.y < global.bounds + global.cam_offset
 	var xcheck : bool = position.x > -global.bounds + global.cam_offset and position.x < global.bounds + global.cam_offset
@@ -140,13 +148,13 @@ func bounds_checking(ycheck : bool, xcheck : bool, yangle : bool, xangle : bool,
 	if (ycheck and xangle) or (xcheck and yangle):
 		var mult : float = 1.0 if angle != 15 else 2.0
 		mult = 1.0 if angle != 63.425 else 0.85
-		if sliding:
+		if upsliding or downsliding:
 			rotation_degrees = lerpf(rotation_degrees, 0, 20 * delta)
 		else:
 			rotation_degrees = lerpf(rotation_degrees, angle * dir * mult, 20 * delta)
 	else:
 		rotation_degrees = lerpf(rotation_degrees, 0, 20 * delta)
-	$grounded.emitting = not ycheck if xangle else not xcheck
+	$grounded.emitting = true if upsliding or downsliding else false
 	global_position.y = clamp(global_position.y,-global.bounds + global.cam_offset,global.bounds + global.cam_offset)
 
 func die():
@@ -233,11 +241,11 @@ func place_checkpoint():
 	checkpoint.global_position = global_position
 
 func down(amount : float):
-	$topcast.enabled = sign(amount) == 1
-	$bottomcast.enabled = not $topcast.enabled
-	var raycast = $topcast if $topcast.enabled else $bottomcast
+	orbing = true
 	while true:
+		print(abs(y_boost))
 		y_boost = amount
-		if raycast.is_colliding():
+		if is_on_wall():
 			break
 		await get_tree().process_frame
+	orbing = false

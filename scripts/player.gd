@@ -21,7 +21,7 @@ var respawn_timer : float = 0.0
 const respawn_cooldown : float = 0.4
 var y_boost : float = 0.0 # for jump pads
 var orbing : bool = false
-var dashing : bool = false
+var dashing : Dictionary = {"active": false, "mult": 1.0}
 var downsliding : bool = false
 var upsliding : bool = false
 
@@ -52,8 +52,12 @@ func _physics_process(delta: float) -> void:
 			modulate.a = 1
 			respawn_timer = 0.0
 	
-	if orbing or dashing:
+	if orbing or dashing.active:
 		dir = 0
+		if dashing.active:
+			if not Input.is_action_pressed("click"):
+				angle *= dashing.mult
+				dashing.active = false
 	elif not (flux or stairsmaster.active or ricochet.active):
 		dir = -1 if Input.is_action_pressed("click") else 1
 		dir = dir * -1 if dual else dir
@@ -125,7 +129,7 @@ func _physics_process(delta: float) -> void:
 
 	
 	if upsliding or downsliding:
-		move = move.normalized() * speed * speedmod * 1.15
+		move = move.normalized() * speed * speedmod
 
 	velocity = move
 

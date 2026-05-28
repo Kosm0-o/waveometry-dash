@@ -44,7 +44,7 @@ var orb_data : Array = [
 var p 
 
 func _ready() -> void:
-	pass
+	$AnimatedSprite2D.play(orb_data[orb].name)
 
 func _process(delta: float) -> void:
 	var getp = get_overlapping_bodies()
@@ -61,13 +61,16 @@ func _process(delta: float) -> void:
 				getp.front().angle *= orb_data[orb].angle_mult
 			
 			ORBS.DASH, ORBS.PINKDASH:
-				p = getp.front()
-	if p != null:
-		var m : int = 1 if orb == ORBS.DASH else -1
-		if Input.is_action_pressed("click"):
-			p.dashing = true
-		else:
-			p.angle *= m
-			p.dashing = false
-			p = null
+				var m : int = 1 if orb == ORBS.DASH else -1
+				getp.front().dashing.active = true
+				getp.front().dashing.mult = m
+		size_tween()
+
+
+func size_tween():
+	var tween = create_tween().set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_CUBIC)
+	var og_scale = scale
+	tween.tween_property(self, "scale", Vector2.ONE, 0.2)
+	tween.tween_property(self, "scale", og_scale, 0.2)
+	await tween.finished
 	

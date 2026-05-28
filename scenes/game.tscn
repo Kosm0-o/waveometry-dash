@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://btrtpdonnmiig"]
+[gd_scene load_steps=31 format=3 uid="uid://btrtpdonnmiig"]
 
 [ext_resource type="PackedScene" uid="uid://d2yi0cqbfih7l" path="res://scenes/player.tscn" id="1_uwrxv"]
 [ext_resource type="Script" uid="uid://dy525wqc8vffw" path="res://scripts/gamemanager.gd" id="1_yqjtg"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" uid="uid://ditedlujyd1k2" path="res://scripts/gamegui.gd" id="5_kvuet"]
 [ext_resource type="PackedScene" uid="uid://dtqy8g00cuqob" path="res://scenes/spike.tscn" id="6_p57ef"]
 [ext_resource type="Texture2D" uid="uid://b3rl17jtvbpoq" path="res://assets/pausemenuspritesheet.png" id="6_trtic"]
+[ext_resource type="PackedScene" uid="uid://w8nqdwu7crdh" path="res://scenes/sizeportal.tscn" id="7_ca42v"]
 [ext_resource type="PackedScene" uid="uid://de38yi3l0x16g" path="res://scenes/dualportal.tscn" id="8_gee14"]
 [ext_resource type="PackedScene" uid="uid://dcnw2ni1n582x" path="res://scenes/gamemodeportal.tscn" id="9_0tnpc"]
 [ext_resource type="PackedScene" uid="uid://cv8gnfhudm0yc" path="res://scenes/teleportal.tscn" id="11_kvpfn"]
@@ -219,7 +220,7 @@ texture_pressed = SubResource("AtlasTexture_pl11u")
 
 [node name="Borders" type="Node2D" parent="Map"]
 modulate = Color(1, 1, 1, 0.00784314)
-position = Vector2(-515, 0)
+position = Vector2(-510, 0)
 
 [node name="border" parent="Map/Borders" instance=ExtResource("14_trtic")]
 position = Vector2(0, 655)
@@ -241,11 +242,9 @@ position = Vector2(8258, -39)
 scale = Vector2(13.87, 13.87)
 
 [node name="dualportal" parent="Map" instance=ExtResource("8_gee14")]
-visible = false
-position = Vector2(1499, 31)
+position = Vector2(200, 18)
 
 [node name="dualportal2" parent="Map" instance=ExtResource("8_gee14")]
-visible = false
 position = Vector2(2937, 31)
 dual = 1
 
@@ -264,10 +263,11 @@ portal = 1
 
 [node name="Orb" parent="Map" instance=ExtResource("13_kvuet")]
 position = Vector2(1566, 24)
+orb = 4
 
 [node name="Orb2" parent="Map" instance=ExtResource("13_kvuet")]
 position = Vector2(2857, 574)
-orb = 5
+orb = 6
 
 [node name="mirrorportal" parent="Map" instance=ExtResource("14_ir15t")]
 visible = false
@@ -277,6 +277,14 @@ position = Vector2(1743, 55)
 position = Vector2(520, 12)
 rotation = 1.5708
 pad = 4
+
+[node name="sizeportal" parent="Map" instance=ExtResource("7_ca42v")]
+position = Vector2(43, 0)
+
+[node name="block" parent="Map" instance=ExtResource("14_trtic")]
+position = Vector2(348, 587)
+rotation = 2.15548
+scale = Vector2(33.96, 1)
 
 [connection signal="toggled" from="GUI/PauseMenu/Buttons/HboxContainer/PracticeModeBtn" to="GUI" method="_on_practice_mode_btn_toggled"]
 [connection signal="pressed" from="GUI/PauseMenu/Buttons/HboxContainer/MenuBtn" to="GUI" method="_on_menu_btn_pressed"]

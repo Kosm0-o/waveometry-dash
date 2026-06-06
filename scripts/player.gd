@@ -1,9 +1,7 @@
 extends CharacterBody2D
 class_name Player
 
-
-
-const norm_speed : float = 900
+var basespeed : float = 900
 var speed : float = 900
 var dir : int = 1
 var angle : float = 45
@@ -18,12 +16,11 @@ var checkpoint_time : float = 3.0
 var checkpoint_timer : float = 0.0
 var respawning : bool = false
 var respawn_timer : float = 0.0
-const respawn_cooldown : float = 0.4
+var respawn_cooldown : float = 0.4
 var y_boost : float = 0.0 # for jump pads
-var orbing : bool = false
-var dashing : Dictionary = {"active": false, "mult": 1.0}
-var downsliding : bool = false
-var upsliding : bool = false
+var sliding : bool = false
+var dropping : bool = false
+var prev_wall_norm : Vector2 = Vector2.ZERO
 
 func _ready() -> void:
 	$UI/CheckpointsUI/add.pressed.connect(place_checkpoint)
@@ -33,16 +30,13 @@ func _ready() -> void:
 		die()
 	else:
 		name = "Player2"
-	await get_tree().create_timer(1.5).timeout
-	#down(100000)
+	await get_tree().create_timer(7.5).timeout
 	
 	
 func _physics_process(delta: float) -> void:
-	y_boost = lerpf(y_boost, 0, 10 * delta)
-
-	orbing = true if abs(y_boost) > 450 else false
-	if not orbing:
-		y_boost = 0
+	if not dropping and y_boost > 0:
+		y_boost = lerpf(y_boost, 0, 15 * delta)
+	
 	
 	if respawning:
 		respawn_timer += delta
@@ -52,13 +46,7 @@ func _physics_process(delta: float) -> void:
 			modulate.a = 1
 			respawn_timer = 0.0
 	
-	if orbing or dashing.active:
-		dir = 0
-		if dashing.active:
-			if not Input.is_action_pressed("click"):
-				angle *= dashing.mult
-				dashing.active = false
-	elif not (flux or stairsmaster.active or ricochet.active):
+	if  not (flux or stairsmaster.active or ricochet.active):
 		dir = -1 if Input.is_action_pressed("click") else 1
 		dir = dir * -1 if dual else dir
 	elif Input.is_action_just_pressed("click") and flux:
@@ -67,9 +55,9 @@ func _physics_process(delta: float) -> void:
 			var og_player : Player = global.players.filter(func(p): return p != self).front()
 			dir = 1 if og_player.dir == -1 else -1
 	elif stairsmaster.active:
-		if (upsliding and not dual) or (downsliding and dual):
+		if position.y <= -global.bounds + 25:
 			stairsmaster.fall = true if not dual else false
-		elif (downsliding and not dual) or (upsliding and dual):
+		elif position.y >= global.bounds - 25:
 			stairsmaster.fall = false if not dual else true
 		if stairsmaster.fall:
 			dir = 1 if not dual else -1
@@ -88,9 +76,11 @@ func _physics_process(delta: float) -> void:
 			dir = 0
 			stairsmaster.holding = 0
 	elif ricochet.active:
-		if (is_on_wall() and not ricochet.falling and not dual) or (is_on_wall() and ricochet.falling and dual):
+		if dual:
+			print(ricochet.falling)
+		if position.y <= -global.bounds + 25:
 			ricochet.falling = true if not dual else false
-		elif (is_on_wall() and ricochet.falling and not dual) or (is_on_wall() and not ricochet.falling and dual):
+		elif position.y >= global.bounds - 25:
 			ricochet.falling = false if not dual else true
 		if Input.is_action_pressed("click"):
 			dir = 0
@@ -125,41 +115,53 @@ func _physics_process(delta: float) -> void:
 		move.y = (sin(63.425) / base) * speed * dir * speedmod * 2
 		scale = Vector2(0.6,0.6)
 	
-	
-
-	
-	if upsliding or downsliding:
-		move = move.normalized() * speed * speedmod
-
-	velocity = move
-
-	move_and_slide()
-
-	downsliding = is_on_wall() and not Input.is_action_pressed("click")
-	upsliding = is_on_wall() and Input.is_action_pressed("click")
-	
-	
-	var ycheck : bool = position.y > -global.bounds + global.cam_offset and position.y < global.bounds + global.cam_offset
-	var xcheck : bool = position.x > -global.bounds + global.cam_offset and position.x < global.bounds + global.cam_offset
-	bounds_checking(ycheck, xcheck, global.yangle, global.xangle, delta)
-	
-
-
-
-func bounds_checking(ycheck : bool, xcheck : bool, yangle : bool, xangle : bool, delta):
-	# y angle means you travel vertically and use ycheck, x angle means you tarvel horizontally and use xcheck
-#	print(str(ycheck) + " " + str(xangle) + "    " + str(xcheck) + " " + str(yangle))
-	if (ycheck and xangle) or (xcheck and yangle):
-		var mult : float = 1.0 if angle != 15 else 2.0
-		mult = 1.0 if angle != 63.425 else 0.85
-		if upsliding or downsliding:
-			rotation_degrees = lerpf(rotation_degrees, 0, 20 * delta)
+	sliding = false
+	var wall_norm : Vector2 = Vector2.ZERO
+	if is_on_wall():
+		for i in get_slide_collision_count():
+			var c = get_slide_collision(i)
+			var norm = c.get_normal()
+			var ceiling = norm.y > 0 and Input.is_action_pressed("click")
+			var flooring = norm.y < 0 and not Input.is_action_pressed("click")
+			if not ceiling and not flooring:
+				continue
+			wall_norm += norm
+			if ceiling or flooring:
+				sliding = true
+		if wall_norm != Vector2.ZERO:
+			wall_norm = wall_norm.normalized()
+			prev_wall_norm = wall_norm
+	if sliding:
+		if abs(prev_wall_norm.x) < 0.1:
+			velocity = move.limit_length(speed * speedmod)
 		else:
-			rotation_degrees = lerpf(rotation_degrees, angle * dir * mult, 20 * delta)
+			var tang : Vector2 = Vector2(prev_wall_norm.y, -prev_wall_norm.x)
+			if tang.x < 0:
+				tang *= -1
+			velocity = (tang * speed * speedmod - prev_wall_norm * speed * speedmod)
 	else:
-		rotation_degrees = lerpf(rotation_degrees, 0, 20 * delta)
-	$grounded.emitting = true if upsliding or downsliding else false
-	global_position.y = clamp(global_position.y,-global.bounds + global.cam_offset,global.bounds + global.cam_offset)
+		velocity = move
+	move_and_slide()
+	if is_on_wall():
+		y_boost = 0
+		dropping = false
+	
+	var mult : float = 1.0
+	if abs(angle) == 15: mult = 2.0
+	elif abs(angle) == 63.425: mult = 0.85
+	var norm_targ = angle * dir * mult
+	var slope_targ = rad_to_deg(prev_wall_norm.angle()) - 90
+	if prev_wall_norm.y < 0:
+		slope_targ += 180
+	var targ_rot = slope_targ if sliding else norm_targ
+	$visualoffset.rotation_degrees = lerpf($visualoffset.rotation_degrees, targ_rot, 20 * delta)
+	$grounded.speed_scale = 1 if sliding else 1
+	$grounded.emitting = sliding
+	
+	
+
+
+
 
 func die():
 	visible = false
@@ -185,7 +187,7 @@ func die():
 	trail_node.visible = true
 	if global.practice_mode:
 		Engine.time_scale = 0.3
-	speed = norm_speed
+	speed = basespeed
 	respawning = true
 	global.died.emit()
 	
@@ -243,13 +245,3 @@ func place_checkpoint():
 								}
 	get_tree().current_scene.get_node("Map").add_child(checkpoint)
 	checkpoint.global_position = global_position
-
-func down(amount : float):
-	orbing = true
-	while true:
-		print(abs(y_boost))
-		y_boost = amount
-		if is_on_wall():
-			break
-		await get_tree().process_frame
-	orbing = false

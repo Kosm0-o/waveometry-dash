@@ -60,6 +60,6 @@ func _on_area_2d_area_entered(area) -> void:
 func flash_tween():
 	var tween = create_tween()
 	var og = modulate
-	tween.tween_property(self, "modulate", Color.GHOST_WHITE, 0.1).set_ease(Tween.EASE_IN)
+	tween.tween_property(self, "modulate", Color(2,2,2,2), 0.1).set_ease(Tween.EASE_IN)
 	tween.tween_property(self, "modulate", og, 0.4).set_ease(Tween.EASE_OUT)
 	await tween.finished

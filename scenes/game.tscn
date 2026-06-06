@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://btrtpdonnmiig"]
+[gd_scene load_steps=32 format=3 uid="uid://btrtpdonnmiig"]
 
 [ext_resource type="PackedScene" uid="uid://d2yi0cqbfih7l" path="res://scenes/player.tscn" id="1_uwrxv"]
 [ext_resource type="Script" uid="uid://dy525wqc8vffw" path="res://scripts/gamemanager.gd" id="1_yqjtg"]
@@ -16,6 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://c4sqlto7kttv1" path="res://scenes/mirrorportal.tscn" id="14_ir15t"]
 [ext_resource type="PackedScene" uid="uid://yb37xbjlif6d" path="res://scenes/block.tscn" id="14_trtic"]
 [ext_resource type="PackedScene" uid="uid://ewqticosrtkg" path="res://scenes/pad.tscn" id="15_ir15t"]
+[ext_resource type="PackedScene" uid="uid://ipq8o2gmoibw" path="res://scenes/speed_portal.tscn" id="17_rysoc"]
 
 [sub_resource type="Environment" id="Environment_trtic"]
 background_mode = 3
@@ -85,7 +86,6 @@ player = NodePath("Map/players/Player")
 
 [node name="song" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("2_vtaks")
-volume_db = -80.0
 autoplay = true
 attenuation = 1e-05
 
@@ -242,15 +242,18 @@ position = Vector2(8258, -39)
 scale = Vector2(13.87, 13.87)
 
 [node name="dualportal" parent="Map" instance=ExtResource("8_gee14")]
+visible = false
 position = Vector2(200, 18)
 
 [node name="dualportal2" parent="Map" instance=ExtResource("8_gee14")]
+visible = false
 position = Vector2(2937, 31)
 dual = 1
 
 [node name="gamemodeportal" parent="Map" instance=ExtResource("9_0tnpc")]
 visible = false
-position = Vector2(670, 0)
+position = Vector2(99, -9)
+gamemode = 2
 
 [node name="teleportal" parent="Map" instance=ExtResource("11_kvpfn")]
 visible = false
@@ -262,11 +265,11 @@ position = Vector2(4899, -805)
 portal = 1
 
 [node name="Orb" parent="Map" instance=ExtResource("13_kvuet")]
-position = Vector2(1566, 24)
-orb = 4
+position = Vector2(1638, 453)
+orb = 1
 
 [node name="Orb2" parent="Map" instance=ExtResource("13_kvuet")]
-position = Vector2(2857, 574)
+position = Vector2(3271, 502)
 orb = 6
 
 [node name="mirrorportal" parent="Map" instance=ExtResource("14_ir15t")]
@@ -274,17 +277,132 @@ visible = false
 position = Vector2(1743, 55)
 
 [node name="Pad" parent="Map" instance=ExtResource("15_ir15t")]
-position = Vector2(520, 12)
-rotation = 1.5708
-pad = 4
+visible = false
+position = Vector2(1647, 620)
+pad = 3
+
+[node name="Orb3" parent="Map" instance=ExtResource("13_kvuet")]
+position = Vector2(1959, 356)
+orb = 0
+flipped = true
+
+[node name="Pad2" parent="Map" instance=ExtResource("15_ir15t")]
+visible = false
+position = Vector2(1751, -606)
+flipped = true
+
+[node name="Orb4" parent="Map" instance=ExtResource("13_kvuet")]
+position = Vector2(2507, 430)
+orb = 2
+
+[node name="Pad3" parent="Map" instance=ExtResource("15_ir15t")]
+visible = false
+position = Vector2(1892, 615)
+pad = 2
+
+[node name="Orb5" parent="Map" instance=ExtResource("13_kvuet")]
+position = Vector2(2987, -33)
+orb = 4
+flipped = true
+
+[node name="Orb6" parent="Map" instance=ExtResource("13_kvuet")]
+position = Vector2(507, -249)
+orb = 4
+
+[node name="Pad4" parent="Map" instance=ExtResource("15_ir15t")]
+visible = false
+position = Vector2(2001, -607)
+flipped = true
+
+[node name="Pad5" parent="Map" instance=ExtResource("15_ir15t")]
+position = Vector2(5352, 608)
+pad = 3
+
+[node name="Pad7" parent="Map" instance=ExtResource("15_ir15t")]
+position = Vector2(5505, 608)
+pad = 3
+
+[node name="Pad6" parent="Map" instance=ExtResource("15_ir15t")]
+position = Vector2(5357, -610)
+pad = 3
+flipped = true
+
+[node name="Pad8" parent="Map" instance=ExtResource("15_ir15t")]
+position = Vector2(5506, -610)
+pad = 3
+flipped = true
+
+[node name="Pad9" parent="Map" instance=ExtResource("15_ir15t")]
+position = Vector2(5632, 608)
+pad = 3
+
+[node name="Pad10" parent="Map" instance=ExtResource("15_ir15t")]
+position = Vector2(5785, 608)
+pad = 3
+
+[node name="Pad11" parent="Map" instance=ExtResource("15_ir15t")]
+position = Vector2(5637, -610)
+pad = 3
+flipped = true
+
+[node name="Pad12" parent="Map" instance=ExtResource("15_ir15t")]
+position = Vector2(5786, -610)
+pad = 3
+flipped = true
+
+[node name="Pad13" parent="Map" instance=ExtResource("15_ir15t")]
+position = Vector2(5920, 608)
+pad = 3
+
+[node name="Pad14" parent="Map" instance=ExtResource("15_ir15t")]
+position = Vector2(6073, 608)
+pad = 3
+
+[node name="Pad15" parent="Map" instance=ExtResource("15_ir15t")]
+position = Vector2(5925, -610)
+pad = 3
+flipped = true
+
+[node name="Pad16" parent="Map" instance=ExtResource("15_ir15t")]
+position = Vector2(6074, -610)
+pad = 3
+flipped = true
+
+[node name="Pad17" parent="Map" instance=ExtResource("15_ir15t")]
+position = Vector2(6200, 608)
+pad = 3
+
+[node name="Pad18" parent="Map" instance=ExtResource("15_ir15t")]
+position = Vector2(6353, 608)
+pad = 3
+
+[node name="Pad19" parent="Map" instance=ExtResource("15_ir15t")]
+position = Vector2(6205, -610)
+pad = 3
+flipped = true
+
+[node name="Pad20" parent="Map" instance=ExtResource("15_ir15t")]
+position = Vector2(6354, -610)
+pad = 3
+flipped = true
 
 [node name="sizeportal" parent="Map" instance=ExtResource("7_ca42v")]
-position = Vector2(43, 0)
+visible = false
+position = Vector2(100, -4)
+size = 0
 
 [node name="block" parent="Map" instance=ExtResource("14_trtic")]
-position = Vector2(348, 587)
-rotation = 2.15548
-scale = Vector2(33.96, 1)
+position = Vector2(467, 407)
+rotation = -0.932006
+scale = Vector2(21.815, 1)
+
+[node name="block2" parent="Map" instance=ExtResource("14_trtic")]
+position = Vector2(717, -547)
+scale = Vector2(21.815, 1)
+
+[node name="SpeedPortal" parent="Map" instance=ExtResource("17_rysoc")]
+position = Vector2(556, 0)
+speed = 0
 
 [connection signal="toggled" from="GUI/PauseMenu/Buttons/HboxContainer/PracticeModeBtn" to="GUI" method="_on_practice_mode_btn_toggled"]
 [connection signal="pressed" from="GUI/PauseMenu/Buttons/HboxContainer/MenuBtn" to="GUI" method="_on_menu_btn_pressed"]

@@ -85,7 +85,7 @@ animations = [{
 size = Vector2(54, 153.714)
 
 [node name="SpeedPortal" type="Node2D"]
-modulate = Color(0.219608, 0.219608, 0.219608, 1)
+modulate = Color(0.699653, 0.699653, 0.699653, 1)
 material = SubResource("CanvasItemMaterial_qw0bg")
 scale = Vector2(1.75, 1.75)
 script = ExtResource("1_qw0bg")

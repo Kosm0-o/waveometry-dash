@@ -41,8 +41,7 @@ events = [SubResource("InputEventKey_dqkch")]
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6w21d"]
 size = Vector2(28, 13)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_3vyb7"]
-size = Vector2(28, 13)
+[sub_resource type="CircleShape2D" id="CircleShape2D_3vyb7"]
 
 [node name="Player" type="CharacterBody2D"]
 z_index = 2
@@ -51,7 +50,9 @@ motion_mode = 1
 safe_margin = 0.001
 script = ExtResource("1_3vyb7")
 
-[node name="shape" type="Polygon2D" parent="."]
+[node name="visualoffset" type="Node2D" parent="."]
+
+[node name="shape" type="Polygon2D" parent="visualoffset"]
 position = Vector2(-25, 0)
 scale = Vector2(0.5, 0.5)
 color = Color(0, 0.907882, 0.95293, 1)
@@ -105,6 +106,6 @@ collision_mask = 0
 position = Vector2(-7, 0)
 shape = SubResource("RectangleShape2D_6w21d")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
 position = Vector2(-7, 0)
-shape = SubResource("RectangleShape2D_3vyb7")
+shape = SubResource("CircleShape2D_3vyb7")

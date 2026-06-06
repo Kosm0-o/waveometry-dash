@@ -19,6 +19,7 @@ func _ready() -> void:
 	
 func _process(delta: float) -> void:
 	width = player.scale.x * og_width
+	width = clamp(width, 5, 38)
 	var pos = player.global_position
 	
 	starter_frames -= 1

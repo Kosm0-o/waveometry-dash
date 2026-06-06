@@ -18,6 +18,7 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
+#	Engine.time_scale = 0.1
 	if Engine.time_scale >= 0.99 and Engine.time_scale != 1:
 		Engine.time_scale = 1.0
 	elif Engine.time_scale < 1:

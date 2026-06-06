@@ -20,7 +20,7 @@ var pad_data : Array = [
 	},
 	{
 		"name": "spider",
-		"boost": -6000
+		"boost": 50000
 	},
 	{
 		"name": "blue",
@@ -28,20 +28,30 @@ var pad_data : Array = [
 	}
 ]
 
-@export_category("SPIDER PAD ONLY")
+@export_category("REVERSE DIRECTION")
 @export var flipped : bool = false
+
+var padded : bool = false
 
 func _ready() -> void:
 	pass
-	
+
+func _process(delta: float) -> void:
+	if get_overlapping_bodies().size() > 0:
+		_on_body_entered(get_overlapping_bodies().front())
+
 func _on_body_entered(body: Node2D) -> void:
+	if padded:
+		return
+	padded = true if not pad == PADS.SPIDER else false
+	var m = -1 if flipped else 1
 	match pad:
 		PADS.SPIDER:
-			var m = -1 if flipped else 1
-			body.down(pad_data[pad].boost * m)
+			body.dropping = true
+			body.y_boost = pad_data[pad].boost * m
 		
 		PADS.YELLOW, PADS.PINK, PADS.RED:
-			body.y_boost = pad_data[pad].boost
+			body.y_boost = pad_data[pad].boost * sign(body.angle)
 			
 		PADS.BLUE:
 			body.angle *= pad_data[pad].angle_mult

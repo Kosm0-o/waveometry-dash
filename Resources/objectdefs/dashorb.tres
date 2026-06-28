@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="ObjectResource" load_steps=3 format=3 uid="uid://cgpxml4qwbium"]
+
+[ext_resource type="PackedScene" uid="uid://fa7xrx36wu6v" path="res://scenes/orb.tscn" id="1_diknb"]
+[ext_resource type="Script" uid="uid://b7ivepggsojwl" path="res://scripts/objectresource.gd" id="2_kou5o"]
+
+[resource]
+script = ExtResource("2_kou5o")
+id = "dashorb"
+display_name = "Dash Orb"
+scene = ExtResource("1_diknb")
+category = "interactables"
+metadata/_custom_type_script = "uid://b7ivepggsojwl"

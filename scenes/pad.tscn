@@ -1,36 +1,101 @@
-[gd_scene load_steps=5 format=3 uid="uid://ewqticosrtkg"]
+[gd_scene load_steps=11 format=3 uid="uid://ewqticosrtkg"]
 
 [ext_resource type="Script" uid="uid://dfq638r5vyg8y" path="res://scripts/pad.gd" id="1_sqfiy"]
-[ext_resource type="Texture2D" uid="uid://ccfbw316dc6xv" path="res://icon.svg" id="2_t6n0v"]
+[ext_resource type="Texture2D" uid="uid://5jvrrbutemvg" path="res://assets/padsspritesheet.png" id="2_sqfiy"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t6n0v"]
+atlas = ExtResource("2_sqfiy")
+region = Rect2(100, 0, 50, 15)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kt18w"]
+atlas = ExtResource("2_sqfiy")
+region = Rect2(0, 15, 50, 15)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2pflq"]
+atlas = ExtResource("2_sqfiy")
+region = Rect2(50, 0, 50, 15)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_18eyw"]
+atlas = ExtResource("2_sqfiy")
+region = Rect2(0, 0, 50, 15)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_85nxr"]
+atlas = ExtResource("2_sqfiy")
+region = Rect2(50, 15, 50, 15)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ubfm6"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("2_t6n0v")
+"texture": SubResource("AtlasTexture_t6n0v")
 }],
 "loop": false,
-"name": &"default",
+"name": &"blue",
+"speed": 0.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kt18w")
+}],
+"loop": false,
+"name": &"pink",
+"speed": 0.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2pflq")
+}],
+"loop": false,
+"name": &"red",
+"speed": 0.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_18eyw")
+}],
+"loop": false,
+"name": &"spider",
+"speed": 0.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_85nxr")
+}],
+"loop": false,
+"name": &"yellow",
 "speed": 0.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g6cbt"]
 size = Vector2(137, 55)
 
-[node name="Pad" type="Area2D"]
-collision_layer = 2
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_sqfiy"]
+radius = 11.0
+height = 117.0
+
+[node name="Pad" type="Node2D"]
 script = ExtResource("1_sqfiy")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-scale = Vector2(1, 0.37)
+scale = Vector2(2.825, 2.825)
 sprite_frames = SubResource("SpriteFrames_ubfm6")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-0.5, 0.5)
-shape = SubResource("RectangleShape2D_g6cbt")
+animation = &"red"
 
 [node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
 position = Vector2(0.499998, 1)
 scale = Vector2(7.15, 3.4)
 
-[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-0.5, 0.5)
+shape = SubResource("RectangleShape2D_g6cbt")
+
+[node name="clickdetector" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="clickdetector"]
+position = Vector2(-1, 0)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_sqfiy")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

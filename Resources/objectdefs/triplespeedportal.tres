@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="ObjectResource" load_steps=3 format=3 uid="uid://pmarvovom55i"]
+
+[ext_resource type="PackedScene" uid="uid://ipq8o2gmoibw" path="res://scenes/speed_portal.tscn" id="1_t13i5"]
+[ext_resource type="Script" uid="uid://b7ivepggsojwl" path="res://scripts/objectresource.gd" id="2_egeh7"]
+
+[resource]
+script = ExtResource("2_egeh7")
+id = "triplespeedportal"
+display_name = "Triple Speed Portal"
+scene = ExtResource("1_t13i5")
+category = "interactables"
+metadata/_custom_type_script = "uid://b7ivepggsojwl"

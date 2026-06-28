@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://fa7xrx36wu6v"]
+[gd_scene load_steps=14 format=3 uid="uid://fa7xrx36wu6v"]
 
 [ext_resource type="Script" uid="uid://nviuj3ou2t6b" path="res://scripts/orb.gd" id="1_ubfm6"]
 [ext_resource type="Texture2D" uid="uid://bpf2svg517x6b" path="res://assets/orbsspritesheet.png" id="2_ubfm6"]
@@ -105,19 +105,31 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g6cbt"]
 size = Vector2(147, 148)
 
-[node name="Orb" type="Area2D"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_ubfm6"]
+radius = 48.7603
+
+[node name="Orb" type="Node2D"]
 scale = Vector2(0.8, 0.8)
-collision_layer = 2
 script = ExtResource("1_ubfm6")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_ubfm6")
-animation = &"blue"
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(1.5, 0)
-shape = SubResource("RectangleShape2D_g6cbt")
+animation = &"red"
 
 [node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
 position = Vector2(0.499996, 3.8147e-06)
 scale = Vector2(7.55, 7.7)
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(1.5, 0)
+scale = Vector2(1, 1)
+shape = SubResource("RectangleShape2D_g6cbt")
+
+[node name="clickdetector" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="clickdetector"]
+position = Vector2(-1, 0)
+rotation = 1.5708
+shape = SubResource("CircleShape2D_ubfm6")

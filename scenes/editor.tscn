@@ -1,0 +1,65 @@
+[gd_scene load_steps=2 format=3 uid="uid://dvicnlxkttgiw"]
+
+[ext_resource type="Script" uid="uid://db3arps08nl6q" path="res://scripts/editor.gd" id="1_b1cmn"]
+
+[node name="editor" type="Node2D"]
+script = ExtResource("1_b1cmn")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="gui" type="CanvasLayer" parent="."]
+
+[node name="editorscroll" type="ScrollContainer" parent="gui"]
+offset_left = 9.0
+offset_top = 382.0
+offset_right = 449.0
+offset_bottom = 483.0
+scale = Vector2(2.6, 2.6)
+vertical_scroll_mode = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="gui/editorscroll"]
+layout_mode = 2
+
+[node name="editorhbox" type="HBoxContainer" parent="gui/editorscroll/VBoxContainer"]
+layout_mode = 2
+
+[node name="editorhbox2" type="HBoxContainer" parent="gui/editorscroll/VBoxContainer"]
+layout_mode = 2
+
+[node name="editorhbox3" type="HBoxContainer" parent="gui/editorscroll/VBoxContainer"]
+layout_mode = 2
+
+[node name="playtest" type="Button" parent="gui"]
+offset_left = 1054.0
+offset_top = 16.0
+offset_right = 1095.0
+offset_bottom = 47.0
+scale = Vector2(2, 2)
+text = "Play"
+
+[node name="modes" type="HBoxContainer" parent="gui"]
+offset_left = 14.0
+offset_top = 13.0
+offset_right = 123.0
+offset_bottom = 53.0
+scale = Vector2(2.055, 2.055)
+
+[node name="select" type="Button" parent="gui/modes"]
+layout_mode = 2
+text = "Select"
+
+[node name="drag" type="Button" parent="gui/modes"]
+layout_mode = 2
+text = "Move"
+
+[node name="add" type="Button" parent="gui/modes"]
+layout_mode = 2
+text = "Add"
+
+[node name="delete" type="Button" parent="gui/modes"]
+layout_mode = 2
+text = "Delete"
+
+[node name="levelobjects" type="Node2D" parent="."]
+
+[connection signal="pressed" from="gui/playtest" to="." method="_on_playtest_pressed"]

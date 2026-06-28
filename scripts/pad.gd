@@ -1,7 +1,7 @@
-extends Area2D
+extends LevelObject
 
 enum PADS {YELLOW, PINK, RED, SPIDER, BLUE}
-@export var pad : PADS = PADS.YELLOW
+var pad : PADS = PADS.YELLOW
 
 # negative boost = down, positive = up
 
@@ -33,14 +33,25 @@ var pad_data : Array = [
 
 var padded : bool = false
 
+
 func _ready() -> void:
-	pass
+	match get_meta("id"):
+		"yellowpad":
+			pad = PADS.YELLOW
+		"pinkpad":
+			pad = PADS.PINK
+		"redpad":
+			pad = PADS.RED
+		"spiderpad":
+			pad = PADS.SPIDER
+		"bluepad":
+			pad = PADS.BLUE
+	$AnimatedSprite2D.play(pad_data[pad].name)
+	if pad == PADS.SPIDER and flipped: rotation += PI
+	
 
-func _process(delta: float) -> void:
-	if get_overlapping_bodies().size() > 0:
-		_on_body_entered(get_overlapping_bodies().front())
 
-func _on_body_entered(body: Node2D) -> void:
+func _on_area_2d_body_entered(body: Node2D) -> void:
 	if padded:
 		return
 	padded = true if not pad == PADS.SPIDER else false

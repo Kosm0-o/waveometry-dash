@@ -1,7 +1,7 @@
-[gd_scene load_steps=12 format=3 uid="uid://ipq8o2gmoibw"]
+[gd_scene load_steps=13 format=3 uid="uid://ipq8o2gmoibw"]
 
 [ext_resource type="Script" uid="uid://qexhc2vtpk7e" path="res://scripts/speed_portal.gd" id="1_qw0bg"]
-[ext_resource type="Texture2D" uid="uid://5jvrrbutemvg" path="res://assets/spritesheet.png" id="2_qw0bg"]
+[ext_resource type="Texture2D" uid="uid://cgss44qdwlie0" path="res://assets/portalspritesheet.png" id="2_qw0bg"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_qw0bg"]
 light_mode = 1
@@ -82,7 +82,10 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_aeaor"]
-size = Vector2(54, 153.714)
+size = Vector2(54, 97.1429)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qxe5q"]
+size = Vector2(68, 89.7143)
 
 [node name="SpeedPortal" type="Node2D"]
 modulate = Color(0.699653, 0.699653, 0.699653, 1)
@@ -92,19 +95,30 @@ script = ExtResource("1_qw0bg")
 speed = 1
 
 [node name="sprites" type="AnimatedSprite2D" parent="."]
+position = Vector2(-1.14286, 1.71428)
+scale = Vector2(0.703677, 0.703677)
 sprite_frames = SubResource("SpriteFrames_6tpj1")
-animation = &"double"
-offset = Vector2(3.375, 95)
+animation = &"triple"
+offset = Vector2(9.49, 93.455)
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(0, -3.71429)
+position = Vector2(0, -0.571432)
+scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_aeaor")
 
 [node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
 position = Vector2(2, -1.42857)
 scale = Vector2(6.14286, 4.77143)
+
+[node name="clickdetector" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="clickdetector"]
+position = Vector2(-0.857149, 0.857144)
+rotation = 1.5708
+scale = Vector2(1, 1)
+shape = SubResource("RectangleShape2D_qxe5q")
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

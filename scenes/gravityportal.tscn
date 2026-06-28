@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bs2n242lcgaj5" path="res://scripts/gravityportal.gd" id="1_fcftj"]
 [ext_resource type="Script" uid="uid://cbef427tmh2pe" path="res://scripts/sprites.gd" id="2_e1bu2"]
-[ext_resource type="Texture2D" uid="uid://5jvrrbutemvg" path="res://assets/spritesheet.png" id="3_28a1h"]
+[ext_resource type="Texture2D" uid="uid://5jvrrbutemvg" path="res://assets/padsspritesheet.png" id="3_28a1h"]
 [ext_resource type="Texture2D" uid="uid://dc5luvhx3oew6" path="res://assets/particlesquare.svg" id="3_e1bu2"]
 [ext_resource type="Texture2D" uid="uid://bf86uqk1hbnh5" path="res://assets/boopparticlesprite.svg" id="5_28a1h"]
 

@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="ObjectResource" load_steps=3 format=3 uid="uid://3ege833ou5lk"]
+
+[ext_resource type="PackedScene" uid="uid://ewqticosrtkg" path="res://scenes/pad.tscn" id="1_ahm1x"]
+[ext_resource type="Script" uid="uid://b7ivepggsojwl" path="res://scripts/objectresource.gd" id="2_5ivn1"]
+
+[resource]
+script = ExtResource("2_5ivn1")
+id = "spiderpad"
+display_name = "Spider Pad"
+scene = ExtResource("1_ahm1x")
+category = "interactables"
+metadata/_custom_type_script = "uid://b7ivepggsojwl"

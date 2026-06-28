@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="ObjectResource" load_steps=3 format=3 uid="uid://bfpju7es3lhby"]
+
+[ext_resource type="PackedScene" uid="uid://fa7xrx36wu6v" path="res://scenes/orb.tscn" id="1_ri6cs"]
+[ext_resource type="Script" uid="uid://b7ivepggsojwl" path="res://scripts/objectresource.gd" id="2_vml8t"]
+
+[resource]
+script = ExtResource("2_vml8t")
+id = "pinkorb"
+display_name = "Pink Orb"
+scene = ExtResource("1_ri6cs")
+category = "interactables"
+metadata/_custom_type_script = "uid://b7ivepggsojwl"

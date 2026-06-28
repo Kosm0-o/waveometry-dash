@@ -1,41 +1,49 @@
-extends Node2D
+extends LevelObject
 
 enum SPEEDS {SLOW, NORMAL, DOUBLE, TRIPLE, QUAD, BURST}
 @export var speed : SPEEDS
 var speedinfo : Array[Dictionary] = [
 	{
 	"name": "slow",
-	"speedmod": 0.8,
-	"texture": load("res://assets/slow speed sprite.svg")
+	"speedmod": 0.8
 	},
 	{
 	"name": "normal",
-	"speedmod": 1.0,
-	"texture": load("res://assets/normal speed sprite.svg")
+	"speedmod": 1.0
 	},
 	{
 	"name": "double",
-	"speedmod": 1.45,
-	"texture": load("res://assets/double speed sprite.svg")
+	"speedmod": 1.45
 	},
 	{
 	"name": "triple",
-	"speedmod": 1.8,
-	"texture": load("res://assets/triple speed sprite.svg")
+	"speedmod": 1.8
 	},
 	{
 	"name": "quad",
-	"speedmod": 2.19,
-	"texture": load("res://assets/quad speed sprite.svg")
+	"speedmod": 2.19
 	},
 	{
 	"name": "burst",
-	"speedmod": 2.3,
-	"texture": load("res://assets/burst speed sprite.svg")
+	"speedmod": 2.3
 	}
 ]
 
 func _ready() -> void:
+	match get_meta("id"):
+		"normalspeedportal":
+			speed = SPEEDS.NORMAL
+		"doublespeedportal":
+			speed = SPEEDS.DOUBLE
+		"triplespeedportal":
+			speed = SPEEDS.TRIPLE
+		"quadspeedportal":
+			speed = SPEEDS.QUAD
+		"slowspeedportal":
+			speed = SPEEDS.SLOW
+		"burstspeedportal":
+			speed = SPEEDS.BURST
+
 	$sprites.play(speedinfo[speed]["name"])
 
 func _on_area_2d_area_entered(area) -> void:

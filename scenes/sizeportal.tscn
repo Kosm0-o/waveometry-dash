@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dlmiqtd8vfxey" path="res://scripts/sizeportal.gd" id="1_x4rsw"]
 [ext_resource type="Script" uid="uid://cbef427tmh2pe" path="res://scripts/sprites.gd" id="2_cqxvd"]
-[ext_resource type="Texture2D" uid="uid://5jvrrbutemvg" path="res://assets/spritesheet.png" id="3_4shoe"]
+[ext_resource type="Texture2D" uid="uid://5jvrrbutemvg" path="res://assets/padsspritesheet.png" id="3_4shoe"]
 [ext_resource type="Texture2D" uid="uid://bf86uqk1hbnh5" path="res://assets/boopparticlesprite.svg" id="4_4shoe"]
 [ext_resource type="Texture2D" uid="uid://dc5luvhx3oew6" path="res://assets/particlesquare.svg" id="5_7jv5i"]
 
@@ -154,7 +154,7 @@ script = ExtResource("2_cqxvd")
 
 [node name="backhalf" type="AnimatedSprite2D" parent="sprites"]
 sprite_frames = SubResource("SpriteFrames_rfpjt")
-animation = &"mega"
+animation = &"mini"
 offset = Vector2(3.375, 95)
 
 [node name="fronthalf" type="AnimatedSprite2D" parent="sprites"]

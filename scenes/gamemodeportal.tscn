@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://l8brn0klavvo" path="res://scripts/gamemodeportal.gd" id="1_3wu3l"]
 [ext_resource type="Script" uid="uid://cbef427tmh2pe" path="res://scripts/sprites.gd" id="2_we7b8"]
 [ext_resource type="Texture2D" uid="uid://dc5luvhx3oew6" path="res://assets/particlesquare.svg" id="3_j7xi8"]
-[ext_resource type="Texture2D" uid="uid://5jvrrbutemvg" path="res://assets/spritesheet.png" id="3_yruo1"]
+[ext_resource type="Texture2D" uid="uid://5jvrrbutemvg" path="res://assets/padsspritesheet.png" id="3_yruo1"]
 [ext_resource type="Texture2D" uid="uid://bf86uqk1hbnh5" path="res://assets/boopparticlesprite.svg" id="5_j7xi8"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_3wu3l"]

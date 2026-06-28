@@ -41,7 +41,9 @@ events = [SubResource("InputEventKey_dqkch")]
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6w21d"]
 size = Vector2(28, 13)
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_3vyb7"]
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_3vyb7"]
+radius = 0.25
+height = 1.5
 
 [node name="Player" type="CharacterBody2D"]
 z_index = 2
@@ -106,6 +108,7 @@ collision_mask = 0
 position = Vector2(-7, 0)
 shape = SubResource("RectangleShape2D_6w21d")
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
-position = Vector2(-7, 0)
-shape = SubResource("CircleShape2D_3vyb7")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-7.25, 0.375)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_3vyb7")

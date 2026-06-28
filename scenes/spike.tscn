@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://dtqy8g00cuqob"]
 
 [ext_resource type="Script" uid="uid://coa7c8o2o00jy" path="res://scripts/obstacle.gd" id="1_7a7y0"]
-[ext_resource type="Texture2D" uid="uid://beqr6bhvy2qa1" path="res://assets/spike sprite.svg" id="2_d2mqm"]
+[ext_resource type="Texture2D" uid="uid://beqr6bhvy2qa1" path="res://assets/old/spike sprite.svg" id="2_d2mqm"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cx2lw"]
 size = Vector2(20, 51)

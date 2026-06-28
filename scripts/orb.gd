@@ -1,4 +1,4 @@
-extends Area2D
+extends LevelObject
 
 enum ORBS {YELLOW, PINK, RED, DROP, SPIDER, BLUE, DASH, PINKDASH}
 @export var orb : ORBS = ORBS.DROP
@@ -44,11 +44,28 @@ var orb_data : Array = [
  
 
 func _ready() -> void:
+	match get_meta("id"):
+		"yelloworb":
+			orb = ORBS.YELLOW
+		"pinkorb":
+			orb = ORBS.PINK
+		"redorb":
+			orb = ORBS.RED
+		"spiderorb":
+			orb = ORBS.SPIDER
+		"blueorb":
+			orb = ORBS.BLUE
+		"droporb":
+			orb = ORBS.DROP
+		"dashorb":
+			orb = ORBS.DASH
+		"pinkdashorb":
+			orb = ORBS.PINKDASH
 	$AnimatedSprite2D.play(orb_data[orb].name)
 	if orb == ORBS.SPIDER and flipped: rotation += PI
 
 func _process(delta: float) -> void:
-	var getp = get_overlapping_bodies()
+	var getp = $Area2D.get_overlapping_bodies()
 	if getp.size() > 0 and Input.is_action_just_pressed("click"):
 		var player = getp.front()
 		match orb:
@@ -70,7 +87,8 @@ func _process(delta: float) -> void:
 				player.angle *= orb_data[orb].angle_mult
 			
 			ORBS.DASH, ORBS.PINKDASH:
-				player.dashing = true
+				player.dashing["true"] = true
+				player.dashing.pink = true if orb == ORBS.PINKDASH else false
 		
 		size_tween()
 

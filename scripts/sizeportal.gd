@@ -21,6 +21,13 @@ var angleinfo : Array[Dictionary] = [
 ]
 
 func _ready() -> void:
+	match get_meta("id"):
+		"normalsizeportal":
+			size = SIZES.NORMAL
+		"minisizeportal":
+			size = SIZES.MINI
+		"megasizeportal":
+			size = SIZES.MEGA
 	$sprites.play(angleinfo[size]["name"])
 	$particles.modulate = angleinfo[size]["color"]
 	$boop.modulate = angleinfo[size]["color"]

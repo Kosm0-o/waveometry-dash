@@ -19,6 +19,9 @@ var respawn_timer : float = 0.0
 var respawn_cooldown : float = 0.4
 var y_boost : float = 0.0 # for jump pads
 var sliding : bool = false
+var dashing : Dictionary = {"true": false, "pink": false}
+var ceiling : bool = false # for gamemodes
+var flooring : bool = false # also for gamemodes
 var dropping : bool = false
 var prev_wall_norm : Vector2 = Vector2.ZERO
 
@@ -27,7 +30,7 @@ func _ready() -> void:
 	$UI/CheckpointsUI/remove.pressed.connect(remove_current_checkpoint)
 	await get_tree().create_timer(0.2).timeout
 	if not dual:
-		die()
+		if not global.playtest: die()
 	else:
 		name = "Player2"
 	await get_tree().create_timer(7.5).timeout
@@ -46,7 +49,14 @@ func _physics_process(delta: float) -> void:
 			modulate.a = 1
 			respawn_timer = 0.0
 	
-	if  not (flux or stairsmaster.active or ricochet.active):
+	if dashing["true"]:
+		dir = 0
+		if not Input.is_action_pressed("click") or is_on_wall():
+			dashing["true"] = false
+			if dashing.pink:
+				angle *= -1
+				dashing.pink = false
+	elif  not (flux or stairsmaster.active or ricochet.active):
 		dir = -1 if Input.is_action_pressed("click") else 1
 		dir = dir * -1 if dual else dir
 	elif Input.is_action_just_pressed("click") and flux:
@@ -55,9 +65,9 @@ func _physics_process(delta: float) -> void:
 			var og_player : Player = global.players.filter(func(p): return p != self).front()
 			dir = 1 if og_player.dir == -1 else -1
 	elif stairsmaster.active:
-		if position.y <= -global.bounds + 25:
+		if (ceiling and not dual) or (flooring and dual):
 			stairsmaster.fall = true if not dual else false
-		elif position.y >= global.bounds - 25:
+		elif (flooring and not dual) or (ceiling and dual):
 			stairsmaster.fall = false if not dual else true
 		if stairsmaster.fall:
 			dir = 1 if not dual else -1
@@ -76,11 +86,9 @@ func _physics_process(delta: float) -> void:
 			dir = 0
 			stairsmaster.holding = 0
 	elif ricochet.active:
-		if dual:
-			print(ricochet.falling)
-		if position.y <= -global.bounds + 25:
+		if (ceiling and not dual) or (flooring and dual):
 			ricochet.falling = true if not dual else false
-		elif position.y >= global.bounds - 25:
+		elif (flooring and not dual) or (ceiling and dual):
 			ricochet.falling = false if not dual else true
 		if Input.is_action_pressed("click"):
 			dir = 0
@@ -97,6 +105,7 @@ func _physics_process(delta: float) -> void:
 			checkpoint_timer = checkpoint_time
 	$UI/CheckpointsUI.visible = global.practice_mode
 	
+	
 	var tempangle = deg_to_rad(angle)
 	var base = sin(deg_to_rad(45.0))
 	
@@ -108,11 +117,11 @@ func _physics_process(delta: float) -> void:
 		scale = Vector2.ONE
 	elif abs(angle) == 15:
 		move.x = speed * speedmod
-		move.y = (sin(15) / base) * speed * dir * speedmod
+		move.y = (sin(15) / base) * speed * dir * speedmod - y_boost
 		scale = Vector2(1.55,1.55)
 	else:
 		move.x = speed * speedmod
-		move.y = (sin(63.425) / base) * speed * dir * speedmod * 2
+		move.y = (sin(63.425) / base) * speed * dir * speedmod * 2 - y_boost
 		scale = Vector2(0.6,0.6)
 	
 	sliding = false
@@ -121,8 +130,8 @@ func _physics_process(delta: float) -> void:
 		for i in get_slide_collision_count():
 			var c = get_slide_collision(i)
 			var norm = c.get_normal()
-			var ceiling = norm.y > 0 and Input.is_action_pressed("click")
-			var flooring = norm.y < 0 and not Input.is_action_pressed("click")
+			ceiling = norm.y > 0 and Input.is_action_pressed("click")
+			flooring = norm.y < 0 and not Input.is_action_pressed("click")
 			if not ceiling and not flooring:
 				continue
 			wall_norm += norm
@@ -132,13 +141,13 @@ func _physics_process(delta: float) -> void:
 			wall_norm = wall_norm.normalized()
 			prev_wall_norm = wall_norm
 	if sliding:
-		if abs(prev_wall_norm.x) < 0.1:
+		if abs(prev_wall_norm.x) < 0.01:
 			velocity = move.limit_length(speed * speedmod)
 		else:
 			var tang : Vector2 = Vector2(prev_wall_norm.y, -prev_wall_norm.x)
 			if tang.x < 0:
 				tang *= -1
-			velocity = (tang * speed * speedmod - prev_wall_norm * speed * speedmod)
+			velocity = (tang * (speed * speedmod / tang.x) - prev_wall_norm * speed * speedmod)
 	else:
 		velocity = move
 	move_and_slide()
@@ -155,7 +164,7 @@ func _physics_process(delta: float) -> void:
 		slope_targ += 180
 	var targ_rot = slope_targ if sliding else norm_targ
 	$visualoffset.rotation_degrees = lerpf($visualoffset.rotation_degrees, targ_rot, 20 * delta)
-	$grounded.speed_scale = 1 if sliding else 1
+	$grounded.speed_scale = 1 if sliding else 5
 	$grounded.emitting = sliding
 	
 	
@@ -167,6 +176,10 @@ func die():
 	visible = false
 	trail_node.visible = false
 	speed = 0
+	if global.playtest:
+		global.playtest = false
+		get_tree().call_deferred("change_scene_to_file","res://scenes/editor.tscn")
+		return
 	await get_tree().create_timer(respawn_cooldown).timeout
 	if global.practice_mode and global.all_checkpoints.size() > 0:
 		go_to_checkpoint(global.all_checkpoints.back())

@@ -1,4 +1,4 @@
-extends Node2D
+extends LevelObject
 
 enum MODES {DUAL, SINGLE}
 @export var dual : MODES = MODES.DUAL
@@ -7,19 +7,22 @@ var dualinfo : Array[Dictionary] = [
 	"name": "dual",
 	"color": Color("#e18b03"),
 	"mainpos": Vector2(30, -72),
-	"frontpos": Vector2(-14.151, 19.811)
+	"frontpos": Vector2(8.22, 1.843)
 	},
 	{
 	"name": "single",
 	"color": Color("#009dd9"),
-	"mainpos": Vector2(9, -54),
-	"frontpos": Vector2(12.3, -2.831)
+	"mainpos": Vector2(30, -72),
+	"frontpos": Vector2(-17.924, 21.968)
 	}
 ]
 
-@onready var pnode : Node2D = get_tree().current_scene.get_node("Map").get_node("players")
-
-func _ready() -> void:
+func object_ready() -> void:
+	match get_meta("id"):
+		"dualportal":
+			dual = MODES.DUAL
+		"singleportal":
+			dual = MODES.SINGLE
 	$sprites.play(dualinfo[dual]["name"])
 	$particles.modulate = dualinfo[dual]["color"]
 	$boop.modulate = dualinfo[dual]["color"]
@@ -31,8 +34,9 @@ func _on_area_2d_area_entered(area) -> void:
 	area = area.get_parent()
 	$boop.emitting = true
 	if global.dualing and dual == MODES.SINGLE:
-		for p in pnode.get_children():
+		for p in global.pnode.get_children():
 			if p.dual:
+				p.dual = false
 				await fade_tween(p, p.trail_node)
 				p.trail_node.queue_free()
 				p.queue_free()
@@ -53,8 +57,8 @@ func _on_area_2d_area_entered(area) -> void:
 		b.angle = area.angle
 		b.trail_node = c
 		c.player = b
-		pnode.add_child(b)
-		pnode.get_parent().add_child(c)
+		global.pnode.call_deferred("add_child", b)
+		global.pnode.get_parent().add_child(c)
 		global.dualing = true
 
 func fade_tween(p : Player, t : Trail):

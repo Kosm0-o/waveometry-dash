@@ -4,3 +4,4 @@ class_name LevelData
 var lvlname : String = ""
 var song_id : int = 0
 var objects : Array = []
+var object_counts : Dictionary

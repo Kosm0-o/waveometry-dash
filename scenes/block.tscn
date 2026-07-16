@@ -15,6 +15,10 @@ size = Vector2(88, 88)
 collision_layer = 8
 physics_material_override = SubResource("PhysicsMaterial_8r6n6")
 script = ExtResource("1_cgrg5")
+group_bools = {
+"groups": true,
+"targets": false
+}
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(6.365, 6.365)
@@ -30,6 +34,8 @@ position = Vector2(-0.500001, -0.499997)
 scale = Vector2(4.45, 4.45)
 
 [node name="clickdetector" type="Area2D" parent="."]
+collision_layer = 32
+collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="clickdetector"]
 position = Vector2(1.90735e-06, 1.90735e-06)

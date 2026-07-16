@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="ObjectResource" load_steps=3 format=3 uid="uid://dllt47fcqytl7"]
+
+[ext_resource type="PackedScene" uid="uid://ckvd4w7xxq6ud" path="res://scenes/startpos.tscn" id="1_3p0ow"]
+[ext_resource type="Script" uid="uid://b7ivepggsojwl" path="res://scripts/objectresource.gd" id="2_ul7ti"]
+
+[resource]
+script = ExtResource("2_ul7ti")
+id = "startpos"
+display_name = "Start Position"
+scene = ExtResource("1_3p0ow")
+category = "triggers"
+max_amount = 1
+metadata/_custom_type_script = "uid://b7ivepggsojwl"

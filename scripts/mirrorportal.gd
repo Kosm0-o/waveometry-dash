@@ -1,4 +1,4 @@
-extends Node2D
+extends LevelObject
 
 enum FLIPS {NORMAL, BACKWARD}
 @export var flip : FLIPS = FLIPS.BACKWARD
@@ -13,7 +13,12 @@ var mirrorinfo : Array[Dictionary] = [
 	}
 ]
 
-func _ready() -> void:
+func object_ready() -> void:
+	match get_meta("id"):
+		"backwardmirrorportal":
+			flip = FLIPS.BACKWARD
+		"normalmirrorportal":
+			flip = FLIPS.NORMAL
 	$sprites.play(mirrorinfo[flip]["name"])
 	$particles.modulate = mirrorinfo[flip]["color"]
 	$boop.modulate = mirrorinfo[flip]["color"]

@@ -26,11 +26,12 @@ var dropping : bool = false
 var prev_wall_norm : Vector2 = Vector2.ZERO
 
 func _ready() -> void:
+	if not dual: global_position = global.startpos
 	$UI/CheckpointsUI/add.pressed.connect(place_checkpoint)
 	$UI/CheckpointsUI/remove.pressed.connect(remove_current_checkpoint)
 	await get_tree().create_timer(0.2).timeout
 	if not dual:
-		if not global.playtest: die()
+		if not EditorGlobal.playtest: die()
 	else:
 		name = "Player2"
 	await get_tree().create_timer(7.5).timeout
@@ -51,15 +52,15 @@ func _physics_process(delta: float) -> void:
 	
 	if dashing["true"]:
 		dir = 0
-		if not Input.is_action_pressed("click") or is_on_wall():
+		if not Input.is_action_pressed("game_click") or is_on_wall():
 			dashing["true"] = false
 			if dashing.pink:
 				angle *= -1
 				dashing.pink = false
 	elif  not (flux or stairsmaster.active or ricochet.active):
-		dir = -1 if Input.is_action_pressed("click") else 1
+		dir = -1 if Input.is_action_pressed("game_click") else 1
 		dir = dir * -1 if dual else dir
-	elif Input.is_action_just_pressed("click") and flux:
+	elif Input.is_action_just_pressed("game_click") and flux:
 		dir *= -1
 		if dual:
 			var og_player : Player = global.players.filter(func(p): return p != self).front()
@@ -72,7 +73,7 @@ func _physics_process(delta: float) -> void:
 		if stairsmaster.fall:
 			dir = 1 if not dual else -1
 			stairsmaster.holding = 0
-		elif Input.is_action_pressed("click"):
+		elif Input.is_action_pressed("game_click"):
 			if stairsmaster.holding > 0.35:
 				stairsmaster.stopframes -= 1
 				dir = 0
@@ -90,7 +91,7 @@ func _physics_process(delta: float) -> void:
 			ricochet.falling = true if not dual else false
 		elif (flooring and not dual) or (ceiling and dual):
 			ricochet.falling = false if not dual else true
-		if Input.is_action_pressed("click"):
+		if Input.is_action_pressed("game_click"):
 			dir = 0
 		elif ricochet.falling:
 			dir = 1 if not dual else -1
@@ -130,8 +131,8 @@ func _physics_process(delta: float) -> void:
 		for i in get_slide_collision_count():
 			var c = get_slide_collision(i)
 			var norm = c.get_normal()
-			ceiling = norm.y > 0 and Input.is_action_pressed("click")
-			flooring = norm.y < 0 and not Input.is_action_pressed("click")
+			ceiling = norm.y > 0 and Input.is_action_pressed("game_click")
+			flooring = norm.y < 0 and not Input.is_action_pressed("game_click")
 			if not ceiling and not flooring:
 				continue
 			wall_norm += norm
@@ -176,8 +177,9 @@ func die():
 	visible = false
 	trail_node.visible = false
 	speed = 0
-	if global.playtest:
-		global.playtest = false
+	if EditorGlobal.playtest:
+		EditorGlobal.playtest = false
+		EditorGlobal.trail_points = trail_node.points
 		get_tree().call_deferred("change_scene_to_file","res://scenes/editor.tscn")
 		return
 	await get_tree().create_timer(respawn_cooldown).timeout

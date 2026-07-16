@@ -1,0 +1,39 @@
+[gd_scene load_steps=4 format=3 uid="uid://d16f4gqn6d572"]
+
+[ext_resource type="Script" uid="uid://cs823n727j1sk" path="res://scripts/rotationtrigger.gd" id="1_wvh5y"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_cvtg8"]
+font_size = 23
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xod1d"]
+size = Vector2(91, 95)
+
+[node name="rotationtrigger" type="Node2D"]
+script = ExtResource("1_wvh5y")
+
+[node name="Panel" type="Panel" parent="."]
+offset_left = -46.0
+offset_top = -47.0
+offset_right = 48.0
+offset_bottom = 47.0
+mouse_filter = 2
+
+[node name="Label" type="Label" parent="."]
+offset_left = -46.0
+offset_top = -44.0
+offset_right = 38.0
+offset_bottom = 49.0
+text = "Rotate"
+label_settings = SubResource("LabelSettings_cvtg8")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="clickdetector" type="Area2D" parent="."]
+z_index = 5
+position = Vector2(13, -23)
+collision_layer = 32
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="clickdetector"]
+position = Vector2(-12.5, 23.5)
+shape = SubResource("RectangleShape2D_xod1d")

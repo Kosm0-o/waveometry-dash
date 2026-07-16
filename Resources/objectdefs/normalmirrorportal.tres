@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="ObjectResource" load_steps=3 format=3 uid="uid://dleoiwi0kc7dq"]
+
+[ext_resource type="PackedScene" uid="uid://c4sqlto7kttv1" path="res://scenes/mirrorportal.tscn" id="1_odxur"]
+[ext_resource type="Script" uid="uid://b7ivepggsojwl" path="res://scripts/objectresource.gd" id="2_kepto"]
+
+[resource]
+script = ExtResource("2_kepto")
+id = "normalmirrorportal"
+display_name = "Rightway Mirror Portal"
+scene = ExtResource("1_odxur")
+category = "portals"
+max_amount = 0
+metadata/_custom_type_script = "uid://b7ivepggsojwl"

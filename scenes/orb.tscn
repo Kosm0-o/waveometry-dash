@@ -111,6 +111,10 @@ radius = 48.7603
 [node name="Orb" type="Node2D"]
 scale = Vector2(0.8, 0.8)
 script = ExtResource("1_ubfm6")
+group_bools = {
+"groups": true,
+"targets": false
+}
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_ubfm6")
@@ -121,13 +125,15 @@ position = Vector2(0.499996, 3.8147e-06)
 scale = Vector2(7.55, 7.7)
 
 [node name="Area2D" type="Area2D" parent="."]
+collision_layer = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(1.5, 0)
-scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_g6cbt")
 
 [node name="clickdetector" type="Area2D" parent="."]
+collision_layer = 32
+collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="clickdetector"]
 position = Vector2(-1, 0)

@@ -13,9 +13,14 @@ var target_shift_pos : Vector2 = Vector2.ZERO
 
 
 func _ready() -> void:
-	global.current_lvl = LevelLoader.load_level("user://levelname.json", $Map/objects)
+	EditorGlobal.editing = false
+	EditorGlobal.current_lvl = LevelLoader.load_level("user://levelname.json", $Map/objects)
 	global.portal_entered.connect(_shift_camera)
 	global.died.connect(func(): song.playing = false; song.play())
+	global.pnode = $Map/players
+	global.bg = $bg/black
+	target_shift_pos.y = player.global_position.y
+	
 
 
 func _process(delta: float) -> void:

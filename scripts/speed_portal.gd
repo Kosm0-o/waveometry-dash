@@ -29,7 +29,7 @@ var speedinfo : Array[Dictionary] = [
 	}
 ]
 
-func _ready() -> void:
+func object_ready() -> void:
 	match get_meta("id"):
 		"normalspeedportal":
 			speed = SPEEDS.NORMAL
@@ -59,7 +59,6 @@ func _on_area_2d_area_entered(area) -> void:
 			p.speedmod = speedinfo[speed]["speedmod"]
 		await get_tree().create_timer(0.25).timeout
 		for p in global.players:
-			print(p.name)
 			var tween = create_tween().set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_EXPO)
 			tween.tween_property(p, "speedmod", p.ogspeedmod, 1.0)
 			await tween.finished

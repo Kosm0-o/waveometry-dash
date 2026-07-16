@@ -1,4 +1,4 @@
-extends Node2D
+extends LevelObject
 
 enum TYPES {UP, DOWN, FLIP}
 @export var gravity : TYPES = TYPES.DOWN
@@ -20,7 +20,14 @@ var gravityinfo : Array[Dictionary] = [
 	}
 ]
 
-func _ready() -> void:
+func object_ready() -> void:
+	match get_meta("id"):
+		"downgravityportal":
+			gravity = TYPES.DOWN
+		"flipgravityportal":
+			gravity = TYPES.FLIP
+		"upgravityportal":
+			gravity = TYPES.UP
 	$sprites.play(gravityinfo[gravity]["name"])
 	$particles.modulate = gravityinfo[gravity]["color"]
 	$boop.modulate = gravityinfo[gravity]["color"]

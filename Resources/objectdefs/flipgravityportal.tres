@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="ObjectResource" load_steps=3 format=3 uid="uid://bopmr4msxpx8q"]
+
+[ext_resource type="PackedScene" uid="uid://dr1xtmfnp78gl" path="res://scenes/gravityportal.tscn" id="1_jjwlr"]
+[ext_resource type="Script" uid="uid://b7ivepggsojwl" path="res://scripts/objectresource.gd" id="2_et1ot"]
+
+[resource]
+script = ExtResource("2_et1ot")
+id = "upgravityportal"
+display_name = "Up Gravity Portal"
+scene = ExtResource("1_jjwlr")
+category = "portals"
+max_amount = 0
+metadata/_custom_type_script = "uid://b7ivepggsojwl"

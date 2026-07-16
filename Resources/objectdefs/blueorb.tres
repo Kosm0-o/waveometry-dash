@@ -9,4 +9,5 @@ id = "blueorb"
 display_name = "Blue Orb"
 scene = ExtResource("1_2ipbv")
 category = "interactables"
+max_amount = 0
 metadata/_custom_type_script = "uid://b7ivepggsojwl"

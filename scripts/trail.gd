@@ -24,7 +24,7 @@ func _process(delta: float) -> void:
 	
 	starter_frames -= 1
 	
-	if pos.distance_squared_to(last_point_pos) >= pow(between_length, 2) or Input.is_action_just_pressed("click") or Input.is_action_just_released("click"):
+	if pos.distance_squared_to(last_point_pos) >= pow(between_length, 2) or Input.is_action_just_pressed("game_click") or Input.is_action_just_released("game_click"):
 		add_point(pos)
 		last_point_pos = pos
 		if starter_frames <= 0:

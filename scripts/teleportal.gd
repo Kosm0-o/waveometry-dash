@@ -1,4 +1,4 @@
-extends Node2D
+extends LevelObject
 class_name Teleportal
 
 enum PORTALS {ENTRANCE, EXIT}
@@ -13,31 +13,40 @@ var teleportinfo : Array[Dictionary] = [
 	"color": Color("#e18b03")
 	}
 ]
-@onready var pnode : Node2D = get_tree().current_scene.get_node("Map").get_node("players")
-@export_category("ENTRANCE PORTAL ONLY")
-@export var target_group_id : int
-@export_category("EXIT PORTAL ONLY")
-@export var group_id : int
 
 var teledata : Dictionary = {}
 
-func _ready() -> void:
+func object_ready() -> void:
+	match get_meta("id"):
+		"enterteleportal":
+			portal = PORTALS.ENTRANCE
+		"exitteleportal":
+			portal = PORTALS.EXIT
 	if portal == PORTALS.EXIT:
-		global.exit_teleportals.append(self)
-		global.exit_teleportals.shuffle()
+		if not EditorGlobal.editing:
+			global.exit_teleportals.append(self)
+			global.exit_teleportals.shuffle()
 		scale.x = -1
+		group_bools["targets"] = false
+	else:
+		single_target = true
 	$sprites.play(teleportinfo[portal]["name"])
 	$particles.modulate = teleportinfo[portal]["color"]
 	$boop.modulate = teleportinfo[portal]["color"]
 	$boop.modulate.a = 2
 
+	
 func _on_area_2d_area_entered(area) -> void:
 	area = area.get_parent()
 	$boop.emitting = true
 	if portal == PORTALS.ENTRANCE:
-		for t in global.exit_teleportals:
-			if t.group_id == target_group_id:
-				area.global_position = t.global_position - Vector2(50, 0)
-				global.portal_entered.emit(t)
-				break
+		var target_id = -1
+		if not targets.is_empty():
+			target_id = targets.front()
+		if target_id != -1:
+			for t in global.exit_teleportals:
+				if target_id in t.group_ids:
+					area.global_position = t.global_position - Vector2(50, 0)
+					global.portal_entered.emit(t)
+					break
 		area.trail_node.reset()

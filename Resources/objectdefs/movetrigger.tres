@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="ObjectResource" load_steps=3 format=3 uid="uid://bcpc76nnv85fl"]
+
+[ext_resource type="PackedScene" uid="uid://b5h1fkdpg1tnp" path="res://scenes/movetrigger.tscn" id="1_7256l"]
+[ext_resource type="Script" uid="uid://b7ivepggsojwl" path="res://scripts/objectresource.gd" id="2_hlad7"]
+
+[resource]
+script = ExtResource("2_hlad7")
+id = "movetrigger"
+display_name = "Move Trigger"
+scene = ExtResource("1_7256l")
+category = "triggers"
+max_amount = 0
+metadata/_custom_type_script = "uid://b7ivepggsojwl"

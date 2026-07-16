@@ -5,8 +5,9 @@
 
 [resource]
 script = ExtResource("2_rlaq6")
-id = "normalspeedportal"
-display_name = "Normal Speed Portal"
+id = "doublespeedportal"
+display_name = "Double Speed Portal"
 scene = ExtResource("1_s5lq7")
-category = "interactables"
+category = "portals"
+max_amount = 0
 metadata/_custom_type_script = "uid://b7ivepggsojwl"

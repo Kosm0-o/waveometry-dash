@@ -2,22 +2,22 @@
 
 [ext_resource type="Script" uid="uid://bs2n242lcgaj5" path="res://scripts/gravityportal.gd" id="1_fcftj"]
 [ext_resource type="Script" uid="uid://cbef427tmh2pe" path="res://scripts/sprites.gd" id="2_e1bu2"]
-[ext_resource type="Texture2D" uid="uid://5jvrrbutemvg" path="res://assets/padsspritesheet.png" id="3_28a1h"]
+[ext_resource type="Texture2D" uid="uid://cgss44qdwlie0" path="res://assets/portalspritesheet.png" id="3_28a1h"]
 [ext_resource type="Texture2D" uid="uid://dc5luvhx3oew6" path="res://assets/particlesquare.svg" id="3_e1bu2"]
 [ext_resource type="Texture2D" uid="uid://bf86uqk1hbnh5" path="res://assets/boopparticlesprite.svg" id="5_28a1h"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_0cebx"]
 light_mode = 1
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_e1bu2"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_13j7o"]
 atlas = ExtResource("3_28a1h")
 region = Rect2(548, 888, 137, 296)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_28a1h"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_osuda"]
 atlas = ExtResource("3_28a1h")
 region = Rect2(0, 888, 137, 296)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_13j7o"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_wrmuw"]
 atlas = ExtResource("3_28a1h")
 region = Rect2(274, 888, 137, 296)
 
@@ -25,7 +25,7 @@ region = Rect2(274, 888, 137, 296)
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_e1bu2")
+"texture": SubResource("AtlasTexture_13j7o")
 }],
 "loop": false,
 "name": &"down",
@@ -33,7 +33,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_28a1h")
+"texture": SubResource("AtlasTexture_osuda")
 }],
 "loop": false,
 "name": &"flip",
@@ -41,22 +41,22 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_13j7o")
+"texture": SubResource("AtlasTexture_wrmuw")
 }],
 "loop": false,
 "name": &"up",
 "speed": 0.0
 }]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_wrmuw"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_g7h6c"]
 atlas = ExtResource("3_28a1h")
 region = Rect2(685, 888, 137, 296)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_g7h6c"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_g7ehg"]
 atlas = ExtResource("3_28a1h")
 region = Rect2(137, 888, 137, 296)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_g7ehg"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_2uums"]
 atlas = ExtResource("3_28a1h")
 region = Rect2(411, 888, 137, 296)
 
@@ -64,7 +64,7 @@ region = Rect2(411, 888, 137, 296)
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_wrmuw")
+"texture": SubResource("AtlasTexture_g7h6c")
 }],
 "loop": false,
 "name": &"down",
@@ -72,7 +72,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_g7h6c")
+"texture": SubResource("AtlasTexture_g7ehg")
 }],
 "loop": false,
 "name": &"flip",
@@ -80,7 +80,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_g7ehg")
+"texture": SubResource("AtlasTexture_2uums")
 }],
 "loop": false,
 "name": &"up",
@@ -146,6 +146,10 @@ color_ramp = SubResource("GradientTexture1D_g7h6c")
 [node name="gravityportal" type="Node2D"]
 material = SubResource("CanvasItemMaterial_0cebx")
 script = ExtResource("1_fcftj")
+group_bools = {
+"groups": true,
+"targets": false
+}
 
 [node name="sprites" type="Node2D" parent="."]
 position = Vector2(1.52588e-05, 24)
@@ -167,9 +171,10 @@ offset = Vector2(3.375, 95)
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 2
+input_pickable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(34, -55.5)
+position = Vector2(34, 1)
 shape = SubResource("RectangleShape2D_4shoe")
 
 [node name="particles" type="GPUParticles2D" parent="." groups=["particles"]]
@@ -193,5 +198,14 @@ lifetime = 0.25
 one_shot = true
 explosiveness = 1.0
 process_material = SubResource("ParticleProcessMaterial_43iv6")
+
+[node name="clickdetector" type="Area2D" parent="."]
+position = Vector2(13, -23)
+collision_layer = 32
+collision_mask = 0
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="clickdetector"]
+position = Vector2(-7, -23)
+polygon = PackedVector2Array(-29, -95, -66, 91, 59, 92, -7, -95)
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

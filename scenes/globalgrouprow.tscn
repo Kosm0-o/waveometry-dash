@@ -1,0 +1,33 @@
+[gd_scene load_steps=2 format=3 uid="uid://bvapsg2mf7qdb"]
+
+[ext_resource type="Script" uid="uid://d2upwgnbobbeu" path="res://scripts/globalgrouprowidentifiers.gd" id="1_08ylp"]
+
+[node name="globalgrouprow" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_08ylp")
+
+[node name="labels" type="HBoxContainer" parent="."]
+theme_override_constants/separation = 165
+
+[node name="groupnum" type="Label" parent="labels"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 26
+text = "1"
+
+[node name="objectnum" type="Label" parent="labels"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 26
+text = "8"
+
+[node name="Line2D" type="Line2D" parent="."]
+position = Vector2(-14, 45)
+points = PackedVector2Array(1, -3, 311.315, -3)
+width = 9.75
+default_color = Color(0, 0, 0, 0.662745)

@@ -1,4 +1,4 @@
-extends Node2D
+extends LevelObject
 
 enum SIZES {MINI, NORMAL, MEGA}
 @export var size : SIZES = SIZES.NORMAL
@@ -20,7 +20,7 @@ var angleinfo : Array[Dictionary] = [
 	}
 ]
 
-func _ready() -> void:
+func object_ready() -> void:
 	match get_meta("id"):
 		"normalsizeportal":
 			size = SIZES.NORMAL

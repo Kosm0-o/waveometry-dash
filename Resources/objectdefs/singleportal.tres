@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="ObjectResource" load_steps=3 format=3 uid="uid://3fplx8soygac"]
+
+[ext_resource type="PackedScene" uid="uid://de38yi3l0x16g" path="res://scenes/dualportal.tscn" id="1_j74jx"]
+[ext_resource type="Script" uid="uid://b7ivepggsojwl" path="res://scripts/objectresource.gd" id="2_yao4k"]
+
+[resource]
+script = ExtResource("2_yao4k")
+id = "singleportal"
+display_name = "Single Portal"
+scene = ExtResource("1_j74jx")
+category = "portals"
+max_amount = 0
+metadata/_custom_type_script = "uid://b7ivepggsojwl"

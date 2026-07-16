@@ -8,5 +8,6 @@ script = ExtResource("2_qhcmo")
 id = "burstspeedportal"
 display_name = "Burst Speed Portal"
 scene = ExtResource("1_46r5n")
-category = "interactables"
+category = "portals"
+max_amount = 0
 metadata/_custom_type_script = "uid://b7ivepggsojwl"

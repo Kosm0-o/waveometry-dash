@@ -8,5 +8,6 @@ script = ExtResource("2_7426v")
 id = "megasizeportal"
 display_name = "Mega Size Portal"
 scene = ExtResource("1_ba233")
-category = "interactables"
+category = "portals"
+max_amount = 0
 metadata/_custom_type_script = "uid://b7ivepggsojwl"

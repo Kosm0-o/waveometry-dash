@@ -1,32 +1,112 @@
-[gd_scene load_steps=2 format=3 uid="uid://dvicnlxkttgiw"]
+[gd_scene load_steps=13 format=3 uid="uid://dvicnlxkttgiw"]
 
 [ext_resource type="Script" uid="uid://db3arps08nl6q" path="res://scripts/editor.gd" id="1_b1cmn"]
+[ext_resource type="Script" uid="uid://bksixu7j3mqh3" path="res://scripts/gridvisual.gd" id="2_pxqd5"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_b1cmn"]
+content_margin_left = 25.0
+content_margin_right = 25.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ba0ut"]
+content_margin_left = 25.0
+content_margin_right = 25.0
+bg_color = Color(0, 0, 0, 1)
+border_width_top = 3
+
+[sub_resource type="InputEventKey" id="InputEventKey_pxqd5"]
+device = -1
+keycode = 32
+unicode = 32
+
+[sub_resource type="Shortcut" id="Shortcut_ba0ut"]
+events = [SubResource("InputEventKey_pxqd5")]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b1cmn"]
+bg_color = Color(0.868985, 0.868985, 0.868985, 1)
+border_width_left = 7
+border_width_top = 7
+border_width_right = 7
+border_width_bottom = 7
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_pxqd5"]
+
+[sub_resource type="Gradient" id="Gradient_b1cmn"]
+colors = PackedColorArray(0, 0, 0, 0, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_pxqd5"]
+gradient = SubResource("Gradient_b1cmn")
+width = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pxqd5"]
+border_width_left = 7
+border_width_top = 7
+border_width_right = 7
+border_width_bottom = 7
+border_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_pxqd5"]
+font_size = 24
+font_color = Color(0.817521, 0.817521, 0.817521, 1)
 
 [node name="editor" type="Node2D"]
 script = ExtResource("1_b1cmn")
 
 [node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(0.25, 0.25)
 
 [node name="gui" type="CanvasLayer" parent="."]
 
+[node name="editortabs" type="TabBar" parent="gui"]
+offset_left = 13.0
+offset_top = 297.0
+offset_right = 639.0
+offset_bottom = 337.0
+scale = Vector2(1.815, 1.815)
+theme_override_font_sizes/font_size = 14
+theme_override_styles/tab_unselected = SubResource("StyleBoxEmpty_b1cmn")
+theme_override_styles/tab_hovered = SubResource("StyleBoxEmpty_b1cmn")
+theme_override_styles/tab_selected = SubResource("StyleBoxFlat_ba0ut")
+theme_override_styles/tab_focus = SubResource("StyleBoxEmpty_b1cmn")
+current_tab = 0
+clip_tabs = false
+tab_count = 6
+tab_0/title = "Blocks"
+tab_1/title = "Hazards"
+tab_2/title = "Portals"
+tab_3/title = "Interactables"
+tab_4/title = "Deco"
+tab_5/title = "Triggers"
+
+[node name="levelslider" type="HSlider" parent="gui"]
+offset_left = 604.0
+offset_top = 35.0
+offset_right = 947.0
+offset_bottom = 76.0
+scrollable = false
+
 [node name="editorscroll" type="ScrollContainer" parent="gui"]
 offset_left = 9.0
-offset_top = 382.0
+offset_top = 376.0
 offset_right = 449.0
-offset_bottom = 483.0
+offset_bottom = 477.0
 scale = Vector2(2.6, 2.6)
 vertical_scroll_mode = 0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="gui/editorscroll"]
+[node name="editorvbox" type="VBoxContainer" parent="gui/editorscroll"]
 layout_mode = 2
 
-[node name="editorhbox" type="HBoxContainer" parent="gui/editorscroll/VBoxContainer"]
+[node name="editorhbox" type="HBoxContainer" parent="gui/editorscroll/editorvbox"]
 layout_mode = 2
 
-[node name="editorhbox2" type="HBoxContainer" parent="gui/editorscroll/VBoxContainer"]
+[node name="editorhbox2" type="HBoxContainer" parent="gui/editorscroll/editorvbox"]
 layout_mode = 2
 
-[node name="editorhbox3" type="HBoxContainer" parent="gui/editorscroll/VBoxContainer"]
+[node name="editorhbox3" type="HBoxContainer" parent="gui/editorscroll/editorvbox"]
 layout_mode = 2
 
 [node name="playtest" type="Button" parent="gui"]
@@ -35,6 +115,7 @@ offset_top = 16.0
 offset_right = 1095.0
 offset_bottom = 47.0
 scale = Vector2(2, 2)
+shortcut = SubResource("Shortcut_ba0ut")
 text = "Play"
 
 [node name="modes" type="HBoxContainer" parent="gui"]
@@ -60,6 +141,664 @@ text = "Add"
 layout_mode = 2
 text = "Delete"
 
+[node name="gridsnap" type="Label" parent="gui"]
+offset_left = 467.0
+offset_top = 13.0
+offset_right = 581.0
+offset_bottom = 49.0
+theme_override_font_sizes/font_size = 26
+text = "Gridsnap"
+
+[node name="toggle" type="CheckButton" parent="gui/gridsnap"]
+layout_mode = 0
+offset_left = 15.0
+offset_top = 34.0
+offset_right = 59.0
+offset_bottom = 58.0
+scale = Vector2(1.995, 1.995)
+
+[node name="groupsui" type="Control" parent="gui"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="groupsbtn" type="Button" parent="gui/groupsui"]
+layout_mode = 0
+offset_left = 1056.0
+offset_top = 209.0
+offset_right = 1146.0
+offset_bottom = 299.0
+theme_override_font_sizes/font_size = 21
+text = "Groups"
+
+[node name="groupspanel" type="Panel" parent="gui/groupsui"]
+visible = false
+layout_mode = 0
+offset_left = 104.0
+offset_top = 25.0
+offset_right = 1039.0
+offset_bottom = 607.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_b1cmn")
+
+[node name="groupspanel2" type="Panel" parent="gui/groupsui/groupspanel"]
+layout_mode = 0
+offset_left = 33.0
+offset_top = 249.0
+offset_right = 912.0
+offset_bottom = 562.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_b1cmn")
+
+[node name="idscroll" type="ScrollContainer" parent="gui/groupsui/groupspanel"]
+layout_mode = 0
+offset_left = 63.0
+offset_top = 259.0
+offset_right = 885.0
+offset_bottom = 551.0
+horizontal_scroll_mode = 0
+
+[node name="groupids" type="GridContainer" parent="gui/groupsui/groupspanel/idscroll"]
+layout_mode = 2
+columns = 7
+
+[node name="Label" type="Label" parent="gui/groupsui/groupspanel"]
+layout_mode = 0
+offset_left = 367.0
+offset_top = 14.0
+offset_right = 581.0
+offset_bottom = 98.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 61
+text = "Groups"
+
+[node name="btns" type="HBoxContainer" parent="gui/groupsui/groupspanel"]
+layout_mode = 0
+offset_left = 132.0
+offset_top = 152.0
+offset_right = 831.0
+offset_bottom = 240.0
+scale = Vector2(0.99, 0.99)
+theme_override_constants/separation = -1
+
+[node name="newgroupbtn" type="Button" parent="gui/groupsui/groupspanel/btns"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 36
+text = "New Group"
+
+[node name="space" type="Panel" parent="gui/groupsui/groupspanel/btns"]
+custom_minimum_size = Vector2(20.035, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_pxqd5")
+
+[node name="identer" type="TextEdit" parent="gui/groupsui/groupspanel/btns"]
+custom_minimum_size = Vector2(283, 88)
+layout_mode = 2
+theme_override_font_sizes/font_size = 31
+placeholder_text = "[enter id number]"
+context_menu_enabled = false
+emoji_menu_enabled = false
+shortcut_keys_enabled = false
+selecting_enabled = false
+drag_and_drop_selection_enabled = false
+virtual_keyboard_enabled = false
+middle_mouse_paste_enabled = false
+empty_selection_clipboard_enabled = false
+scroll_fit_content_height = true
+scroll_fit_content_width = true
+caret_blink = true
+
+[node name="addgroupbtn" type="Button" parent="gui/groupsui/groupspanel/btns"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 36
+text = "Add Group"
+
+[node name="X" type="Button" parent="gui/groupsui/groupspanel"]
+layout_mode = 0
+offset_left = 862.0
+offset_top = 6.0
+offset_right = 931.0
+offset_bottom = 84.0
+theme_override_font_sizes/font_size = 51
+text = "X"
+
+[node name="groupscategories" type="TabBar" parent="gui/groupsui/groupspanel"]
+layout_mode = 0
+offset_left = -52.0
+offset_top = 465.0
+offset_right = 178.0
+offset_bottom = 505.0
+rotation = 4.71239
+scale = Vector2(1.555, 1.555)
+current_tab = 2
+tab_alignment = 1
+clip_tabs = false
+scrolling_enabled = false
+tab_count = 3
+tab_0/title = "Global"
+tab_1/title = "Targets"
+tab_2/title = "Groups"
+
+[node name="globalgroupspanel" type="Panel" parent="gui/groupsui"]
+visible = false
+layout_mode = 0
+offset_left = 104.0
+offset_top = 25.0
+offset_right = 1039.0
+offset_bottom = 607.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_b1cmn")
+
+[node name="groupspanel2" type="Panel" parent="gui/groupsui/globalgroupspanel"]
+layout_mode = 0
+offset_left = 33.0
+offset_top = 152.0
+offset_right = 912.0
+offset_bottom = 562.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_b1cmn")
+
+[node name="Line2D" type="Line2D" parent="gui/groupsui/globalgroupspanel"]
+position = Vector2(31, 0)
+points = PackedVector2Array(350, 156, 350, 557)
+default_color = Color(0, 0, 0, 1)
+
+[node name="labels" type="HBoxContainer" parent="gui/groupsui/globalgroupspanel"]
+layout_mode = 2
+offset_left = 50.0
+offset_top = 108.0
+offset_right = 444.0
+offset_bottom = 144.0
+theme_override_constants/separation = 60
+
+[node name="Label" type="Label" parent="gui/groupsui/globalgroupspanel/labels"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 26
+text = "Group"
+
+[node name="Label2" type="Label" parent="gui/groupsui/globalgroupspanel/labels"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 26
+text = "# of Objects"
+
+[node name="rowscroll" type="ScrollContainer" parent="gui/groupsui/globalgroupspanel"]
+layout_mode = 0
+offset_left = 51.0
+offset_top = 159.0
+offset_right = 344.0
+offset_bottom = 540.0
+horizontal_scroll_mode = 0
+
+[node name="vsep" type="VBoxContainer" parent="gui/groupsui/globalgroupspanel/rowscroll"]
+layout_mode = 2
+theme_override_constants/separation = 50
+
+[node name="Label" type="Label" parent="gui/groupsui/globalgroupspanel"]
+layout_mode = 0
+offset_left = 263.0
+offset_top = 14.0
+offset_right = 682.0
+offset_bottom = 98.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 61
+text = "Global Groups"
+
+[node name="X" type="Button" parent="gui/groupsui/globalgroupspanel"]
+offset_left = 862.0
+offset_top = 6.0
+offset_right = 931.0
+offset_bottom = 84.0
+theme_override_font_sizes/font_size = 51
+text = "X"
+
+[node name="groupid" type="SpinBox" parent="gui/groupsui/globalgroupspanel"]
+layout_mode = 0
+offset_left = 454.0
+offset_top = 163.0
+offset_right = 567.0
+offset_bottom = 194.0
+scale = Vector2(1.975, 1.975)
+theme_override_icons/down = SubResource("GradientTexture1D_pxqd5")
+theme_override_icons/down_hover = SubResource("GradientTexture1D_pxqd5")
+theme_override_icons/down_pressed = SubResource("GradientTexture1D_pxqd5")
+theme_override_icons/up_pressed = SubResource("GradientTexture1D_pxqd5")
+theme_override_icons/up_hover = SubResource("GradientTexture1D_pxqd5")
+theme_override_icons/up = SubResource("GradientTexture1D_pxqd5")
+theme_override_icons/updown = SubResource("GradientTexture1D_pxqd5")
+max_value = 9999.0
+alignment = 1
+update_on_text_changed = true
+prefix = "GroupID:"
+
+[node name="btns" type="GridContainer" parent="gui/groupsui/globalgroupspanel"]
+layout_mode = 0
+offset_left = 413.0
+offset_top = 230.0
+offset_right = 661.0
+offset_bottom = 402.0
+scale = Vector2(1.86, 1.86)
+theme_override_constants/h_separation = 60
+columns = 2
+
+[node name="findgroupbtn" type="Button" parent="gui/groupsui/globalgroupspanel/btns"]
+layout_mode = 2
+text = "Find Group"
+
+[node name="selectallbtn" type="Button" parent="gui/groupsui/globalgroupspanel/btns"]
+layout_mode = 2
+text = "Select All"
+
+[node name="deleteallbtn" type="Button" parent="gui/groupsui/globalgroupspanel/btns"]
+layout_mode = 2
+text = "Delete All"
+
+[node name="propertiesbtn" type="Button" parent="gui"]
+offset_left = 1032.0
+offset_top = 113.0
+offset_right = 1145.0
+offset_bottom = 203.0
+theme_override_font_sizes/font_size = 21
+text = "Properties"
+
+[node name="propertiesui" type="Control" parent="gui"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="propertiespanel" type="Panel" parent="gui/propertiesui"]
+modulate = Color(1, 1, 1, 0.737255)
+offset_left = 104.0
+offset_top = 25.0
+offset_right = 1039.0
+offset_bottom = 607.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_b1cmn")
+
+[node name="X" type="Button" parent="gui/propertiesui/propertiespanel"]
+layout_mode = 0
+offset_left = 862.0
+offset_top = 6.0
+offset_right = 931.0
+offset_bottom = 84.0
+theme_override_font_sizes/font_size = 51
+text = "X"
+
+[node name="Label" type="Label" parent="gui/propertiesui/propertiespanel"]
+offset_left = 302.0
+offset_top = 14.0
+offset_right = 608.0
+offset_bottom = 98.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 61
+text = "Properties"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="gui/propertiesui/propertiespanel"]
+layout_mode = 0
+offset_left = 89.0
+offset_top = 112.0
+offset_right = 836.0
+offset_bottom = 557.0
+horizontal_scroll_mode = 0
+
+[node name="org" type="GridContainer" parent="gui/propertiesui/propertiespanel/ScrollContainer"]
+layout_mode = 2
+theme_override_constants/v_separation = 40
+columns = 2
+
+[node name="rotationlbl" type="Label" parent="gui/propertiesui/propertiespanel/ScrollContainer/org"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 41
+text = "Rotation: "
+
+[node name="HSlider" type="HSlider" parent="gui/propertiesui/propertiespanel/ScrollContainer/org"]
+custom_minimum_size = Vector2(500, 0)
+layout_mode = 2
+min_value = -360.0
+max_value = 360.0
+step = 0.5
+scrollable = false
+
+[node name="rotationlbl" type="LineEdit" parent="gui/propertiesui/propertiespanel/ScrollContainer/org/HSlider"]
+layout_mode = 0
+offset_left = 188.0
+offset_top = 20.0
+offset_right = 312.0
+offset_bottom = 72.0
+theme_override_font_sizes/font_size = 31
+text = "0"
+alignment = 1
+max_length = 6
+context_menu_enabled = false
+emoji_menu_enabled = false
+virtual_keyboard_enabled = false
+shortcut_keys_enabled = false
+middle_mouse_paste_enabled = false
+drag_and_drop_selection_enabled = false
+caret_blink = true
+
+[node name="scalelbl" type="Label" parent="gui/propertiesui/propertiespanel/ScrollContainer/org"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 41
+text = "Scale: "
+
+[node name="scales" type="Control" parent="gui/propertiesui/propertiespanel/ScrollContainer/org"]
+layout_mode = 2
+
+[node name="xslider" type="HSlider" parent="gui/propertiesui/propertiespanel/ScrollContainer/org/scales"]
+layout_mode = 2
+offset_left = -16.0
+offset_top = 7.0
+offset_right = 140.0
+offset_bottom = 23.0
+min_value = 0.05
+max_value = 25.0
+step = 0.05
+value = 1.0
+scrollable = false
+
+[node name="scalelbl" type="LineEdit" parent="gui/propertiesui/propertiespanel/ScrollContainer/org/scales/xslider"]
+offset_left = 21.0
+offset_top = 19.0
+offset_right = 145.0
+offset_bottom = 71.0
+theme_override_font_sizes/font_size = 31
+text = "1"
+alignment = 1
+max_length = 6
+context_menu_enabled = false
+emoji_menu_enabled = false
+virtual_keyboard_enabled = false
+shortcut_keys_enabled = false
+middle_mouse_paste_enabled = false
+drag_and_drop_selection_enabled = false
+caret_blink = true
+
+[node name="Label" type="Label" parent="gui/propertiesui/propertiespanel/ScrollContainer/org/scales/xslider"]
+offset_left = 71.0
+offset_top = -48.0
+offset_right = 97.0
+offset_bottom = 9.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 41
+text = "X"
+
+[node name="yslider" type="HSlider" parent="gui/propertiesui/propertiespanel/ScrollContainer/org/scales"]
+layout_mode = 2
+offset_left = 323.0
+offset_top = 7.0
+offset_right = 479.0
+offset_bottom = 23.0
+min_value = 0.05
+max_value = 25.0
+step = 0.05
+value = 1.0
+scrollable = false
+
+[node name="scalelbl" type="LineEdit" parent="gui/propertiesui/propertiespanel/ScrollContainer/org/scales/yslider"]
+offset_left = 21.0
+offset_top = 19.0
+offset_right = 145.0
+offset_bottom = 71.0
+theme_override_font_sizes/font_size = 31
+text = "1"
+alignment = 1
+max_length = 6
+context_menu_enabled = false
+emoji_menu_enabled = false
+virtual_keyboard_enabled = false
+shortcut_keys_enabled = false
+middle_mouse_paste_enabled = false
+drag_and_drop_selection_enabled = false
+caret_blink = true
+
+[node name="Label" type="Label" parent="gui/propertiesui/propertiespanel/ScrollContainer/org/scales/yslider"]
+offset_left = 71.0
+offset_top = -48.0
+offset_right = 97.0
+offset_bottom = 9.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 41
+text = "Y"
+
+[node name="colorlbl" type="Label" parent="gui/propertiesui/propertiespanel/ScrollContainer/org"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 41
+text = "Color: "
+
+[node name="modulate" type="ColorPickerButton" parent="gui/propertiesui/propertiespanel/ScrollContainer/org"]
+z_index = 1
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_pxqd5")
+color = Color(1, 1, 1, 1)
+
+[node name="zlbl" type="Label" parent="gui/propertiesui/propertiespanel/ScrollContainer/org"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 41
+text = "Z-Index: "
+
+[node name="zindexbox" type="SpinBox" parent="gui/propertiesui/propertiespanel/ScrollContainer/org"]
+layout_mode = 2
+min_value = -100.0
+alignment = 1
+update_on_text_changed = true
+
+[node name="fliplbl" type="Label" parent="gui/propertiesui/propertiespanel/ScrollContainer/org"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 41
+text = "Flipped: "
+
+[node name="fliptoggle" type="CheckButton" parent="gui/propertiesui/propertiespanel/ScrollContainer/org/fliplbl"]
+layout_mode = 2
+offset_left = 359.0
+offset_top = -21.0
+offset_right = 403.0
+offset_bottom = 3.0
+scale = Vector2(3.97, 3.97)
+
+[node name="filler" type="Label" parent="gui/propertiesui/propertiespanel/ScrollContainer/org"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 41
+
+[node name="targetcolorlbl" type="Label" parent="gui/propertiesui/propertiespanel/ScrollContainer/org"]
+visible = false
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 41
+text = "Target Color: "
+
+[node name="targetcolor" type="ColorPickerButton" parent="gui/propertiesui/propertiespanel/ScrollContainer/org"]
+visible = false
+z_index = 1
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_pxqd5")
+color = Color(1, 1, 1, 1)
+
+[node name="durationlbl" type="Label" parent="gui/propertiesui/propertiespanel/ScrollContainer/org"]
+visible = false
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 41
+text = "Duration: "
+
+[node name="durationedit" type="LineEdit" parent="gui/propertiesui/propertiespanel/ScrollContainer/org"]
+visible = false
+layout_mode = 2
+theme_override_font_sizes/font_size = 31
+text = "0"
+alignment = 1
+max_length = 6
+context_menu_enabled = false
+emoji_menu_enabled = false
+virtual_keyboard_enabled = false
+shortcut_keys_enabled = false
+middle_mouse_paste_enabled = false
+drag_and_drop_selection_enabled = false
+caret_blink = true
+
+[node name="distancelbl" type="Label" parent="gui/propertiesui/propertiespanel/ScrollContainer/org"]
+visible = false
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 41
+text = "Distance: "
+
+[node name="distances" type="Control" parent="gui/propertiesui/propertiespanel/ScrollContainer/org"]
+visible = false
+layout_mode = 2
+
+[node name="movex" type="Control" parent="gui/propertiesui/propertiespanel/ScrollContainer/org/distances"]
+layout_mode = 2
+anchors_preset = 0
+offset_left = -16.0
+offset_top = 7.0
+offset_right = 140.0
+offset_bottom = 23.0
+
+[node name="movelbl" type="LineEdit" parent="gui/propertiesui/propertiespanel/ScrollContainer/org/distances/movex"]
+offset_left = 21.0
+offset_top = 19.0
+offset_right = 145.0
+offset_bottom = 71.0
+theme_override_font_sizes/font_size = 31
+text = "0"
+alignment = 1
+max_length = 10
+context_menu_enabled = false
+emoji_menu_enabled = false
+virtual_keyboard_enabled = false
+shortcut_keys_enabled = false
+middle_mouse_paste_enabled = false
+drag_and_drop_selection_enabled = false
+caret_blink = true
+
+[node name="Label" type="Label" parent="gui/propertiesui/propertiespanel/ScrollContainer/org/distances/movex"]
+offset_left = 10.0
+offset_top = -31.0
+offset_right = 154.0
+offset_bottom = 26.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 41
+text = "Move X"
+
+[node name="movey" type="Control" parent="gui/propertiesui/propertiespanel/ScrollContainer/org/distances"]
+layout_mode = 2
+anchors_preset = 0
+offset_left = 315.0
+offset_top = 7.0
+offset_right = 471.0
+offset_bottom = 23.0
+
+[node name="movelbl" type="LineEdit" parent="gui/propertiesui/propertiespanel/ScrollContainer/org/distances/movey"]
+offset_left = 21.0
+offset_top = 19.0
+offset_right = 145.0
+offset_bottom = 71.0
+theme_override_font_sizes/font_size = 31
+text = "0"
+alignment = 1
+max_length = 10
+context_menu_enabled = false
+emoji_menu_enabled = false
+virtual_keyboard_enabled = false
+shortcut_keys_enabled = false
+middle_mouse_paste_enabled = false
+drag_and_drop_selection_enabled = false
+caret_blink = true
+
+[node name="Label" type="Label" parent="gui/propertiesui/propertiespanel/ScrollContainer/org/distances/movey"]
+offset_left = 10.0
+offset_top = -31.0
+offset_right = 154.0
+offset_bottom = 26.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 41
+text = "Move Y"
+
+[node name="targrotlbl" type="Label" parent="gui/propertiesui/propertiespanel/ScrollContainer/org"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 36
+text = "Target Rotation: "
+
+[node name="targrotslider" type="HSlider" parent="gui/propertiesui/propertiespanel/ScrollContainer/org"]
+custom_minimum_size = Vector2(500, 0)
+layout_mode = 2
+min_value = -360.0
+max_value = 360.0
+step = 0.5
+scrollable = false
+
+[node name="targrotlbl" type="LineEdit" parent="gui/propertiesui/propertiespanel/ScrollContainer/org/targrotslider"]
+layout_mode = 0
+offset_left = 188.0
+offset_top = 20.0
+offset_right = 312.0
+offset_bottom = 72.0
+theme_override_font_sizes/font_size = 31
+text = "0"
+alignment = 1
+max_length = 6
+context_menu_enabled = false
+emoji_menu_enabled = false
+virtual_keyboard_enabled = false
+shortcut_keys_enabled = false
+middle_mouse_paste_enabled = false
+drag_and_drop_selection_enabled = false
+caret_blink = true
+
+[node name="filler2" type="Label" parent="gui/propertiesui/propertiespanel/ScrollContainer/org"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 41
+
+[node name="filler3" type="Label" parent="gui/propertiesui/propertiespanel/ScrollContainer/org"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 41
+
+[node name="savepanel" type="Control" parent="gui"]
+layout_mode = 3
+anchors_preset = 0
+offset_top = -142.0
+offset_right = 40.0
+offset_bottom = -102.0
+
+[node name="ColorRect2" type="ColorRect" parent="gui/savepanel"]
+offset_left = 428.0
+offset_top = 34.0
+offset_right = 708.0
+offset_bottom = 117.0
+color = Color(0.187176, 0.187176, 0.187176, 1)
+
+[node name="ColorRect" type="ColorRect" parent="gui/savepanel"]
+offset_left = 442.0
+offset_top = 44.0
+offset_right = 694.0
+offset_bottom = 105.0
+color = Color(0.303233, 0.303233, 0.303233, 1)
+
+[node name="Label" type="Label" parent="gui/savepanel"]
+offset_left = 444.0
+offset_top = 43.0
+offset_right = 693.0
+offset_bottom = 103.0
+text = "Saved!"
+label_settings = SubResource("LabelSettings_pxqd5")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="grid" type="Node2D" parent="."]
+script = ExtResource("2_pxqd5")
+
 [node name="levelobjects" type="Node2D" parent="."]
+
+[node name="preimage" type="Node2D" parent="."]
+
+[node name="helperline" type="Node2D" parent="."]
 
 [connection signal="pressed" from="gui/playtest" to="." method="_on_playtest_pressed"]

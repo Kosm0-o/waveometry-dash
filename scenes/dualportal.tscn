@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://bdtpuanlv4471" path="res://scripts/dualportal.gd" id="1_pwaq1"]
 [ext_resource type="Script" uid="uid://cbef427tmh2pe" path="res://scripts/sprites.gd" id="2_jxrae"]
 [ext_resource type="Texture2D" uid="uid://dc5luvhx3oew6" path="res://assets/particlesquare.svg" id="3_mxppa"]
-[ext_resource type="Texture2D" uid="uid://5jvrrbutemvg" path="res://assets/padsspritesheet.png" id="3_q7aul"]
+[ext_resource type="Texture2D" uid="uid://cgss44qdwlie0" path="res://assets/portalspritesheet.png" id="3_q7aul"]
 [ext_resource type="Texture2D" uid="uid://bf86uqk1hbnh5" path="res://assets/boopparticlesprite.svg" id="5_mxppa"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_pwaq1"]
@@ -11,11 +11,11 @@ light_mode = 1
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ernbj"]
 atlas = ExtResource("3_q7aul")
-region = Rect2(137, 592, 137, 296)
+region = Rect2(0, 592, 137, 296)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_h21jl"]
 atlas = ExtResource("3_q7aul")
-region = Rect2(1233, 296, 137, 296)
+region = Rect2(1096, 296, 137, 296)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_jven1"]
 animations = [{
@@ -36,19 +36,19 @@ animations = [{
 "speed": 0.0
 }]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_jven1"]
+atlas = ExtResource("3_q7aul")
+region = Rect2(137, 592, 137, 296)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_35xis"]
 atlas = ExtResource("3_q7aul")
-region = Rect2(0, 592, 137, 296)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_0dx13"]
-atlas = ExtResource("3_q7aul")
-region = Rect2(1096, 296, 137, 296)
+region = Rect2(1233, 296, 137, 296)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_dbym0"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_35xis")
+"texture": SubResource("AtlasTexture_jven1")
 }],
 "loop": false,
 "name": &"dual",
@@ -56,7 +56,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_0dx13")
+"texture": SubResource("AtlasTexture_35xis")
 }],
 "loop": false,
 "name": &"single",
@@ -121,6 +121,10 @@ color_ramp = SubResource("GradientTexture1D_mxppa")
 [node name="dualportal" type="Node2D"]
 material = SubResource("CanvasItemMaterial_pwaq1")
 script = ExtResource("1_pwaq1")
+group_bools = {
+"groups": true,
+"targets": false
+}
 
 [node name="sprites" type="Node2D" parent="."]
 position = Vector2(30, -72)
@@ -128,14 +132,14 @@ scale = Vector2(1.06, 1.06)
 script = ExtResource("2_jxrae")
 
 [node name="backhalf" type="AnimatedSprite2D" parent="sprites"]
+z_index = 3
 position = Vector2(-2.83019, 10.3774)
 sprite_frames = SubResource("SpriteFrames_jven1")
 animation = &"dual"
 offset = Vector2(3.375, 95)
 
 [node name="fronthalf" type="AnimatedSprite2D" parent="sprites"]
-z_index = 3
-position = Vector2(-14.1509, 19.8113)
+position = Vector2(8.22, 1.843)
 sprite_frames = SubResource("SpriteFrames_dbym0")
 animation = &"dual"
 offset = Vector2(3.375, 95)
@@ -168,5 +172,14 @@ lifetime = 0.25
 one_shot = true
 explosiveness = 1.0
 process_material = SubResource("ParticleProcessMaterial_0dx13")
+
+[node name="clickdetector" type="Area2D" parent="."]
+position = Vector2(13, -23)
+collision_layer = 32
+collision_mask = 0
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="clickdetector"]
+position = Vector2(-7, -23)
+polygon = PackedVector2Array(-2, -70, -50, -16, -49, 94, 1, 148, 60, 36)
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="ObjectResource" load_steps=3 format=3 uid="uid://6rumbfojxxfy"]
+
+[ext_resource type="PackedScene" uid="uid://cv8gnfhudm0yc" path="res://scenes/teleportal.tscn" id="1_a18me"]
+[ext_resource type="Script" uid="uid://b7ivepggsojwl" path="res://scripts/objectresource.gd" id="2_ec6pp"]
+
+[resource]
+script = ExtResource("2_ec6pp")
+id = "enterteleportal"
+display_name = "Entrance Teleport Portal"
+scene = ExtResource("1_a18me")
+category = "portals"
+max_amount = 0
+metadata/_custom_type_script = "uid://b7ivepggsojwl"

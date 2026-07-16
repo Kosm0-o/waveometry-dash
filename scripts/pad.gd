@@ -34,7 +34,7 @@ var pad_data : Array = [
 var padded : bool = false
 
 
-func _ready() -> void:
+func object_ready() -> void:
 	match get_meta("id"):
 		"yellowpad":
 			pad = PADS.YELLOW

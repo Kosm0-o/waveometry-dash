@@ -43,7 +43,7 @@ var orb_data : Array = [
 
  
 
-func _ready() -> void:
+func object_ready() -> void:
 	match get_meta("id"):
 		"yelloworb":
 			orb = ORBS.YELLOW
@@ -66,7 +66,7 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	var getp = $Area2D.get_overlapping_bodies()
-	if getp.size() > 0 and Input.is_action_just_pressed("click"):
+	if getp.size() > 0 and Input.is_action_just_pressed("game_click"):
 		var player = getp.front()
 		match orb:
 			ORBS.DROP:

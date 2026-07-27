@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="ObjectResource" load_steps=3 format=3 uid="uid://b2ocsejx4lphs"]
+
+[ext_resource type="PackedScene" uid="uid://du3f13qmlicv5" path="res://scenes/saw.tscn" id="1_ryqca"]
+[ext_resource type="Script" uid="uid://b7ivepggsojwl" path="res://scripts/objectresource.gd" id="2_3qy8t"]
+
+[resource]
+script = ExtResource("2_3qy8t")
+id = "saw"
+display_name = "Saw"
+scene = ExtResource("1_ryqca")
+category = "hazards"
+max_amount = 0
+metadata/_custom_type_script = "uid://b7ivepggsojwl"

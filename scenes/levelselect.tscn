@@ -1,0 +1,139 @@
+[gd_scene load_steps=8 format=3 uid="uid://bp6hi685oo5u4"]
+
+[ext_resource type="Script" uid="uid://cdag2m7tqfdvu" path="res://scripts/levelselect.gd" id="1_xuh2y"]
+[ext_resource type="AudioStream" uid="uid://c5cpkag0fagl7" path="res://assets/music/gdmenuoncrack.wav" id="2_vttqt"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pneju"]
+bg_color = Color(0.121569, 0.121569, 0.121569, 0.631373)
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
+
+[sub_resource type="Gradient" id="Gradient_xuh2y"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_vttqt"]
+gradient = SubResource("Gradient_xuh2y")
+
+[sub_resource type="LabelSettings" id="LabelSettings_4kdbh"]
+font_size = 51
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nqy8e"]
+bg_color = Color(0.121569, 0.121569, 0.121569, 0.631373)
+corner_radius_top_left = 100
+corner_radius_top_right = 100
+corner_radius_bottom_right = 100
+corner_radius_bottom_left = 100
+
+[node name="levelselect" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_xuh2y")
+
+[node name="bg" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = -8.0
+offset_top = -11.0
+offset_right = 1156.0
+offset_bottom = 662.0
+color = Color(0.138677, 0.371756, 1, 1)
+
+[node name="arrows" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="left" type="Button" parent="arrows"]
+layout_mode = 0
+offset_left = 26.0
+offset_top = 290.0
+offset_right = 72.0
+offset_bottom = 389.0
+theme_override_font_sizes/font_size = 66
+text = "<"
+
+[node name="right" type="Button" parent="arrows"]
+layout_mode = 0
+offset_left = 1088.0
+offset_top = 299.0
+offset_right = 1134.0
+offset_bottom = 398.0
+theme_override_font_sizes/font_size = 66
+text = ">"
+
+[node name="back" type="Button" parent="arrows"]
+layout_mode = 0
+offset_left = 26.0
+offset_top = 5.0
+offset_right = 72.0
+offset_bottom = 104.0
+theme_override_font_sizes/font_size = 66
+text = "<"
+
+[node name="main" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="levelinfo" type="Panel" parent="main"]
+layout_mode = 0
+offset_left = 162.0
+offset_top = 163.0
+offset_right = 1004.0
+offset_bottom = 383.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_pneju")
+
+[node name="difficultyface" type="TextureRect" parent="main/levelinfo"]
+layout_mode = 0
+offset_left = 76.0
+offset_top = 74.0
+offset_right = 140.0
+offset_bottom = 138.0
+texture = SubResource("GradientTexture2D_vttqt")
+
+[node name="Button" type="Button" parent="main/levelinfo"]
+modulate = Color(1, 1, 1, 0.0117647)
+layout_mode = 0
+offset_right = 841.0
+offset_bottom = 217.0
+
+[node name="levelname" type="Label" parent="main/levelinfo"]
+layout_mode = 0
+offset_left = 279.0
+offset_top = 69.0
+offset_right = 583.0
+offset_bottom = 139.0
+text = "Time Leaper"
+label_settings = SubResource("LabelSettings_4kdbh")
+
+[node name="ProgressBar" type="ProgressBar" parent="main"]
+layout_mode = 0
+offset_left = 184.0
+offset_top = 431.0
+offset_right = 979.0
+offset_bottom = 479.0
+theme_override_styles/background = SubResource("StyleBoxFlat_nqy8e")
+step = 1.0
+
+[node name="trans" type="CanvasLayer" parent="."]
+layer = 128
+
+[node name="ColorRect" type="ColorRect" parent="trans"]
+offset_left = -159.0
+offset_top = -92.0
+offset_right = 1424.0
+offset_bottom = 781.0
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+
+[node name="bgmusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_vttqt")
+pitch_scale = 1.14
+autoplay = true
+bus = &"Music"
+
+[connection signal="pressed" from="arrows/back" to="." method="_on_back_pressed"]

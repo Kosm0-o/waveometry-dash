@@ -31,8 +31,8 @@ func _on_practice_mode_btn_toggled(toggled_on: bool) -> void:
 	global.practice_mode = toggled_on
 
 func _on_menu_btn_pressed() -> void:
-	# go to menu scene 
-	pass
+	get_tree().paused = false
+	get_tree().change_scene_to_packed(load("res://scenes/mainmenu.tscn"))
 
 func _on_restart_btn_pressed() -> void:
 	_handle_pausing(false)
@@ -46,7 +46,7 @@ func _handle_pausing(paused : bool):
 	$PauseMenu.visible = paused
 
 func _scale_tween(button, hover : bool):
-	var m = 1 if not hover else 1.15
+	var m = 1.0 if not hover else 1.15
 	var c = Color(1.15,1.15,1.15) if hover else Color.WHITE
 	if button.name == $PauseMenu/Buttons/PlayBtn.name:
 		m = 1.165 if not hover else 1.25

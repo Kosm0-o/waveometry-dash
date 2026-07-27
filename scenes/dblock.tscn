@@ -1,0 +1,57 @@
+[gd_scene load_steps=7 format=3 uid="uid://bek88ijduqy2k"]
+
+[ext_resource type="Script" uid="uid://c4cvcsgapvxgg" path="res://scripts/dblock.gd" id="1_n61mk"]
+[ext_resource type="Texture2D" uid="uid://dc5luvhx3oew6" path="res://assets/particlesquare.svg" id="2_ml0dq"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_8r6n6"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cgrg5"]
+size = Vector2(42.1546, 41.6862)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4kun4"]
+size = Vector2(88, 88)
+
+[sub_resource type="LabelSettings" id="LabelSettings_n61mk"]
+font_size = 46
+font_color = Color(0, 0, 0, 1)
+
+[node name="dblock" type="StaticBody2D"]
+collision_layer = 8
+physics_material_override = SubResource("PhysicsMaterial_8r6n6")
+script = ExtResource("1_n61mk")
+group_bools = {
+"groups": true,
+"targets": false
+}
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(6.365, 6.365)
+texture = ExtResource("2_ml0dq")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-1.19209e-06, -0.499998)
+scale = Vector2(2.135, 2.135)
+shape = SubResource("RectangleShape2D_cgrg5")
+
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
+position = Vector2(-0.500001, -0.499997)
+scale = Vector2(4.45, 4.45)
+
+[node name="clickdetector" type="Area2D" parent="."]
+collision_layer = 32
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="clickdetector"]
+position = Vector2(1.90735e-06, 1.90735e-06)
+rotation = 1.5708
+shape = SubResource("RectangleShape2D_4kun4")
+
+[node name="Label" type="Label" parent="."]
+offset_left = -46.0
+offset_top = -46.0
+offset_right = 45.0
+offset_bottom = 45.0
+text = "D"
+label_settings = SubResource("LabelSettings_n61mk")
+horizontal_alignment = 1
+vertical_alignment = 1

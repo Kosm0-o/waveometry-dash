@@ -6,19 +6,31 @@
 [sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_t0130"]
 points = PackedVector2Array(-40.5, -108, 41.5, -108, 134.5, 70, -148.5, 61)
 
-[node name="45DegSpike" type="Area2D"]
-collision_layer = 4
+[node name="45DegSpike" type="Node2D"]
 script = ExtResource("1_13xme")
+metadata/_custom_type_script = "uid://vj5rshmf5d5h"
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_13xme")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
+position = Vector2(14.5, 7)
+scale = Vector2(19.65, 12.1)
+enable_node_path = NodePath("../Area2D/CollisionShape2D")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(8.5, 26)
 shape = SubResource("ConvexPolygonShape2D_t0130")
 
-[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="CollisionShape2D"]
-position = Vector2(5.99998, -19)
-scale = Vector2(19.65, 12.1)
+[node name="clickdetector" type="Area2D" parent="."]
+collision_layer = 32
+collision_mask = 0
 
-[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[node name="CollisionShape2D" type="CollisionPolygon2D" parent="clickdetector"]
+position = Vector2(6, 22)
+polygon = PackedVector2Array(-198, 83, -102, 92, 132, 95, 175, 71, 178, 45, 27, -143, -42, -109)
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

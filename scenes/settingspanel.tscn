@@ -1,0 +1,118 @@
+[gd_scene load_steps=4 format=3 uid="uid://c8dkls50qsedm"]
+
+[ext_resource type="Script" uid="uid://bft1tp3vnxaud" path="res://scripts/settingspanel.gd" id="1_5kjfj"]
+[ext_resource type="Texture2D" uid="uid://vffedftkysfq" path="res://assets/icons-decos-ui-spritesheet.png" id="2_uk3nw"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yv6mx"]
+atlas = ExtResource("2_uk3nw")
+region = Rect2(3040, 138, 330, 234)
+
+[node name="settingspanel" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_5kjfj")
+
+[node name="settingspanel" type="Panel" parent="."]
+modulate = Color(0.396889, 0.396889, 0.396889, 1)
+layout_mode = 0
+offset_left = 250.0
+offset_top = 25.0
+offset_right = 929.0
+offset_bottom = 627.0
+
+[node name="X" type="Button" parent="settingspanel"]
+layout_mode = 0
+offset_left = 602.0
+offset_top = 8.0
+offset_right = 671.0
+offset_bottom = 86.0
+theme_override_font_sizes/font_size = 51
+text = "X"
+
+[node name="Label" type="Label" parent="settingspanel"]
+layout_mode = 0
+offset_left = 7.0
+offset_top = 10.0
+offset_right = 673.0
+offset_bottom = 94.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 61
+text = "Settings"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="org" type="GridContainer" parent="settingspanel"]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 127.0
+offset_right = 656.0
+offset_bottom = 573.0
+columns = 2
+
+[node name="musicv" type="Label" parent="settingspanel/org"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 41
+text = "Music Volume"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="filler" type="Label" parent="settingspanel/org"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 41
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="musicslider" type="HSlider" parent="settingspanel/org/filler"]
+custom_minimum_size = Vector2(350, 0)
+layout_mode = 2
+offset_left = 5.0
+offset_top = 22.0
+offset_right = 355.0
+offset_bottom = 38.0
+min_value = -55.0
+max_value = 6.0
+step = 0.5
+
+[node name="sfxv" type="Label" parent="settingspanel/org"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 41
+text = "SFX Volume"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="filler2" type="Label" parent="settingspanel/org"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 41
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="sfxslider" type="HSlider" parent="settingspanel/org/filler2"]
+custom_minimum_size = Vector2(350, 0)
+layout_mode = 2
+offset_left = 5.0
+offset_top = 22.0
+offset_right = 355.0
+offset_bottom = 38.0
+min_value = -55.0
+max_value = 6.0
+step = 0.5
+value = -7.0
+
+[node name="customborder" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 236.0
+offset_top = -34.0
+offset_right = 965.0
+offset_bottom = 669.0
+mouse_filter = 2
+texture = SubResource("AtlasTexture_yv6mx")
+
+[connection signal="pressed" from="settingspanel/X" to="." method="_on_x_pressed"]

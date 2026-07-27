@@ -1,7 +1,12 @@
-[gd_scene load_steps=13 format=3 uid="uid://dvicnlxkttgiw"]
+[gd_scene load_steps=46 format=3 uid="uid://dvicnlxkttgiw"]
 
 [ext_resource type="Script" uid="uid://db3arps08nl6q" path="res://scripts/editor.gd" id="1_b1cmn"]
+[ext_resource type="Texture2D" uid="uid://cgss44qdwlie0" path="res://assets/portalspritesheet.png" id="2_ba0ut"]
 [ext_resource type="Script" uid="uid://bksixu7j3mqh3" path="res://scripts/gridvisual.gd" id="2_pxqd5"]
+[ext_resource type="Texture2D" uid="uid://b3rl17jtvbpoq" path="res://assets/pausemenuspritesheet.png" id="3_q68jb"]
+[ext_resource type="FontFile" uid="uid://c21leaucdjxc0" path="res://assets/fonts/PUSAB___.otf" id="3_xg7d5"]
+[ext_resource type="Theme" uid="uid://dume7nemxq63b" path="res://Resources/visuals/editablepusab.tres" id="4_5lcyj"]
+[ext_resource type="LabelSettings" uid="uid://dh4mtswsaqy2r" path="res://Resources/visuals/pusabcustomized.tres" id="4_eqbpn"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_b1cmn"]
 content_margin_left = 25.0
@@ -13,13 +18,88 @@ content_margin_right = 25.0
 bg_color = Color(0, 0, 0, 1)
 border_width_top = 3
 
+[sub_resource type="Gradient" id="Gradient_pxqd5"]
+offsets = PackedFloat32Array(0, 0.438462, 0.984615, 1)
+colors = PackedColorArray(0.215686, 0.215686, 0.215686, 1, 0.482353, 0.482353, 0.482353, 0, 0.546172, 0.546172, 0.546172, 0, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_ba0ut"]
+gradient = SubResource("Gradient_pxqd5")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_q68jb"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+corner_radius_top_left = 100
+corner_radius_top_right = 100
+corner_radius_bottom_right = 100
+corner_radius_bottom_left = 100
+expand_margin_top = 5.0
+expand_margin_bottom = 5.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ba0ut"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_q68jb"]
+
 [sub_resource type="InputEventKey" id="InputEventKey_pxqd5"]
 device = -1
-keycode = 32
-unicode = 32
+keycode = 84
+unicode = 116
 
 [sub_resource type="Shortcut" id="Shortcut_ba0ut"]
 events = [SubResource("InputEventKey_pxqd5")]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_eqbpn"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5lcyj"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5tm2q"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_j8y2p"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xg7d5"]
+atlas = ExtResource("3_q68jb")
+region = Rect2(0, 156, 144, 156)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_q68jb"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xg7d5"]
+bg_color = Color(0.473976, 0.473976, 0.473976, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0.194349, 0.194349, 0.194349, 1)
+corner_radius_top_left = 9
+corner_radius_top_right = 9
+corner_radius_bottom_right = 9
+corner_radius_bottom_left = 9
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_eqbpn"]
+bg_color = Color(0.205117, 0.205117, 0.205117, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0.194349, 0.194349, 0.194349, 1)
+corner_radius_top_left = 9
+corner_radius_top_right = 9
+corner_radius_bottom_right = 9
+corner_radius_bottom_left = 9
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5lcyj"]
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0.194349, 0.194349, 0.194349, 1)
+corner_radius_top_left = 9
+corner_radius_top_right = 9
+corner_radius_bottom_right = 9
+corner_radius_bottom_left = 9
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b1cmn"]
 bg_color = Color(0.868985, 0.868985, 0.868985, 1)
@@ -33,7 +113,37 @@ corner_radius_top_right = 15
 corner_radius_bottom_right = 15
 corner_radius_bottom_left = 15
 
+[sub_resource type="FontVariation" id="FontVariation_grgw0"]
+base_font = ExtResource("3_xg7d5")
+spacing_glyph = 2
+
+[sub_resource type="LabelSettings" id="LabelSettings_o435n"]
+font = SubResource("FontVariation_grgw0")
+font_size = 70
+outline_size = 18
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 7
+shadow_color = Color(0, 0, 0, 0.333333)
+shadow_offset = Vector2(7.89, 4.055)
+
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_pxqd5"]
+
+[sub_resource type="Theme" id="Theme_5lcyj"]
+default_font = SubResource("FontVariation_grgw0")
+default_font_size = 0
+
+[sub_resource type="LabelSettings" id="LabelSettings_3vi5u"]
+font = SubResource("FontVariation_grgw0")
+font_size = 70
+outline_size = 18
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 7
+shadow_color = Color(0, 0, 0, 0.333333)
+shadow_offset = Vector2(7.89, 4.055)
+
+[sub_resource type="Theme" id="Theme_78fwb"]
+default_font = SubResource("FontVariation_grgw0")
+default_font_size = 19
 
 [sub_resource type="Gradient" id="Gradient_b1cmn"]
 colors = PackedColorArray(0, 0, 0, 0, 1, 1, 1, 0)
@@ -42,12 +152,68 @@ colors = PackedColorArray(0, 0, 0, 0, 1, 1, 1, 0)
 gradient = SubResource("Gradient_b1cmn")
 width = 1
 
+[sub_resource type="Theme" id="Theme_74j0u"]
+default_font = SubResource("FontVariation_grgw0")
+default_font_size = 0
+
+[sub_resource type="LabelSettings" id="LabelSettings_eqbpn"]
+font = SubResource("FontVariation_grgw0")
+font_size = 61
+outline_size = 18
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_o435n"]
+content_margin_left = 9.0
+content_margin_top = 24.0
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pxqd5"]
 border_width_left = 7
 border_width_top = 7
 border_width_right = 7
 border_width_bottom = 7
 border_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_5lcyj"]
+font = SubResource("FontVariation_grgw0")
+font_size = 35
+outline_size = 18
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 7
+shadow_color = Color(0, 0, 0, 0.333333)
+shadow_offset = Vector2(7.89, 4.055)
+
+[sub_resource type="LabelSettings" id="LabelSettings_5tm2q"]
+font = SubResource("FontVariation_grgw0")
+font_size = 31
+outline_size = 18
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 7
+shadow_color = Color(0, 0, 0, 0.333333)
+shadow_offset = Vector2(7.89, 4.055)
+
+[sub_resource type="LabelSettings" id="LabelSettings_j8y2p"]
+font = SubResource("FontVariation_grgw0")
+font_size = 35
+outline_size = 18
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 7
+shadow_color = Color(0, 0, 0, 0.333333)
+shadow_offset = Vector2(7.89, 4.055)
+
+[sub_resource type="LabelSettings" id="LabelSettings_78fwb"]
+font = SubResource("FontVariation_grgw0")
+font_size = 75
+outline_size = 18
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 7
+shadow_color = Color(0, 0, 0, 0.333333)
+shadow_offset = Vector2(7.89, 4.055)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xg7d5"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q68jb"]
+atlas = ExtResource("2_ba0ut")
+region = Rect2(550, 0, 50, 98)
 
 [sub_resource type="LabelSettings" id="LabelSettings_pxqd5"]
 font_size = 24
@@ -87,6 +253,10 @@ offset_left = 604.0
 offset_top = 35.0
 offset_right = 947.0
 offset_bottom = 76.0
+theme_override_icons/grabber = SubResource("GradientTexture2D_ba0ut")
+theme_override_styles/slider = SubResource("StyleBoxFlat_q68jb")
+theme_override_styles/grabber_area = SubResource("StyleBoxEmpty_ba0ut")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxEmpty_q68jb")
 scrollable = false
 
 [node name="editorscroll" type="ScrollContainer" parent="gui"]
@@ -110,13 +280,13 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="playtest" type="Button" parent="gui"]
-offset_left = 1054.0
+offset_left = 1002.0
 offset_top = 16.0
-offset_right = 1095.0
+offset_right = 1072.0
 offset_bottom = 47.0
 scale = Vector2(2, 2)
 shortcut = SubResource("Shortcut_ba0ut")
-text = "Play"
+text = "Playtest"
 
 [node name="modes" type="HBoxContainer" parent="gui"]
 offset_left = 14.0
@@ -140,6 +310,123 @@ text = "Add"
 [node name="delete" type="Button" parent="gui/modes"]
 layout_mode = 2
 text = "Delete"
+
+[node name="navigationui" type="Control" parent="gui"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="menubtnoffset" type="Control" parent="gui/navigationui"]
+anchors_preset = 0
+offset_left = 63.0
+offset_top = 137.0
+offset_right = 103.0
+offset_bottom = 177.0
+
+[node name="MenuButton" type="Button" parent="gui/navigationui/menubtnoffset"]
+layout_mode = 0
+offset_left = -44.0
+offset_top = -45.0
+offset_right = 108.0
+offset_bottom = 119.0
+scale = Vector2(0.56, 0.56)
+theme_override_font_sizes/font_size = 356
+theme_override_styles/focus = SubResource("StyleBoxEmpty_eqbpn")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_5lcyj")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_5tm2q")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_j8y2p")
+toggle_mode = true
+icon = SubResource("AtlasTexture_xg7d5")
+
+[node name="PanelContainer" type="PanelContainer" parent="gui/navigationui/menubtnoffset/MenuButton"]
+visible = false
+layout_mode = 0
+offset_left = -5.35715
+offset_top = 41.0714
+offset_right = 238.643
+offset_bottom = 192.071
+rotation = 1.5708
+scale = Vector2(1.545, 1.545)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="gui/navigationui/menubtnoffset/MenuButton/PanelContainer"]
+layout_mode = 2
+theme_override_constants/separation = 5
+
+[node name="ColorRect2" type="ColorRect" parent="gui/navigationui/menubtnoffset/MenuButton/PanelContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 7.27)
+layout_mode = 2
+color = Color(1, 1, 1, 0)
+
+[node name="mainmenubtn" type="Button" parent="gui/navigationui/menubtnoffset/MenuButton/PanelContainer/VBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_styles/focus = SubResource("StyleBoxTexture_q68jb")
+theme_override_styles/hover = SubResource("StyleBoxFlat_xg7d5")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_eqbpn")
+theme_override_styles/normal = SubResource("StyleBoxFlat_5lcyj")
+text = "Main Menu"
+
+[node name="controlsbtn" type="Button" parent="gui/navigationui/menubtnoffset/MenuButton/PanelContainer/VBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_styles/focus = SubResource("StyleBoxTexture_q68jb")
+theme_override_styles/hover = SubResource("StyleBoxFlat_xg7d5")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_eqbpn")
+theme_override_styles/normal = SubResource("StyleBoxFlat_5lcyj")
+text = "Controls"
+
+[node name="levelsettingsbtn" type="Button" parent="gui/navigationui/menubtnoffset/MenuButton/PanelContainer/VBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_styles/focus = SubResource("StyleBoxTexture_q68jb")
+theme_override_styles/hover = SubResource("StyleBoxFlat_xg7d5")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_eqbpn")
+theme_override_styles/normal = SubResource("StyleBoxFlat_5lcyj")
+text = "Level Settings"
+
+[node name="savenplaybtn" type="Button" parent="gui/navigationui/menubtnoffset/MenuButton/PanelContainer/VBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_styles/focus = SubResource("StyleBoxTexture_q68jb")
+theme_override_styles/hover = SubResource("StyleBoxFlat_xg7d5")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_eqbpn")
+theme_override_styles/normal = SubResource("StyleBoxFlat_5lcyj")
+text = "Save & Play"
+
+[node name="backbtn" type="Button" parent="gui/navigationui/menubtnoffset/MenuButton/PanelContainer/VBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_styles/focus = SubResource("StyleBoxTexture_q68jb")
+theme_override_styles/hover = SubResource("StyleBoxFlat_xg7d5")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_eqbpn")
+theme_override_styles/normal = SubResource("StyleBoxFlat_5lcyj")
+text = "Back"
 
 [node name="gridsnap" type="Label" parent="gui"]
 offset_left = 467.0
@@ -203,25 +490,27 @@ columns = 7
 
 [node name="Label" type="Label" parent="gui/groupsui/groupspanel"]
 layout_mode = 0
-offset_left = 367.0
-offset_top = 14.0
-offset_right = 581.0
-offset_bottom = 98.0
+offset_left = 321.0
+offset_top = 31.0
+offset_right = 598.0
+offset_bottom = 75.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 61
 text = "Groups"
+label_settings = SubResource("LabelSettings_o435n")
 
 [node name="btns" type="HBoxContainer" parent="gui/groupsui/groupspanel"]
 layout_mode = 0
-offset_left = 132.0
+offset_left = 75.0
 offset_top = 152.0
-offset_right = 831.0
+offset_right = 878.0
 offset_bottom = 240.0
 scale = Vector2(0.99, 0.99)
 theme_override_constants/separation = -1
 
 [node name="newgroupbtn" type="Button" parent="gui/groupsui/groupspanel/btns"]
 layout_mode = 2
+theme = ExtResource("4_5lcyj")
 theme_override_font_sizes/font_size = 36
 text = "New Group"
 
@@ -233,6 +522,7 @@ theme_override_styles/panel = SubResource("StyleBoxEmpty_pxqd5")
 [node name="identer" type="TextEdit" parent="gui/groupsui/groupspanel/btns"]
 custom_minimum_size = Vector2(283, 88)
 layout_mode = 2
+theme = ExtResource("4_5lcyj")
 theme_override_font_sizes/font_size = 31
 placeholder_text = "[enter id number]"
 context_menu_enabled = false
@@ -249,6 +539,7 @@ caret_blink = true
 
 [node name="addgroupbtn" type="Button" parent="gui/groupsui/groupspanel/btns"]
 layout_mode = 2
+theme = ExtResource("4_5lcyj")
 theme_override_font_sizes/font_size = 36
 text = "Add Group"
 
@@ -269,6 +560,7 @@ offset_right = 178.0
 offset_bottom = 505.0
 rotation = 4.71239
 scale = Vector2(1.555, 1.555)
+theme = SubResource("Theme_5lcyj")
 current_tab = 2
 tab_alignment = 1
 clip_tabs = false
@@ -334,15 +626,17 @@ theme_override_constants/separation = 50
 
 [node name="Label" type="Label" parent="gui/groupsui/globalgroupspanel"]
 layout_mode = 0
-offset_left = 263.0
-offset_top = 14.0
-offset_right = 682.0
-offset_bottom = 98.0
+offset_left = 167.0
+offset_top = 24.0
+offset_right = 744.0
+offset_bottom = 68.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 61
 text = "Global Groups"
+label_settings = SubResource("LabelSettings_3vi5u")
 
 [node name="X" type="Button" parent="gui/groupsui/globalgroupspanel"]
+layout_mode = 0
 offset_left = 862.0
 offset_top = 6.0
 offset_right = 931.0
@@ -352,11 +646,12 @@ text = "X"
 
 [node name="groupid" type="SpinBox" parent="gui/groupsui/globalgroupspanel"]
 layout_mode = 0
-offset_left = 454.0
+offset_left = 407.0
 offset_top = 163.0
-offset_right = 567.0
+offset_right = 676.0
 offset_bottom = 194.0
 scale = Vector2(1.975, 1.975)
+theme = SubResource("Theme_78fwb")
 theme_override_icons/down = SubResource("GradientTexture1D_pxqd5")
 theme_override_icons/down_hover = SubResource("GradientTexture1D_pxqd5")
 theme_override_icons/down_pressed = SubResource("GradientTexture1D_pxqd5")
@@ -376,19 +671,22 @@ offset_top = 230.0
 offset_right = 661.0
 offset_bottom = 402.0
 scale = Vector2(1.86, 1.86)
-theme_override_constants/h_separation = 60
+theme_override_constants/h_separation = 20
 columns = 2
 
 [node name="findgroupbtn" type="Button" parent="gui/groupsui/globalgroupspanel/btns"]
 layout_mode = 2
+theme = SubResource("Theme_74j0u")
 text = "Find Group"
 
 [node name="selectallbtn" type="Button" parent="gui/groupsui/globalgroupspanel/btns"]
 layout_mode = 2
+theme = SubResource("Theme_74j0u")
 text = "Select All"
 
 [node name="deleteallbtn" type="Button" parent="gui/groupsui/globalgroupspanel/btns"]
 layout_mode = 2
+theme = SubResource("Theme_74j0u")
 text = "Delete All"
 
 [node name="propertiesbtn" type="Button" parent="gui"]
@@ -406,7 +704,9 @@ offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="propertiespanel" type="Panel" parent="gui/propertiesui"]
+visible = false
 modulate = Color(1, 1, 1, 0.737255)
+layout_mode = 0
 offset_left = 104.0
 offset_top = 25.0
 offset_right = 1039.0
@@ -423,32 +723,36 @@ theme_override_font_sizes/font_size = 51
 text = "X"
 
 [node name="Label" type="Label" parent="gui/propertiesui/propertiespanel"]
-offset_left = 302.0
+layout_mode = 0
+offset_left = 22.0
 offset_top = 14.0
-offset_right = 608.0
+offset_right = 846.0
 offset_bottom = 98.0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 61
 text = "Properties"
+label_settings = SubResource("LabelSettings_eqbpn")
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="ScrollContainer" type="ScrollContainer" parent="gui/propertiesui/propertiespanel"]
 layout_mode = 0
-offset_left = 89.0
-offset_top = 112.0
-offset_right = 836.0
+offset_left = 28.0
+offset_top = 116.0
+offset_right = 1092.0
 offset_bottom = 557.0
+theme_override_styles/panel = SubResource("StyleBoxEmpty_o435n")
 horizontal_scroll_mode = 0
 
 [node name="org" type="GridContainer" parent="gui/propertiesui/propertiespanel/ScrollContainer"]
 layout_mode = 2
-theme_override_constants/v_separation = 40
+theme_override_constants/h_separation = 55
+theme_override_constants/v_separation = 65
 columns = 2
 
 [node name="rotationlbl" type="Label" parent="gui/propertiesui/propertiespanel/ScrollContainer/org"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 41
 text = "Rotation: "
+label_settings = ExtResource("4_eqbpn")
 
 [node name="HSlider" type="HSlider" parent="gui/propertiesui/propertiespanel/ScrollContainer/org"]
 custom_minimum_size = Vector2(500, 0)
@@ -464,7 +768,7 @@ offset_left = 188.0
 offset_top = 20.0
 offset_right = 312.0
 offset_bottom = 72.0
-theme_override_font_sizes/font_size = 31
+theme = ExtResource("4_5lcyj")
 text = "0"
 alignment = 1
 max_length = 6
@@ -479,8 +783,8 @@ caret_blink = true
 [node name="scalelbl" type="Label" parent="gui/propertiesui/propertiespanel/ScrollContainer/org"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 41
 text = "Scale: "
+label_settings = ExtResource("4_eqbpn")
 
 [node name="scales" type="Control" parent="gui/propertiesui/propertiespanel/ScrollContainer/org"]
 layout_mode = 2
@@ -498,10 +802,12 @@ value = 1.0
 scrollable = false
 
 [node name="scalelbl" type="LineEdit" parent="gui/propertiesui/propertiespanel/ScrollContainer/org/scales/xslider"]
+layout_mode = 0
 offset_left = 21.0
 offset_top = 19.0
 offset_right = 145.0
 offset_bottom = 71.0
+theme = ExtResource("4_5lcyj")
 theme_override_font_sizes/font_size = 31
 text = "1"
 alignment = 1
@@ -515,6 +821,7 @@ drag_and_drop_selection_enabled = false
 caret_blink = true
 
 [node name="Label" type="Label" parent="gui/propertiesui/propertiespanel/ScrollContainer/org/scales/xslider"]
+layout_mode = 0
 offset_left = 71.0
 offset_top = -48.0
 offset_right = 97.0
@@ -536,10 +843,12 @@ value = 1.0
 scrollable = false
 
 [node name="scalelbl" type="LineEdit" parent="gui/propertiesui/propertiespanel/ScrollContainer/org/scales/yslider"]
+layout_mode = 0
 offset_left = 21.0
 offset_top = 19.0
 offset_right = 145.0
 offset_bottom = 71.0
+theme = ExtResource("4_5lcyj")
 theme_override_font_sizes/font_size = 31
 text = "1"
 alignment = 1
@@ -553,6 +862,7 @@ drag_and_drop_selection_enabled = false
 caret_blink = true
 
 [node name="Label" type="Label" parent="gui/propertiesui/propertiespanel/ScrollContainer/org/scales/yslider"]
+layout_mode = 0
 offset_left = 71.0
 offset_top = -48.0
 offset_right = 97.0
@@ -564,8 +874,8 @@ text = "Y"
 [node name="colorlbl" type="Label" parent="gui/propertiesui/propertiespanel/ScrollContainer/org"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 41
 text = "Color: "
+label_settings = ExtResource("4_eqbpn")
 
 [node name="modulate" type="ColorPickerButton" parent="gui/propertiesui/propertiespanel/ScrollContainer/org"]
 z_index = 1
@@ -576,11 +886,12 @@ color = Color(1, 1, 1, 1)
 [node name="zlbl" type="Label" parent="gui/propertiesui/propertiespanel/ScrollContainer/org"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 41
 text = "Z-Index: "
+label_settings = ExtResource("4_eqbpn")
 
 [node name="zindexbox" type="SpinBox" parent="gui/propertiesui/propertiespanel/ScrollContainer/org"]
 layout_mode = 2
+theme = ExtResource("4_5lcyj")
 min_value = -100.0
 alignment = 1
 update_on_text_changed = true
@@ -588,14 +899,14 @@ update_on_text_changed = true
 [node name="fliplbl" type="Label" parent="gui/propertiesui/propertiespanel/ScrollContainer/org"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 41
 text = "Flipped: "
+label_settings = ExtResource("4_eqbpn")
 
 [node name="fliptoggle" type="CheckButton" parent="gui/propertiesui/propertiespanel/ScrollContainer/org/fliplbl"]
 layout_mode = 2
-offset_left = 359.0
+offset_left = 488.0
 offset_top = -21.0
-offset_right = 403.0
+offset_right = 532.0
 offset_bottom = 3.0
 scale = Vector2(3.97, 3.97)
 
@@ -608,8 +919,8 @@ theme_override_font_sizes/font_size = 41
 visible = false
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 41
 text = "Target Color: "
+label_settings = SubResource("LabelSettings_5lcyj")
 
 [node name="targetcolor" type="ColorPickerButton" parent="gui/propertiesui/propertiespanel/ScrollContainer/org"]
 visible = false
@@ -622,8 +933,8 @@ color = Color(1, 1, 1, 1)
 visible = false
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 41
 text = "Duration: "
+label_settings = ExtResource("4_eqbpn")
 
 [node name="durationedit" type="LineEdit" parent="gui/propertiesui/propertiespanel/ScrollContainer/org"]
 visible = false
@@ -644,8 +955,8 @@ caret_blink = true
 visible = false
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 41
 text = "Distance: "
+label_settings = ExtResource("4_eqbpn")
 
 [node name="distances" type="Control" parent="gui/propertiesui/propertiespanel/ScrollContainer/org"]
 visible = false
@@ -660,10 +971,11 @@ offset_right = 140.0
 offset_bottom = 23.0
 
 [node name="movelbl" type="LineEdit" parent="gui/propertiesui/propertiespanel/ScrollContainer/org/distances/movex"]
+layout_mode = 0
 offset_left = 21.0
-offset_top = 19.0
+offset_top = 4.0
 offset_right = 145.0
-offset_bottom = 71.0
+offset_bottom = 56.0
 theme_override_font_sizes/font_size = 31
 text = "0"
 alignment = 1
@@ -677,10 +989,11 @@ drag_and_drop_selection_enabled = false
 caret_blink = true
 
 [node name="Label" type="Label" parent="gui/propertiesui/propertiespanel/ScrollContainer/org/distances/movex"]
+layout_mode = 0
 offset_left = 10.0
-offset_top = -31.0
+offset_top = -46.0
 offset_right = 154.0
-offset_bottom = 26.0
+offset_bottom = 11.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 41
 text = "Move X"
@@ -694,10 +1007,11 @@ offset_right = 471.0
 offset_bottom = 23.0
 
 [node name="movelbl" type="LineEdit" parent="gui/propertiesui/propertiespanel/ScrollContainer/org/distances/movey"]
+layout_mode = 0
 offset_left = 21.0
-offset_top = 19.0
+offset_top = 4.0
 offset_right = 145.0
-offset_bottom = 71.0
+offset_bottom = 56.0
 theme_override_font_sizes/font_size = 31
 text = "0"
 alignment = 1
@@ -711,21 +1025,24 @@ drag_and_drop_selection_enabled = false
 caret_blink = true
 
 [node name="Label" type="Label" parent="gui/propertiesui/propertiespanel/ScrollContainer/org/distances/movey"]
+layout_mode = 0
 offset_left = 10.0
-offset_top = -31.0
+offset_top = -46.0
 offset_right = 154.0
-offset_bottom = 26.0
+offset_bottom = 11.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 41
 text = "Move Y"
 
 [node name="targrotlbl" type="Label" parent="gui/propertiesui/propertiespanel/ScrollContainer/org"]
+visible = false
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 36
 text = "Target Rotation: "
+label_settings = SubResource("LabelSettings_5tm2q")
 
 [node name="targrotslider" type="HSlider" parent="gui/propertiesui/propertiespanel/ScrollContainer/org"]
+visible = false
 custom_minimum_size = Vector2(500, 0)
 layout_mode = 2
 min_value = -360.0
@@ -751,15 +1068,615 @@ middle_mouse_paste_enabled = false
 drag_and_drop_selection_enabled = false
 caret_blink = true
 
+[node name="targscalelbl" type="Label" parent="gui/propertiesui/propertiespanel/ScrollContainer/org"]
+visible = false
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Target Scale: "
+label_settings = SubResource("LabelSettings_j8y2p")
+
+[node name="targscales" type="Control" parent="gui/propertiesui/propertiespanel/ScrollContainer/org"]
+visible = false
+layout_mode = 2
+
+[node name="xslider" type="HSlider" parent="gui/propertiesui/propertiespanel/ScrollContainer/org/targscales"]
+layout_mode = 2
+offset_left = -16.0
+offset_top = 7.0
+offset_right = 140.0
+offset_bottom = 23.0
+min_value = 0.05
+max_value = 25.0
+step = 0.05
+value = 1.0
+scrollable = false
+
+[node name="targscalelbl" type="LineEdit" parent="gui/propertiesui/propertiespanel/ScrollContainer/org/targscales/xslider"]
+layout_mode = 0
+offset_left = 21.0
+offset_top = 19.0
+offset_right = 145.0
+offset_bottom = 71.0
+theme_override_font_sizes/font_size = 31
+text = "1"
+alignment = 1
+max_length = 6
+context_menu_enabled = false
+emoji_menu_enabled = false
+virtual_keyboard_enabled = false
+shortcut_keys_enabled = false
+middle_mouse_paste_enabled = false
+drag_and_drop_selection_enabled = false
+caret_blink = true
+
+[node name="Label" type="Label" parent="gui/propertiesui/propertiespanel/ScrollContainer/org/targscales/xslider"]
+layout_mode = 0
+offset_left = 71.0
+offset_top = -48.0
+offset_right = 97.0
+offset_bottom = 9.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 41
+text = "X"
+
+[node name="yslider" type="HSlider" parent="gui/propertiesui/propertiespanel/ScrollContainer/org/targscales"]
+layout_mode = 2
+offset_left = 323.0
+offset_top = 7.0
+offset_right = 479.0
+offset_bottom = 23.0
+min_value = 0.05
+max_value = 25.0
+step = 0.05
+value = 1.0
+scrollable = false
+
+[node name="targscalelbl" type="LineEdit" parent="gui/propertiesui/propertiespanel/ScrollContainer/org/targscales/yslider"]
+layout_mode = 0
+offset_left = 21.0
+offset_top = 19.0
+offset_right = 145.0
+offset_bottom = 71.0
+theme_override_font_sizes/font_size = 31
+text = "1"
+alignment = 1
+max_length = 6
+context_menu_enabled = false
+emoji_menu_enabled = false
+virtual_keyboard_enabled = false
+shortcut_keys_enabled = false
+middle_mouse_paste_enabled = false
+drag_and_drop_selection_enabled = false
+caret_blink = true
+
+[node name="Label" type="Label" parent="gui/propertiesui/propertiespanel/ScrollContainer/org/targscales/yslider"]
+layout_mode = 0
+offset_left = 71.0
+offset_top = -48.0
+offset_right = 97.0
+offset_bottom = 9.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 41
+text = "Y"
+
+[node name="textlbl" type="Label" parent="gui/propertiesui/propertiespanel/ScrollContainer/org"]
+visible = false
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Text: "
+label_settings = ExtResource("4_eqbpn")
+
+[node name="TextEdit" type="TextEdit" parent="gui/propertiesui/propertiespanel/ScrollContainer/org"]
+visible = false
+layout_mode = 2
+placeholder_text = "[Enter Text Here]"
+context_menu_enabled = false
+drag_and_drop_selection_enabled = false
+virtual_keyboard_enabled = false
+middle_mouse_paste_enabled = false
+empty_selection_clipboard_enabled = false
+wrap_mode = 1
+scroll_fit_content_width = true
+caret_blink = true
+
+[node name="fontsizelbl" type="Label" parent="gui/propertiesui/propertiespanel/ScrollContainer/org"]
+visible = false
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Font Size: "
+label_settings = ExtResource("4_eqbpn")
+
+[node name="fontsizebox" type="SpinBox" parent="gui/propertiesui/propertiespanel/ScrollContainer/org"]
+visible = false
+layout_mode = 2
+theme = ExtResource("4_5lcyj")
+min_value = 1.0
+max_value = 1000.0
+value = 1.0
+alignment = 1
+update_on_text_changed = true
+
 [node name="filler2" type="Label" parent="gui/propertiesui/propertiespanel/ScrollContainer/org"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 41
 
 [node name="filler3" type="Label" parent="gui/propertiesui/propertiespanel/ScrollContainer/org"]
+self_modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 41
+text = "aaaaaaaaaaaaaaaaaaaaaa"
+
+[node name="levelsettingsui" type="Control" parent="gui"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="settingspanel" type="Panel" parent="gui/levelsettingsui"]
+layout_mode = 0
+offset_left = 109.0
+offset_top = 27.0
+offset_right = 1034.0
+offset_bottom = 603.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_b1cmn")
+
+[node name="X" type="Button" parent="gui/levelsettingsui/settingspanel"]
+layout_mode = 0
+offset_left = 862.0
+offset_top = 6.0
+offset_right = 931.0
+offset_bottom = 84.0
+theme_override_font_sizes/font_size = 51
+text = "X"
+
+[node name="Label" type="Label" parent="gui/levelsettingsui/settingspanel"]
+layout_mode = 2
+offset_left = 9.0
+offset_top = 6.0
+offset_right = 920.0
+offset_bottom = 90.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 61
+text = "Level Settings"
+label_settings = SubResource("LabelSettings_78fwb")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="org" type="GridContainer" parent="gui/levelsettingsui/settingspanel"]
+layout_mode = 0
+offset_left = 19.0
+offset_top = 100.0
+offset_right = 819.0
+offset_bottom = 549.0
+theme_override_constants/v_separation = 26
+columns = 2
+
+[node name="lvlnamelbl" type="Label" parent="gui/levelsettingsui/settingspanel/org"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 51
+text = "Level Name: "
+label_settings = ExtResource("4_eqbpn")
+
+[node name="lvlnameenter" type="LineEdit" parent="gui/levelsettingsui/settingspanel/org"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+placeholder_text = "[Enter Level Title]"
+max_length = 24
+expand_to_text_length = true
+context_menu_enabled = false
+emoji_menu_enabled = false
+virtual_keyboard_enabled = false
+middle_mouse_paste_enabled = false
+drag_and_drop_selection_enabled = false
+caret_blink = true
+
+[node name="songlbl" type="Label" parent="gui/levelsettingsui/settingspanel/org"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 51
+text = "Song ID: "
+label_settings = ExtResource("4_eqbpn")
+
+[node name="choosesong" type="OptionButton" parent="gui/levelsettingsui/settingspanel/org"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 51
+alignment = 1
+
+[node name="songstartlbl" type="Label" parent="gui/levelsettingsui/settingspanel/org"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 38
+text = "Song Start Time:"
+label_settings = ExtResource("4_eqbpn")
+
+[node name="songstarttime" type="LineEdit" parent="gui/levelsettingsui/settingspanel/org"]
+layout_mode = 2
+placeholder_text = "[Enter Song Start Time in Seconds]"
+alignment = 1
+max_length = 8
+expand_to_text_length = true
+context_menu_enabled = false
+emoji_menu_enabled = false
+virtual_keyboard_enabled = false
+middle_mouse_paste_enabled = false
+drag_and_drop_selection_enabled = false
+caret_blink = true
+
+[node name="speedlbl" type="Label" parent="gui/levelsettingsui/settingspanel/org"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 41
+text = "Starting Speed: "
+label_settings = ExtResource("4_eqbpn")
+
+[node name="speedbtn" type="Button" parent="gui/levelsettingsui/settingspanel/org"]
+layout_mode = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_xg7d5")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_xg7d5")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_xg7d5")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_xg7d5")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_xg7d5")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_xg7d5")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_xg7d5")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_xg7d5")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_xg7d5")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_xg7d5")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_xg7d5")
+icon = SubResource("AtlasTexture_q68jb")
+icon_alignment = 1
+
+[node name="glowlbl" type="Label" parent="gui/levelsettingsui/settingspanel/org"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 41
+text = "Glow Enabled: "
+label_settings = ExtResource("4_eqbpn")
+
+[node name="filler" type="Label" parent="gui/levelsettingsui/settingspanel/org"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 41
+
+[node name="glowtoggle" type="CheckButton" parent="gui/levelsettingsui/settingspanel/org/filler"]
+layout_mode = 2
+offset_left = 49.0
+offset_top = -15.0
+offset_right = 93.0
+offset_bottom = 9.0
+scale = Vector2(3.68, 3.68)
+button_pressed = true
+
+[node name="gridlbl" type="Label" parent="gui/levelsettingsui/settingspanel/org"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 41
+text = "Grid Enabled: "
+label_settings = ExtResource("4_eqbpn")
+
+[node name="filler2" type="Label" parent="gui/levelsettingsui/settingspanel/org"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 41
+
+[node name="gridtoggle" type="CheckButton" parent="gui/levelsettingsui/settingspanel/org/filler2"]
+layout_mode = 2
+offset_left = 49.0
+offset_top = -15.0
+offset_right = 93.0
+offset_bottom = 9.0
+scale = Vector2(3.68, 3.68)
+
+[node name="controlstutorialui" type="Control" parent="gui"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="controlspanel" type="Panel" parent="gui/controlstutorialui"]
+visible = false
+layout_mode = 0
+offset_left = 292.0
+offset_top = 27.0
+offset_right = 850.0
+offset_bottom = 603.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_b1cmn")
+
+[node name="X" type="Button" parent="gui/controlstutorialui/controlspanel"]
+layout_mode = 0
+offset_left = 483.0
+offset_top = 6.0
+offset_right = 552.0
+offset_bottom = 84.0
+theme_override_font_sizes/font_size = 51
+text = "X"
+
+[node name="Label" type="Label" parent="gui/controlstutorialui/controlspanel"]
+layout_mode = 2
+offset_left = 7.0
+offset_top = 10.0
+offset_right = 551.0
+offset_bottom = 94.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 61
+text = "Controls"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="gui/controlstutorialui/controlspanel"]
+layout_mode = 0
+offset_left = 19.0
+offset_top = 100.0
+offset_right = 539.0
+offset_bottom = 557.0
+scroll_vertical = 100
+horizontal_scroll_mode = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="gui/controlstutorialui/controlspanel/ScrollContainer"]
+layout_mode = 2
+
+[node name="select" type="Label" parent="gui/controlstutorialui/controlspanel/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(520, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 46
+text = "Select Mode - Q"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="selectobj" type="Label" parent="gui/controlstutorialui/controlspanel/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(520, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 31
+text = "Select Object - Click"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="multiselect" type="Label" parent="gui/controlstutorialui/controlspanel/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(520, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 31
+text = "Multi-Select - Click + Drag"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="deleteselected" type="Label" parent="gui/controlstutorialui/controlspanel/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(520, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 27
+text = "Delete Selected Object - Del/Backspace"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="duplicateselected" type="Label" parent="gui/controlstutorialui/controlspanel/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(520, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 27
+text = "Duplicate Selected Object - Ctrl + D"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="unselect" type="Label" parent="gui/controlstutorialui/controlspanel/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(520, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 27
+text = "Unselect - Escape/Click Nothing"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="filler" type="Label" parent="gui/controlstutorialui/controlspanel/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(520, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 46
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="drag" type="Label" parent="gui/controlstutorialui/controlspanel/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(520, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 46
+text = "Move/Drag Mode - W"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="dragobj" type="Label" parent="gui/controlstutorialui/controlspanel/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(520, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 29
+text = "Move Selected Object(s) - Click+Drag"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="filler2" type="Label" parent="gui/controlstutorialui/controlspanel/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(520, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 46
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="add" type="Label" parent="gui/controlstutorialui/controlspanel/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(520, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 46
+text = "Add Mode - E"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="selectadd" type="Label" parent="gui/controlstutorialui/controlspanel/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(520, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 29
+text = "Select Object Type to Add - Click Category, then Object Button"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="filler8" type="Label" parent="gui/controlstutorialui/controlspanel/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 5
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="addobj" type="Label" parent="gui/controlstutorialui/controlspanel/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(520, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 29
+text = "Add Object - Click"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="filler3" type="Label" parent="gui/controlstutorialui/controlspanel/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(520, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 46
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="delete" type="Label" parent="gui/controlstutorialui/controlspanel/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(520, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 46
+text = "Delete Mode - R"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="deleteobj" type="Label" parent="gui/controlstutorialui/controlspanel/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(520, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 29
+text = "Delete Object - Hover + Click"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="multidelete" type="Label" parent="gui/controlstutorialui/controlspanel/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(520, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 29
+text = "Multi-Delete - Click + Drag"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="filler4" type="Label" parent="gui/controlstutorialui/controlspanel/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(520, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 46
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="other" type="Label" parent="gui/controlstutorialui/controlspanel/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(520, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 46
+text = "Other"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="save" type="Label" parent="gui/controlstutorialui/controlspanel/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(520, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 29
+text = "Save Current Level - Ctrl + S"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="zoom" type="Label" parent="gui/controlstutorialui/controlspanel/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(520, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 29
+text = "Zoom In/Out - Mouse Scroll Wheel"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="pan" type="Label" parent="gui/controlstutorialui/controlspanel/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(520, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 27
+text = "Pan Through Level - Right Click + Drag"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="playtest" type="Label" parent="gui/controlstutorialui/controlspanel/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(520, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 27
+text = "Playtest - T"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="filler5" type="Label" parent="gui/controlstutorialui/controlspanel/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(520, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 46
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="tutorial" type="Label" parent="gui/controlstutorialui/controlspanel/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(520, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 46
+text = "Tutorial"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="tutorialtxt" type="Label" parent="gui/controlstutorialui/controlspanel/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(520, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 27
+text = "There are 4 different modes used in the editor. 
+The select mode is used to modify properties and groups, and allow for objects to be moved.
+The drag/move mode is used to move objects around.
+The add mode is used to place new objects into the editor.
+The delete mode is used to remove objects from the editor.
+The menu button (3 lines) contains navigational buttons and other information and settings.
+Playtesting your level just gives you one life to try out whatever you've added.
+The properties window has all the properties for modifying an object like color, size, and more. Some objects (usually triggers) have additional custom properties.
+The groups window is important for \"communication\" between objects. The group(s) an object has is an identifier. The targets an object has are what find the identifier and hook up the group to itself. Any object can have groups but only some objects can have targets (mostly triggers). The global groups manager can help edit big groups of objects.
+The blocks category currently contains 2 types, regular blocks and d-blocks. Regular blocks still destroy the player. D-blocks (aka Sliding Blocks) enable sliding on the area that they cover.
+Hazards are objects that destroy the player upon touching them.
+Portals do a multitude of things that can vary gameplay like different gamemodes, different player sizes, teleportation, and such.
+Interactables include pads and orbs. Pads trigger an effect when the player touches them, while orbs must be timed and the user must click when the player is touching the orb to trigger the effect.
+Decorations are purely visual objects, as the name implies.
+Triggers enable the changing of properties among other things. They are triggered whenever the player passes their position (doesn't have to be touched by the player). 
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="filler6" type="Label" parent="gui/controlstutorialui/controlspanel/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(520, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 46
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="savepanel" type="Control" parent="gui"]
 layout_mode = 3
@@ -769,6 +1686,7 @@ offset_right = 40.0
 offset_bottom = -102.0
 
 [node name="ColorRect2" type="ColorRect" parent="gui/savepanel"]
+layout_mode = 0
 offset_left = 428.0
 offset_top = 34.0
 offset_right = 708.0
@@ -776,6 +1694,7 @@ offset_bottom = 117.0
 color = Color(0.187176, 0.187176, 0.187176, 1)
 
 [node name="ColorRect" type="ColorRect" parent="gui/savepanel"]
+layout_mode = 0
 offset_left = 442.0
 offset_top = 44.0
 offset_right = 694.0
@@ -783,6 +1702,7 @@ offset_bottom = 105.0
 color = Color(0.303233, 0.303233, 0.303233, 1)
 
 [node name="Label" type="Label" parent="gui/savepanel"]
+layout_mode = 0
 offset_left = 444.0
 offset_top = 43.0
 offset_right = 693.0
@@ -791,6 +1711,18 @@ text = "Saved!"
 label_settings = SubResource("LabelSettings_pxqd5")
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="trans" type="CanvasLayer" parent="."]
+layer = 128
+visible = false
+
+[node name="ColorRect" type="ColorRect" parent="trans"]
+offset_left = -159.0
+offset_top = -92.0
+offset_right = 1424.0
+offset_bottom = 781.0
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
 
 [node name="grid" type="Node2D" parent="."]
 script = ExtResource("2_pxqd5")
@@ -802,3 +1734,4 @@ script = ExtResource("2_pxqd5")
 [node name="helperline" type="Node2D" parent="."]
 
 [connection signal="pressed" from="gui/playtest" to="." method="_on_playtest_pressed"]
+[connection signal="pressed" from="gui/navigationui/menubtnoffset/MenuButton/PanelContainer/VBoxContainer/savenplaybtn" to="." method="_on_savenplaybtn_pressed"]

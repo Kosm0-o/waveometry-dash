@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="ObjectResource" load_steps=3 format=3 uid="uid://c5rdbak021vs2"]
+
+[ext_resource type="PackedScene" uid="uid://cq2akgqxh2f3i" path="res://scenes/scaletrigger.tscn" id="1_r3sq2"]
+[ext_resource type="Script" uid="uid://b7ivepggsojwl" path="res://scripts/objectresource.gd" id="2_qca2n"]
+
+[resource]
+script = ExtResource("2_qca2n")
+id = "scaletrigger"
+display_name = "Scale Trigger"
+scene = ExtResource("1_r3sq2")
+category = "triggers"
+max_amount = 0
+metadata/_custom_type_script = "uid://b7ivepggsojwl"

@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="ObjectResource" load_steps=3 format=3 uid="uid://b8lsvujqxamc3"]
+
+[ext_resource type="PackedScene" uid="uid://dcnw2ni1n582x" path="res://scenes/gamemodeportal.tscn" id="1_5lqo0"]
+[ext_resource type="Script" uid="uid://b7ivepggsojwl" path="res://scripts/objectresource.gd" id="2_15ssn"]
+
+[resource]
+script = ExtResource("2_15ssn")
+id = "fluxgamemodeportal"
+display_name = "Flux Gamemode Portal"
+scene = ExtResource("1_5lqo0")
+category = "portals"
+max_amount = 0
+metadata/_custom_type_script = "uid://b7ivepggsojwl"

@@ -4,7 +4,7 @@ class_name LevelObject
 signal object_clicked(obj : LevelObject)
 
 var mouse_over : bool = false
-var clickarea : Area2D = null
+@onready var clickarea : Area2D = $clickdetector
 @export var group_bools : Dictionary = {"groups": false, "targets": false}
 var group_ids : Array[int] = []
 var targets : Array[int] = []
@@ -15,6 +15,10 @@ var duration : float = 1.0
 var move_x : float = 0.0
 var move_y : float = 0.0
 var targ_rot : float = 0.0
+var targ_scale_x : float = 0.0
+var targ_scale_y : float = 0.0
+var objecttext : String = "[Text]"
+var font_size : int = 51
 
 func _ready() -> void:
 	click_detector_setup()
@@ -22,10 +26,6 @@ func _ready() -> void:
 	object_ready()
 
 func click_detector_setup():
-	for node in get_children():
-		if node is Area2D and "clickdetector" in node.name:
-			clickarea = node
-			break
 	if clickarea != null and not clickarea.mouse_entered.is_connected(_mouse):
 		clickarea.mouse_entered.connect(_mouse.bind(true))
 		clickarea.mouse_exited.connect(_mouse.bind(false))
@@ -38,7 +38,7 @@ func _mouse(over: bool): mouse_over = over
 
 func _unhandled_input(event: InputEvent) -> void:
 	if not EditorGlobal.editing: return
-	if event.is_action_pressed("editor_click") and EditorGlobal.modes.selecting and mouse_over:
+	if (event.is_action_pressed("editor_click") or event.is_action_pressed("addremoveselect")) and EditorGlobal.modes.selecting and mouse_over:
 		object_clicked.emit(self)
 	elif event.is_action_pressed("editor_click") and EditorGlobal.modes.deleting and mouse_over:
 		if EditorGlobal.object_defintions[get_meta("id")].max_amount > 0: EditorGlobal.object_deleted.emit(self)

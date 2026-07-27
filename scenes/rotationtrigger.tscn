@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://d16f4gqn6d572"]
 
-[ext_resource type="Script" uid="uid://cs823n727j1sk" path="res://scripts/rotationtrigger.gd" id="1_wvh5y"]
+[ext_resource type="Script" uid="uid://cs823n727j1sk" path="res://scripts/triggers/rotationtrigger.gd" id="1_wvh5y"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_cvtg8"]
 font_size = 23
@@ -10,6 +10,10 @@ size = Vector2(91, 95)
 
 [node name="rotationtrigger" type="Node2D"]
 script = ExtResource("1_wvh5y")
+group_bools = {
+"groups": true,
+"targets": true
+}
 
 [node name="Panel" type="Panel" parent="."]
 offset_left = -46.0

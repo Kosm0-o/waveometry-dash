@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="ObjectResource" load_steps=3 format=3 uid="uid://dcngm57yghjgd"]
+
+[ext_resource type="PackedScene" uid="uid://c7x7rv4ajmk84" path="res://scenes/textobject.tscn" id="1_u3q1t"]
+[ext_resource type="Script" uid="uid://b7ivepggsojwl" path="res://scripts/objectresource.gd" id="1_ykx1u"]
+
+[resource]
+script = ExtResource("1_ykx1u")
+id = "textobject"
+display_name = "Text"
+scene = ExtResource("1_u3q1t")
+category = "deco"
+max_amount = 0
+metadata/_custom_type_script = "uid://b7ivepggsojwl"

@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="ObjectResource" load_steps=3 format=3 uid="uid://4mdvq3rtt065"]
+
+[ext_resource type="PackedScene" uid="uid://d16f4gqn6d572" path="res://scenes/rotationtrigger.tscn" id="1_lerlb"]
+[ext_resource type="Script" uid="uid://b7ivepggsojwl" path="res://scripts/objectresource.gd" id="2_7hldk"]
+
+[resource]
+script = ExtResource("2_7hldk")
+id = "rotationtrigger"
+display_name = "Rotation Trigger"
+scene = ExtResource("1_lerlb")
+category = "triggers"
+max_amount = 0
+metadata/_custom_type_script = "uid://b7ivepggsojwl"

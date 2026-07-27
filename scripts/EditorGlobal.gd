@@ -8,7 +8,7 @@ var object_defintions : Dictionary = {
 var custom_objects : Dictionary
 var editor_selection : Resource
 
-var current_lvl : Dictionary # unused for now 
+var current_lvl = null
 var playtest : bool = false
 var editing : bool = false
 var objects_selected : Array[LevelObject] = []
@@ -32,10 +32,16 @@ var groups : Dictionary = {
 }
 var preimage = null
 var trail_points
-
+var custom_levels : Array = [
+	
+]
 
 func _ready() -> void:
+	var dir = DirAccess.open("user://")
+	if not dir.dir_exists("customlevels"):
+		dir.make_dir_recursive("customlevels")
 	get_res_defs()
+	get_custom_levels()
 
 func get_res_defs():
 	var fname = "res://Resources/objectdefs/"
@@ -52,3 +58,10 @@ func get_res_defs():
 				)
 				continue
 			object_defintions[def.id] = def
+
+func get_custom_levels():
+	var fname = "user://customlevels/"
+	var folder = DirAccess.open(fname)
+	for file in folder.get_files():
+		if file.ends_with(".json"):
+			custom_levels.append(fname + file)

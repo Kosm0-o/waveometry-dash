@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="ObjectResource" load_steps=3 format=3 uid="uid://di6yeuu4gfmut"]
+
+[ext_resource type="Script" uid="uid://b7ivepggsojwl" path="res://scripts/objectresource.gd" id="1_yfn0l"]
+[ext_resource type="PackedScene" uid="uid://1akf0w80fwso" path="res://scenes/timmon.tscn" id="1_yykpk"]
+
+[resource]
+script = ExtResource("1_yfn0l")
+id = "timothy"
+display_name = "Timothy Monster"
+scene = ExtResource("1_yykpk")
+category = "hazards"
+max_amount = 0
+metadata/_custom_type_script = "uid://b7ivepggsojwl"

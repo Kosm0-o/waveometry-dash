@@ -1,10 +1,15 @@
 extends Node2D
 
-
-func get_level_data(objects_node : Node2D):
+func get_level_data(objects_node : Node2D, settings_dictionary : Dictionary):
 	var level_data : Dictionary = {
-		"name": "LevelName",
-		"objects": []
+		"level_name": settings_dictionary.get("level_name"),
+		"objects": [],
+		"gridsnap_enabled": settings_dictionary.get("gridsnap_enabled", false),
+		"grid_enabled": settings_dictionary.get("grid_visual_enabled", false),
+		"song_id": settings_dictionary.get("song_id", "timeleaper"),
+		"song_start_time": settings_dictionary.get("song_start_time", 0.0),
+		"start_speed": settings_dictionary.get("start_speed", "normal"),
+		"glow_enabled": settings_dictionary.get("glow_enabled", true)
 	}
 	for obj in objects_node.get_children():
 		level_data.objects.append({
@@ -21,18 +26,24 @@ func get_level_data(objects_node : Node2D):
 			"target_color": obj.targ_color.to_html(true),
 			"duration": obj.duration,
 			"move_x": obj.move_x,
-			"move_y": obj.move_y
+			"move_y": obj.move_y,
+			"targ_rot": obj.targ_rot,
+			"targ_scale_x": obj.targ_scale_x,
+			"targ_scale_y": obj.targ_scale_y,
+			"objecttext": obj.objecttext,
+			"font_size": obj.font_size
 			})
 	return level_data
 
-func save_level(path : String, objects_node : Node2D):
-	var json = JSON.stringify(get_level_data(objects_node), "\t")
+func save_level(path : String, objects_node : Node2D, settings_dictionary : Dictionary):
+	var json = JSON.stringify(get_level_data(objects_node, settings_dictionary), "\t")
 	var file = FileAccess.open(path, FileAccess.WRITE)
 	file.store_string(json)
 	file.close()
 
 func load_level(path : String, objects_node : Node2D):
 	for o in objects_node.get_children():
+		objects_node.remove_child(o)
 		o.queue_free()
 	global.exit_teleportals.clear()
 	var txt = FileAccess.get_file_as_string(path)
@@ -72,6 +83,11 @@ func spawn_obj(data : Dictionary, parent : Node2D):
 	obj.duration = data.duration
 	obj.move_x = data.move_x
 	obj.move_y = data.move_y
+	obj.targ_rot = data.targ_rot
+	obj.targ_scale_x = data.targ_scale_x
+	obj.targ_scale_y = data.targ_scale_y
+	obj.objecttext = data.objecttext
+	obj.font_size = data.font_size
 
 func rebuild_groups(objects_node : Node2D):
 	EditorGlobal.groups.clear()

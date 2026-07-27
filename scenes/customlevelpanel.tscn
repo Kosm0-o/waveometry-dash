@@ -1,0 +1,88 @@
+[gd_scene load_steps=6 format=3 uid="uid://byyhe1jouvd0h"]
+
+[ext_resource type="Script" uid="uid://bk1frxm3vhjon" path="res://scripts/customlevelpanel.gd" id="1_4o602"]
+[ext_resource type="FontFile" uid="uid://c21leaucdjxc0" path="res://assets/fonts/PUSAB___.otf" id="2_5wtbq"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_i2uum"]
+bg_color = Color(1, 1, 1, 1)
+
+[sub_resource type="FontVariation" id="FontVariation_grgw0"]
+base_font = ExtResource("2_5wtbq")
+spacing_glyph = 2
+
+[sub_resource type="LabelSettings" id="LabelSettings_66blk"]
+font = SubResource("FontVariation_grgw0")
+font_size = 91
+outline_size = 18
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 7
+shadow_color = Color(0, 0, 0, 0.333333)
+shadow_offset = Vector2(7.89, 4.055)
+
+[node name="customlevelpanel" type="Panel"]
+self_modulate = Color(0.760784, 0.447059, 0.247059, 1)
+custom_minimum_size = Vector2(789, 128.935)
+theme_override_styles/panel = SubResource("StyleBoxFlat_i2uum")
+script = ExtResource("1_4o602")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 2.0
+offset_right = 646.0
+offset_bottom = 127.0
+text = "Level"
+label_settings = SubResource("LabelSettings_66blk")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="editbtn" type="Button" parent="."]
+layout_mode = 0
+offset_left = 664.0
+offset_top = 10.0
+offset_right = 776.0
+offset_bottom = 57.0
+theme_override_font_sizes/font_size = 28
+text = "Edit"
+
+[node name="deletebtn" type="Button" parent="."]
+layout_mode = 0
+offset_left = 664.0
+offset_top = 66.0
+offset_right = 776.0
+offset_bottom = 113.0
+theme_override_font_sizes/font_size = 28
+text = "Delete"
+
+[node name="yesbtn" type="Button" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 664.0
+offset_top = 10.0
+offset_right = 776.0
+offset_bottom = 57.0
+theme_override_colors/font_hover_color = Color(1, 0, 0, 1)
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(1, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(1, 0, 0, 1)
+theme_override_font_sizes/font_size = 28
+text = "Yes"
+
+[node name="nobtn" type="Button" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 664.0
+offset_top = 66.0
+offset_right = 776.0
+offset_bottom = 113.0
+theme_override_colors/font_hover_color = Color(0, 1, 0, 1)
+theme_override_colors/font_color = Color(0, 1, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 1, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 1, 0, 1)
+theme_override_font_sizes/font_size = 28
+text = "No"
+
+[connection signal="pressed" from="editbtn" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="deletebtn" to="." method="_on_deletebtn_pressed"]
+[connection signal="pressed" from="yesbtn" to="." method="_on_yesbtn_pressed"]
+[connection signal="pressed" from="nobtn" to="." method="_on_nobtn_pressed"]

@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="SongResource" load_steps=3 format=3 uid="uid://bdtikkkwfhm7s"]
+
+[ext_resource type="AudioStream" uid="uid://c454jmxvsx4v8" path="res://assets/music/739991_Creo---Sphere.mp3" id="1_wqaq2"]
+[ext_resource type="Script" uid="uid://bobtt8f8ofd5c" path="res://scripts/songresource.gd" id="2_l75am"]
+
+[resource]
+script = ExtResource("2_l75am")
+id = "sphere"
+display_name = "Sphere"
+artist = "Creo"
+audio = ExtResource("1_wqaq2")
+metadata/_custom_type_script = "uid://bobtt8f8ofd5c"

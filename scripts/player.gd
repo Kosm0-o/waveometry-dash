@@ -24,15 +24,15 @@ var ceiling : bool = false # for gamemodes
 var flooring : bool = false # also for gamemodes
 var dropping : bool = false
 var prev_wall_norm : Vector2 = Vector2.ZERO
+var auto : bool = false
+var auto_timer : float = 0.0
 
 func _ready() -> void:
 	if not dual: global_position = global.startpos
 	$UI/CheckpointsUI/add.pressed.connect(place_checkpoint)
 	$UI/CheckpointsUI/remove.pressed.connect(remove_current_checkpoint)
 	await get_tree().create_timer(0.2).timeout
-	if not dual:
-		if not EditorGlobal.playtest: die()
-	else:
+	if dual:
 		name = "Player2"
 	await get_tree().create_timer(7.5).timeout
 	
@@ -50,7 +50,13 @@ func _physics_process(delta: float) -> void:
 			modulate.a = 1
 			respawn_timer = 0.0
 	
-	if dashing["true"]:
+	if auto:
+		auto_timer += delta
+		if auto_timer >= 0.1:
+			if randf() <= [0.25, 0.5, 0.75].pick_random():
+				dir = [-1, 1].pick_random()
+			auto_timer = 0.0
+	elif dashing["true"]:
 		dir = 0
 		if not Input.is_action_pressed("game_click") or is_on_wall():
 			dashing["true"] = false
@@ -131,8 +137,10 @@ func _physics_process(delta: float) -> void:
 		for i in get_slide_collision_count():
 			var c = get_slide_collision(i)
 			var norm = c.get_normal()
-			ceiling = norm.y > 0 and Input.is_action_pressed("game_click")
-			flooring = norm.y < 0 and not Input.is_action_pressed("game_click")
+			ceiling = norm.y * sign(angle) > 0
+			if ceiling and not (flux or stairsmaster.active or ricochet.active):
+				ceiling = Input.is_action_just_pressed("game_click")
+			flooring = norm.y * sign(angle) < 0 and not Input.is_action_pressed("game_click")
 			if not ceiling and not flooring:
 				continue
 			wall_norm += norm
@@ -196,8 +204,8 @@ func die():
 		ogspeedmod = 1
 		speedmod = 1
 		angle = 45
-		global_position = Vector2.ZERO
 		trail_node.reset()
+		trail_node.set_starter_frames(1000)
 	visible = true
 	trail_node.visible = true
 	if global.practice_mode:

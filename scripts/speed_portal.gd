@@ -53,20 +53,19 @@ func _on_area_2d_area_entered(area) -> void:
 		for p in global.players:
 			p.ogspeedmod = p.speedmod
 			p.speedmod = speedinfo[speed]["speedmod"]
-
 	else:
 		for p in global.players:
 			p.speedmod = speedinfo[speed]["speedmod"]
-		await get_tree().create_timer(0.25).timeout
+		await get_tree().create_timer(1.5).timeout
 		for p in global.players:
-			var tween = create_tween().set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_EXPO)
-			tween.tween_property(p, "speedmod", p.ogspeedmod, 1.0)
-			await tween.finished
+			await get_tree().create_timer(1.0).timeout
+			if not is_instance_valid(p):
+				break
 			p.speedmod = p.ogspeedmod
 
 func flash_tween():
 	var tween = create_tween()
 	var og = modulate
-	tween.tween_property(self, "modulate", Color(2,2,2,2), 0.1).set_ease(Tween.EASE_IN)
+	tween.tween_property(self, "modulate", Color(100,100,100,100), 0.1).set_ease(Tween.EASE_IN)
 	tween.tween_property(self, "modulate", og, 0.4).set_ease(Tween.EASE_OUT)
 	await tween.finished

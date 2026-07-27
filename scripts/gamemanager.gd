@@ -10,18 +10,24 @@ var past_rotation_tweening : bool = false
 var frames : int = 0
 var target_shift_pos : Vector2 = Vector2.ZERO
 @onready var song: AudioStreamPlayer2D = $song
-
+var speeds : Dictionary[String, float] = {
+	"slow": 0.8,
+	"normal": 1.0,
+	"double": 1.45,
+	"triple": 1.8,
+	"quad": 2.19
+}
+var time_alive : float = 0.0
 
 func _ready() -> void:
 	EditorGlobal.editing = false
-	EditorGlobal.current_lvl = LevelLoader.load_level("user://levelname.json", $Map/objects)
 	global.portal_entered.connect(_shift_camera)
-	global.died.connect(func(): song.playing = false; song.play())
+	global.died.connect(reset_level)
 	global.pnode = $Map/players
 	global.bg = $bg/black
-	target_shift_pos.y = player.global_position.y
+	target_shift_pos.y = global.startpos.y
+	reset_level()
 	
-
 
 func _process(delta: float) -> void:
 #	Engine.time_scale = 0.1
@@ -79,6 +85,7 @@ func _process(delta: float) -> void:
 		global.complete_details = true
 	
 	past_rotation_tweening = global.rotation_tweening
+	time_alive += delta
 
 func _shift_camera(portal):
 	if abs(portal.global_position.y - cam.global_position.y) < 100:
@@ -89,3 +96,18 @@ func _shift_camera(portal):
 	elif global.yangle:
 		target_shift_pos.x = portal.global_position.x
 		target_shift_pos.y = 0
+
+func reset_level():
+	var lvl_data = LevelLoader.load_level(EditorGlobal.current_lvl, $Map/objects)
+	$GUI/PauseMenu/LevelTitle.text = lvl_data.level_name
+	if global.practice_mode:
+		song.play(lvl_data.song_start_time + time_alive)
+		time_alive = 0.0
+		return
+	$WorldEnvironment.environment.glow_enabled = lvl_data.glow_enabled
+	song.stream = SongDatabase.get_song(lvl_data.song_id).song_data.audio
+	song.playing = false
+	song.play(lvl_data.song_start_time)
+	player.speedmod = speeds[lvl_data.start_speed]
+	player.ogspeedmod = speeds[lvl_data.start_speed]
+	player.global_position = global.startpos

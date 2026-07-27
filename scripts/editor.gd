@@ -5,6 +5,7 @@ extends Node2D
 
 @onready var groupidnumglobal: SpinBox = $gui/groupsui/globalgroupspanel/groupid
 @onready var identer: TextEdit = $gui/groupsui/groupspanel/btns/identer
+@onready var textedit: TextEdit = $gui/propertiesui/propertiespanel/ScrollContainer/org/TextEdit
 @onready var rotationlbl: LineEdit = $gui/propertiesui/propertiespanel/ScrollContainer/org/HSlider/rotationlbl
 @onready var xscalelbl: LineEdit = $gui/propertiesui/propertiespanel/ScrollContainer/org/scales/xslider/scalelbl
 @onready var yscalelbl: LineEdit = $gui/propertiesui/propertiespanel/ScrollContainer/org/scales/yslider/scalelbl
@@ -12,6 +13,9 @@ extends Node2D
 @onready var ymovelbl: LineEdit = $gui/propertiesui/propertiespanel/ScrollContainer/org/distances/movey/movelbl
 @onready var durationedit: LineEdit = $gui/propertiesui/propertiespanel/ScrollContainer/org/durationedit
 @onready var targrotlbl: LineEdit = $gui/propertiesui/propertiespanel/ScrollContainer/org/targrotslider/targrotlbl
+@onready var targxscalelbl: LineEdit = $gui/propertiesui/propertiespanel/ScrollContainer/org/targscales/xslider/targscalelbl
+@onready var targyscalelbl: LineEdit = $gui/propertiesui/propertiespanel/ScrollContainer/org/targscales/yslider/targscalelbl
+@onready var songstarttime: LineEdit = $gui/levelsettingsui/settingspanel/org/songstarttime
 @onready var grid: Node2D = $grid
 
 var old_txt : Dictionary = {
@@ -23,7 +27,19 @@ var old_txt : Dictionary = {
 	"xmove": "",
 	"ymove": "",
 	"targ_rot": "",
+	"targxscale": "",
+	"targyscale": "",
+	"songstarttime": ""
 	}
+
+var speedicons : Dictionary[String, Rect2] = {
+	"slow": Rect2(685, 0, 70, 98),
+	"normal": Rect2(550, 0, 50, 98),
+	"double": Rect2(412, 0, 83, 98),
+	"triple": Rect2(275, 0, 120, 98),
+	"quad": Rect2(135, 0, 140, 98)
+}
+var start_speed : Array = ["normal", 1]
 
 var object_btns : Dictionary = {}
 var object_counts : Dictionary = {}
@@ -38,20 +54,29 @@ const TOOL_KEY_MAPPING : Array = [
 	"deletetool"
 	]
 
-var hold_timer : float = 0.0
-var threshold : float = 0.1
+var threshold : float = 10.0
 var drag_start_pos : Vector2 = Vector2.ZERO
 var cur_rect : Rect2 = Rect2(0,0,0,0)
 var min_max_x : Array = [null, null]
 var updating_properties : bool = false
 const GRIDSIZE : int = 89
 var gridsnap : bool = false
+var grid_visual_enabled : bool = false
+var song_id : String = "atthespeedoflight"
+var song_start_time : float = 0.0
+var lvl_name : String = ""
+var glow_enabled : bool = false
+var click_start_pos : Vector2
+var dragging : bool = false
 
 
 func _ready() -> void:
-	#LevelLoader.save_level("user://levelname.json", $levelobjects)
+	#LevelLoader.save_level(EditorGlobal.current_lvl, $levelobjects, {})
 	EditorGlobal.editing = true
-	var lvl_data = LevelLoader.load_level("user://levelname.json", $levelobjects)
+	global.trans_rect = $trans/ColorRect
+	global.fade_tween(false)
+	var lvl_data = LevelLoader.load_level(EditorGlobal.current_lvl, $levelobjects)
+	settings_setup(lvl_data)
 	$gui/groupsui/globalgroupspanel/groupid.get_line_edit().add_theme_constant_override("minimum_character_width", 13)
 	EditorGlobal.objects_selected.clear()
 	connect_signals()
@@ -61,6 +86,11 @@ func _ready() -> void:
 	create_helper_trail()
 	$gui/propertiesui/propertiespanel/ScrollContainer/org/modulate.modulate.a = 1.35638298
 	$gui/propertiesui/propertiespanel/ScrollContainer/org/targetcolor.modulate.a = 1.35638298
+	$gui/modes/select.modulate = Color.YELLOW
+	generate_buttons(0)
+#	for song in SongDatabase.song_definitions:
+#		print(song.display_name, ": ", song.audio)
+
 
 func _process(delta: float) -> void:
 	var hovered = get_viewport().gui_get_hovered_control()
@@ -73,8 +103,10 @@ func _process(delta: float) -> void:
 			grid.queue_redraw()
 		cam.zoom = clamp(cam.zoom, Vector2(0.01,0.01), Vector2(50.0,50.0))
 		if Input.is_action_pressed("editor_click") and (EditorGlobal.modes.deleting or EditorGlobal.modes.selecting):
-			hold_timer += delta
-			if hold_timer >= threshold:
+			if not dragging:
+				if click_start_pos.distance_to(get_global_mouse_position()) > threshold:
+					dragging = true
+			if dragging:
 				if drag_start_pos == Vector2.ZERO:
 					clear_selected()
 					drag_start_pos = get_global_mouse_position()
@@ -82,7 +114,7 @@ func _process(delta: float) -> void:
 	if Input.is_action_just_released("editor_click"):
 		grid.queue_redraw()
 		recalibrate_level_slider()
-		if hold_timer >= threshold:
+		if dragging:
 			clear_selected()
 			for obj in $levelobjects.get_children():
 				if cur_rect.intersects(obj.get_editor_rect()):
@@ -94,7 +126,7 @@ func _process(delta: float) -> void:
 							EditorGlobal.objects_selected.append(obj)
 							obj.modulate = Color(0.5, 1.5, 1.5, 1.5)
 							EditorGlobal.selected_obj = obj
-		hold_timer = 0.0
+		dragging = false
 		drag_start_pos = Vector2.ZERO
 		cur_rect = Rect2(0,0,0,0)
 		queue_redraw()
@@ -105,6 +137,8 @@ func _process(delta: float) -> void:
 		EditorGlobal.preimage = null
 	$gui/groupsui/groupsbtn.visible = EditorGlobal.selected_obj != null and EditorGlobal.objects_selected.size() == 1
 	$gui/propertiesbtn.visible = EditorGlobal.selected_obj != null and EditorGlobal.objects_selected.size() == 1
+	$gui/navigationui/menubtnoffset/MenuButton.icon.region = Rect2(288.0, 4.0, 144.0, 148.0) if not $gui/navigationui/menubtnoffset/MenuButton.button_pressed else Rect2(0.0, 156.0, 144.0, 156.0)
+	$gui/navigationui/menubtnoffset.rotation_degrees = lerpf($gui/navigationui/menubtnoffset.rotation_degrees, -90 if $gui/navigationui/menubtnoffset/MenuButton.button_pressed else 0, 12 * delta)
 
 func connect_signals():
 	EditorGlobal.object_deleted.connect(_object_deleted)
@@ -130,6 +164,8 @@ func connect_signals():
 			updating_properties = true
 			$gui/propertiesui/propertiespanel.visible = true
 			var obj = EditorGlobal.selected_obj
+			$gui/propertiesui/propertiespanel/Label.text = EditorGlobal.object_defintions[obj.get_meta("id")].display_name + " Properties"
+			$gui/propertiesui/propertiespanel/Label.label_settings.font_size = 41 * (824.0 / $gui/propertiesui/propertiespanel/Label.size.x)
 			rotationlbl.text = str(obj.rotation_degrees)
 			xscalelbl.text = str(abs(obj.scale.x))
 			yscalelbl.text = str(obj.scale.y)
@@ -139,44 +175,66 @@ func connect_signals():
 			$gui/propertiesui/propertiespanel/ScrollContainer/org/modulate.color = obj.mod
 			$gui/propertiesui/propertiespanel/ScrollContainer/org/zindexbox.value = int(obj.z_index)
 			$gui/propertiesui/propertiespanel/ScrollContainer/org/fliplbl/fliptoggle.button_pressed = sign(obj.scale.x) == -1
-			
 			trigger_ui_check(obj)
 			updating_properties = false
 			)
 	$gui/groupsui/groupspanel/btns/newgroupbtn.pressed.connect(_generate_group.bind(false))
 	identer.text_changed.connect(_custom_group_check)
+	textedit.text_changed.connect(func(): EditorGlobal.selected_obj.objecttext = textedit.text)
 	rotationlbl.text_changed.connect(_rotation_check)
-	rotationlbl.text_submitted.connect(func(txt): EditorGlobal.selected_obj.rotation_degrees = float(txt); $gui/propertiesui/propertiespanel/org/HSlider.value = float(txt))
+	rotationlbl.text_submitted.connect(func(txt): EditorGlobal.selected_obj.rotation_degrees = float(txt); $gui/propertiesui/propertiespanel/ScrollContainer/org/HSlider.value = float(txt))
+	songstarttime.text_changed.connect(_song_start_time_check)
+	songstarttime.text_submitted.connect(func(txt): song_start_time = float(txt))
 	targrotlbl.text_changed.connect(_targ_rot_check)
 	targrotlbl.text_submitted.connect(func(txt): EditorGlobal.selected_obj.targ_rot = float(txt); $gui/propertiesui/propertiespanel/ScrollContainer/org/targrotslider.value = float(txt))
 	xscalelbl.text_changed.connect(_scale_check.bind(xscalelbl))
-	xscalelbl.text_submitted.connect(func(txt): EditorGlobal.selected_obj.scale.x = float(txt) * sign(EditorGlobal.selected_obj.scale.x); $gui/propertiesui/propertiespanel/org/scales/xslider.value = float(txt))
+	xscalelbl.text_submitted.connect(func(txt): EditorGlobal.selected_obj.scale.x = float(txt) * sign(EditorGlobal.selected_obj.scale.x); $gui/propertiesui/propertiespanel/ScrollContainer/org/scales/xslider.value = float(txt))
 	yscalelbl.text_changed.connect(_scale_check.bind(yscalelbl))
-	yscalelbl.text_submitted.connect(func(txt): EditorGlobal.selected_obj.scale.y = float(txt); $gui/propertiesui/propertiespanel/org/scales/yslider.value = float(txt))
+	yscalelbl.text_submitted.connect(func(txt): EditorGlobal.selected_obj.scale.y = float(txt); $gui/propertiesui/propertiespanel/ScrollContainer/org/scales/yslider.value = float(txt))
 	xmovelbl.text_changed.connect(_move_check.bind(xmovelbl))
 	xmovelbl.text_submitted.connect(func(txt): EditorGlobal.selected_obj.move_x = float(txt))
 	ymovelbl.text_changed.connect(_move_check.bind(ymovelbl))
 	ymovelbl.text_submitted.connect(func(txt): EditorGlobal.selected_obj.move_y = float(txt))
+	targxscalelbl.text_changed.connect(_targ_scale_check.bind(targxscalelbl))
+	targxscalelbl.text_submitted.connect(func(txt): EditorGlobal.selected_obj.targ_scale_x = float(txt) * sign(EditorGlobal.selected_obj.scale.x); $gui/propertiesui/propertiespanel/ScrollContainer/org/targscales/xslider.value = float(txt))
+	targyscalelbl.text_changed.connect(_targ_scale_check.bind(targyscalelbl))
+	targyscalelbl.text_submitted.connect(func(txt): EditorGlobal.selected_obj.targ_scale_y = float(txt); $gui/propertiesui/propertiespanel/ScrollContainer/org/targscales/yslider.value = float(txt))
 	$gui/groupsui/groupspanel/btns/addgroupbtn.pressed.connect(_generate_group.bind(true))
 	$gui/groupsui/groupspanel/X.pressed.connect(func(): $gui/groupsui/groupspanel.visible = false)
 	$gui/groupsui/globalgroupspanel/X.pressed.connect(func(): $gui/groupsui/groupspanel.visible = false; $gui/groupsui/globalgroupspanel.visible = false)
+	$gui/levelsettingsui/settingspanel/X.pressed.connect(func(): $gui/levelsettingsui/settingspanel.visible = false)
 	$gui/groupsui/groupspanel/groupscategories.tab_selected.connect(_group_category_changed)
 	$gui/groupsui/globalgroupspanel/btns/findgroupbtn.pressed.connect(_find_group_row)
 	$gui/groupsui/globalgroupspanel/btns/selectallbtn.pressed.connect(_select_all_in_group)
 	$gui/groupsui/globalgroupspanel/btns/deleteallbtn.pressed.connect(_delete_all_in_group)
 	$gui/propertiesui/propertiespanel/ScrollContainer/org/HSlider.value_changed.connect(_rotation_value_changed)
+	$gui/propertiesui/propertiespanel/ScrollContainer/org/targrotslider.value_changed.connect(_targ_rot_value_changed)
 	$gui/propertiesui/propertiespanel/ScrollContainer/org/scales/xslider.value_changed.connect(_scale_value_changed.bind("x"))
 	$gui/propertiesui/propertiespanel/ScrollContainer/org/scales/yslider.value_changed.connect(_scale_value_changed.bind("y"))
+	$gui/propertiesui/propertiespanel/ScrollContainer/org/targscales/xslider.value_changed.connect(_targ_scale_value_changed.bind("x"))
+	$gui/propertiesui/propertiespanel/ScrollContainer/org/targscales/yslider.value_changed.connect(_targ_scale_value_changed.bind("y"))
 	$gui/propertiesui/propertiespanel/X.pressed.connect(func(): $gui/propertiesui/propertiespanel.visible = false)
 	$gui/propertiesui/propertiespanel/ScrollContainer/org/modulate.color_changed.connect(func(color): EditorGlobal.selected_obj.mod = color; EditorGlobal.selected_obj.modulate = color)
 	$gui/propertiesui/propertiespanel/ScrollContainer/org/zindexbox.value_changed.connect(func(val : float): EditorGlobal.selected_obj.z_index = int(val))
-	$gui/propertiesui/propertiespanel/ScrollContainer/org/fliplbl/fliptoggle.toggled.connect(func(on : bool): if not updating_properties: EditorGlobal.selected_obj.scale.x *= -1)
-	$gui/levelslider.value_changed.connect(func(val : float): cam.position.x = val)
-	$gui/levelslider.drag_ended.connect(func(changed): $gui/levelslider.release_focus())
-	$gui/gridsnap/toggle.toggled.connect(func(toggle : bool): gridsnap = toggle)
+	$gui/propertiesui/propertiespanel/ScrollContainer/org/fontsizebox.value_changed.connect(func(val : float): EditorGlobal.selected_obj.font_size = int(val))
+	$gui/propertiesui/propertiespanel/ScrollContainer/org/fliplbl/fliptoggle.toggled.connect(func(_on : bool): if not updating_properties: EditorGlobal.selected_obj.scale.x *= -1)
+	$gui/levelslider.value_changed.connect(func(val : float): cam.position.x = val; grid.queue_redraw())
+	$gui/levelslider.drag_ended.connect(func(_changed): $gui/levelslider.release_focus())
+	$gui/gridsnap/toggle.toggled.connect(func(toggle : bool): gridsnap = toggle; $gui/gridsnap/toggle.release_focus())
 	$gui/propertiesui/propertiespanel/ScrollContainer/org/targetcolor.color_changed.connect(func(color): EditorGlobal.selected_obj.targ_color = color)
 	durationedit.text_changed.connect(_duration_check)
 	durationedit.text_submitted.connect(func(txt): EditorGlobal.selected_obj.duration = float(txt))
+	$gui/levelsettingsui/settingspanel/org/choosesong.item_selected.connect(func(idx : int): song_id = SongDatabase.song_definitions[idx].id)
+	$gui/levelsettingsui/settingspanel/org/speedbtn.pressed.connect(_next_speed)
+	$gui/navigationui/menubtnoffset/MenuButton/PanelContainer/VBoxContainer/levelsettingsbtn.pressed.connect(func(): $gui/levelsettingsui/settingspanel.visible = true)
+	$gui/levelsettingsui/settingspanel/org/lvlnameenter.text_changed.connect(func(txt : String): lvl_name = txt)
+	$gui/navigationui/menubtnoffset/MenuButton.toggled.connect(_menu_button_toggled)
+	$gui/navigationui/menubtnoffset/MenuButton/PanelContainer/VBoxContainer/controlsbtn.pressed.connect(func(): $gui/controlstutorialui/controlspanel.visible = true)
+	$gui/controlstutorialui/controlspanel/X.pressed.connect(func(): $gui/controlstutorialui/controlspanel.visible = false)
+	$gui/levelsettingsui/settingspanel/org/filler/glowtoggle.toggled.connect(func(toggled : bool): glow_enabled = toggled)
+	$gui/levelsettingsui/settingspanel/org/filler2/gridtoggle.toggled.connect(func(toggled : bool): grid_visual_enabled = toggled; $grid.visible = grid_visual_enabled)
+	$gui/navigationui/menubtnoffset/MenuButton/PanelContainer/VBoxContainer/backbtn.pressed.connect(func(): await global.fade_tween(true); get_tree().change_scene_to_file("res://scenes/editorlevelmenu.tscn"))
+	$gui/navigationui/menubtnoffset/MenuButton/PanelContainer/VBoxContainer/mainmenubtn.pressed.connect(func(): await global.fade_tween(true); get_tree().change_scene_to_file("res://scenes/mainmenu.tscn"))
 	
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("editor_click"):
@@ -188,6 +246,7 @@ func _unhandled_input(event: InputEvent) -> void:
 				for obj in EditorGlobal.objects_selected:
 					drag_offsets.append(obj.global_position - get_global_mouse_position())
 		elif EditorGlobal.modes.selecting:
+			click_start_pos = get_global_mouse_position()
 			var obj = clicked_obj
 			clicked_obj = null
 			if obj == null:
@@ -207,10 +266,13 @@ func _unhandled_input(event: InputEvent) -> void:
 		elif event.is_action_pressed("unselect"):
 			clear_selected()
 	if event.is_action_pressed("savelvl"):
-		LevelLoader.save_level("user://levelname.json", $levelobjects)
+		LevelLoader.save_level(EditorGlobal.current_lvl, $levelobjects, generate_settings_dictionary())
 		save_tween()
 	elif event.is_action_pressed("duplicate"):
-		duplicate_object()
+		var objs = EditorGlobal.objects_selected.duplicate()
+		clear_selected()
+		for obj in objs:
+			duplicate_object(obj)
 	for input in TOOL_KEY_MAPPING:
 		if event.is_action_pressed(input):
 			_change_mode(TOOL_KEY_MAPPING.find(input))
@@ -246,8 +308,12 @@ func create_object():
 
 func _on_playtest_pressed() -> void:
 	EditorGlobal.playtest = true
-	LevelLoader.save_level("user://levelname.json", $levelobjects)
+	_on_savenplaybtn_pressed()
+
+func _on_savenplaybtn_pressed() -> void:
+	LevelLoader.save_level(EditorGlobal.current_lvl, $levelobjects, generate_settings_dictionary())
 	get_tree().change_scene_to_file("res://scenes/game.tscn")
+
 
 func _change_mode(mode : int):
 	var i = 0
@@ -352,10 +418,20 @@ func recalibrate_level_slider():
 
 func _object_selected(obj : LevelObject):
 	clicked_obj = obj
-	clear_selected()
-	EditorGlobal.objects_selected.append(obj)
-	EditorGlobal.selected_obj = obj
-	EditorGlobal.selected_obj.modulate = Color(0.5, 1.5, 1.5, 1.5)
+	if not Input.is_action_pressed("addremoveselect"):
+		clear_selected()
+	if Input.is_action_pressed("addremoveselect"):
+		if not obj in EditorGlobal.objects_selected:
+			EditorGlobal.objects_selected.append(obj)
+			EditorGlobal.selected_obj = obj
+			EditorGlobal.selected_obj.modulate = Color(0.5, 1.5, 1.5, 1.5)
+		elif obj in EditorGlobal.objects_selected:
+			EditorGlobal.objects_selected.erase(obj)
+			EditorGlobal.selected_obj.modulate = EditorGlobal.selected_obj.mod
+	elif Input.is_action_pressed("editor_click"):
+		EditorGlobal.objects_selected.append(obj)
+		EditorGlobal.selected_obj = obj
+		EditorGlobal.selected_obj.modulate = Color(0.5, 1.5, 1.5, 1.5)
 
 func clear_selected():
 	for obj in EditorGlobal.objects_selected:
@@ -432,16 +508,26 @@ func _custom_group_check():
 func _rotation_check(txt : String):
 	if (txt.is_valid_float() and float(txt) >= -360.0 and float(txt) <= 360.0) or txt == "":
 		old_txt.rotation = txt
+		EditorGlobal.selected_obj.rotation_degrees = float(txt)
 	else:
 		rotationlbl.text = old_txt.rotation
 		rotationlbl.set_caret_column(len(rotationlbl.text))
 
+func _song_start_time_check(txt : String):
+	if (txt.is_valid_float() and float(txt) >= 0.0) or txt == "":
+		old_txt.songstarttime = txt
+		song_start_time = float(txt)
+	else:
+		songstarttime.text = old_txt.songstarttime
+		songstarttime.set_caret_column(len(songstarttime.text))
+
 func _targ_rot_check(txt : String):
 	if (txt.is_valid_float() and float(txt) >= -360.0 and float(txt) <= 360.0) or txt == "":
-		old_txt.rotation = txt
+		old_txt.targ_rot = txt
+		EditorGlobal.selected_obj.targ_rot = float(txt)
 	else:
-		rotationlbl.text = old_txt.rotation
-		rotationlbl.set_caret_column(len(rotationlbl.text))
+		targrotlbl.text = old_txt.targ_rot
+		targrotlbl.set_caret_column(len(targrotlbl.text))
 
 func _duration_check(txt : String):
 	if (txt.is_valid_float() and float(txt) >= 0.0) or txt == "":
@@ -451,15 +537,29 @@ func _duration_check(txt : String):
 		durationedit.text = old_txt.duration
 		durationedit.set_caret_column(len(durationedit.text))
 
-
 func _scale_check(txt : String, lineedit : LineEdit):
 	if (txt.is_valid_float() and float(txt) >= 0.05 and float(txt) <= 25.0) or txt == "":
 		if "x" in str(lineedit.get_parent().name):
 			old_txt.xscale = txt
+			EditorGlobal.selected_obj.scale.x = float(txt)
 		else:
 			old_txt.yscale = txt
+			EditorGlobal.selected_obj.scale.y = float(txt)
 	else:
 		var old = old_txt.xscale if "x" in str(lineedit.get_parent().name) else old_txt.yscale
+		lineedit.text = old
+		lineedit.set_caret_column(len(lineedit.text))
+
+func _targ_scale_check(txt : String, lineedit : LineEdit):
+	if (txt.is_valid_float() and float(txt) >= 0.05 and float(txt) <= 25.0) or txt == "":
+		if "x" in str(lineedit.get_parent().name):
+			old_txt.targxscale = txt
+			EditorGlobal.selected_obj.targ_scale_x = float(txt)
+		else:
+			old_txt.targyscale = txt
+			EditorGlobal.selected_obj.targ_scale_y = float(txt)
+	else:
+		var old = old_txt.targxscale if "x" in str(lineedit.get_parent().name) else old_txt.targyscale
 		lineedit.text = old
 		lineedit.set_caret_column(len(lineedit.text))
 
@@ -578,6 +678,10 @@ func _rotation_value_changed(val : float):
 	rotationlbl.text = str(val)
 	EditorGlobal.selected_obj.rotation_degrees = val
 
+func _targ_rot_value_changed(val : float):
+	targrotlbl.text = str(val)
+	EditorGlobal.selected_obj.targ_rot = val
+
 func _scale_value_changed(val : float, type : String):
 	if type == "x":
 		xscalelbl.text = str(val)
@@ -585,7 +689,15 @@ func _scale_value_changed(val : float, type : String):
 	else:
 		yscalelbl.text = str(val)
 		EditorGlobal.selected_obj.scale.y = val
-	
+		
+func _targ_scale_value_changed(val : float, type : String):
+	if type == "x":
+		targxscalelbl.text = str(val)
+		EditorGlobal.selected_obj.targ_scale_x = val * sign(EditorGlobal.selected_obj.scale.x)
+	else:
+		targyscalelbl.text = str(val)
+		EditorGlobal.selected_obj.targ_scale_y = val
+
 
 func create_pre_image():
 	if EditorGlobal.preimage != null: EditorGlobal.preimage.queue_free();
@@ -606,8 +718,7 @@ func create_helper_trail():
 		line.width = 5
 		line.default_color = Color.WHITE
 
-func duplicate_object():
-	var og = EditorGlobal.selected_obj
+func duplicate_object(og : LevelObject):
 	var obj = og.duplicate(Node.DUPLICATE_SCRIPTS | Node.DUPLICATE_SIGNALS | Node.DUPLICATE_USE_INSTANTIATION)
 	var def = EditorGlobal.object_defintions[obj.get_meta("id")] 
 	var mx = def.max_amount
@@ -616,14 +727,14 @@ func duplicate_object():
 		if object_counts.get(id, 0) >= mx:
 			return
 	$levelobjects.add_child(obj)
-	obj.global_position += Vector2.ONE * 100
+	obj.global_position += Vector2.ONE * GRIDSIZE
 	for gid in og.group_ids:
 		EditorGlobal.groups[gid].append(obj)
 		obj.add_group(gid, true)
 	for targ in og.targets:
 		obj.add_group(targ, false)
-	clear_selected()
 	EditorGlobal.objects_selected.append(obj)
+	obj.modulate = Color(0.5, 1.5, 1.5, 1.5)
 	EditorGlobal.selected_obj = obj
 	obj.object_clicked.connect(_object_selected)
 	recalibrate_level_slider()
@@ -638,7 +749,15 @@ func trigger_ui_check(obj : LevelObject):
 		$gui/propertiesui/propertiespanel/ScrollContainer/org/durationlbl,
 		$gui/propertiesui/propertiespanel/ScrollContainer/org/durationedit,
 		$gui/propertiesui/propertiespanel/ScrollContainer/org/distancelbl,
-		$gui/propertiesui/propertiespanel/ScrollContainer/org/distances
+		$gui/propertiesui/propertiespanel/ScrollContainer/org/distances,
+		$gui/propertiesui/propertiespanel/ScrollContainer/org/targrotlbl,
+		$gui/propertiesui/propertiespanel/ScrollContainer/org/targrotslider,
+		$gui/propertiesui/propertiespanel/ScrollContainer/org/targscalelbl,
+		$gui/propertiesui/propertiespanel/ScrollContainer/org/targscales,
+		$gui/propertiesui/propertiespanel/ScrollContainer/org/textlbl,
+		$gui/propertiesui/propertiespanel/ScrollContainer/org/TextEdit,
+		$gui/propertiesui/propertiespanel/ScrollContainer/org/fontsizelbl,
+		$gui/propertiesui/propertiespanel/ScrollContainer/org/fontsizebox
 	]
 	for ui in custom_properties_uis:
 		ui.visible = false
@@ -649,7 +768,7 @@ func trigger_ui_check(obj : LevelObject):
 		$gui/propertiesui/propertiespanel/ScrollContainer/org/durationedit.visible = true
 		$gui/propertiesui/propertiespanel/ScrollContainer/org/durationedit.text = str(obj.duration)
 	match id:
-		"bgcolortrigger":
+		"bgcolortrigger", "colortrigger":
 			$gui/propertiesui/propertiespanel/ScrollContainer/org/targetcolorlbl.visible = true
 			$gui/propertiesui/propertiespanel/ScrollContainer/org/targetcolor.visible = true
 			$gui/propertiesui/propertiespanel/ScrollContainer/org/targetcolor.color = obj.targ_color
@@ -659,9 +778,94 @@ func trigger_ui_check(obj : LevelObject):
 			$gui/propertiesui/propertiespanel/ScrollContainer/org/distances.visible = true
 			$gui/propertiesui/propertiespanel/ScrollContainer/org/distances/movex/movelbl.text = str(obj.move_x)
 			$gui/propertiesui/propertiespanel/ScrollContainer/org/distances/movey/movelbl.text = str(obj.move_y)
+		
+		"rotationtrigger":
+			$gui/propertiesui/propertiespanel/ScrollContainer/org/targrotlbl.visible = true
+			$gui/propertiesui/propertiespanel/ScrollContainer/org/targrotslider.visible = true
+			$gui/propertiesui/propertiespanel/ScrollContainer/org/targrotslider.value = obj.targ_rot
+			$gui/propertiesui/propertiespanel/ScrollContainer/org/targrotslider/targrotlbl.text = str(obj.targ_rot)
+		
+		"scaletrigger":
+			$gui/propertiesui/propertiespanel/ScrollContainer/org/targscalelbl.visible = true
+			$gui/propertiesui/propertiespanel/ScrollContainer/org/targscales.visible = true
+			$gui/propertiesui/propertiespanel/ScrollContainer/org/targscales/xslider.value = obj.targ_scale_x
+			$gui/propertiesui/propertiespanel/ScrollContainer/org/targscales/yslider.value = obj.targ_scale_y
+			$gui/propertiesui/propertiespanel/ScrollContainer/org/targscales/xslider/targscalelbl.text = str(obj.targ_scale_x)
+			$gui/propertiesui/propertiespanel/ScrollContainer/org/targscales/yslider/targscalelbl.text = str(obj.targ_scale_y)
+		
+		"textobject":
+			$gui/propertiesui/propertiespanel/ScrollContainer/org/textlbl.visible = true
+			$gui/propertiesui/propertiespanel/ScrollContainer/org/TextEdit.visible = true
+			$gui/propertiesui/propertiespanel/ScrollContainer/org/fontsizelbl.visible = true
+			$gui/propertiesui/propertiespanel/ScrollContainer/org/fontsizebox.visible = true
+			$gui/propertiesui/propertiespanel/ScrollContainer/org/TextEdit.text = obj.objecttext
+			$gui/propertiesui/propertiespanel/ScrollContainer/org/fontsizebox.value = obj.font_size
 
 func save_tween():
 	var tween = create_tween().set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
 	tween.tween_property($gui/savepanel, "global_position:y", 75, 0.35)
 	tween.tween_property($gui/savepanel, "global_position:y", -142, 0.35).set_delay(0.5)
 	await tween.finished
+
+func settings_setup(data : Dictionary):
+	lvl_name = data.level_name
+	$gui/levelsettingsui/settingspanel/org/lvlnameenter.text = lvl_name
+	gridsnap = data.gridsnap_enabled
+	$gui/gridsnap/toggle.button_pressed = gridsnap
+	grid_visual_enabled = data.grid_enabled
+	$grid.visible = grid_visual_enabled
+	generate_song_options()
+	song_id = data.song_id
+	$gui/levelsettingsui/settingspanel/org/choosesong.select(SongDatabase.get_song(song_id).index)
+	song_start_time = data.song_start_time
+	$gui/levelsettingsui/settingspanel/org/songstarttime.text = str(song_start_time)
+	start_speed = [data.start_speed, speedicons.keys().find(data.start_speed)]
+	$gui/levelsettingsui/settingspanel/org/speedbtn.icon.region = speedicons[start_speed.front()]
+	glow_enabled = data.glow_enabled
+	$gui/levelsettingsui/settingspanel/org/filler/glowtoggle.button_pressed = glow_enabled
+
+func generate_song_options():
+	$gui/levelsettingsui/settingspanel/org/choosesong.clear()
+	for song in SongDatabase.song_definitions:
+		$gui/levelsettingsui/settingspanel/org/choosesong.add_item(song.display_name)
+	for i in range($gui/levelsettingsui/settingspanel/org/choosesong.item_count):
+		var itemname = $gui/levelsettingsui/settingspanel/org/choosesong.get_item_text(i)
+		if itemname == "":
+			$gui/levelsettingsui/settingspanel/org/choosesong.remove_item(i)
+			break
+
+func generate_settings_dictionary():
+	return {
+		"level_name": lvl_name,
+		"gridsnap_enabled": gridsnap,
+		"grid_visual_enabled": grid_visual_enabled,
+		"song_id": song_id,
+		"song_start_time": song_start_time,
+		"start_speed": start_speed.front(),
+		"glow_enabled": glow_enabled
+	}
+
+func _next_speed():
+	var idx = start_speed.back() + 1
+	if idx > speedicons.size() - 1:
+		idx = 0
+	start_speed = [speedicons.keys()[idx], idx]
+	$gui/levelsettingsui/settingspanel/org/speedbtn.icon.region = speedicons[start_speed.front()]
+
+func fade_in_tween(node):
+	var tween = create_tween().set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
+	tween.tween_property(node, "modulate:a", 1.0, 0.2)
+	await tween.finished
+
+func _menu_button_toggled(toggled : bool):
+	if toggled:
+		await get_tree().create_timer(0.1).timeout
+		$gui/navigationui/menubtnoffset/MenuButton/PanelContainer.visible = true
+		for btn in $gui/navigationui/menubtnoffset/MenuButton/PanelContainer/VBoxContainer.get_children():
+			if btn is Button:
+				await fade_in_tween(btn)
+	else:
+		$gui/navigationui/menubtnoffset/MenuButton/PanelContainer.visible = false
+		for btn in $gui/navigationui/menubtnoffset/MenuButton/PanelContainer/VBoxContainer.get_children():
+			if btn is Button:
+				btn.modulate.a = 0.0

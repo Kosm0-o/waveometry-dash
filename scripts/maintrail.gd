@@ -20,3 +20,7 @@ func reset():
 	for l in get_children():
 		l.clear_points()
 		l.starter_frames = 250
+
+func set_starter_frames(num : int):
+	for l in get_children():
+		l.starter_frames = num

@@ -1,13 +1,12 @@
-[gd_scene load_steps=23 format=3 uid="uid://btrtpdonnmiig"]
+[gd_scene load_steps=22 format=3 uid="uid://btrtpdonnmiig"]
 
 [ext_resource type="PackedScene" uid="uid://d2yi0cqbfih7l" path="res://scenes/player.tscn" id="1_uwrxv"]
 [ext_resource type="Script" uid="uid://dy525wqc8vffw" path="res://scripts/gamemanager.gd" id="1_yqjtg"]
 [ext_resource type="PackedScene" uid="uid://cc2x03pdfnfcu" path="res://scenes/trail.tscn" id="2_iywne"]
-[ext_resource type="AudioStream" uid="uid://5j5ws1vswys6" path="res://assets/467339_At_the_Speed_of_Light_FINA.mp3" id="2_vtaks"]
 [ext_resource type="Script" uid="uid://boiyb54qyfsae" path="res://scripts/testtrail.gd" id="3_lbhrr"]
 [ext_resource type="Script" uid="uid://ditedlujyd1k2" path="res://scripts/gamegui.gd" id="5_kvuet"]
 [ext_resource type="Texture2D" uid="uid://b3rl17jtvbpoq" path="res://assets/pausemenuspritesheet.png" id="6_trtic"]
-[ext_resource type="PackedScene" uid="uid://yb37xbjlif6d" path="res://scenes/block.tscn" id="14_trtic"]
+[ext_resource type="PackedScene" uid="uid://bek88ijduqy2k" path="res://scenes/dblock.tscn" id="7_gee14"]
 
 [sub_resource type="Environment" id="Environment_trtic"]
 background_mode = 3
@@ -76,8 +75,6 @@ script = ExtResource("1_yqjtg")
 player = NodePath("Map/players/Player")
 
 [node name="song" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("2_vtaks")
-autoplay = true
 attenuation = 1e-05
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
@@ -210,14 +207,13 @@ texture_pressed = SubResource("AtlasTexture_pl11u")
 [node name="Map" type="Node2D" parent="."]
 
 [node name="Borders" type="Node2D" parent="Map"]
-modulate = Color(1, 1, 1, 0.00784314)
 position = Vector2(-510, 0)
 
-[node name="border" parent="Map/Borders" instance=ExtResource("14_trtic")]
-position = Vector2(0, 655)
-
-[node name="border2" parent="Map/Borders" instance=ExtResource("14_trtic")]
+[node name="bordertop" parent="Map/Borders" instance=ExtResource("7_gee14")]
 position = Vector2(0, -659)
+
+[node name="borderbottom" parent="Map/Borders" instance=ExtResource("7_gee14")]
+position = Vector2(0, 655)
 
 [node name="players" type="Node2D" parent="Map"]
 z_index = 1

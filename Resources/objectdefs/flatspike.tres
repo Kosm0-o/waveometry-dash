@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="ObjectResource" load_steps=3 format=3 uid="uid://msrlj8knmx51"]
+
+[ext_resource type="PackedScene" uid="uid://8kpddd58gs6d" path="res://scenes/45degspike.tscn" id="1_gyxau"]
+[ext_resource type="Script" uid="uid://b7ivepggsojwl" path="res://scripts/objectresource.gd" id="2_5qdaf"]
+
+[resource]
+script = ExtResource("2_5qdaf")
+id = "flatspike"
+display_name = "Flat Spike"
+scene = ExtResource("1_gyxau")
+category = "hazards"
+max_amount = 0
+metadata/_custom_type_script = "uid://b7ivepggsojwl"

@@ -1,4 +1,4 @@
-extends Node2D
+extends LevelObject
 
 enum GAMEMODES {NORMAL, FLUX, STAIRSMASTER, RICOCHET}
 @export var gamemode : GAMEMODES = GAMEMODES.FLUX
@@ -27,11 +27,21 @@ var modeinfo : Array[Dictionary] = [
 
 
 func _ready() -> void:
+	match get_meta("id"):
+		"normalgamemodeportal":
+			gamemode = GAMEMODES.NORMAL
+		"fluxgamemodeportal":
+			gamemode = GAMEMODES.FLUX
+		"stairsmastergamemodeportal":
+			gamemode = GAMEMODES.STAIRSMASTER
+		"ricochetgamemodeportal":
+			gamemode = GAMEMODES.RICOCHET
 	$sprites.play(modeinfo[gamemode]["name"])
 	$particles.modulate = modeinfo[gamemode]["color"]
 	$boop.modulate = modeinfo[gamemode]["color"]
 	$boop.modulate.a = 2
 	$sprites/fronthalf.position = modeinfo[gamemode]["frontpos"]
+
 
 func _on_area_2d_area_entered(area) -> void:
 	area = area.get_parent()

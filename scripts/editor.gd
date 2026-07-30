@@ -74,7 +74,6 @@ func _ready() -> void:
 	#LevelLoader.save_level(EditorGlobal.current_lvl, $levelobjects, {})
 	EditorGlobal.editing = true
 	global.trans_rect = $trans/ColorRect
-	global.fade_tween(false)
 	var lvl_data = LevelLoader.load_level(EditorGlobal.current_lvl, $levelobjects)
 	settings_setup(lvl_data)
 	$gui/groupsui/globalgroupspanel/groupid.get_line_edit().add_theme_constant_override("minimum_character_width", 13)
@@ -86,8 +85,11 @@ func _ready() -> void:
 	create_helper_trail()
 	$gui/propertiesui/propertiespanel/ScrollContainer/org/modulate.modulate.a = 1.35638298
 	$gui/propertiesui/propertiespanel/ScrollContainer/org/targetcolor.modulate.a = 1.35638298
-	$gui/modes/select.modulate = Color.YELLOW
+	_change_mode(0)
 	generate_buttons(0)
+	setup_buttons()
+	await global.fade_tween(false)
+	RenderingServer.set_default_clear_color(Color("#292929"))
 #	for song in SongDatabase.song_definitions:
 #		print(song.display_name, ": ", song.audio)
 
@@ -120,6 +122,8 @@ func _process(delta: float) -> void:
 				if cur_rect.intersects(obj.get_editor_rect()):
 					if EditorGlobal.modes.deleting:
 						if EditorGlobal.object_defintions[obj.get_meta("id")].max_amount > 0: _object_deleted(obj)
+						for id in obj.group_ids:
+							EditorGlobal.groups[id].erase(obj)
 						obj.queue_free()
 					if EditorGlobal.modes.selecting:
 						if not obj in EditorGlobal.objects_selected:
@@ -139,10 +143,17 @@ func _process(delta: float) -> void:
 	$gui/propertiesbtn.visible = EditorGlobal.selected_obj != null and EditorGlobal.objects_selected.size() == 1
 	$gui/navigationui/menubtnoffset/MenuButton.icon.region = Rect2(288.0, 4.0, 144.0, 148.0) if not $gui/navigationui/menubtnoffset/MenuButton.button_pressed else Rect2(0.0, 156.0, 144.0, 156.0)
 	$gui/navigationui/menubtnoffset.rotation_degrees = lerpf($gui/navigationui/menubtnoffset.rotation_degrees, -90 if $gui/navigationui/menubtnoffset/MenuButton.button_pressed else 0, 12 * delta)
+	$gui/groupsui/customborder.visible = $gui/groupsui/globalgroupspanel.visible or $gui/groupsui/groupspanel.visible
 
 func connect_signals():
 	EditorGlobal.object_deleted.connect(_object_deleted)
-	$gui/editortabs.tab_changed.connect(generate_buttons)
+	$gui/editortabs.tab_changed.connect(func(tabnum : int):
+		generate_buttons(tabnum)
+		for i in range($gui/editortabs.get_children().size()):
+			$gui/editortabs.get_child(i).modulate.a = 0.3
+			if i == tabnum:
+				$gui/editortabs.get_child(i).modulate.a = 1.0
+	)
 	var c = 0
 	for mode in $gui/modes.get_children():
 		if not mode is Button: continue
@@ -233,8 +244,8 @@ func connect_signals():
 	$gui/controlstutorialui/controlspanel/X.pressed.connect(func(): $gui/controlstutorialui/controlspanel.visible = false)
 	$gui/levelsettingsui/settingspanel/org/filler/glowtoggle.toggled.connect(func(toggled : bool): glow_enabled = toggled)
 	$gui/levelsettingsui/settingspanel/org/filler2/gridtoggle.toggled.connect(func(toggled : bool): grid_visual_enabled = toggled; $grid.visible = grid_visual_enabled)
-	$gui/navigationui/menubtnoffset/MenuButton/PanelContainer/VBoxContainer/backbtn.pressed.connect(func(): await global.fade_tween(true); get_tree().change_scene_to_file("res://scenes/editorlevelmenu.tscn"))
-	$gui/navigationui/menubtnoffset/MenuButton/PanelContainer/VBoxContainer/mainmenubtn.pressed.connect(func(): await global.fade_tween(true); get_tree().change_scene_to_file("res://scenes/mainmenu.tscn"))
+	$gui/navigationui/menubtnoffset/MenuButton/PanelContainer/VBoxContainer/backbtn.pressed.connect(func(): LevelLoader.save_level(EditorGlobal.current_lvl, $levelobjects, generate_settings_dictionary()); await global.fade_tween(true); get_tree().change_scene_to_file("res://scenes/editorlevelmenu.tscn"))
+	$gui/navigationui/menubtnoffset/MenuButton/PanelContainer/VBoxContainer/mainmenubtn.pressed.connect(func(): LevelLoader.save_level(EditorGlobal.current_lvl, $levelobjects, generate_settings_dictionary()); await global.fade_tween(true); get_tree().change_scene_to_file("res://scenes/mainmenu.tscn"))
 	
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("editor_click"):
@@ -262,6 +273,8 @@ func _unhandled_input(event: InputEvent) -> void:
 			objs.append_array(EditorGlobal.objects_selected)
 			clear_selected()
 			for obj in objs:
+				for id in obj.group_ids:
+					EditorGlobal.groups[id].erase(obj)
 				obj.queue_free()
 		elif event.is_action_pressed("unselect"):
 			clear_selected()
@@ -336,11 +349,12 @@ func _change_mode(mode : int):
 		btn = $gui/modes/delete
 	Input.set_default_cursor_shape(c)
 	for b in $gui/modes.get_children():
-		b.modulate = Color.WHITE
-	btn.modulate = Color.YELLOW
+		b.self_modulate = Color.WHITE
+	btn.self_modulate = Color.YELLOW
 	
 func _object_deleted(obj : LevelObject):
 	upd_obj_count(obj.get_meta("id"), -1)
+	
 
 func upd_obj_count(id : String, remove : int):
 	object_counts.set(id, object_counts.get(id, 0) + 1 * remove)
@@ -357,31 +371,48 @@ func generate_buttons(tabnum : int):
 	var category = EditorGlobal.CATEGORIES[tabnum]
 	var vals = EditorGlobal.object_defintions.values()
 	var hboxes = editorvbox.get_children()
-	for i in range(3):
+	for i in range(hboxes.size()):
 		for child in hboxes[i].get_children(): child.queue_free()
 	for i in range(vals.size()):
 		var def = vals[i]
 		if def.category != category: continue
 		if def != null:
 			var btn = Button.new()
-			btn.text = def.display_name
+			btn.icon = preload("res://Resources/visuals/editorbtnbackgroundicon.tres")
+			btn.flat = true
 			btn.set_meta("id", def.id)
-			btn.pressed.connect((func(d : Resource): EditorGlobal.editor_selection = d).bind(def))
-			hboxes[i % 3].add_child(btn)
-			object_btns[def.id] = {"button": btn}
+			if not object_btns.has(def.id):
+				object_btns[def.id] = {"button": btn, "current": false}
+			else:
+				object_btns[def.id].button = btn
+			btn.pressed.connect((func(d : Resource): EditorGlobal.editor_selection = d; button_highlights(btn); object_btns[def.id].current = true).bind(def))
+			if object_btns[def.id].has("current"):
+				if object_btns[def.id].current:
+					button_highlights(btn)
+			hboxes[i % 2].add_child(btn)
+			btn.focus_mode = Control.FOCUS_NONE
+			btn.mouse_entered.connect(highlight.bind(btn, true))
+			btn.mouse_exited.connect(highlight.bind(btn, false))
+			var icon = TextureRect.new()
+			icon.texture = def.icon
+			icon.expand_mode = TextureRect.EXPAND_KEEP_SIZE
+			btn.add_child(icon)
+			icon.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+			var subscale = min(84.0 / icon.size.x, 84.0 / icon.size.y)
+			icon.size *= subscale
+			icon.position = Vector2(
+				(btn.size.x - icon.size.x) / 2,
+				(btn.size.y - icon.size.y) / 2
+			)
 			if def.max_amount > 0:
 				var lbl = Label.new()
-				var settings = LabelSettings.new()
-				settings.font_size = 13
-				settings.outline_color = Color("#2e2e2e")
-				settings.outline_size = 7
+				lbl.label_settings = load("res://Resources/visuals/pusabcustomized.tres")
 				lbl.text = str(int(def.max_amount - object_counts.get(def.id, 0))) + "/" + str(def.max_amount)
-				lbl.label_settings = settings
 				lbl.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 				lbl.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 				btn.add_child(lbl)
 				lbl.size = btn.size
-				lbl.position.y = 15.375
+				lbl.position.y = 65.0
 				object_btns[def.id] = {"button": btn, "label": lbl}
 
 func re_obj_counts():
@@ -492,10 +523,18 @@ func _generate_group_visual(group_id : int):
 	var cms = Vector2(114.9, 58.87)
 	var btn = Button.new()
 	btn.custom_minimum_size = cms
-	btn.set("theme_override_styles/normal", load("res://Resources/visuals/groupid.tres"))
+	btn.icon = preload("res://assets/rectanglebuttongd.svg")
+	btn.icon_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	btn.flat = true
+	btn.add_theme_constant_override("outline_size", 5)
+	btn.theme = load("res://Resources/visuals/editablepusab.tres")
 	btn.text = str(group_id)
+	btn.self_modulate = Color.WHITE
 	$gui/groupsui/groupspanel/idscroll/groupids.add_child(btn)
 	btn.pressed.connect(_group_removal_check.bind(EditorGlobal.selected_obj, btn, group_id))
+	btn.mouse_entered.connect(highlight.bind(btn, true))
+	btn.mouse_exited.connect(highlight.bind(btn, false))
+	btn.focus_mode = Control.FOCUS_NONE
 
 func _custom_group_check():
 	if (identer.text.is_valid_int() or identer.text == "") and len(identer.text) <= 15:
@@ -669,7 +708,10 @@ func _delete_all_in_group():
 	for id in EditorGlobal.groups:
 		if id == group:
 			for obj in EditorGlobal.groups[id]:
+				if not is_instance_valid(obj): continue
 				_object_deleted(obj)
+				for gid in obj.group_ids:
+					EditorGlobal.groups[gid].erase(obj)
 				obj.queue_free()
 	EditorGlobal.groups.erase(int(group))
 	refresh_global_groups_ui()
@@ -715,7 +757,7 @@ func create_helper_trail():
 		var line = Line2D.new()
 		$helperline.add_child(line)
 		line.points = EditorGlobal.trail_points
-		line.width = 5
+		line.width = 10
 		line.default_color = Color.WHITE
 
 func duplicate_object(og : LevelObject):
@@ -735,6 +777,19 @@ func duplicate_object(og : LevelObject):
 		obj.add_group(targ, false)
 	EditorGlobal.objects_selected.append(obj)
 	obj.modulate = Color(0.5, 1.5, 1.5, 1.5)
+	obj.mod = og.mod
+	obj.scale = og.scale
+	obj.rotation_degrees = og.rotation_degrees
+	obj.z_index = og.z_index
+	obj.targ_color = og.targ_color
+	obj.duration = og.duration
+	obj.move_x = og.move_x
+	obj.move_y = og.move_y
+	obj.targ_rot = og.targ_rot
+	obj.targ_scale_x = og.targ_scale_x
+	obj.targ_scale_y = og.targ_scale_y
+	obj.objecttext = og.objecttext
+	obj.font_size = og.font_size
 	EditorGlobal.selected_obj = obj
 	obj.object_clicked.connect(_object_selected)
 	recalibrate_level_slider()
@@ -869,3 +924,23 @@ func _menu_button_toggled(toggled : bool):
 		for btn in $gui/navigationui/menubtnoffset/MenuButton/PanelContainer/VBoxContainer.get_children():
 			if btn is Button:
 				btn.modulate.a = 0.0
+
+func highlight(node : Node, entered : bool):
+	node.modulate = Color.WHITE if not entered else Color.WHITE * 1.3
+
+func button_highlights(btn : Button):
+	for b in $gui/editorscroll.find_children("*", "Button", true, false):
+		b.self_modulate = Color.WHITE
+	for b in object_btns:
+		object_btns[b].current = false
+	btn.self_modulate = Color.YELLOW * 0.85
+	btn.self_modulate.a = 1.0
+
+func setup_buttons():
+	for btn in find_children("*", "Button", true, false):
+		if not btn.mouse_entered.is_connected(highlight):
+			btn.mouse_entered.connect(highlight.bind(btn, true))
+			btn.mouse_exited.connect(highlight.bind(btn, false))
+			btn.focus_mode = Control.FOCUS_NONE
+	$gui/levelslider.mouse_entered.connect(highlight.bind($gui/levelslider, true))
+	$gui/levelslider.mouse_exited.connect(highlight.bind($gui/levelslider, false))

@@ -1,12 +1,19 @@
-[gd_resource type="Resource" script_class="ObjectResource" load_steps=3 format=3 uid="uid://chjbry0dgjr8u"]
+[gd_resource type="Resource" script_class="ObjectResource" load_steps=5 format=3 uid="uid://chjbry0dgjr8u"]
 
+[ext_resource type="Texture2D" uid="uid://5jvrrbutemvg" path="res://assets/padsspritesheet.png" id="1_6i0yh"]
 [ext_resource type="PackedScene" uid="uid://ewqticosrtkg" path="res://scenes/pad.tscn" id="1_sai17"]
 [ext_resource type="Script" uid="uid://b7ivepggsojwl" path="res://scripts/objectresource.gd" id="2_6i0yh"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7ueku"]
+atlas = ExtResource("1_6i0yh")
+region = Rect2(3, 18, 44, 10)
 
 [resource]
 script = ExtResource("2_6i0yh")
 id = "pinkpad"
 display_name = "Pink Pad"
 scene = ExtResource("1_sai17")
+icon = SubResource("AtlasTexture_7ueku")
 category = "interactables"
+max_amount = 0
 metadata/_custom_type_script = "uid://b7ivepggsojwl"

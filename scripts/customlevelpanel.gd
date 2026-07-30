@@ -4,10 +4,16 @@ extends Panel
 var lvl = null
 var oglabeltxt : String = ""
 
+func _ready() -> void:
+	for btn in get_children():
+		if btn is Button:
+			btn.mouse_entered.connect(highlight.bind(btn, true))
+			btn.mouse_exited.connect(highlight.bind(btn, false))
+
 func _process(delta: float) -> void:
 	if label.size.x > 636.0:
 		var div = (636.0 / label.size.x)
-		label.label_settings.font_size = 66.0 * div
+		label.label_settings.font_size = 33.0 * div
 		label.label_settings.outline_size = 18.0 * div
 		label.label_settings.shadow_size = 7.0 * div
 
@@ -42,3 +48,6 @@ func _on_nobtn_pressed() -> void:
 	$deletebtn.show()
 	$yesbtn.hide()
 	$nobtn.hide()
+
+func highlight(node : Node, entered : bool):
+	node.modulate = Color.WHITE if not entered else Color.WHITE * 1.3

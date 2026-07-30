@@ -1,12 +1,19 @@
-[gd_resource type="Resource" script_class="ObjectResource" load_steps=3 format=3 uid="uid://bxlm84qvm661"]
+[gd_resource type="Resource" script_class="ObjectResource" load_steps=5 format=3 uid="uid://bxlm84qvm661"]
 
+[ext_resource type="Texture2D" uid="uid://bpf2svg517x6b" path="res://assets/orbsspritesheet.png" id="1_egic3"]
 [ext_resource type="PackedScene" uid="uid://fa7xrx36wu6v" path="res://scenes/orb.tscn" id="1_yu2wa"]
 [ext_resource type="Script" uid="uid://b7ivepggsojwl" path="res://scripts/objectresource.gd" id="2_egic3"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_imxy0"]
+atlas = ExtResource("1_egic3")
+region = Rect2(650, 91, 96, 94)
 
 [resource]
 script = ExtResource("2_egic3")
 id = "yelloworb"
 display_name = "Yellow Orb"
 scene = ExtResource("1_yu2wa")
+icon = SubResource("AtlasTexture_imxy0")
 category = "interactables"
+max_amount = 0
 metadata/_custom_type_script = "uid://b7ivepggsojwl"

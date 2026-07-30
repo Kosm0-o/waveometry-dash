@@ -27,10 +27,11 @@ func _process(delta: float) -> void:
 	if pos.distance_squared_to(last_point_pos) >= pow(between_length, 2) or Input.is_action_just_pressed("game_click") or Input.is_action_just_released("game_click"):
 		add_point(pos)
 		last_point_pos = pos
-		if starter_frames <= 0:
-			frames -= 1
-			if frames == 0:
-				remove_point(0)
-				frames = NEWFRAMES
+		if not EditorGlobal.playtest:
+			if starter_frames <= 0:
+				frames -= 1
+				if frames == 0:
+					remove_point(0)
+					frames = NEWFRAMES
 	if points.size() > 0:
 		points[points.size() - 1] = pos

@@ -1,12 +1,17 @@
-[gd_scene load_steps=22 format=3 uid="uid://btrtpdonnmiig"]
+[gd_scene load_steps=37 format=3 uid="uid://btrtpdonnmiig"]
 
 [ext_resource type="PackedScene" uid="uid://d2yi0cqbfih7l" path="res://scenes/player.tscn" id="1_uwrxv"]
 [ext_resource type="Script" uid="uid://dy525wqc8vffw" path="res://scripts/gamemanager.gd" id="1_yqjtg"]
+[ext_resource type="Texture2D" uid="uid://dixwsann4wcy4" path="res://assets/gdbgmodulatable.svg" id="2_dinhu"]
 [ext_resource type="PackedScene" uid="uid://cc2x03pdfnfcu" path="res://scenes/trail.tscn" id="2_iywne"]
-[ext_resource type="Script" uid="uid://boiyb54qyfsae" path="res://scripts/testtrail.gd" id="3_lbhrr"]
 [ext_resource type="Script" uid="uid://ditedlujyd1k2" path="res://scripts/gamegui.gd" id="5_kvuet"]
+[ext_resource type="LabelSettings" uid="uid://dh4mtswsaqy2r" path="res://Resources/visuals/pusabcustomized.tres" id="6_dinhu"]
 [ext_resource type="Texture2D" uid="uid://b3rl17jtvbpoq" path="res://assets/pausemenuspritesheet.png" id="6_trtic"]
 [ext_resource type="PackedScene" uid="uid://bek88ijduqy2k" path="res://scenes/dblock.tscn" id="7_gee14"]
+[ext_resource type="Theme" uid="uid://dume7nemxq63b" path="res://Resources/visuals/editablepusab.tres" id="7_kvuet"]
+[ext_resource type="Texture2D" uid="uid://vffedftkysfq" path="res://assets/icons-decos-ui-spritesheet.png" id="8_trtic"]
+[ext_resource type="FontFile" uid="uid://c21leaucdjxc0" path="res://assets/fonts/PUSAB___.otf" id="9_ir15t"]
+[ext_resource type="Texture2D" uid="uid://b8vr4anp6aaie" path="res://assets/icons-ui-buttons-spritesheet2.png" id="10_ca42v"]
 
 [sub_resource type="Environment" id="Environment_trtic"]
 background_mode = 3
@@ -16,6 +21,10 @@ glow_levels/2 = 2.7
 glow_levels/7 = 0.65
 glow_bloom = 0.11
 glow_blend_mode = 0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dinhu"]
+atlas = ExtResource("2_dinhu")
+region = Rect2(3.785, 0, 478.35, 361)
 
 [sub_resource type="InputEventKey" id="InputEventKey_kvuet"]
 device = -1
@@ -34,9 +43,6 @@ corner_radius_top_left = 35
 corner_radius_top_right = 35
 corner_radius_bottom_right = 35
 corner_radius_bottom_left = 35
-
-[sub_resource type="LabelSettings" id="LabelSettings_rysoc"]
-font_size = 46
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ssvqc"]
 atlas = ExtResource("6_trtic")
@@ -70,34 +76,81 @@ region = Rect2(144, 156, 144, 156)
 atlas = ExtResource("6_trtic")
 region = Rect2(432, 0, 144, 156)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_rysoc"]
+atlas = ExtResource("8_trtic")
+region = Rect2(1698, 746, 450, 38)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bhx41"]
+atlas = ExtResource("8_trtic")
+region = Rect2(416, 746, 450, 38)
+
+[sub_resource type="FontVariation" id="FontVariation_5lcyj"]
+base_font = ExtResource("9_ir15t")
+spacing_glyph = 2
+
+[sub_resource type="LabelSettings" id="LabelSettings_qnb83"]
+font = SubResource("FontVariation_5lcyj")
+font_size = 35
+outline_size = 6
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 7
+shadow_color = Color(0, 0, 0, 0.333333)
+shadow_offset = Vector2(7.89, 4.055)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sww3w"]
+atlas = ExtResource("8_trtic")
+region = Rect2(3040, 138, 330, 234)
+
+[sub_resource type="LabelSettings" id="LabelSettings_suyxu"]
+font = SubResource("FontVariation_5lcyj")
+font_size = 34
+outline_size = 18
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 7
+shadow_color = Color(0, 0, 0, 0.333333)
+shadow_offset = Vector2(7.89, 4.055)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sgl2t"]
+atlas = ExtResource("10_ca42v")
+region = Rect2(493, 125, 418, 21)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qouja"]
+atlas = ExtResource("10_ca42v")
+region = Rect2(25, 128, 418, 22)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wljb1"]
+atlas = ExtResource("10_ca42v")
+region = Rect2(1101, 66, 139, 138)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_v2yb1"]
+
 [node name="game" type="Node2D" node_paths=PackedStringArray("player")]
 script = ExtResource("1_yqjtg")
 player = NodePath("Map/players/Player")
 
 [node name="song" type="AudioStreamPlayer2D" parent="."]
 attenuation = 1e-05
+bus = &"Music"
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_trtic")
 
 [node name="bg" type="Parallax2D" parent="."]
-repeat_size = Vector2(4000, 2500)
+z_index = -4096
+repeat_size = Vector2(2304, 1296)
+repeat_times = 10
 
-[node name="black" type="ColorRect" parent="bg"]
-offset_left = -528.0
-offset_top = -346.0
-offset_right = 3472.0
-offset_bottom = 2154.0
-color = Color(0, 0, 0, 1)
+[node name="bgtexture" type="TextureRect" parent="bg"]
+modulate = Color(4.66868e-05, 0, 0.608089, 1)
+offset_left = -1153.0
+offset_top = -643.0
+offset_right = 1151.0
+offset_bottom = 653.0
+texture = SubResource("AtlasTexture_dinhu")
 metadata/_edit_use_anchors_ = true
 
 [node name="trail" parent="." node_paths=PackedStringArray("player") instance=ExtResource("2_iywne")]
 player = NodePath("../Map/players/Player")
-
-[node name="trail2" type="Polygon2D" parent="."]
-visible = false
-z_as_relative = false
-script = ExtResource("3_lbhrr")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 top_level = true
@@ -108,10 +161,10 @@ remote_path = NodePath("../../song")
 update_rotation = false
 update_scale = false
 
-[node name="Node2D" type="Node2D" parent="Camera2D"]
+[node name="borderoffset" type="Node2D" parent="Camera2D"]
 position = Vector2(-510, 0)
 
-[node name="RemoteTransformBorder" type="RemoteTransform2D" parent="Camera2D/Node2D"]
+[node name="RemoteTransformBorder" type="RemoteTransform2D" parent="Camera2D/borderoffset"]
 remote_path = NodePath("../../../Map/Borders")
 update_rotation = false
 update_scale = false
@@ -147,19 +200,21 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_ca42v")
 
 [node name="LevelTitle" type="Label" parent="GUI/PauseMenu"]
 layout_mode = 0
-offset_left = 441.0
-offset_top = 92.0
-offset_right = 664.0
-offset_bottom = 156.0
+offset_left = 123.0
+offset_top = 113.0
+offset_right = 1040.0
+offset_bottom = 145.0
 text = "Level Title"
-label_settings = SubResource("LabelSettings_rysoc")
+label_settings = ExtResource("6_dinhu")
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Buttons" type="Control" parent="GUI/PauseMenu"]
 anchors_preset = 0
 offset_left = 243.0
-offset_top = 308.0
+offset_top = 243.0
 offset_right = 283.0
-offset_bottom = 348.0
+offset_bottom = 283.0
 
 [node name="HboxContainer" type="HBoxContainer" parent="GUI/PauseMenu/Buttons"]
 layout_mode = 2
@@ -204,16 +259,153 @@ focus_mode = 0
 texture_normal = SubResource("AtlasTexture_e1j6l")
 texture_pressed = SubResource("AtlasTexture_pl11u")
 
+[node name="ProgressBar" type="TextureProgressBar" parent="GUI/PauseMenu"]
+layout_mode = 0
+offset_left = 170.0
+offset_top = 171.0
+offset_right = 620.0
+offset_bottom = 219.0
+scale = Vector2(1.825, 1.245)
+theme = ExtResource("7_kvuet")
+texture_under = SubResource("AtlasTexture_rysoc")
+texture_progress = SubResource("AtlasTexture_bhx41")
+
+[node name="percentage" type="Label" parent="GUI/PauseMenu/ProgressBar"]
+layout_mode = 0
+offset_left = 203.479
+offset_top = 11.2447
+offset_right = 257.479
+offset_bottom = 38.2447
+scale = Vector2(0.548, 0.8)
+text = "0%"
+label_settings = SubResource("LabelSettings_qnb83")
+
+[node name="border" type="TextureRect" parent="GUI/PauseMenu"]
+layout_mode = 0
+offset_left = 74.0
+offset_top = 34.0
+offset_right = 1087.0
+offset_bottom = 625.0
+mouse_filter = 2
+texture = SubResource("AtlasTexture_sww3w")
+
+[node name="musicslidernode" type="Control" parent="GUI/PauseMenu"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="musicv" type="Label" parent="GUI/PauseMenu/musicslidernode"]
+layout_mode = 0
+offset_left = 35.0
+offset_top = 505.0
+offset_right = 332.0
+offset_bottom = 529.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 41
+text = "Music"
+label_settings = SubResource("LabelSettings_suyxu")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="slider" type="Control" parent="GUI/PauseMenu/musicslidernode"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="sliderfill" type="TextureProgressBar" parent="GUI/PauseMenu/musicslidernode/slider"]
+layout_mode = 0
+offset_left = 242.0
+offset_top = 504.0
+offset_right = 660.0
+offset_bottom = 526.0
+scale = Vector2(0.855, 1.14)
+min_value = -55.0
+max_value = 6.0
+texture_under = SubResource("AtlasTexture_sgl2t")
+texture_progress = SubResource("AtlasTexture_qouja")
+
+[node name="musicslider" type="HSlider" parent="GUI/PauseMenu/musicslidernode/slider"]
+custom_minimum_size = Vector2(350, 0)
+layout_mode = 0
+offset_left = 244.0
+offset_top = 495.0
+offset_right = 1403.0
+offset_bottom = 633.0
+scale = Vector2(0.307, 0.307)
+theme_override_icons/grabber = SubResource("AtlasTexture_wljb1")
+theme_override_icons/grabber_highlight = SubResource("AtlasTexture_wljb1")
+theme_override_styles/slider = SubResource("StyleBoxEmpty_v2yb1")
+theme_override_styles/grabber_area = SubResource("StyleBoxEmpty_v2yb1")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxEmpty_v2yb1")
+min_value = -55.0
+max_value = 6.0
+step = 0.5
+
+[node name="sfxslidernode" type="Control" parent="GUI/PauseMenu"]
+anchors_preset = 0
+offset_left = 476.0
+offset_right = 516.0
+offset_bottom = 40.0
+
+[node name="sfxv" type="Label" parent="GUI/PauseMenu/sfxslidernode"]
+layout_mode = 0
+offset_left = 132.0
+offset_top = 505.0
+offset_right = 204.0
+offset_bottom = 529.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 41
+text = "SFX"
+label_settings = SubResource("LabelSettings_suyxu")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="slider" type="Control" parent="GUI/PauseMenu/sfxslidernode"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="sliderfill" type="TextureProgressBar" parent="GUI/PauseMenu/sfxslidernode/slider"]
+layout_mode = 0
+offset_left = 207.0
+offset_top = 504.0
+offset_right = 625.0
+offset_bottom = 526.0
+scale = Vector2(0.855, 1.14)
+min_value = -55.0
+max_value = 6.0
+texture_under = SubResource("AtlasTexture_sgl2t")
+texture_progress = SubResource("AtlasTexture_qouja")
+
+[node name="sfxslider" type="HSlider" parent="GUI/PauseMenu/sfxslidernode/slider"]
+custom_minimum_size = Vector2(350, 0)
+layout_mode = 0
+offset_left = 209.0
+offset_top = 495.0
+offset_right = 1368.0
+offset_bottom = 633.0
+scale = Vector2(0.307, 0.307)
+theme_override_icons/grabber = SubResource("AtlasTexture_wljb1")
+theme_override_icons/grabber_highlight = SubResource("AtlasTexture_wljb1")
+theme_override_styles/slider = SubResource("StyleBoxEmpty_v2yb1")
+theme_override_styles/grabber_area = SubResource("StyleBoxEmpty_v2yb1")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxEmpty_v2yb1")
+min_value = -55.0
+max_value = 6.0
+step = 0.5
+
 [node name="Map" type="Node2D" parent="."]
 
 [node name="Borders" type="Node2D" parent="Map"]
 position = Vector2(-510, 0)
 
 [node name="bordertop" parent="Map/Borders" instance=ExtResource("7_gee14")]
-position = Vector2(0, -659)
+position = Vector2(0, -681)
+scale = Vector2(41.895, 1)
 
 [node name="borderbottom" parent="Map/Borders" instance=ExtResource("7_gee14")]
-position = Vector2(0, 655)
+position = Vector2(0, 681)
+scale = Vector2(41.895, 1)
 
 [node name="players" type="Node2D" parent="Map"]
 z_index = 1

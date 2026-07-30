@@ -1,13 +1,19 @@
-[gd_resource type="Resource" script_class="ObjectResource" load_steps=3 format=3 uid="uid://c7vi25uwsydxp"]
+[gd_resource type="Resource" script_class="ObjectResource" load_steps=5 format=3 uid="uid://c7vi25uwsydxp"]
 
+[ext_resource type="Texture2D" uid="uid://be0pr2htcknmm" path="res://assets/iconsforportalsspritesheetrecompilation.png" id="1_bjnnq"]
 [ext_resource type="PackedScene" uid="uid://c4sqlto7kttv1" path="res://scenes/mirrorportal.tscn" id="1_monv0"]
 [ext_resource type="Script" uid="uid://b7ivepggsojwl" path="res://scripts/objectresource.gd" id="2_bjnnq"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f0g6h"]
+atlas = ExtResource("1_bjnnq")
+region = Rect2(447, 366, 161, 215)
 
 [resource]
 script = ExtResource("2_bjnnq")
 id = "backwardmirrorportal"
 display_name = "Backward Mirror Portal"
 scene = ExtResource("1_monv0")
+icon = SubResource("AtlasTexture_f0g6h")
 category = "portals"
 max_amount = 0
 metadata/_custom_type_script = "uid://b7ivepggsojwl"

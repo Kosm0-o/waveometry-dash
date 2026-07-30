@@ -1,7 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://yb37xbjlif6d"]
+[gd_scene load_steps=6 format=3 uid="uid://yb37xbjlif6d"]
 
-[ext_resource type="Texture2D" uid="uid://dc5luvhx3oew6" path="res://assets/particlesquare.svg" id="1_8r6n6"]
 [ext_resource type="Script" uid="uid://bfrciggpeot6l" path="res://scripts/block.gd" id="1_cgrg5"]
+[ext_resource type="Texture2D" uid="uid://b8vr4anp6aaie" path="res://assets/icons-ui-buttons-spritesheet2.png" id="2_cgrg5"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4kun4"]
+atlas = ExtResource("2_cgrg5")
+region = Rect2(2061, 633, 89, 89)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4kun4"]
 size = Vector2(88, 88)
@@ -17,8 +21,7 @@ group_bools = {
 }
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(6.365, 6.365)
-texture = ExtResource("1_8r6n6")
+texture = SubResource("AtlasTexture_4kun4")
 
 [node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
 position = Vector2(-0.500001, -0.499997)

@@ -1,13 +1,19 @@
-[gd_resource type="Resource" script_class="ObjectResource" load_steps=3 format=3 uid="uid://cyjk3dwcq0sic"]
+[gd_resource type="Resource" script_class="ObjectResource" load_steps=5 format=3 uid="uid://cyjk3dwcq0sic"]
 
+[ext_resource type="Texture2D" uid="uid://be0pr2htcknmm" path="res://assets/iconsforportalsspritesheetrecompilation.png" id="1_71y6q"]
 [ext_resource type="PackedScene" uid="uid://dcnw2ni1n582x" path="res://scenes/gamemodeportal.tscn" id="1_pjcf8"]
 [ext_resource type="Script" uid="uid://b7ivepggsojwl" path="res://scripts/objectresource.gd" id="2_71y6q"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y3bg7"]
+atlas = ExtResource("1_71y6q")
+region = Rect2(247, 997, 139, 218)
 
 [resource]
 script = ExtResource("2_71y6q")
 id = "normalgamemodeportal"
 display_name = "Normal Gamemode Portal"
 scene = ExtResource("1_pjcf8")
+icon = SubResource("AtlasTexture_y3bg7")
 category = "portals"
 max_amount = 0
 metadata/_custom_type_script = "uid://b7ivepggsojwl"

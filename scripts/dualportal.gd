@@ -18,6 +18,7 @@ var dualinfo : Array[Dictionary] = [
 ]
 
 func object_ready() -> void:
+	global.dualing = false
 	match get_meta("id"):
 		"dualportal":
 			dual = MODES.DUAL

@@ -4,6 +4,6 @@ extends LevelObject
 
 func _process(delta: float) -> void:
 	$Label.text = objecttext
-	$Label.add_theme_font_size_override("font_size", font_size)
+	$Label.label_settings.font_size = font_size
 	shape.size = $Label.size
 	$clickdetector/CollisionShape2D.position = shape.size / 2 + $Label.position

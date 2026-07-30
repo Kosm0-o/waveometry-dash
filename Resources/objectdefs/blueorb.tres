@@ -1,13 +1,19 @@
-[gd_resource type="Resource" script_class="ObjectResource" load_steps=3 format=3 uid="uid://otgpvw6aghlv"]
+[gd_resource type="Resource" script_class="ObjectResource" load_steps=5 format=3 uid="uid://otgpvw6aghlv"]
 
 [ext_resource type="PackedScene" uid="uid://fa7xrx36wu6v" path="res://scenes/orb.tscn" id="1_2ipbv"]
+[ext_resource type="Texture2D" uid="uid://bpf2svg517x6b" path="res://assets/orbsspritesheet.png" id="1_k427l"]
 [ext_resource type="Script" uid="uid://b7ivepggsojwl" path="res://scripts/objectresource.gd" id="2_k427l"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dleal"]
+atlas = ExtResource("1_k427l")
+region = Rect2(92, 645, 96, 94)
 
 [resource]
 script = ExtResource("2_k427l")
 id = "blueorb"
 display_name = "Blue Orb"
 scene = ExtResource("1_2ipbv")
+icon = SubResource("AtlasTexture_dleal")
 category = "interactables"
 max_amount = 0
 metadata/_custom_type_script = "uid://b7ivepggsojwl"

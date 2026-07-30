@@ -2,10 +2,10 @@
 
 [ext_resource type="FontFile" uid="uid://c21leaucdjxc0" path="res://assets/fonts/PUSAB___.otf" id="1_5bo7o"]
 
-[sub_resource type="FontVariation" id="FontVariation_grgw0"]
+[sub_resource type="FontVariation" id="FontVariation_5tm2q"]
 base_font = ExtResource("1_5bo7o")
 spacing_glyph = 2
 
 [resource]
-default_font = SubResource("FontVariation_grgw0")
+default_font = SubResource("FontVariation_5tm2q")
 default_font_size = 41

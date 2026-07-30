@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="ObjectResource" load_steps=5 format=3 uid="uid://bv7sc5vdmqgw4"]
+
+[ext_resource type="Texture2D" uid="uid://vffedftkysfq" path="res://assets/icons-decos-ui-spritesheet.png" id="1_gru46"]
+[ext_resource type="PackedScene" uid="uid://bsj7mygtuxgjl" path="res://scenes/deco.tscn" id="2_s518s"]
+[ext_resource type="Script" uid="uid://b7ivepggsojwl" path="res://scripts/objectresource.gd" id="3_e0upk"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cb5xj"]
+atlas = ExtResource("1_gru46")
+region = Rect2(5689, 1195, 160, 160)
+
+[resource]
+script = ExtResource("3_e0upk")
+id = "circledeco"
+display_name = "Circle Deco"
+scene = ExtResource("2_s518s")
+icon = SubResource("AtlasTexture_cb5xj")
+category = "deco"
+max_amount = 0
+metadata/_custom_type_script = "uid://b7ivepggsojwl"

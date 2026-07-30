@@ -1,7 +1,55 @@
-[gd_scene load_steps=4 format=3 uid="uid://c8dkls50qsedm"]
+[gd_scene load_steps=17 format=3 uid="uid://c8dkls50qsedm"]
 
 [ext_resource type="Script" uid="uid://bft1tp3vnxaud" path="res://scripts/settingspanel.gd" id="1_5kjfj"]
+[ext_resource type="Texture2D" uid="uid://cjhmqr08gd07" path="res://assets/textsspritesheet1.png" id="2_dfh7l"]
 [ext_resource type="Texture2D" uid="uid://vffedftkysfq" path="res://assets/icons-decos-ui-spritesheet.png" id="2_uk3nw"]
+[ext_resource type="FontFile" uid="uid://c21leaucdjxc0" path="res://assets/fonts/PUSAB___.otf" id="3_5bu7b"]
+[ext_resource type="Texture2D" uid="uid://b8vr4anp6aaie" path="res://assets/icons-ui-buttons-spritesheet2.png" id="4_5bu7b"]
+[ext_resource type="Texture2D" uid="uid://lgi1kob385sm" path="res://assets/xbuttongd.svg" id="6_6erqq"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6erqq"]
+atlas = ExtResource("2_dfh7l")
+region = Rect2(242, 651, 591, 98)
+
+[sub_resource type="FontVariation" id="FontVariation_5bu7b"]
+base_font = ExtResource("3_5bu7b")
+spacing_glyph = 2
+
+[sub_resource type="LabelSettings" id="LabelSettings_aponl"]
+font = SubResource("FontVariation_5bu7b")
+font_size = 39
+outline_size = 18
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 7
+shadow_color = Color(0, 0, 0, 0.333333)
+shadow_offset = Vector2(7.89, 4.055)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aponl"]
+atlas = ExtResource("4_5bu7b")
+region = Rect2(493, 125, 418, 21)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ohfe3"]
+atlas = ExtResource("4_5bu7b")
+region = Rect2(25, 128, 418, 22)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5bu7b"]
+atlas = ExtResource("4_5bu7b")
+region = Rect2(1101, 66, 139, 138)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5bu7b"]
+
+[sub_resource type="FontVariation" id="FontVariation_5lcyj"]
+base_font = ExtResource("3_5bu7b")
+spacing_glyph = 2
+
+[sub_resource type="LabelSettings" id="LabelSettings_ohfe3"]
+font = SubResource("FontVariation_5lcyj")
+font_size = 39
+outline_size = 18
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 7
+shadow_color = Color(0, 0, 0, 0.333333)
+shadow_offset = Vector2(7.89, 4.055)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_yv6mx"]
 atlas = ExtResource("2_uk3nw")
@@ -17,33 +65,21 @@ grow_vertical = 2
 script = ExtResource("1_5kjfj")
 
 [node name="settingspanel" type="Panel" parent="."]
-modulate = Color(0.396889, 0.396889, 0.396889, 1)
+self_modulate = Color(0.423651, 0.423651, 0.423651, 1)
 layout_mode = 0
 offset_left = 250.0
 offset_top = 25.0
 offset_right = 929.0
 offset_bottom = 627.0
 
-[node name="X" type="Button" parent="settingspanel"]
+[node name="Label" type="TextureRect" parent="settingspanel"]
 layout_mode = 0
-offset_left = 602.0
-offset_top = 8.0
-offset_right = 671.0
-offset_bottom = 86.0
-theme_override_font_sizes/font_size = 51
-text = "X"
-
-[node name="Label" type="Label" parent="settingspanel"]
-layout_mode = 0
-offset_left = 7.0
-offset_top = 10.0
-offset_right = 673.0
-offset_bottom = 94.0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 61
-text = "Settings"
-horizontal_alignment = 1
-vertical_alignment = 1
+offset_left = 100.0
+offset_top = 22.0
+offset_right = 564.0
+offset_bottom = 99.0
+texture = SubResource("AtlasTexture_6erqq")
+expand_mode = 1
 
 [node name="org" type="GridContainer" parent="settingspanel"]
 layout_mode = 0
@@ -58,6 +94,7 @@ layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 41
 text = "Music Volume"
+label_settings = SubResource("LabelSettings_aponl")
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -68,13 +105,32 @@ theme_override_font_sizes/font_size = 41
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="sliderfill" type="TextureProgressBar" parent="settingspanel/org/filler"]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 17.0
+offset_right = 420.0
+offset_bottom = 39.0
+scale = Vector2(0.855, 1.14)
+min_value = -55.0
+max_value = 6.0
+texture_under = SubResource("AtlasTexture_aponl")
+texture_progress = SubResource("AtlasTexture_ohfe3")
+
 [node name="musicslider" type="HSlider" parent="settingspanel/org/filler"]
 custom_minimum_size = Vector2(350, 0)
 layout_mode = 2
-offset_left = 5.0
-offset_top = 22.0
-offset_right = 355.0
-offset_bottom = 38.0
+offset_left = 4.0
+offset_top = 8.0
+offset_right = 1163.0
+offset_bottom = 146.0
+scale = Vector2(0.307, 0.307)
+focus_mode = 0
+theme_override_icons/grabber = SubResource("AtlasTexture_5bu7b")
+theme_override_icons/grabber_highlight = SubResource("AtlasTexture_5bu7b")
+theme_override_styles/slider = SubResource("StyleBoxEmpty_5bu7b")
+theme_override_styles/grabber_area = SubResource("StyleBoxEmpty_5bu7b")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxEmpty_5bu7b")
 min_value = -55.0
 max_value = 6.0
 step = 0.5
@@ -84,6 +140,7 @@ layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 41
 text = "SFX Volume"
+label_settings = SubResource("LabelSettings_ohfe3")
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -94,17 +151,37 @@ theme_override_font_sizes/font_size = 41
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="sliderfill" type="TextureProgressBar" parent="settingspanel/org/filler2"]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 17.0
+offset_right = 420.0
+offset_bottom = 39.0
+scale = Vector2(0.855, 1.14)
+min_value = -55.0
+max_value = 6.0
+value = 1.0
+texture_under = SubResource("AtlasTexture_aponl")
+texture_progress = SubResource("AtlasTexture_ohfe3")
+
 [node name="sfxslider" type="HSlider" parent="settingspanel/org/filler2"]
 custom_minimum_size = Vector2(350, 0)
-layout_mode = 2
-offset_left = 5.0
-offset_top = 22.0
-offset_right = 355.0
-offset_bottom = 38.0
+layout_mode = 0
+offset_left = 4.0
+offset_top = 8.0
+offset_right = 1163.0
+offset_bottom = 146.0
+scale = Vector2(0.307, 0.307)
+focus_mode = 0
+theme_override_icons/grabber = SubResource("AtlasTexture_5bu7b")
+theme_override_icons/grabber_highlight = SubResource("AtlasTexture_5bu7b")
+theme_override_styles/slider = SubResource("StyleBoxEmpty_5bu7b")
+theme_override_styles/grabber_area = SubResource("StyleBoxEmpty_5bu7b")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxEmpty_5bu7b")
 min_value = -55.0
 max_value = 6.0
 step = 0.5
-value = -7.0
+value = -7.5
 
 [node name="customborder" type="TextureRect" parent="."]
 layout_mode = 0
@@ -115,4 +192,16 @@ offset_bottom = 669.0
 mouse_filter = 2
 texture = SubResource("AtlasTexture_yv6mx")
 
-[connection signal="pressed" from="settingspanel/X" to="." method="_on_x_pressed"]
+[node name="X" type="Button" parent="."]
+layout_mode = 0
+offset_left = 874.0
+offset_top = -44.0
+offset_right = 1026.0
+offset_bottom = 112.0
+scale = Vector2(0.725, 0.725)
+focus_mode = 0
+theme_override_font_sizes/font_size = 51
+icon = ExtResource("6_6erqq")
+flat = true
+
+[connection signal="pressed" from="X" to="." method="_on_x_pressed"]

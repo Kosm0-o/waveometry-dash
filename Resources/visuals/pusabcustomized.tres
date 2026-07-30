@@ -2,13 +2,13 @@
 
 [ext_resource type="FontFile" uid="uid://c21leaucdjxc0" path="res://assets/fonts/PUSAB___.otf" id="1_grgw0"]
 
-[sub_resource type="FontVariation" id="FontVariation_grgw0"]
+[sub_resource type="FontVariation" id="FontVariation_5lcyj"]
 base_font = ExtResource("1_grgw0")
 spacing_glyph = 2
 
 [resource]
-font = SubResource("FontVariation_grgw0")
-font_size = 50
+font = SubResource("FontVariation_5lcyj")
+font_size = 40
 outline_size = 18
 outline_color = Color(0, 0, 0, 1)
 shadow_size = 7

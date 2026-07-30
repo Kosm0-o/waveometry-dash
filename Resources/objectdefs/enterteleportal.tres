@@ -1,13 +1,19 @@
-[gd_resource type="Resource" script_class="ObjectResource" load_steps=3 format=3 uid="uid://6rumbfojxxfy"]
+[gd_resource type="Resource" script_class="ObjectResource" load_steps=5 format=3 uid="uid://6rumbfojxxfy"]
 
 [ext_resource type="PackedScene" uid="uid://cv8gnfhudm0yc" path="res://scenes/teleportal.tscn" id="1_a18me"]
+[ext_resource type="Texture2D" uid="uid://be0pr2htcknmm" path="res://assets/iconsforportalsspritesheetrecompilation.png" id="1_ec6pp"]
 [ext_resource type="Script" uid="uid://b7ivepggsojwl" path="res://scripts/objectresource.gd" id="2_ec6pp"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j45j1"]
+atlas = ExtResource("1_ec6pp")
+region = Rect2(478, 670, 99, 240)
 
 [resource]
 script = ExtResource("2_ec6pp")
 id = "enterteleportal"
 display_name = "Entrance Teleport Portal"
 scene = ExtResource("1_a18me")
+icon = SubResource("AtlasTexture_j45j1")
 category = "portals"
 max_amount = 0
 metadata/_custom_type_script = "uid://b7ivepggsojwl"

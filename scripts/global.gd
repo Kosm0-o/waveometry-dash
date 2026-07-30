@@ -19,8 +19,11 @@ var xangle : bool = layout_rotation == 0 or layout_rotation == 180 # when you tr
 var yangle : bool = layout_rotation == 90 or layout_rotation == 270 # when you travel vertically
 var practice_mode : bool = false
 var all_checkpoints : Array = []
-var bg : ColorRect = null
+var bg : Control = null
 var trans_rect : ColorRect = null
+var progress : Dictionary = {
+	"time_leaper": 25.3
+}
 
 var startpos : Vector2 = Vector2.ZERO
 
@@ -34,7 +37,9 @@ func _input(event: InputEvent) -> void:
 		lowdetailmode = not lowdetailmode
 		complete_details = false
 
-func fade_tween(fade_in : bool):
+func fade_tween(fade_in : bool, time : float = 1.0):
+	RenderingServer.set_default_clear_color(Color.BLACK)
 	var tween = create_tween().set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT if not fade_in else Tween.EASE_IN)
-	tween.tween_property(trans_rect, "modulate:a", 1.0 if fade_in else 0.0, 1.0)
+	tween.tween_property(trans_rect, "modulate:a", 1.0 if fade_in else 0.0, time)
 	await tween.finished
+	RenderingServer.set_default_clear_color(Color.BLACK)

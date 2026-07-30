@@ -1,7 +1,18 @@
-[gd_scene load_steps=8 format=3 uid="uid://bp6hi685oo5u4"]
+[gd_scene load_steps=18 format=3 uid="uid://bp6hi685oo5u4"]
 
 [ext_resource type="Script" uid="uid://cdag2m7tqfdvu" path="res://scripts/levelselect.gd" id="1_xuh2y"]
+[ext_resource type="Theme" uid="uid://dume7nemxq63b" path="res://Resources/visuals/editablepusab.tres" id="2_4kdbh"]
+[ext_resource type="Texture2D" uid="uid://vffedftkysfq" path="res://assets/icons-decos-ui-spritesheet.png" id="2_aaiik"]
 [ext_resource type="AudioStream" uid="uid://c5cpkag0fagl7" path="res://assets/music/gdmenuoncrack.wav" id="2_vttqt"]
+[ext_resource type="Texture2D" uid="uid://cjhmqr08gd07" path="res://assets/textsspritesheet1.png" id="3_nqdjo"]
+[ext_resource type="FontFile" uid="uid://c21leaucdjxc0" path="res://assets/fonts/PUSAB___.otf" id="5_rsw7q"]
+
+[sub_resource type="Gradient" id="Gradient_n4sav"]
+colors = PackedColorArray(0.206084, 0.434075, 1, 1, 7.26774e-05, 0, 0.744056, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_ey6kh"]
+gradient = SubResource("Gradient_n4sav")
+fill_to = Vector2(0, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pneju"]
 bg_color = Color(0.121569, 0.121569, 0.121569, 0.631373)
@@ -10,20 +21,42 @@ corner_radius_top_right = 25
 corner_radius_bottom_right = 25
 corner_radius_bottom_left = 25
 
-[sub_resource type="Gradient" id="Gradient_xuh2y"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_a4q4k"]
+atlas = ExtResource("2_aaiik")
+region = Rect2(3133, 693, 144, 144)
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_vttqt"]
-gradient = SubResource("Gradient_xuh2y")
+[sub_resource type="AtlasTexture" id="AtlasTexture_x5apk"]
+atlas = ExtResource("3_nqdjo")
+region = Rect2(3225, 147, 1075, 105)
 
-[sub_resource type="LabelSettings" id="LabelSettings_4kdbh"]
-font_size = 51
+[sub_resource type="AtlasTexture" id="AtlasTexture_gddte"]
+atlas = ExtResource("2_aaiik")
+region = Rect2(1698, 746, 450, 38)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nqy8e"]
-bg_color = Color(0.121569, 0.121569, 0.121569, 0.631373)
-corner_radius_top_left = 100
-corner_radius_top_right = 100
-corner_radius_bottom_right = 100
-corner_radius_bottom_left = 100
+[sub_resource type="AtlasTexture" id="AtlasTexture_buxkt"]
+atlas = ExtResource("2_aaiik")
+region = Rect2(416, 746, 450, 38)
+
+[sub_resource type="FontVariation" id="FontVariation_aaiik"]
+base_font = ExtResource("5_rsw7q")
+spacing_glyph = 2
+
+[sub_resource type="LabelSettings" id="LabelSettings_ja5dh"]
+font = SubResource("FontVariation_aaiik")
+font_size = 35
+outline_size = 6
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 7
+shadow_color = Color(0, 0, 0, 0.333333)
+shadow_offset = Vector2(7.89, 4.055)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aaiik"]
+atlas = ExtResource("2_aaiik")
+region = Rect2(4446, 177, 79, 165)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nqdjo"]
+atlas = ExtResource("2_aaiik")
+region = Rect2(5717, 196, 108, 124)
 
 [node name="levelselect" type="Control"]
 layout_mode = 3
@@ -34,52 +67,20 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_xuh2y")
 
-[node name="bg" type="ColorRect" parent="."]
+[node name="bg" type="TextureRect" parent="."]
 layout_mode = 0
 offset_left = -8.0
 offset_top = -11.0
 offset_right = 1156.0
 offset_bottom = 662.0
-color = Color(0.138677, 0.371756, 1, 1)
-
-[node name="arrows" type="Control" parent="."]
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="left" type="Button" parent="arrows"]
-layout_mode = 0
-offset_left = 26.0
-offset_top = 290.0
-offset_right = 72.0
-offset_bottom = 389.0
-theme_override_font_sizes/font_size = 66
-text = "<"
-
-[node name="right" type="Button" parent="arrows"]
-layout_mode = 0
-offset_left = 1088.0
-offset_top = 299.0
-offset_right = 1134.0
-offset_bottom = 398.0
-theme_override_font_sizes/font_size = 66
-text = ">"
-
-[node name="back" type="Button" parent="arrows"]
-layout_mode = 0
-offset_left = 26.0
-offset_top = 5.0
-offset_right = 72.0
-offset_bottom = 104.0
-theme_override_font_sizes/font_size = 66
-text = "<"
+texture = SubResource("GradientTexture2D_ey6kh")
 
 [node name="main" type="Control" parent="."]
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="levelinfo" type="Panel" parent="main"]
+[node name="levelinfo2" type="Panel" parent="main"]
 layout_mode = 0
 offset_left = 162.0
 offset_top = 163.0
@@ -87,13 +88,67 @@ offset_right = 1004.0
 offset_bottom = 383.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_pneju")
 
+[node name="difficultyface" type="TextureRect" parent="main/levelinfo2"]
+layout_mode = 0
+offset_left = 102.0
+offset_top = 60.0
+offset_right = 184.0
+offset_bottom = 142.0
+texture = SubResource("AtlasTexture_a4q4k")
+expand_mode = 1
+
+[node name="Button" type="Button" parent="main/levelinfo2"]
+modulate = Color(1, 1, 1, 0.0117647)
+layout_mode = 0
+offset_right = 841.0
+offset_bottom = 217.0
+
+[node name="levelname" type="TextureRect" parent="main/levelinfo2"]
+layout_mode = 0
+offset_left = 124.0
+offset_top = 75.0
+offset_right = 769.0
+offset_bottom = 138.0
+texture = SubResource("AtlasTexture_x5apk")
+expand_mode = 1
+
+[node name="ProgressBar" type="TextureProgressBar" parent="main/levelinfo2"]
+layout_mode = 0
+offset_left = 14.0
+offset_top = 268.0
+offset_right = 464.0
+offset_bottom = 316.0
+scale = Vector2(1.825, 1.245)
+theme = ExtResource("2_4kdbh")
+texture_under = SubResource("AtlasTexture_gddte")
+texture_progress = SubResource("AtlasTexture_buxkt")
+
+[node name="percentage" type="Label" parent="main/levelinfo2/ProgressBar"]
+layout_mode = 0
+offset_left = 203.479
+offset_top = 11.2447
+offset_right = 257.479
+offset_bottom = 38.2447
+scale = Vector2(0.548, 0.8)
+text = "0%"
+label_settings = SubResource("LabelSettings_ja5dh")
+
+[node name="levelinfo" type="Panel" parent="main"]
+layout_mode = 0
+offset_left = 1323.0
+offset_top = 163.0
+offset_right = 2165.0
+offset_bottom = 383.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_pneju")
+
 [node name="difficultyface" type="TextureRect" parent="main/levelinfo"]
 layout_mode = 0
-offset_left = 76.0
-offset_top = 74.0
-offset_right = 140.0
-offset_bottom = 138.0
-texture = SubResource("GradientTexture2D_vttqt")
+offset_left = 102.0
+offset_top = 60.0
+offset_right = 184.0
+offset_bottom = 142.0
+texture = SubResource("AtlasTexture_a4q4k")
+expand_mode = 1
 
 [node name="Button" type="Button" parent="main/levelinfo"]
 modulate = Color(1, 1, 1, 0.0117647)
@@ -101,23 +156,78 @@ layout_mode = 0
 offset_right = 841.0
 offset_bottom = 217.0
 
-[node name="levelname" type="Label" parent="main/levelinfo"]
+[node name="levelname" type="TextureRect" parent="main/levelinfo"]
 layout_mode = 0
-offset_left = 279.0
-offset_top = 69.0
-offset_right = 583.0
-offset_bottom = 139.0
-text = "Time Leaper"
-label_settings = SubResource("LabelSettings_4kdbh")
+offset_left = 124.0
+offset_top = 75.0
+offset_right = 769.0
+offset_bottom = 138.0
+texture = SubResource("AtlasTexture_x5apk")
+expand_mode = 1
 
-[node name="ProgressBar" type="ProgressBar" parent="main"]
+[node name="ProgressBar" type="TextureProgressBar" parent="main/levelinfo"]
 layout_mode = 0
-offset_left = 184.0
-offset_top = 431.0
-offset_right = 979.0
-offset_bottom = 479.0
-theme_override_styles/background = SubResource("StyleBoxFlat_nqy8e")
-step = 1.0
+offset_left = 14.0
+offset_top = 268.0
+offset_right = 464.0
+offset_bottom = 316.0
+scale = Vector2(1.825, 1.245)
+theme = ExtResource("2_4kdbh")
+texture_under = SubResource("AtlasTexture_gddte")
+texture_progress = SubResource("AtlasTexture_buxkt")
+
+[node name="percentage" type="Label" parent="main/levelinfo/ProgressBar"]
+layout_mode = 0
+offset_left = 203.479
+offset_top = 11.2447
+offset_right = 257.479
+offset_bottom = 38.2447
+scale = Vector2(0.548, 0.8)
+text = "0%"
+label_settings = SubResource("LabelSettings_ja5dh")
+
+[node name="arrows" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="left" type="Button" parent="arrows"]
+modulate = Color(0.868985, 0.868985, 0.868985, 1)
+layout_mode = 0
+offset_left = 16.0
+offset_top = 237.5
+offset_right = 103.0
+offset_bottom = 410.5
+scale = Vector2(0.64, 0.64)
+focus_mode = 0
+theme_override_font_sizes/font_size = 66
+icon = SubResource("AtlasTexture_aaiik")
+flat = true
+
+[node name="right" type="Button" parent="arrows"]
+modulate = Color(0.868985, 0.868985, 0.868985, 1)
+layout_mode = 0
+offset_left = 1141.0
+offset_top = 237.5
+offset_right = 1228.0
+offset_bottom = 410.5
+scale = Vector2(-0.64, 0.64)
+focus_mode = 0
+theme_override_font_sizes/font_size = 66
+icon = SubResource("AtlasTexture_aaiik")
+flat = true
+
+[node name="back" type="Button" parent="arrows"]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 132.0
+offset_bottom = 148.0
+scale = Vector2(0.64, 0.64)
+focus_mode = 0
+theme_override_font_sizes/font_size = 66
+icon = SubResource("AtlasTexture_nqdjo")
+flat = true
 
 [node name="trans" type="CanvasLayer" parent="."]
 layer = 128

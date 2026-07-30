@@ -1,13 +1,19 @@
-[gd_resource type="Resource" script_class="ObjectResource" load_steps=3 format=3 uid="uid://bpiluy5d30e5s"]
+[gd_resource type="Resource" script_class="ObjectResource" load_steps=5 format=3 uid="uid://bpiluy5d30e5s"]
 
 [ext_resource type="PackedScene" uid="uid://dr1xtmfnp78gl" path="res://scenes/gravityportal.tscn" id="1_drhya"]
+[ext_resource type="Texture2D" uid="uid://be0pr2htcknmm" path="res://assets/iconsforportalsspritesheetrecompilation.png" id="1_et1ot"]
 [ext_resource type="Script" uid="uid://b7ivepggsojwl" path="res://scripts/objectresource.gd" id="2_3ferw"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_njch1"]
+atlas = ExtResource("1_et1ot")
+region = Rect2(272, 326, 89, 296)
 
 [resource]
 script = ExtResource("2_3ferw")
 id = "flipgravityportal"
 display_name = "Flip Gravity Portal"
 scene = ExtResource("1_drhya")
+icon = SubResource("AtlasTexture_njch1")
 category = "portals"
 max_amount = 0
 metadata/_custom_type_script = "uid://b7ivepggsojwl"

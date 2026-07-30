@@ -24,7 +24,7 @@ func _ready() -> void:
 	global.portal_entered.connect(_shift_camera)
 	global.died.connect(reset_level)
 	global.pnode = $Map/players
-	global.bg = $bg/black
+	global.bg = $bg/bgtexture
 	target_shift_pos.y = global.startpos.y
 	reset_level()
 	
@@ -35,12 +35,13 @@ func _process(delta: float) -> void:
 		Engine.time_scale = 1.0
 	elif Engine.time_scale < 1:
 		Engine.time_scale = lerp(Engine.time_scale, 1.0, 5 * delta)
-		
 	global.cam_offset = cam.global_position.y
 	map.rotation_degrees = global.layout_rotation
 	var offset : float
 	if target_shift_pos.x == 0:
 		cam.global_position.y = lerp(cam.global_position.y, target_shift_pos.y, 10 * delta)
+		if abs(cam.global_position.y - target_shift_pos.y) < 2.5:
+			cam.global_position.y = target_shift_pos.y
 	elif target_shift_pos.y == 0:
 		cam.global_position.x = lerp(cam.global_position.x, target_shift_pos.x, 10 * delta)
 		
@@ -67,8 +68,6 @@ func _process(delta: float) -> void:
 	if global.lowdetailmode and not global.complete_details:
 		Engine.max_fps = 144
 		DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_MAILBOX)
-		
-		$WorldEnvironment.environment.glow_enabled = false
 		for pr in get_tree().get_nodes_in_group("particles"): 
 			if pr is GPUParticles2D:
 				pr.emitting = false
@@ -77,7 +76,6 @@ func _process(delta: float) -> void:
 	elif not global.lowdetailmode and not global.complete_details:
 		Engine.max_fps = 0
 		DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_ENABLED)
-		$WorldEnvironment.environment.glow_enabled = true
 		for pr in get_tree().get_nodes_in_group("particles"):
 			if pr is GPUParticles2D:
 				pr.emitting = true

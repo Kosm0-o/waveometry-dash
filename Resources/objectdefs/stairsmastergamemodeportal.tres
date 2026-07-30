@@ -1,13 +1,19 @@
-[gd_resource type="Resource" script_class="ObjectResource" load_steps=3 format=3 uid="uid://dd6odnp7sv2vd"]
+[gd_resource type="Resource" script_class="ObjectResource" load_steps=5 format=3 uid="uid://dd6odnp7sv2vd"]
 
 [ext_resource type="PackedScene" uid="uid://dcnw2ni1n582x" path="res://scenes/gamemodeportal.tscn" id="1_v1mb7"]
+[ext_resource type="Texture2D" uid="uid://be0pr2htcknmm" path="res://assets/iconsforportalsspritesheetrecompilation.png" id="1_wcg4m"]
 [ext_resource type="Script" uid="uid://b7ivepggsojwl" path="res://scripts/objectresource.gd" id="2_wcg4m"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k08mr"]
+atlas = ExtResource("1_wcg4m")
+region = Rect2(458, 997, 139, 218)
 
 [resource]
 script = ExtResource("2_wcg4m")
 id = "stairsmastergamemodeportal"
 display_name = "Stairsmaster Gamemode Portal"
 scene = ExtResource("1_v1mb7")
+icon = SubResource("AtlasTexture_k08mr")
 category = "portals"
 max_amount = 0
 metadata/_custom_type_script = "uid://b7ivepggsojwl"

@@ -1,6 +1,7 @@
-[gd_resource type="Resource" script_class="ObjectResource" load_steps=3 format=3 uid="uid://cgkmby1f533n2"]
+[gd_resource type="Resource" script_class="ObjectResource" load_steps=4 format=3 uid="uid://cgkmby1f533n2"]
 
 [ext_resource type="PackedScene" uid="uid://dtqy8g00cuqob" path="res://scenes/spike.tscn" id="1_3akf6"]
+[ext_resource type="Texture2D" uid="uid://beqr6bhvy2qa1" path="res://assets/old/spike sprite.svg" id="1_b0jas"]
 [ext_resource type="Script" uid="uid://b7ivepggsojwl" path="res://scripts/objectresource.gd" id="2_b0jas"]
 
 [resource]
@@ -8,5 +9,7 @@ script = ExtResource("2_b0jas")
 id = "spike"
 display_name = "Spike"
 scene = ExtResource("1_3akf6")
+icon = ExtResource("1_b0jas")
 category = "hazards"
+max_amount = 0
 metadata/_custom_type_script = "uid://b7ivepggsojwl"

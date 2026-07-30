@@ -1,11 +1,19 @@
 extends Node
 
 var song_definitions : Array[SongResource] = [
-	
+	load("res://Resources/songdefs/atthespeedoflight.tres"),
+	load("res://Resources/songdefs/dimension.tres"),
+	load("res://Resources/songdefs/everyend.tres"),
+	load("res://Resources/songdefs/flow.tres"),
+	load("res://Resources/songdefs/realms.tres"),
+	load("res://Resources/songdefs/skystrike.tres"),
+	load("res://Resources/songdefs/sphere.tres"),
+	load("res://Resources/songdefs/timeleaper.tres"),
+	load("res://Resources/songdefs/unstablegeometry.tres")
 ]
 
 func _ready() -> void: 
-	get_res_defs()
+	pass#get_res_defs()
 
 func get_res_defs():
 	var fname = "res://Resources/songdefs/"
@@ -22,6 +30,8 @@ func get_res_defs():
 				)
 				continue
 			song_definitions.append(def)
+	for song in song_definitions:
+		print('load("', song.resource_path, '"),')
 
 func get_song(song_id : String):
 	if song_id == "":

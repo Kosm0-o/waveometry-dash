@@ -63,6 +63,7 @@ func object_ready() -> void:
 			orb = ORBS.PINKDASH
 	$AnimatedSprite2D.play(orb_data[orb].name)
 	if orb == ORBS.SPIDER and flipped: rotation += PI
+	
 
 func _process(delta: float) -> void:
 	var getp = $Area2D.get_overlapping_bodies()

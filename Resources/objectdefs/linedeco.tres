@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="ObjectResource" load_steps=5 format=3 uid="uid://bl48wqhqtp4gy"]
+
+[ext_resource type="Texture2D" uid="uid://vffedftkysfq" path="res://assets/icons-decos-ui-spritesheet.png" id="1_q6l2w"]
+[ext_resource type="PackedScene" uid="uid://bsj7mygtuxgjl" path="res://scenes/deco.tscn" id="2_py6np"]
+[ext_resource type="Script" uid="uid://b7ivepggsojwl" path="res://scripts/objectresource.gd" id="3_8g7ff"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lres4"]
+atlas = ExtResource("1_q6l2w")
+region = Rect2(4440, 1782, 94, 6)
+
+[resource]
+script = ExtResource("3_8g7ff")
+id = "linedeco"
+display_name = "Line Deco"
+scene = ExtResource("2_py6np")
+icon = SubResource("AtlasTexture_lres4")
+category = "deco"
+max_amount = 0
+metadata/_custom_type_script = "uid://b7ivepggsojwl"

@@ -1,13 +1,19 @@
-[gd_resource type="Resource" script_class="ObjectResource" load_steps=3 format=3 uid="uid://dleoiwi0kc7dq"]
+[gd_resource type="Resource" script_class="ObjectResource" load_steps=5 format=3 uid="uid://dleoiwi0kc7dq"]
 
+[ext_resource type="Texture2D" uid="uid://be0pr2htcknmm" path="res://assets/iconsforportalsspritesheetrecompilation.png" id="1_kepto"]
 [ext_resource type="PackedScene" uid="uid://c4sqlto7kttv1" path="res://scenes/mirrorportal.tscn" id="1_odxur"]
 [ext_resource type="Script" uid="uid://b7ivepggsojwl" path="res://scripts/objectresource.gd" id="2_kepto"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7qbi5"]
+atlas = ExtResource("1_kepto")
+region = Rect2(658, 366, 160, 215)
 
 [resource]
 script = ExtResource("2_kepto")
 id = "normalmirrorportal"
 display_name = "Rightway Mirror Portal"
 scene = ExtResource("1_odxur")
+icon = SubResource("AtlasTexture_7qbi5")
 category = "portals"
 max_amount = 0
 metadata/_custom_type_script = "uid://b7ivepggsojwl"

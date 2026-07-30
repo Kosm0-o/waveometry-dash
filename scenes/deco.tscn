@@ -1,0 +1,32 @@
+[gd_scene load_steps=6 format=3 uid="uid://bsj7mygtuxgjl"]
+
+[ext_resource type="Script" uid="uid://0v13qeugjmmu" path="res://scripts/deco.gd" id="1_uwo68"]
+[ext_resource type="Texture2D" uid="uid://vffedftkysfq" path="res://assets/icons-decos-ui-spritesheet.png" id="3_20ojq"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_20ojq"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_518r4"]
+atlas = ExtResource("3_20ojq")
+region = Rect2(4415, 1203, 143, 143)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hr1de"]
+size = Vector2(89, 89)
+
+[node name="deco" type="Node2D"]
+script = ExtResource("1_uwo68")
+deco = 6
+metadata/_custom_type_script = "uid://vj5rshmf5d5h"
+
+[node name="sprite" type="TextureRect" parent="."]
+material = SubResource("CanvasItemMaterial_20ojq")
+offset_right = 143.0
+offset_bottom = 143.0
+mouse_filter = 2
+texture = SubResource("AtlasTexture_518r4")
+
+[node name="clickdetector" type="Area2D" parent="."]
+collision_layer = 32
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="clickdetector"]
+shape = SubResource("RectangleShape2D_hr1de")

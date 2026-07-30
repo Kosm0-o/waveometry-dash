@@ -11,5 +11,5 @@ func _process(delta: float) -> void:
 
 func bg_tween():
 	var tween = create_tween()#.set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
-	tween.tween_property(global.bg, "color", targ_color, duration)
+	tween.tween_property(global.bg, "modulate", targ_color, duration)
 	await tween.finished

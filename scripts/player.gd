@@ -10,7 +10,7 @@ var ogspeedmod : float = 1
 var dual : bool = false
 var trail_node : Trail = null
 var flux : bool = false # switch gravity on click
-var stairsmaster : Dictionary = {"active": false, "fall": false, "holding": 0, "stopframes": 10} # climb the stairs, fall to the bottom, start again
+var stairsmaster : Dictionary = {"active": false, "fall": false, "holding": 0, "stopframes": 10, "particle_trigger": false} # climb the stairs, fall to the bottom, start again
 var ricochet : Dictionary = {"active": false, "falling": false} # bouncy, bouncy, STOP
 var checkpoint_time : float = 3.0
 var checkpoint_timer : float = 0.0
@@ -49,7 +49,7 @@ func _physics_process(delta: float) -> void:
 			respawning = false
 			modulate.a = 1
 			respawn_timer = 0.0
-	
+		
 	if auto:
 		auto_timer += delta
 		if auto_timer >= 0.1:
@@ -63,7 +63,7 @@ func _physics_process(delta: float) -> void:
 			if dashing.pink:
 				angle *= -1
 				dashing.pink = false
-	elif  not (flux or stairsmaster.active or ricochet.active):
+	elif not (flux or stairsmaster.active or ricochet.active):
 		dir = -1 if Input.is_action_pressed("game_click") else 1
 		dir = dir * -1 if dual else dir
 	elif Input.is_action_just_pressed("game_click") and flux:
@@ -73,13 +73,16 @@ func _physics_process(delta: float) -> void:
 			dir = 1 if og_player.dir == -1 else -1
 	elif stairsmaster.active:
 		if (ceiling and not dual) or (flooring and dual):
-			stairsmaster.fall = true if not dual else false
+			stairsmaster.fall = true
 		elif (flooring and not dual) or (ceiling and dual):
-			stairsmaster.fall = false if not dual else true
+			stairsmaster.fall = false
+			stairsmaster["particle_trigger"] = true
 		if stairsmaster.fall:
 			dir = 1 if not dual else -1
 			stairsmaster.holding = 0
 		elif Input.is_action_pressed("game_click"):
+			if flooring: flooring = false
+			stairsmaster["particle_trigger"] = false
 			if stairsmaster.holding > 0.35:
 				stairsmaster.stopframes -= 1
 				dir = 0
@@ -94,9 +97,9 @@ func _physics_process(delta: float) -> void:
 			stairsmaster.holding = 0
 	elif ricochet.active:
 		if (ceiling and not dual) or (flooring and dual):
-			ricochet.falling = true if not dual else false
+			ricochet.falling = true
 		elif (flooring and not dual) or (ceiling and dual):
-			ricochet.falling = false if not dual else true
+			ricochet.falling = false
 		if Input.is_action_pressed("game_click"):
 			dir = 0
 		elif ricochet.falling:
@@ -124,11 +127,11 @@ func _physics_process(delta: float) -> void:
 		scale = Vector2.ONE
 	elif abs(angle) == 15:
 		move.x = speed * speedmod
-		move.y = (sin(15) / base) * speed * dir * speedmod - y_boost
+		move.y = (sin(sign(tempangle) * 15) / base) * speed * dir * speedmod - y_boost
 		scale = Vector2(1.55,1.55)
 	else:
 		move.x = speed * speedmod
-		move.y = (sin(63.425) / base) * speed * dir * speedmod * 2 - y_boost
+		move.y = (sin(tempangle) / base) * speed * dir * speedmod * 2 - y_boost
 		scale = Vector2(0.6,0.6)
 	
 	sliding = false
@@ -139,7 +142,7 @@ func _physics_process(delta: float) -> void:
 			var norm = c.get_normal()
 			ceiling = norm.y * sign(angle) > 0
 			if ceiling and not (flux or stairsmaster.active or ricochet.active):
-				ceiling = Input.is_action_just_pressed("game_click")
+				ceiling = Input.is_action_pressed("game_click")
 			flooring = norm.y * sign(angle) < 0 and not Input.is_action_pressed("game_click")
 			if not ceiling and not flooring:
 				continue
@@ -160,10 +163,12 @@ func _physics_process(delta: float) -> void:
 	else:
 		velocity = move
 	move_and_slide()
+	# teleport, then slide on ceiling, there is bumps bug fix idk why but it worked lol (pushes player away from border by 0.1 pixel
+	if not (flux or stairsmaster.active or ricochet.active):
+		global_position -= prev_wall_norm * 0.1 if ceiling else prev_wall_norm * -0.1
 	if is_on_wall():
 		y_boost = 0
 		dropping = false
-	
 	var mult : float = 1.0
 	if abs(angle) == 15: mult = 2.0
 	elif abs(angle) == 63.425: mult = 0.85
@@ -173,8 +178,9 @@ func _physics_process(delta: float) -> void:
 		slope_targ += 180
 	var targ_rot = slope_targ if sliding else norm_targ
 	$visualoffset.rotation_degrees = lerpf($visualoffset.rotation_degrees, targ_rot, 20 * delta)
-	$grounded.speed_scale = 1 if sliding else 5
-	$grounded.emitting = sliding
+	var particle_bool : bool = sliding or (stairsmaster["particle_trigger"])
+	$grounded.speed_scale = 1 if particle_bool else 5
+	$grounded.emitting = particle_bool
 	
 	
 
@@ -199,7 +205,7 @@ func die():
 			trail_node.queue_free()
 			queue_free()
 		flux = false # switch gravity on click
-		stairsmaster = {"active": false, "fall": false, "holding": 0, "stopframes": 10} # climb the stairs, fall to the bottom, start again
+		stairsmaster = {"active": false, "fall": false, "holding": 0, "stopframes": 10, "particle_trigger": false} # climb the stairs, fall to the bottom, start again
 		ricochet = {"active": false, "falling": false}
 		ogspeedmod = 1
 		speedmod = 1

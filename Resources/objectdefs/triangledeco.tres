@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="ObjectResource" load_steps=5 format=3 uid="uid://b06doyh1tei0o"]
+
+[ext_resource type="Texture2D" uid="uid://vffedftkysfq" path="res://assets/icons-decos-ui-spritesheet.png" id="1_hp5bp"]
+[ext_resource type="PackedScene" uid="uid://bsj7mygtuxgjl" path="res://scenes/deco.tscn" id="2_7e0y6"]
+[ext_resource type="Script" uid="uid://b7ivepggsojwl" path="res://scripts/objectresource.gd" id="3_3hva8"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8mtqb"]
+atlas = ExtResource("1_hp5bp")
+region = Rect2(3168, 1734, 73, 101)
+
+[resource]
+script = ExtResource("3_3hva8")
+id = "triangledeco"
+display_name = "Triangle Deco"
+scene = ExtResource("2_7e0y6")
+icon = SubResource("AtlasTexture_8mtqb")
+category = "deco"
+max_amount = 0
+metadata/_custom_type_script = "uid://b7ivepggsojwl"

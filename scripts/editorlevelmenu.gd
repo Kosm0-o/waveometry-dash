@@ -1,9 +1,24 @@
 extends Control
 
 func _ready() -> void:
+	RenderingServer.set_default_clear_color(Color.BLACK)
+	EditorGlobal.editing = false
 	global.trans_rect = $trans/ColorRect
 	global.fade_tween(false)
 	setup_custom_level_panels()
+	for btn in [
+		$back,
+		$newlvl
+	]:
+		if btn is Button:
+			btn.mouse_entered.connect(
+				func():
+					btn.modulate *= 1.3
+			)
+			btn.mouse_exited.connect(
+				func():
+					btn.modulate = Color.WHITE
+			)
 
 
 func _process(delta: float) -> void:

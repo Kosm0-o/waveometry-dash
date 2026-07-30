@@ -1,12 +1,19 @@
-[gd_resource type="Resource" script_class="ObjectResource" load_steps=3 format=3 uid="uid://dr7pt6ypcsmwy"]
+[gd_resource type="Resource" script_class="ObjectResource" load_steps=5 format=3 uid="uid://dr7pt6ypcsmwy"]
 
 [ext_resource type="PackedScene" uid="uid://yb37xbjlif6d" path="res://scenes/block.tscn" id="1_2wsbg"]
 [ext_resource type="Script" uid="uid://b7ivepggsojwl" path="res://scripts/objectresource.gd" id="1_36psl"]
+[ext_resource type="Texture2D" uid="uid://b8vr4anp6aaie" path="res://assets/icons-ui-buttons-spritesheet2.png" id="1_i4lwn"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jfwda"]
+atlas = ExtResource("1_i4lwn")
+region = Rect2(2061, 633, 89, 89)
 
 [resource]
 script = ExtResource("1_36psl")
 id = "block"
 display_name = "Block"
 scene = ExtResource("1_2wsbg")
+icon = SubResource("AtlasTexture_jfwda")
 category = "blocks"
+max_amount = 0
 metadata/_custom_type_script = "uid://b7ivepggsojwl"

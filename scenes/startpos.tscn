@@ -1,9 +1,11 @@
-[gd_scene load_steps=4 format=3 uid="uid://ckvd4w7xxq6ud"]
+[gd_scene load_steps=5 format=3 uid="uid://ckvd4w7xxq6ud"]
 
 [ext_resource type="Script" uid="uid://cd0dv6xbqs4o5" path="res://scripts/startpos.gd" id="1_florh"]
+[ext_resource type="Texture2D" uid="uid://b8vr4anp6aaie" path="res://assets/icons-ui-buttons-spritesheet2.png" id="2_bhx4d"]
 
-[sub_resource type="LabelSettings" id="LabelSettings_bhx4d"]
-font_size = 23
+[sub_resource type="AtlasTexture" id="AtlasTexture_fmbpj"]
+atlas = ExtResource("2_bhx4d")
+region = Rect2(2059, 359, 93, 95)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_florh"]
 size = Vector2(91, 95)
@@ -15,23 +17,8 @@ group_bools = {
 "targets": false
 }
 
-[node name="Panel" type="Panel" parent="."]
-offset_left = -46.0
-offset_top = -47.0
-offset_right = 48.0
-offset_bottom = 47.0
-mouse_filter = 2
-
-[node name="Label" type="Label" parent="."]
-offset_left = -46.0
-offset_top = -44.0
-offset_right = 38.0
-offset_bottom = 49.0
-text = "Start
-Pos"
-label_settings = SubResource("LabelSettings_bhx4d")
-horizontal_alignment = 1
-vertical_alignment = 1
+[node name="Panel" type="Sprite2D" parent="."]
+texture = SubResource("AtlasTexture_fmbpj")
 
 [node name="clickdetector" type="Area2D" parent="."]
 z_index = 5

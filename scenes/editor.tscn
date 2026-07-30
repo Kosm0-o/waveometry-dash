@@ -1,48 +1,86 @@
-[gd_scene load_steps=46 format=3 uid="uid://dvicnlxkttgiw"]
+[gd_scene load_steps=101 format=3 uid="uid://dvicnlxkttgiw"]
 
 [ext_resource type="Script" uid="uid://db3arps08nl6q" path="res://scripts/editor.gd" id="1_b1cmn"]
+[ext_resource type="Texture2D" uid="uid://b5c16qc8con4y" path="res://assets/editortabunselectedgd (1).svg" id="2_2w0at"]
+[ext_resource type="Texture2D" uid="uid://cjhmqr08gd07" path="res://assets/textsspritesheet1.png" id="2_5tm2q"]
 [ext_resource type="Texture2D" uid="uid://cgss44qdwlie0" path="res://assets/portalspritesheet.png" id="2_ba0ut"]
 [ext_resource type="Script" uid="uid://bksixu7j3mqh3" path="res://scripts/gridvisual.gd" id="2_pxqd5"]
+[ext_resource type="Texture2D" uid="uid://b8vr4anp6aaie" path="res://assets/icons-ui-buttons-spritesheet2.png" id="3_3vi5u"]
+[ext_resource type="Texture2D" uid="uid://c5qguxuh4r8hp" path="res://assets/editortabselectedgd (1).svg" id="3_5tdu1"]
 [ext_resource type="Texture2D" uid="uid://b3rl17jtvbpoq" path="res://assets/pausemenuspritesheet.png" id="3_q68jb"]
 [ext_resource type="FontFile" uid="uid://c21leaucdjxc0" path="res://assets/fonts/PUSAB___.otf" id="3_xg7d5"]
+[ext_resource type="Texture2D" uid="uid://vffedftkysfq" path="res://assets/icons-decos-ui-spritesheet.png" id="4_3vi5u"]
 [ext_resource type="Theme" uid="uid://dume7nemxq63b" path="res://Resources/visuals/editablepusab.tres" id="4_5lcyj"]
+[ext_resource type="Texture2D" uid="uid://dp6h23mxcc0af" path="res://assets/blankcirclebuttongd.svg" id="4_78fwb"]
 [ext_resource type="LabelSettings" uid="uid://dh4mtswsaqy2r" path="res://Resources/visuals/pusabcustomized.tres" id="4_eqbpn"]
+[ext_resource type="Texture2D" uid="uid://c0pmd0qk5k6hk" path="res://assets/customtogglebuttongdon.svg" id="7_74j0u"]
+[ext_resource type="Texture2D" uid="uid://1ey5id0qygtu" path="res://assets/customtogglebuttongdoff.svg" id="8_sdh1e"]
+[ext_resource type="Texture2D" uid="uid://clr33odf13405" path="res://assets/rectanglebuttongd.svg" id="11_5tdu1"]
+[ext_resource type="Texture2D" uid="uid://lgi1kob385sm" path="res://assets/xbuttongd.svg" id="14_q8l03"]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_b1cmn"]
-content_margin_left = 25.0
-content_margin_right = 25.0
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_v24q3"]
+content_margin_left = 50.0
+texture = ExtResource("2_2w0at")
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ba0ut"]
-content_margin_left = 25.0
-content_margin_right = 25.0
-bg_color = Color(0, 0, 0, 1)
-border_width_top = 3
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_jke8t"]
+content_margin_left = 50.0
+texture = ExtResource("3_5tdu1")
 
-[sub_resource type="Gradient" id="Gradient_pxqd5"]
-offsets = PackedFloat32Array(0, 0.438462, 0.984615, 1)
-colors = PackedColorArray(0.215686, 0.215686, 0.215686, 1, 0.482353, 0.482353, 0.482353, 0, 0.546172, 0.546172, 0.546172, 0, 1, 1, 1, 0)
+[sub_resource type="AtlasTexture" id="AtlasTexture_j8y2p"]
+atlas = ExtResource("2_5tm2q")
+region = Rect2(4608, 396, 474, 97)
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_ba0ut"]
-gradient = SubResource("Gradient_pxqd5")
-fill = 1
-fill_from = Vector2(0.5, 0.5)
+[sub_resource type="AtlasTexture" id="AtlasTexture_o435n"]
+atlas = ExtResource("2_5tm2q")
+region = Rect2(2408, 396, 566, 97)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3vi5u"]
+atlas = ExtResource("2_5tm2q")
+region = Rect2(3496, 396, 544, 97)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_78fwb"]
+atlas = ExtResource("2_5tm2q")
+region = Rect2(1140, 396, 948, 97)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_74j0u"]
+atlas = ExtResource("2_5tm2q")
+region = Rect2(376, 396, 323, 97)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sdh1e"]
+atlas = ExtResource("2_5tm2q")
+region = Rect2(4545, 269, 600, 97)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1abrv"]
+atlas = ExtResource("3_3vi5u")
+region = Rect2(630, 332, 144, 148)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_q68jb"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
-border_width_left = 5
-border_width_top = 5
-border_width_right = 5
-border_width_bottom = 5
+border_width_left = 10
+border_width_top = 10
+border_width_right = 10
+border_width_bottom = 10
 corner_radius_top_left = 100
 corner_radius_top_right = 100
 corner_radius_bottom_right = 100
 corner_radius_bottom_left = 100
-expand_margin_top = 5.0
-expand_margin_bottom = 5.0
+expand_margin_top = 25.0
+expand_margin_bottom = 25.0
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ba0ut"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_q68jb"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_78fwb"]
+content_margin_left = 20.0
+content_margin_top = 10.0
+content_margin_right = 20.0
+content_margin_bottom = 10.0
+bg_color = Color(0, 0, 0, 0.32549)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
 
 [sub_resource type="InputEventKey" id="InputEventKey_pxqd5"]
 device = -1
@@ -51,6 +89,26 @@ unicode = 116
 
 [sub_resource type="Shortcut" id="Shortcut_ba0ut"]
 events = [SubResource("InputEventKey_pxqd5")]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6lm8n"]
+atlas = ExtResource("3_3vi5u")
+region = Rect2(1098, 332, 144, 148)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wyx26"]
+atlas = ExtResource("3_3vi5u")
+region = Rect2(162, 332, 144, 148)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4jiep"]
+atlas = ExtResource("3_3vi5u")
+region = Rect2(2034, 61, 144, 148)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fce0a"]
+atlas = ExtResource("4_3vi5u")
+region = Rect2(5733, 1750, 71, 71)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m12ww"]
+atlas = ExtResource("3_3vi5u")
+region = Rect2(1566, 61, 144, 148)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_eqbpn"]
 
@@ -101,12 +159,71 @@ corner_radius_top_right = 9
 corner_radius_bottom_right = 9
 corner_radius_bottom_left = 9
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_7msgv"]
+atlas = ExtResource("3_3vi5u")
+region = Rect2(1527, 932, 222, 33)
+margin = Rect2(5.565, 0, 8.76, 0)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5tm2q"]
+atlas = ExtResource("2_5tm2q")
+region = Rect2(3225, 269, 1075, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bn54a"]
+atlas = ExtResource("3_3vi5u")
+region = Rect2(1527, 932, 222, 33)
+margin = Rect2(5.565, 0, 8.76, 0)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0u1f5"]
+atlas = ExtResource("2_5tm2q")
+region = Rect2(2373, 269, 636, 98)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8g6du"]
+atlas = ExtResource("2_5tm2q")
+region = Rect2(1075, 271, 1075, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aa8l6"]
+atlas = ExtResource("2_5tm2q")
+region = Rect2(0, 270, 1075, 98)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k1sck"]
+atlas = ExtResource("2_5tm2q")
+region = Rect2(4679, 142, 332, 97)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2w0at"]
+atlas = ExtResource("2_5tm2q")
+region = Rect2(2387, 523, 608, 98)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nhltt"]
+atlas = ExtResource("11_5tdu1")
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v24q3"]
+atlas = SubResource("AtlasTexture_nhltt")
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q8l03"]
+atlas = ExtResource("2_5tm2q")
+region = Rect2(1237, 523, 755, 97)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jke8t"]
+atlas = SubResource("AtlasTexture_nhltt")
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5tdu1"]
+atlas = ExtResource("2_5tm2q")
+region = Rect2(290, 523, 494, 98)
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b1cmn"]
-bg_color = Color(0.868985, 0.868985, 0.868985, 1)
+bg_color = Color(0.760784, 0.447059, 0.247059, 1)
 border_width_left = 7
 border_width_top = 7
 border_width_right = 7
 border_width_bottom = 7
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_q8l03"]
+bg_color = Color(0.423529, 0.231373, 0.105882, 0.643137)
 border_color = Color(0, 0, 0, 1)
 corner_radius_top_left = 15
 corner_radius_top_right = 15
@@ -126,11 +243,31 @@ shadow_size = 7
 shadow_color = Color(0, 0, 0, 0.333333)
 shadow_offset = Vector2(7.89, 4.055)
 
+[sub_resource type="FontVariation" id="FontVariation_5tm2q"]
+base_font = ExtResource("3_xg7d5")
+spacing_glyph = 2
+
+[sub_resource type="Theme" id="Theme_5tdu1"]
+default_font = SubResource("FontVariation_5tm2q")
+default_font_size = 41
+
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_pxqd5"]
 
 [sub_resource type="Theme" id="Theme_5lcyj"]
 default_font = SubResource("FontVariation_grgw0")
 default_font_size = 0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0u1f5"]
+bg_color = Color(0.423529, 0.231373, 0.105882, 0.643137)
+border_width_left = 7
+border_width_top = 7
+border_width_right = 7
+border_width_bottom = 7
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
 
 [sub_resource type="LabelSettings" id="LabelSettings_3vi5u"]
 font = SubResource("FontVariation_grgw0")
@@ -156,6 +293,18 @@ width = 1
 default_font = SubResource("FontVariation_grgw0")
 default_font_size = 0
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_lo5f0"]
+atlas = ExtResource("4_3vi5u")
+region = Rect2(3040, 138, 330, 234)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8g6du"]
+bg_color = Color(0.760784, 0.447059, 0.247059, 1)
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+
 [sub_resource type="LabelSettings" id="LabelSettings_eqbpn"]
 font = SubResource("FontVariation_grgw0")
 font_size = 61
@@ -165,6 +314,14 @@ outline_color = Color(0, 0, 0, 1)
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_o435n"]
 content_margin_left = 9.0
 content_margin_top = 24.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ndxgo"]
+atlas = ExtResource("2_5tm2q")
+region = Rect2(2642, 142, 99, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e62bx"]
+atlas = ExtResource("2_5tm2q")
+region = Rect2(1565, 143, 98, 96)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pxqd5"]
 border_width_left = 7
@@ -181,6 +338,14 @@ outline_color = Color(0, 0, 0, 1)
 shadow_size = 7
 shadow_color = Color(0, 0, 0, 0.333333)
 shadow_offset = Vector2(7.89, 4.055)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_65evm"]
+atlas = ExtResource("2_5tm2q")
+region = Rect2(292, 142, 490, 97)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pgu5w"]
+atlas = ExtResource("2_5tm2q")
+region = Rect2(4601, 15, 489, 97)
 
 [sub_resource type="LabelSettings" id="LabelSettings_5tm2q"]
 font = SubResource("FontVariation_grgw0")
@@ -200,6 +365,10 @@ shadow_size = 7
 shadow_color = Color(0, 0, 0, 0.333333)
 shadow_offset = Vector2(7.89, 4.055)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_mxdmd"]
+atlas = ExtResource("4_3vi5u")
+region = Rect2(3040, 138, 330, 234)
+
 [sub_resource type="LabelSettings" id="LabelSettings_78fwb"]
 font = SubResource("FontVariation_grgw0")
 font_size = 75
@@ -209,11 +378,73 @@ shadow_size = 7
 shadow_color = Color(0, 0, 0, 0.333333)
 shadow_offset = Vector2(7.89, 4.055)
 
+[sub_resource type="FontVariation" id="FontVariation_5lcyj"]
+base_font = ExtResource("3_xg7d5")
+spacing_glyph = 2
+
+[sub_resource type="LabelSettings" id="LabelSettings_74j0u"]
+font = SubResource("FontVariation_5lcyj")
+font_size = 32
+outline_size = 18
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 7
+shadow_color = Color(0, 0, 0, 0.333333)
+shadow_offset = Vector2(7.89, 4.055)
+
+[sub_resource type="Theme" id="Theme_j8y2p"]
+default_font = SubResource("FontVariation_5tm2q")
+default_font_size = 25
+
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xg7d5"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_q68jb"]
 atlas = ExtResource("2_ba0ut")
 region = Rect2(550, 0, 50, 98)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nxyul"]
+atlas = ExtResource("4_3vi5u")
+region = Rect2(3040, 138, 330, 234)
+
+[sub_resource type="LabelSettings" id="LabelSettings_q8l03"]
+font = SubResource("FontVariation_5lcyj")
+font_size = 65
+outline_size = 18
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 7
+shadow_color = Color(0, 0, 0, 0.333333)
+shadow_offset = Vector2(7.89, 4.055)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0u1f5"]
+content_margin_top = 10.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_8g6du"]
+font = SubResource("FontVariation_5lcyj")
+font_size = 45
+outline_size = 18
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 7
+shadow_color = Color(0, 0, 0, 0.333333)
+shadow_offset = Vector2(7.89, 4.055)
+
+[sub_resource type="LabelSettings" id="LabelSettings_0u1f5"]
+font = SubResource("FontVariation_5lcyj")
+font_size = 22
+outline_size = 7
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 7
+shadow_color = Color(0, 0, 0, 0.333333)
+shadow_offset = Vector2(7.89, 4.055)
+
+[sub_resource type="LabelSettings" id="LabelSettings_aa8l6"]
+font = SubResource("FontVariation_5lcyj")
+font_size = 18
+outline_size = 4
+outline_color = Color(0, 0, 0, 1)
+shadow_offset = Vector2(7.89, 4.055)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qqt88"]
+atlas = ExtResource("4_3vi5u")
+region = Rect2(3040, 138, 330, 234)
 
 [sub_resource type="LabelSettings" id="LabelSettings_pxqd5"]
 font_size = 24
@@ -229,42 +460,105 @@ zoom = Vector2(0.25, 0.25)
 
 [node name="editortabs" type="TabBar" parent="gui"]
 offset_left = 13.0
-offset_top = 297.0
-offset_right = 639.0
-offset_bottom = 337.0
+offset_top = 386.0
+offset_right = 640.0
+offset_bottom = 426.0
 scale = Vector2(1.815, 1.815)
+focus_mode = 0
 theme_override_font_sizes/font_size = 14
-theme_override_styles/tab_unselected = SubResource("StyleBoxEmpty_b1cmn")
-theme_override_styles/tab_hovered = SubResource("StyleBoxEmpty_b1cmn")
-theme_override_styles/tab_selected = SubResource("StyleBoxFlat_ba0ut")
-theme_override_styles/tab_focus = SubResource("StyleBoxEmpty_b1cmn")
+theme_override_styles/tab_unselected = SubResource("StyleBoxTexture_v24q3")
+theme_override_styles/tab_hovered = SubResource("StyleBoxTexture_v24q3")
+theme_override_styles/tab_selected = SubResource("StyleBoxTexture_jke8t")
 current_tab = 0
 clip_tabs = false
 tab_count = 6
-tab_0/title = "Blocks"
-tab_1/title = "Hazards"
-tab_2/title = "Portals"
-tab_3/title = "Interactables"
-tab_4/title = "Deco"
-tab_5/title = "Triggers"
+tab_0/title = "            "
+tab_1/title = "               "
+tab_2/title = "             "
+tab_3/title = "                        "
+tab_4/title = "         "
+tab_5/title = "                "
+
+[node name="blocks" type="TextureRect" parent="gui/editortabs"]
+layout_mode = 2
+offset_left = 9.91735
+offset_top = 14.0
+offset_right = 84.9174
+offset_bottom = 29.0
+texture = SubResource("AtlasTexture_j8y2p")
+expand_mode = 1
+
+[node name="hazards" type="TextureRect" parent="gui/editortabs"]
+modulate = Color(1, 1, 1, 0.301961)
+layout_mode = 2
+offset_left = 105.234
+offset_top = 14.876
+offset_right = 188.234
+offset_bottom = 28.876
+texture = SubResource("AtlasTexture_o435n")
+expand_mode = 1
+
+[node name="portals" type="TextureRect" parent="gui/editortabs"]
+modulate = Color(1, 1, 1, 0.301961)
+layout_mode = 2
+offset_left = 209.366
+offset_top = 14.876
+offset_right = 287.366
+offset_bottom = 27.876
+texture = SubResource("AtlasTexture_3vi5u")
+expand_mode = 1
+
+[node name="interactables" type="TextureRect" parent="gui/editortabs"]
+modulate = Color(1, 1, 1, 0.301961)
+layout_mode = 2
+offset_left = 309.091
+offset_top = 15.0
+offset_right = 425.091
+offset_bottom = 28.0
+texture = SubResource("AtlasTexture_78fwb")
+expand_mode = 1
+
+[node name="deco" type="TextureRect" parent="gui/editortabs"]
+modulate = Color(1, 1, 1, 0.301961)
+layout_mode = 2
+offset_left = 451.791
+offset_top = 14.0
+offset_right = 502.791
+offset_bottom = 29.0
+texture = SubResource("AtlasTexture_74j0u")
+expand_mode = 2
+
+[node name="triggers" type="TextureRect" parent="gui/editortabs"]
+modulate = Color(1, 1, 1, 0.301961)
+layout_mode = 2
+offset_left = 533.884
+offset_top = 16.0
+offset_right = 612.884
+offset_bottom = 29.0
+texture = SubResource("AtlasTexture_sdh1e")
+expand_mode = 1
 
 [node name="levelslider" type="HSlider" parent="gui"]
-offset_left = 604.0
+offset_left = 627.0
 offset_top = 35.0
-offset_right = 947.0
-offset_bottom = 76.0
-theme_override_icons/grabber = SubResource("GradientTexture2D_ba0ut")
+offset_right = 1824.0
+offset_bottom = 183.0
+scale = Vector2(0.29, 0.29)
+theme_override_icons/grabber = SubResource("AtlasTexture_1abrv")
+theme_override_icons/grabber_highlight = SubResource("AtlasTexture_1abrv")
 theme_override_styles/slider = SubResource("StyleBoxFlat_q68jb")
 theme_override_styles/grabber_area = SubResource("StyleBoxEmpty_ba0ut")
 theme_override_styles/grabber_area_highlight = SubResource("StyleBoxEmpty_q68jb")
 scrollable = false
 
 [node name="editorscroll" type="ScrollContainer" parent="gui"]
-offset_left = 9.0
-offset_top = 376.0
-offset_right = 449.0
-offset_bottom = 477.0
-scale = Vector2(2.6, 2.6)
+offset_left = 15.0
+offset_top = 459.0
+offset_right = 1870.0
+offset_bottom = 753.0
+scale = Vector2(0.605, 0.605)
+theme = ExtResource("4_5lcyj")
+theme_override_styles/panel = SubResource("StyleBoxFlat_78fwb")
 vertical_scroll_mode = 0
 
 [node name="editorvbox" type="VBoxContainer" parent="gui/editorscroll"]
@@ -272,44 +566,62 @@ layout_mode = 2
 
 [node name="editorhbox" type="HBoxContainer" parent="gui/editorscroll/editorvbox"]
 layout_mode = 2
+theme_override_constants/separation = 20
 
 [node name="editorhbox2" type="HBoxContainer" parent="gui/editorscroll/editorvbox"]
 layout_mode = 2
-
-[node name="editorhbox3" type="HBoxContainer" parent="gui/editorscroll/editorvbox"]
-layout_mode = 2
+theme_override_constants/separation = 20
 
 [node name="playtest" type="Button" parent="gui"]
-offset_left = 1002.0
-offset_top = 16.0
-offset_right = 1072.0
-offset_bottom = 47.0
-scale = Vector2(2, 2)
+offset_left = 1055.0
+offset_top = 13.0
+offset_right = 1207.0
+offset_bottom = 169.0
+scale = Vector2(0.505, 0.505)
 shortcut = SubResource("Shortcut_ba0ut")
-text = "Playtest"
+icon = SubResource("AtlasTexture_6lm8n")
+flat = true
 
 [node name="modes" type="HBoxContainer" parent="gui"]
-offset_left = 14.0
+offset_left = 122.0
 offset_top = 13.0
-offset_right = 123.0
-offset_bottom = 53.0
-scale = Vector2(2.055, 2.055)
+offset_right = 820.0
+offset_bottom = 169.0
+scale = Vector2(0.45, 0.45)
+theme_override_constants/separation = 30
 
 [node name="select" type="Button" parent="gui/modes"]
 layout_mode = 2
-text = "Select"
+focus_mode = 0
+icon = SubResource("AtlasTexture_wyx26")
+flat = true
 
 [node name="drag" type="Button" parent="gui/modes"]
 layout_mode = 2
-text = "Move"
+focus_mode = 0
+icon = SubResource("AtlasTexture_4jiep")
+flat = true
 
 [node name="add" type="Button" parent="gui/modes"]
 layout_mode = 2
-text = "Add"
+focus_mode = 0
+icon = ExtResource("4_78fwb")
+flat = true
+
+[node name="TextureRect" type="TextureRect" parent="gui/modes/add"]
+self_modulate = Color(0.215686, 0.878431, 0.870588, 1)
+layout_mode = 0
+offset_left = 34.6667
+offset_top = 33.3333
+offset_right = 127.667
+offset_bottom = 126.333
+texture = SubResource("AtlasTexture_fce0a")
 
 [node name="delete" type="Button" parent="gui/modes"]
 layout_mode = 2
-text = "Delete"
+focus_mode = 0
+icon = SubResource("AtlasTexture_m12ww")
+flat = true
 
 [node name="navigationui" type="Control" parent="gui"]
 layout_mode = 3
@@ -320,9 +632,9 @@ offset_bottom = 40.0
 [node name="menubtnoffset" type="Control" parent="gui/navigationui"]
 anchors_preset = 0
 offset_left = 63.0
-offset_top = 137.0
+offset_top = 49.0
 offset_right = 103.0
-offset_bottom = 177.0
+offset_bottom = 89.0
 
 [node name="MenuButton" type="Button" parent="gui/navigationui/menubtnoffset"]
 layout_mode = 0
@@ -370,7 +682,18 @@ theme_override_styles/focus = SubResource("StyleBoxTexture_q68jb")
 theme_override_styles/hover = SubResource("StyleBoxFlat_xg7d5")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_eqbpn")
 theme_override_styles/normal = SubResource("StyleBoxFlat_5lcyj")
-text = "Main Menu"
+icon = SubResource("AtlasTexture_7msgv")
+flat = true
+
+[node name="TextureRect" type="TextureRect" parent="gui/navigationui/menubtnoffset/MenuButton/PanelContainer/VBoxContainer/mainmenubtn"]
+self_modulate = Color(1, 0.862745, 0, 1)
+layout_mode = 0
+offset_left = 20.8045
+offset_top = 12.4782
+offset_right = 223.805
+offset_bottom = 30.4782
+texture = SubResource("AtlasTexture_5tm2q")
+expand_mode = 1
 
 [node name="controlsbtn" type="Button" parent="gui/navigationui/menubtnoffset/MenuButton/PanelContainer/VBoxContainer"]
 modulate = Color(1, 1, 1, 0)
@@ -384,7 +707,18 @@ theme_override_styles/focus = SubResource("StyleBoxTexture_q68jb")
 theme_override_styles/hover = SubResource("StyleBoxFlat_xg7d5")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_eqbpn")
 theme_override_styles/normal = SubResource("StyleBoxFlat_5lcyj")
-text = "Controls"
+icon = SubResource("AtlasTexture_bn54a")
+flat = true
+
+[node name="TextureRect" type="TextureRect" parent="gui/navigationui/menubtnoffset/MenuButton/PanelContainer/VBoxContainer/controlsbtn"]
+self_modulate = Color(1, 0.862745, 0, 1)
+layout_mode = 0
+offset_left = 60.102
+offset_top = 11.3621
+offset_right = 180.102
+offset_bottom = 31.3621
+texture = SubResource("AtlasTexture_0u1f5")
+expand_mode = 1
 
 [node name="levelsettingsbtn" type="Button" parent="gui/navigationui/menubtnoffset/MenuButton/PanelContainer/VBoxContainer"]
 modulate = Color(1, 1, 1, 0)
@@ -398,7 +732,18 @@ theme_override_styles/focus = SubResource("StyleBoxTexture_q68jb")
 theme_override_styles/hover = SubResource("StyleBoxFlat_xg7d5")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_eqbpn")
 theme_override_styles/normal = SubResource("StyleBoxFlat_5lcyj")
-text = "Level Settings"
+icon = SubResource("AtlasTexture_bn54a")
+flat = true
+
+[node name="TextureRect" type="TextureRect" parent="gui/navigationui/menubtnoffset/MenuButton/PanelContainer/VBoxContainer/levelsettingsbtn"]
+self_modulate = Color(1, 0.862745, 0, 1)
+layout_mode = 0
+offset_left = 23.1165
+offset_top = 11.4749
+offset_right = 219.116
+offset_bottom = 31.4749
+texture = SubResource("AtlasTexture_8g6du")
+expand_mode = 1
 
 [node name="savenplaybtn" type="Button" parent="gui/navigationui/menubtnoffset/MenuButton/PanelContainer/VBoxContainer"]
 modulate = Color(1, 1, 1, 0)
@@ -412,7 +757,18 @@ theme_override_styles/focus = SubResource("StyleBoxTexture_q68jb")
 theme_override_styles/hover = SubResource("StyleBoxFlat_xg7d5")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_eqbpn")
 theme_override_styles/normal = SubResource("StyleBoxFlat_5lcyj")
-text = "Save & Play"
+icon = SubResource("AtlasTexture_bn54a")
+flat = true
+
+[node name="TextureRect" type="TextureRect" parent="gui/navigationui/menubtnoffset/MenuButton/PanelContainer/VBoxContainer/savenplaybtn"]
+self_modulate = Color(1, 0.862745, 0, 1)
+layout_mode = 0
+offset_left = 23.1165
+offset_top = 11.4749
+offset_right = 219.116
+offset_bottom = 31.4749
+texture = SubResource("AtlasTexture_aa8l6")
+expand_mode = 1
 
 [node name="backbtn" type="Button" parent="gui/navigationui/menubtnoffset/MenuButton/PanelContainer/VBoxContainer"]
 modulate = Color(1, 1, 1, 0)
@@ -426,23 +782,55 @@ theme_override_styles/focus = SubResource("StyleBoxTexture_q68jb")
 theme_override_styles/hover = SubResource("StyleBoxFlat_xg7d5")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_eqbpn")
 theme_override_styles/normal = SubResource("StyleBoxFlat_5lcyj")
-text = "Back"
+icon = SubResource("AtlasTexture_bn54a")
+flat = true
 
-[node name="gridsnap" type="Label" parent="gui"]
-offset_left = 467.0
-offset_top = 13.0
-offset_right = 581.0
-offset_bottom = 49.0
-theme_override_font_sizes/font_size = 26
-text = "Gridsnap"
+[node name="TextureRect" type="TextureRect" parent="gui/navigationui/menubtnoffset/MenuButton/PanelContainer/VBoxContainer/backbtn"]
+self_modulate = Color(1, 0.862745, 0, 1)
+layout_mode = 0
+offset_left = 92.4649
+offset_top = 10.4715
+offset_right = 158.465
+offset_bottom = 29.4715
+texture = SubResource("AtlasTexture_k1sck")
+expand_mode = 1
+
+[node name="gridsnap" type="TextureRect" parent="gui"]
+offset_left = 462.0
+offset_top = 21.0
+offset_right = 605.0
+offset_bottom = 44.0
+texture = SubResource("AtlasTexture_2w0at")
+expand_mode = 1
 
 [node name="toggle" type="CheckButton" parent="gui/gridsnap"]
 layout_mode = 0
-offset_left = 15.0
-offset_top = 34.0
-offset_right = 59.0
-offset_bottom = 58.0
-scale = Vector2(1.995, 1.995)
+offset_left = 30.0
+offset_top = 25.0
+offset_right = 140.0
+offset_bottom = 81.0
+scale = Vector2(0.705, 0.705)
+focus_mode = 0
+theme_override_icons/checked = ExtResource("7_74j0u")
+theme_override_icons/unchecked = ExtResource("8_sdh1e")
+
+[node name="propertiesbtn" type="Button" parent="gui"]
+offset_left = 982.0
+offset_top = 113.0
+offset_right = 1155.0
+offset_bottom = 203.0
+theme_override_font_sizes/font_size = 21
+icon = SubResource("AtlasTexture_v24q3")
+flat = true
+
+[node name="TextureRect" type="TextureRect" parent="gui/propertiesbtn"]
+layout_mode = 0
+offset_left = 21.0
+offset_top = 36.0
+offset_right = 153.0
+offset_bottom = 53.0
+texture = SubResource("AtlasTexture_q8l03")
+expand_mode = 1
 
 [node name="groupsui" type="Control" parent="gui"]
 layout_mode = 3
@@ -452,12 +840,24 @@ offset_bottom = 40.0
 
 [node name="groupsbtn" type="Button" parent="gui/groupsui"]
 layout_mode = 0
-offset_left = 1056.0
-offset_top = 209.0
-offset_right = 1146.0
-offset_bottom = 299.0
+offset_left = 1039.0
+offset_top = 197.0
+offset_right = 1212.0
+offset_bottom = 287.0
+scale = Vector2(0.665, 1)
 theme_override_font_sizes/font_size = 21
-text = "Groups"
+icon = SubResource("AtlasTexture_jke8t")
+flat = true
+
+[node name="TextureRect" type="TextureRect" parent="gui/groupsui/groupsbtn"]
+layout_mode = 0
+offset_left = 21.0527
+offset_top = 36.0
+offset_right = 107.053
+offset_bottom = 53.0
+scale = Vector2(1.504, 1)
+texture = SubResource("AtlasTexture_5tdu1")
+expand_mode = 1
 
 [node name="groupspanel" type="Panel" parent="gui/groupsui"]
 visible = false
@@ -471,17 +871,18 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_b1cmn")
 [node name="groupspanel2" type="Panel" parent="gui/groupsui/groupspanel"]
 layout_mode = 0
 offset_left = 33.0
-offset_top = 249.0
+offset_top = 257.0
 offset_right = 912.0
 offset_bottom = 562.0
-theme_override_styles/panel = SubResource("StyleBoxFlat_b1cmn")
+theme_override_styles/panel = SubResource("StyleBoxFlat_q8l03")
 
 [node name="idscroll" type="ScrollContainer" parent="gui/groupsui/groupspanel"]
 layout_mode = 0
 offset_left = 63.0
-offset_top = 259.0
-offset_right = 885.0
-offset_bottom = 551.0
+offset_top = 267.0
+offset_right = 1281.0
+offset_bottom = 676.0
+scale = Vector2(0.675, 0.675)
 horizontal_scroll_mode = 0
 
 [node name="groupids" type="GridContainer" parent="gui/groupsui/groupspanel/idscroll"]
@@ -491,28 +892,45 @@ columns = 7
 [node name="Label" type="Label" parent="gui/groupsui/groupspanel"]
 layout_mode = 0
 offset_left = 321.0
-offset_top = 31.0
+offset_top = 95.0
 offset_right = 598.0
-offset_bottom = 75.0
+offset_bottom = 139.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 61
 text = "Groups"
 label_settings = SubResource("LabelSettings_o435n")
 
+[node name="X" type="Button" parent="gui/groupsui/groupspanel"]
+z_index = 1
+layout_mode = 0
+offset_left = 848.0
+offset_top = -15.0
+offset_right = 1000.0
+offset_bottom = 141.0
+scale = Vector2(0.725, 0.725)
+focus_mode = 0
+theme_override_font_sizes/font_size = 51
+icon = ExtResource("14_q8l03")
+flat = true
+
 [node name="btns" type="HBoxContainer" parent="gui/groupsui/groupspanel"]
 layout_mode = 0
-offset_left = 75.0
-offset_top = 152.0
-offset_right = 878.0
-offset_bottom = 240.0
+offset_left = 121.0
+offset_top = 164.0
+offset_right = 923.205
+offset_bottom = 249.0
 scale = Vector2(0.99, 0.99)
 theme_override_constants/separation = -1
 
 [node name="newgroupbtn" type="Button" parent="gui/groupsui/groupspanel/btns"]
 layout_mode = 2
-theme = ExtResource("4_5lcyj")
-theme_override_font_sizes/font_size = 36
+theme = SubResource("Theme_5tdu1")
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/font_size = 21
 text = "New Group"
+icon = ExtResource("11_5tdu1")
+flat = true
+icon_alignment = 1
 
 [node name="space" type="Panel" parent="gui/groupsui/groupspanel/btns"]
 custom_minimum_size = Vector2(20.035, 0)
@@ -520,7 +938,6 @@ layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxEmpty_pxqd5")
 
 [node name="identer" type="TextEdit" parent="gui/groupsui/groupspanel/btns"]
-custom_minimum_size = Vector2(283, 88)
 layout_mode = 2
 theme = ExtResource("4_5lcyj")
 theme_override_font_sizes/font_size = 31
@@ -540,30 +957,27 @@ caret_blink = true
 [node name="addgroupbtn" type="Button" parent="gui/groupsui/groupspanel/btns"]
 layout_mode = 2
 theme = ExtResource("4_5lcyj")
-theme_override_font_sizes/font_size = 36
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/font_size = 21
 text = "Add Group"
-
-[node name="X" type="Button" parent="gui/groupsui/groupspanel"]
-layout_mode = 0
-offset_left = 862.0
-offset_top = 6.0
-offset_right = 931.0
-offset_bottom = 84.0
-theme_override_font_sizes/font_size = 51
-text = "X"
+icon = ExtResource("11_5tdu1")
+flat = true
+icon_alignment = 1
 
 [node name="groupscategories" type="TabBar" parent="gui/groupsui/groupspanel"]
 layout_mode = 0
 offset_left = -52.0
-offset_top = 465.0
-offset_right = 178.0
-offset_bottom = 505.0
+offset_top = 567.0
+offset_right = 302.0
+offset_bottom = 607.0
 rotation = 4.71239
 scale = Vector2(1.555, 1.555)
 theme = SubResource("Theme_5lcyj")
+theme_override_constants/outline_size = 4
 current_tab = 2
 tab_alignment = 1
 clip_tabs = false
+max_tab_width = 118
 scrolling_enabled = false
 tab_count = 3
 tab_0/title = "Global"
@@ -585,7 +999,7 @@ offset_left = 33.0
 offset_top = 152.0
 offset_right = 912.0
 offset_bottom = 562.0
-theme_override_styles/panel = SubResource("StyleBoxFlat_b1cmn")
+theme_override_styles/panel = SubResource("StyleBoxFlat_0u1f5")
 
 [node name="Line2D" type="Line2D" parent="gui/groupsui/globalgroupspanel"]
 position = Vector2(31, 0)
@@ -595,9 +1009,9 @@ default_color = Color(0, 0, 0, 1)
 [node name="labels" type="HBoxContainer" parent="gui/groupsui/globalgroupspanel"]
 layout_mode = 2
 offset_left = 50.0
-offset_top = 108.0
+offset_top = 119.0
 offset_right = 444.0
-offset_bottom = 144.0
+offset_bottom = 155.0
 theme_override_constants/separation = 60
 
 [node name="Label" type="Label" parent="gui/groupsui/globalgroupspanel/labels"]
@@ -627,22 +1041,26 @@ theme_override_constants/separation = 50
 [node name="Label" type="Label" parent="gui/groupsui/globalgroupspanel"]
 layout_mode = 0
 offset_left = 167.0
-offset_top = 24.0
+offset_top = 69.0
 offset_right = 744.0
-offset_bottom = 68.0
+offset_bottom = 113.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 61
 text = "Global Groups"
 label_settings = SubResource("LabelSettings_3vi5u")
 
 [node name="X" type="Button" parent="gui/groupsui/globalgroupspanel"]
+z_index = 1
 layout_mode = 0
-offset_left = 862.0
-offset_top = 6.0
-offset_right = 931.0
-offset_bottom = 84.0
+offset_left = 849.0
+offset_top = -15.0
+offset_right = 1001.0
+offset_bottom = 141.0
+scale = Vector2(0.725, 0.725)
+focus_mode = 0
 theme_override_font_sizes/font_size = 51
-text = "X"
+icon = ExtResource("14_q8l03")
+flat = true
 
 [node name="groupid" type="SpinBox" parent="gui/groupsui/globalgroupspanel"]
 layout_mode = 0
@@ -670,32 +1088,49 @@ offset_left = 413.0
 offset_top = 230.0
 offset_right = 661.0
 offset_bottom = 402.0
-scale = Vector2(1.86, 1.86)
+scale = Vector2(1.325, 1.325)
 theme_override_constants/h_separation = 20
 columns = 2
 
 [node name="findgroupbtn" type="Button" parent="gui/groupsui/globalgroupspanel/btns"]
 layout_mode = 2
 theme = SubResource("Theme_74j0u")
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/font_size = 20
 text = "Find Group"
+icon = ExtResource("11_5tdu1")
+flat = true
+icon_alignment = 1
 
 [node name="selectallbtn" type="Button" parent="gui/groupsui/globalgroupspanel/btns"]
 layout_mode = 2
 theme = SubResource("Theme_74j0u")
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/font_size = 20
 text = "Select All"
+icon = ExtResource("11_5tdu1")
+flat = true
+icon_alignment = 1
 
 [node name="deleteallbtn" type="Button" parent="gui/groupsui/globalgroupspanel/btns"]
 layout_mode = 2
 theme = SubResource("Theme_74j0u")
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/font_size = 20
 text = "Delete All"
+icon = ExtResource("11_5tdu1")
+flat = true
+icon_alignment = 1
 
-[node name="propertiesbtn" type="Button" parent="gui"]
-offset_left = 1032.0
-offset_top = 113.0
-offset_right = 1145.0
-offset_bottom = 203.0
-theme_override_font_sizes/font_size = 21
-text = "Properties"
+[node name="customborder" type="TextureRect" parent="gui/groupsui"]
+visible = false
+layout_mode = 0
+offset_left = 83.0
+offset_top = 11.0
+offset_right = 1069.0
+offset_bottom = 646.0
+mouse_filter = 2
+texture = SubResource("AtlasTexture_lo5f0")
 
 [node name="propertiesui" type="Control" parent="gui"]
 layout_mode = 3
@@ -711,23 +1146,27 @@ offset_left = 104.0
 offset_top = 25.0
 offset_right = 1039.0
 offset_bottom = 607.0
-theme_override_styles/panel = SubResource("StyleBoxFlat_b1cmn")
+theme_override_styles/panel = SubResource("StyleBoxFlat_8g6du")
 
 [node name="X" type="Button" parent="gui/propertiesui/propertiespanel"]
+z_index = 1
 layout_mode = 0
-offset_left = 862.0
-offset_top = 6.0
-offset_right = 931.0
-offset_bottom = 84.0
+offset_left = 851.0
+offset_top = -24.0
+offset_right = 1003.0
+offset_bottom = 132.0
+scale = Vector2(0.725, 0.725)
+focus_mode = 0
 theme_override_font_sizes/font_size = 51
-text = "X"
+icon = ExtResource("14_q8l03")
+flat = true
 
 [node name="Label" type="Label" parent="gui/propertiesui/propertiespanel"]
 layout_mode = 0
 offset_left = 22.0
-offset_top = 14.0
+offset_top = 50.0
 offset_right = 846.0
-offset_bottom = 98.0
+offset_bottom = 134.0
 text = "Properties"
 label_settings = SubResource("LabelSettings_eqbpn")
 horizontal_alignment = 1
@@ -820,15 +1259,14 @@ middle_mouse_paste_enabled = false
 drag_and_drop_selection_enabled = false
 caret_blink = true
 
-[node name="Label" type="Label" parent="gui/propertiesui/propertiespanel/ScrollContainer/org/scales/xslider"]
+[node name="Label" type="TextureRect" parent="gui/propertiesui/propertiespanel/ScrollContainer/org/scales/xslider"]
 layout_mode = 0
-offset_left = 71.0
-offset_top = -48.0
-offset_right = 97.0
-offset_bottom = 9.0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 41
-text = "X"
+offset_left = 64.0
+offset_top = -43.0
+offset_right = 104.0
+offset_bottom = -4.0
+texture = SubResource("AtlasTexture_ndxgo")
+expand_mode = 1
 
 [node name="yslider" type="HSlider" parent="gui/propertiesui/propertiespanel/ScrollContainer/org/scales"]
 layout_mode = 2
@@ -861,15 +1299,14 @@ middle_mouse_paste_enabled = false
 drag_and_drop_selection_enabled = false
 caret_blink = true
 
-[node name="Label" type="Label" parent="gui/propertiesui/propertiespanel/ScrollContainer/org/scales/yslider"]
+[node name="Label2" type="TextureRect" parent="gui/propertiesui/propertiespanel/ScrollContainer/org/scales/yslider"]
 layout_mode = 0
-offset_left = 71.0
-offset_top = -48.0
-offset_right = 97.0
-offset_bottom = 9.0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 41
-text = "Y"
+offset_left = 64.0
+offset_top = -43.0
+offset_right = 104.0
+offset_bottom = -4.0
+texture = SubResource("AtlasTexture_e62bx")
+expand_mode = 1
 
 [node name="colorlbl" type="Label" parent="gui/propertiesui/propertiespanel/ScrollContainer/org"]
 layout_mode = 2
@@ -904,11 +1341,13 @@ label_settings = ExtResource("4_eqbpn")
 
 [node name="fliptoggle" type="CheckButton" parent="gui/propertiesui/propertiespanel/ScrollContainer/org/fliplbl"]
 layout_mode = 2
-offset_left = 488.0
+offset_left = 457.0
 offset_top = -21.0
-offset_right = 532.0
-offset_bottom = 3.0
-scale = Vector2(3.97, 3.97)
+offset_right = 567.0
+offset_bottom = 35.0
+scale = Vector2(1.41, 1.41)
+theme_override_icons/checked = ExtResource("7_74j0u")
+theme_override_icons/unchecked = ExtResource("8_sdh1e")
 
 [node name="filler" type="Label" parent="gui/propertiesui/propertiespanel/ScrollContainer/org"]
 layout_mode = 2
@@ -939,6 +1378,7 @@ label_settings = ExtResource("4_eqbpn")
 [node name="durationedit" type="LineEdit" parent="gui/propertiesui/propertiespanel/ScrollContainer/org"]
 visible = false
 layout_mode = 2
+theme = ExtResource("4_5lcyj")
 theme_override_font_sizes/font_size = 31
 text = "0"
 alignment = 1
@@ -976,6 +1416,7 @@ offset_left = 21.0
 offset_top = 4.0
 offset_right = 145.0
 offset_bottom = 56.0
+theme = ExtResource("4_5lcyj")
 theme_override_font_sizes/font_size = 31
 text = "0"
 alignment = 1
@@ -988,15 +1429,14 @@ middle_mouse_paste_enabled = false
 drag_and_drop_selection_enabled = false
 caret_blink = true
 
-[node name="Label" type="Label" parent="gui/propertiesui/propertiespanel/ScrollContainer/org/distances/movex"]
+[node name="Label2" type="TextureRect" parent="gui/propertiesui/propertiespanel/ScrollContainer/org/distances/movex"]
 layout_mode = 0
-offset_left = 10.0
-offset_top = -46.0
-offset_right = 154.0
-offset_bottom = 11.0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 41
-text = "Move X"
+offset_left = 16.0
+offset_top = -31.0
+offset_right = 157.0
+offset_bottom = -3.0
+texture = SubResource("AtlasTexture_65evm")
+expand_mode = 1
 
 [node name="movey" type="Control" parent="gui/propertiesui/propertiespanel/ScrollContainer/org/distances"]
 layout_mode = 2
@@ -1012,6 +1452,7 @@ offset_left = 21.0
 offset_top = 4.0
 offset_right = 145.0
 offset_bottom = 56.0
+theme = ExtResource("4_5lcyj")
 theme_override_font_sizes/font_size = 31
 text = "0"
 alignment = 1
@@ -1024,15 +1465,14 @@ middle_mouse_paste_enabled = false
 drag_and_drop_selection_enabled = false
 caret_blink = true
 
-[node name="Label" type="Label" parent="gui/propertiesui/propertiespanel/ScrollContainer/org/distances/movey"]
+[node name="Label2" type="TextureRect" parent="gui/propertiesui/propertiespanel/ScrollContainer/org/distances/movey"]
 layout_mode = 0
-offset_left = 10.0
-offset_top = -46.0
-offset_right = 154.0
-offset_bottom = 11.0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 41
-text = "Move Y"
+offset_left = 16.0
+offset_top = -31.0
+offset_right = 157.0
+offset_bottom = -3.0
+texture = SubResource("AtlasTexture_pgu5w")
+expand_mode = 1
 
 [node name="targrotlbl" type="Label" parent="gui/propertiesui/propertiespanel/ScrollContainer/org"]
 visible = false
@@ -1056,6 +1496,7 @@ offset_left = 188.0
 offset_top = 20.0
 offset_right = 312.0
 offset_bottom = 72.0
+theme = ExtResource("4_5lcyj")
 theme_override_font_sizes/font_size = 31
 text = "0"
 alignment = 1
@@ -1097,6 +1538,7 @@ offset_left = 21.0
 offset_top = 19.0
 offset_right = 145.0
 offset_bottom = 71.0
+theme = ExtResource("4_5lcyj")
 theme_override_font_sizes/font_size = 31
 text = "1"
 alignment = 1
@@ -1109,15 +1551,14 @@ middle_mouse_paste_enabled = false
 drag_and_drop_selection_enabled = false
 caret_blink = true
 
-[node name="Label" type="Label" parent="gui/propertiesui/propertiespanel/ScrollContainer/org/targscales/xslider"]
+[node name="Label2" type="TextureRect" parent="gui/propertiesui/propertiespanel/ScrollContainer/org/targscales/xslider"]
 layout_mode = 0
-offset_left = 71.0
-offset_top = -48.0
-offset_right = 97.0
-offset_bottom = 9.0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 41
-text = "X"
+offset_left = 64.0
+offset_top = -43.0
+offset_right = 104.0
+offset_bottom = -4.0
+texture = SubResource("AtlasTexture_ndxgo")
+expand_mode = 1
 
 [node name="yslider" type="HSlider" parent="gui/propertiesui/propertiespanel/ScrollContainer/org/targscales"]
 layout_mode = 2
@@ -1137,6 +1578,7 @@ offset_left = 21.0
 offset_top = 19.0
 offset_right = 145.0
 offset_bottom = 71.0
+theme = ExtResource("4_5lcyj")
 theme_override_font_sizes/font_size = 31
 text = "1"
 alignment = 1
@@ -1149,15 +1591,14 @@ middle_mouse_paste_enabled = false
 drag_and_drop_selection_enabled = false
 caret_blink = true
 
-[node name="Label" type="Label" parent="gui/propertiesui/propertiespanel/ScrollContainer/org/targscales/yslider"]
+[node name="Label3" type="TextureRect" parent="gui/propertiesui/propertiespanel/ScrollContainer/org/targscales/yslider"]
 layout_mode = 0
-offset_left = 71.0
-offset_top = -48.0
-offset_right = 97.0
-offset_bottom = 9.0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 41
-text = "Y"
+offset_left = 64.0
+offset_top = -43.0
+offset_right = 104.0
+offset_bottom = -4.0
+texture = SubResource("AtlasTexture_e62bx")
+expand_mode = 1
 
 [node name="textlbl" type="Label" parent="gui/propertiesui/propertiespanel/ScrollContainer/org"]
 visible = false
@@ -1168,7 +1609,9 @@ label_settings = ExtResource("4_eqbpn")
 
 [node name="TextEdit" type="TextEdit" parent="gui/propertiesui/propertiespanel/ScrollContainer/org"]
 visible = false
+custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
+theme = ExtResource("4_5lcyj")
 placeholder_text = "[Enter Text Here]"
 context_menu_enabled = false
 drag_and_drop_selection_enabled = false
@@ -1208,6 +1651,15 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 41
 text = "aaaaaaaaaaaaaaaaaaaaaa"
 
+[node name="customborder" type="TextureRect" parent="gui/propertiesui/propertiespanel"]
+layout_mode = 0
+offset_left = -46.0
+offset_top = -22.0
+offset_right = 983.0
+offset_bottom = 632.0
+mouse_filter = 2
+texture = SubResource("AtlasTexture_mxdmd")
+
 [node name="levelsettingsui" type="Control" parent="gui"]
 layout_mode = 3
 anchors_preset = 0
@@ -1215,6 +1667,7 @@ offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="settingspanel" type="Panel" parent="gui/levelsettingsui"]
+visible = false
 layout_mode = 0
 offset_left = 109.0
 offset_top = 27.0
@@ -1222,21 +1675,13 @@ offset_right = 1034.0
 offset_bottom = 603.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_b1cmn")
 
-[node name="X" type="Button" parent="gui/levelsettingsui/settingspanel"]
-layout_mode = 0
-offset_left = 862.0
-offset_top = 6.0
-offset_right = 931.0
-offset_bottom = 84.0
-theme_override_font_sizes/font_size = 51
-text = "X"
-
 [node name="Label" type="Label" parent="gui/levelsettingsui/settingspanel"]
+z_index = 1
 layout_mode = 2
 offset_left = 9.0
-offset_top = 6.0
+offset_top = -1.0
 offset_right = 920.0
-offset_bottom = 90.0
+offset_bottom = 46.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 61
 text = "Level Settings"
@@ -1247,10 +1692,11 @@ vertical_alignment = 1
 [node name="org" type="GridContainer" parent="gui/levelsettingsui/settingspanel"]
 layout_mode = 0
 offset_left = 19.0
-offset_top = 100.0
-offset_right = 819.0
+offset_top = 68.0
+offset_right = 911.0
 offset_bottom = 549.0
-theme_override_constants/v_separation = 26
+theme_override_constants/h_separation = 26
+theme_override_constants/v_separation = 31
 columns = 2
 
 [node name="lvlnamelbl" type="Label" parent="gui/levelsettingsui/settingspanel/org"]
@@ -1258,10 +1704,11 @@ layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 51
 text = "Level Name: "
-label_settings = ExtResource("4_eqbpn")
+label_settings = SubResource("LabelSettings_74j0u")
 
 [node name="lvlnameenter" type="LineEdit" parent="gui/levelsettingsui/settingspanel/org"]
 layout_mode = 2
+theme = SubResource("Theme_j8y2p")
 theme_override_font_sizes/font_size = 25
 placeholder_text = "[Enter Level Title]"
 max_length = 24
@@ -1278,11 +1725,11 @@ layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 51
 text = "Song ID: "
-label_settings = ExtResource("4_eqbpn")
+label_settings = SubResource("LabelSettings_74j0u")
 
 [node name="choosesong" type="OptionButton" parent="gui/levelsettingsui/settingspanel/org"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 51
+theme = SubResource("Theme_j8y2p")
 alignment = 1
 
 [node name="songstartlbl" type="Label" parent="gui/levelsettingsui/settingspanel/org"]
@@ -1290,10 +1737,11 @@ layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 38
 text = "Song Start Time:"
-label_settings = ExtResource("4_eqbpn")
+label_settings = SubResource("LabelSettings_74j0u")
 
 [node name="songstarttime" type="LineEdit" parent="gui/levelsettingsui/settingspanel/org"]
 layout_mode = 2
+theme = SubResource("Theme_j8y2p")
 placeholder_text = "[Enter Song Start Time in Seconds]"
 alignment = 1
 max_length = 8
@@ -1310,7 +1758,7 @@ layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 41
 text = "Starting Speed: "
-label_settings = ExtResource("4_eqbpn")
+label_settings = SubResource("LabelSettings_74j0u")
 
 [node name="speedbtn" type="Button" parent="gui/levelsettingsui/settingspanel/org"]
 layout_mode = 2
@@ -1333,20 +1781,24 @@ layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 41
 text = "Glow Enabled: "
-label_settings = ExtResource("4_eqbpn")
+label_settings = SubResource("LabelSettings_74j0u")
 
 [node name="filler" type="Label" parent="gui/levelsettingsui/settingspanel/org"]
+self_modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 41
+text = "aaaaaaaaaaaaaaaaaaa"
 
 [node name="glowtoggle" type="CheckButton" parent="gui/levelsettingsui/settingspanel/org/filler"]
 layout_mode = 2
-offset_left = 49.0
+offset_left = 191.0
 offset_top = -15.0
-offset_right = 93.0
+offset_right = 235.0
 offset_bottom = 9.0
-scale = Vector2(3.68, 3.68)
+scale = Vector2(1.415, 1.415)
+theme_override_icons/checked = ExtResource("7_74j0u")
+theme_override_icons/unchecked = ExtResource("8_sdh1e")
 button_pressed = true
 
 [node name="gridlbl" type="Label" parent="gui/levelsettingsui/settingspanel/org"]
@@ -1354,7 +1806,7 @@ layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 41
 text = "Grid Enabled: "
-label_settings = ExtResource("4_eqbpn")
+label_settings = SubResource("LabelSettings_74j0u")
 
 [node name="filler2" type="Label" parent="gui/levelsettingsui/settingspanel/org"]
 layout_mode = 2
@@ -1363,11 +1815,35 @@ theme_override_font_sizes/font_size = 41
 
 [node name="gridtoggle" type="CheckButton" parent="gui/levelsettingsui/settingspanel/org/filler2"]
 layout_mode = 2
-offset_left = 49.0
+offset_left = 191.0
 offset_top = -15.0
-offset_right = 93.0
+offset_right = 235.0
 offset_bottom = 9.0
-scale = Vector2(3.68, 3.68)
+scale = Vector2(1.415, 1.415)
+theme_override_icons/checked = ExtResource("7_74j0u")
+theme_override_icons/unchecked = ExtResource("8_sdh1e")
+
+[node name="customborder" type="TextureRect" parent="gui/levelsettingsui/settingspanel"]
+layout_mode = 0
+offset_left = -40.0
+offset_top = -18.0
+offset_right = 969.0
+offset_bottom = 612.0
+mouse_filter = 2
+texture = SubResource("AtlasTexture_nxyul")
+
+[node name="X" type="Button" parent="gui/levelsettingsui/settingspanel"]
+z_index = 1
+layout_mode = 0
+offset_left = 862.0
+offset_top = -17.0
+offset_right = 1014.0
+offset_bottom = 139.0
+scale = Vector2(0.725, 0.725)
+focus_mode = 0
+theme_override_font_sizes/font_size = 51
+icon = ExtResource("14_q8l03")
+flat = true
 
 [node name="controlstutorialui" type="Control" parent="gui"]
 layout_mode = 3
@@ -1385,37 +1861,43 @@ offset_bottom = 603.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_b1cmn")
 
 [node name="X" type="Button" parent="gui/controlstutorialui/controlspanel"]
+z_index = 1
 layout_mode = 0
-offset_left = 483.0
-offset_top = 6.0
-offset_right = 552.0
-offset_bottom = 84.0
+offset_left = 484.0
+offset_top = -27.0
+offset_right = 636.0
+offset_bottom = 129.0
+scale = Vector2(0.725, 0.725)
+focus_mode = 0
 theme_override_font_sizes/font_size = 51
-text = "X"
+icon = ExtResource("14_q8l03")
+flat = true
 
 [node name="Label" type="Label" parent="gui/controlstutorialui/controlspanel"]
 layout_mode = 2
 offset_left = 7.0
-offset_top = 10.0
+offset_top = 49.0
 offset_right = 551.0
-offset_bottom = 94.0
+offset_bottom = 133.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 61
 text = "Controls"
+label_settings = SubResource("LabelSettings_q8l03")
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="ScrollContainer" type="ScrollContainer" parent="gui/controlstutorialui/controlspanel"]
 layout_mode = 0
 offset_left = 19.0
-offset_top = 100.0
-offset_right = 539.0
-offset_bottom = 557.0
-scroll_vertical = 100
+offset_top = 126.0
+offset_right = 547.0
+offset_bottom = 526.0
+theme_override_styles/panel = SubResource("StyleBoxEmpty_0u1f5")
 horizontal_scroll_mode = 0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="gui/controlstutorialui/controlspanel/ScrollContainer"]
 layout_mode = 2
+theme_override_constants/separation = 20
 
 [node name="select" type="Label" parent="gui/controlstutorialui/controlspanel/ScrollContainer/VBoxContainer"]
 custom_minimum_size = Vector2(520, 0)
@@ -1423,6 +1905,7 @@ layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 46
 text = "Select Mode - Q"
+label_settings = SubResource("LabelSettings_8g6du")
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -1432,8 +1915,10 @@ layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 31
 text = "Select Object - Click"
+label_settings = SubResource("LabelSettings_0u1f5")
 horizontal_alignment = 1
 vertical_alignment = 1
+autowrap_mode = 3
 
 [node name="multiselect" type="Label" parent="gui/controlstutorialui/controlspanel/ScrollContainer/VBoxContainer"]
 custom_minimum_size = Vector2(520, 0)
@@ -1441,8 +1926,10 @@ layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 31
 text = "Multi-Select - Click + Drag"
+label_settings = SubResource("LabelSettings_0u1f5")
 horizontal_alignment = 1
 vertical_alignment = 1
+autowrap_mode = 3
 
 [node name="deleteselected" type="Label" parent="gui/controlstutorialui/controlspanel/ScrollContainer/VBoxContainer"]
 custom_minimum_size = Vector2(520, 0)
@@ -1450,8 +1937,10 @@ layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 27
 text = "Delete Selected Object - Del/Backspace"
+label_settings = SubResource("LabelSettings_0u1f5")
 horizontal_alignment = 1
 vertical_alignment = 1
+autowrap_mode = 3
 
 [node name="duplicateselected" type="Label" parent="gui/controlstutorialui/controlspanel/ScrollContainer/VBoxContainer"]
 custom_minimum_size = Vector2(520, 0)
@@ -1459,8 +1948,10 @@ layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 27
 text = "Duplicate Selected Object - Ctrl + D"
+label_settings = SubResource("LabelSettings_0u1f5")
 horizontal_alignment = 1
 vertical_alignment = 1
+autowrap_mode = 3
 
 [node name="unselect" type="Label" parent="gui/controlstutorialui/controlspanel/ScrollContainer/VBoxContainer"]
 custom_minimum_size = Vector2(520, 0)
@@ -1468,8 +1959,10 @@ layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 27
 text = "Unselect - Escape/Click Nothing"
+label_settings = SubResource("LabelSettings_0u1f5")
 horizontal_alignment = 1
 vertical_alignment = 1
+autowrap_mode = 3
 
 [node name="filler" type="Label" parent="gui/controlstutorialui/controlspanel/ScrollContainer/VBoxContainer"]
 custom_minimum_size = Vector2(520, 0)
@@ -1485,6 +1978,7 @@ layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 46
 text = "Move/Drag Mode - W"
+label_settings = SubResource("LabelSettings_8g6du")
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -1494,8 +1988,10 @@ layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 29
 text = "Move Selected Object(s) - Click+Drag"
+label_settings = SubResource("LabelSettings_0u1f5")
 horizontal_alignment = 1
 vertical_alignment = 1
+autowrap_mode = 3
 
 [node name="filler2" type="Label" parent="gui/controlstutorialui/controlspanel/ScrollContainer/VBoxContainer"]
 custom_minimum_size = Vector2(520, 0)
@@ -1511,6 +2007,7 @@ layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 46
 text = "Add Mode - E"
+label_settings = SubResource("LabelSettings_8g6du")
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -1520,6 +2017,7 @@ layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 29
 text = "Select Object Type to Add - Click Category, then Object Button"
+label_settings = SubResource("LabelSettings_0u1f5")
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 3
@@ -1537,8 +2035,10 @@ layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 29
 text = "Add Object - Click"
+label_settings = SubResource("LabelSettings_0u1f5")
 horizontal_alignment = 1
 vertical_alignment = 1
+autowrap_mode = 3
 
 [node name="filler3" type="Label" parent="gui/controlstutorialui/controlspanel/ScrollContainer/VBoxContainer"]
 custom_minimum_size = Vector2(520, 0)
@@ -1554,6 +2054,7 @@ layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 46
 text = "Delete Mode - R"
+label_settings = SubResource("LabelSettings_8g6du")
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -1563,8 +2064,10 @@ layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 29
 text = "Delete Object - Hover + Click"
+label_settings = SubResource("LabelSettings_0u1f5")
 horizontal_alignment = 1
 vertical_alignment = 1
+autowrap_mode = 3
 
 [node name="multidelete" type="Label" parent="gui/controlstutorialui/controlspanel/ScrollContainer/VBoxContainer"]
 custom_minimum_size = Vector2(520, 0)
@@ -1572,8 +2075,10 @@ layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 29
 text = "Multi-Delete - Click + Drag"
+label_settings = SubResource("LabelSettings_0u1f5")
 horizontal_alignment = 1
 vertical_alignment = 1
+autowrap_mode = 3
 
 [node name="filler4" type="Label" parent="gui/controlstutorialui/controlspanel/ScrollContainer/VBoxContainer"]
 custom_minimum_size = Vector2(520, 0)
@@ -1589,6 +2094,7 @@ layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 46
 text = "Other"
+label_settings = SubResource("LabelSettings_8g6du")
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -1598,8 +2104,10 @@ layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 29
 text = "Save Current Level - Ctrl + S"
+label_settings = SubResource("LabelSettings_0u1f5")
 horizontal_alignment = 1
 vertical_alignment = 1
+autowrap_mode = 3
 
 [node name="zoom" type="Label" parent="gui/controlstutorialui/controlspanel/ScrollContainer/VBoxContainer"]
 custom_minimum_size = Vector2(520, 0)
@@ -1607,8 +2115,10 @@ layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 29
 text = "Zoom In/Out - Mouse Scroll Wheel"
+label_settings = SubResource("LabelSettings_0u1f5")
 horizontal_alignment = 1
 vertical_alignment = 1
+autowrap_mode = 3
 
 [node name="pan" type="Label" parent="gui/controlstutorialui/controlspanel/ScrollContainer/VBoxContainer"]
 custom_minimum_size = Vector2(520, 0)
@@ -1616,8 +2126,10 @@ layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 27
 text = "Pan Through Level - Right Click + Drag"
+label_settings = SubResource("LabelSettings_0u1f5")
 horizontal_alignment = 1
 vertical_alignment = 1
+autowrap_mode = 3
 
 [node name="playtest" type="Label" parent="gui/controlstutorialui/controlspanel/ScrollContainer/VBoxContainer"]
 custom_minimum_size = Vector2(520, 0)
@@ -1625,8 +2137,10 @@ layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 27
 text = "Playtest - T"
+label_settings = SubResource("LabelSettings_0u1f5")
 horizontal_alignment = 1
 vertical_alignment = 1
+autowrap_mode = 3
 
 [node name="filler5" type="Label" parent="gui/controlstutorialui/controlspanel/ScrollContainer/VBoxContainer"]
 custom_minimum_size = Vector2(520, 0)
@@ -1642,6 +2156,7 @@ layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 46
 text = "Tutorial"
+label_settings = SubResource("LabelSettings_8g6du")
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -1666,6 +2181,7 @@ Interactables include pads and orbs. Pads trigger an effect when the player touc
 Decorations are purely visual objects, as the name implies.
 Triggers enable the changing of properties among other things. They are triggered whenever the player passes their position (doesn't have to be touched by the player). 
 "
+label_settings = SubResource("LabelSettings_aa8l6")
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 3
@@ -1677,6 +2193,16 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 46
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="customborder" type="TextureRect" parent="gui/controlstutorialui/controlspanel"]
+layout_mode = 0
+offset_left = -20.0
+offset_top = -15.0
+offset_right = 578.0
+offset_bottom = 2425.0
+scale = Vector2(1, 0.25)
+mouse_filter = 2
+texture = SubResource("AtlasTexture_qqt88")
 
 [node name="savepanel" type="Control" parent="gui"]
 layout_mode = 3
@@ -1714,7 +2240,6 @@ vertical_alignment = 1
 
 [node name="trans" type="CanvasLayer" parent="."]
 layer = 128
-visible = false
 
 [node name="ColorRect" type="ColorRect" parent="trans"]
 offset_left = -159.0

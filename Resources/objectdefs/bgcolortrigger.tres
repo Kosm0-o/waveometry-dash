@@ -1,5 +1,6 @@
-[gd_resource type="Resource" script_class="ObjectResource" load_steps=3 format=3 uid="uid://ctha2fc1o5c1t"]
+[gd_resource type="Resource" script_class="ObjectResource" load_steps=4 format=3 uid="uid://ctha2fc1o5c1t"]
 
+[ext_resource type="Texture2D" uid="uid://dl0lwgt7h6ulb" path="res://assets/bgcolortriggericon.svg" id="1_v8l8r"]
 [ext_resource type="PackedScene" uid="uid://pmqld4rftcbi" path="res://scenes/bgcolortrigger.tscn" id="1_x53jg"]
 [ext_resource type="Script" uid="uid://b7ivepggsojwl" path="res://scripts/objectresource.gd" id="2_v8l8r"]
 
@@ -8,6 +9,7 @@ script = ExtResource("2_v8l8r")
 id = "bgcolortrigger"
 display_name = "Background Color Trigger"
 scene = ExtResource("1_x53jg")
+icon = ExtResource("1_v8l8r")
 category = "triggers"
 max_amount = 0
 metadata/_custom_type_script = "uid://b7ivepggsojwl"

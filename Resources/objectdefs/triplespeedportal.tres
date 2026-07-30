@@ -1,13 +1,19 @@
-[gd_resource type="Resource" script_class="ObjectResource" load_steps=3 format=3 uid="uid://pmarvovom55i"]
+[gd_resource type="Resource" script_class="ObjectResource" load_steps=5 format=3 uid="uid://pmarvovom55i"]
 
+[ext_resource type="Texture2D" uid="uid://cgss44qdwlie0" path="res://assets/portalspritesheet.png" id="1_egeh7"]
 [ext_resource type="PackedScene" uid="uid://ipq8o2gmoibw" path="res://scenes/speed_portal.tscn" id="1_t13i5"]
 [ext_resource type="Script" uid="uid://b7ivepggsojwl" path="res://scripts/objectresource.gd" id="2_egeh7"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a32qx"]
+atlas = ExtResource("1_egeh7")
+region = Rect2(274, 0, 120, 100)
 
 [resource]
 script = ExtResource("2_egeh7")
 id = "triplespeedportal"
 display_name = "Triple Speed Portal"
 scene = ExtResource("1_t13i5")
+icon = SubResource("AtlasTexture_a32qx")
 category = "portals"
 max_amount = 0
 metadata/_custom_type_script = "uid://b7ivepggsojwl"

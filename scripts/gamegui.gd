@@ -17,7 +17,16 @@ func _ready() -> void:
 	restart_btn.mouse_exited.connect(_scale_tween.bind(restart_btn, false))
 	play_btn.mouse_entered.connect(_scale_tween.bind(play_btn, true))
 	play_btn.mouse_exited.connect(_scale_tween.bind(play_btn, false))
+	$PauseMenu/musicslidernode/slider/musicslider.mouse_entered.connect(highlight.bind($PauseMenu/musicslidernode/slider, true))
+	$PauseMenu/musicslidernode/slider/musicslider.mouse_exited.connect(highlight.bind($PauseMenu/musicslidernode/slider, false))
+	$PauseMenu/sfxslidernode/slider/sfxslider.mouse_entered.connect(highlight.bind($PauseMenu/sfxslidernode/slider, true))
+	$PauseMenu/sfxslidernode/slider/sfxslider.mouse_exited.connect(highlight.bind($PauseMenu/sfxslidernode/slider, false))
 
+func _process(delta: float) -> void:
+	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Music"), $PauseMenu/musicslidernode/slider/musicslider.value)
+	$PauseMenu/musicslidernode/slider/sliderfill.value = $PauseMenu/musicslidernode/slider/musicslider.value
+	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("SFX"), $PauseMenu/sfxslidernode/slider/sfxslider.value)
+	$PauseMenu/sfxslidernode/slider/sliderfill.value = $PauseMenu/sfxslidernode/slider/sfxslider.value
 
 func _on_practice_mode_btn_toggled(toggled_on: bool) -> void:
 	_handle_pausing(false)
@@ -54,3 +63,6 @@ func _scale_tween(button, hover : bool):
 	tween.tween_property(button, "scale", Vector2.ONE * m, 0.2)
 	tween.tween_property(button, "modulate", c, 0.2)
 	await tween.finished
+
+func highlight(node : Node, entered : bool):
+	node.modulate = Color.WHITE if not entered else Color.WHITE * 1.3

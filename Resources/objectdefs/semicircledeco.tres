@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="ObjectResource" load_steps=5 format=3 uid="uid://dt6m3fstsarv8"]
+
+[ext_resource type="Texture2D" uid="uid://vffedftkysfq" path="res://assets/icons-decos-ui-spritesheet.png" id="1_pxaco"]
+[ext_resource type="PackedScene" uid="uid://bsj7mygtuxgjl" path="res://scenes/deco.tscn" id="2_f7h8c"]
+[ext_resource type="Script" uid="uid://b7ivepggsojwl" path="res://scripts/objectresource.gd" id="3_ni46m"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b2utj"]
+atlas = ExtResource("1_pxaco")
+region = Rect2(560, 1744, 161, 81)
+
+[resource]
+script = ExtResource("3_ni46m")
+id = "semicircledeco"
+display_name = "Semi-Circle Deco"
+scene = ExtResource("2_f7h8c")
+icon = SubResource("AtlasTexture_b2utj")
+category = "deco"
+max_amount = 0
+metadata/_custom_type_script = "uid://b7ivepggsojwl"

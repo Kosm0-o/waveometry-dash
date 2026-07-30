@@ -26,7 +26,7 @@ var modeinfo : Array[Dictionary] = [
 ]
 
 
-func _ready() -> void:
+func object_ready() -> void:
 	match get_meta("id"):
 		"normalgamemodeportal":
 			gamemode = GAMEMODES.NORMAL
@@ -50,18 +50,18 @@ func _on_area_2d_area_entered(area) -> void:
 	match gamemode:
 		GAMEMODES.NORMAL:
 			area.flux = false
-			area.stairsmaster = {"active": false, "fall": false, "holding": 0, "stopframes": 10}
+			area.stairsmaster = {"active": false, "fall": false, "holding": 0, "stopframes": 10, "particle_trigger": false}
 			area.ricochet = {"active": false, "falling": false}
 		GAMEMODES.FLUX:
 			area.flux = true
-			area.stairsmaster = {"active": false, "fall": false, "holding": 0, "stopframes": 10}
+			area.stairsmaster = {"active": false, "fall": false, "holding": 0, "stopframes": 10, "particle_trigger": false}
 			area.ricochet = {"active": false, "falling": false}
 		GAMEMODES.STAIRSMASTER:
 			area.flux = false
-			area.stairsmaster = {"active": true, "fall": false, "holding": 0, "stopframes": 10}
+			area.stairsmaster = {"active": true, "fall": false, "holding": 0, "stopframes": 10, "particle_trigger": false}
 			area.ricochet = {"active": false, "falling": false}
 		GAMEMODES.RICOCHET:
 			area.flux = false
-			area.stairsmaster = {"active": false, "fall": false, "holding": 0, "stopframes": 10}
+			area.stairsmaster = {"active": false, "fall": false, "holding": 0, "stopframes": 10, "particle_trigger": false}
 			area.ricochet = {"active": true, "falling": false}
 		

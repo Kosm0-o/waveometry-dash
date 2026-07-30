@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Waveometry Dash"
-run/main_scene="uid://btrtpdonnmiig"
+run/main_scene="uid://crsbdgsp2my85"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
 
@@ -37,7 +37,6 @@ folder_colors={
 "res://Resources/": "teal",
 "res://addons/": "yellow",
 "res://assets/": "red",
-"res://fonts/": "purple",
 "res://scenes/": "blue",
 "res://scripts/": "green"
 }
@@ -146,4 +145,6 @@ opened_getting_started_page=true
 
 [rendering]
 
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"
 environment/defaults/default_clear_color=Color(0.162066, 0.162066, 0.162066, 1)

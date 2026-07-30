@@ -1,7 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://byyhe1jouvd0h"]
+[gd_scene load_steps=12 format=3 uid="uid://byyhe1jouvd0h"]
 
 [ext_resource type="Script" uid="uid://bk1frxm3vhjon" path="res://scripts/customlevelpanel.gd" id="1_4o602"]
 [ext_resource type="FontFile" uid="uid://c21leaucdjxc0" path="res://assets/fonts/PUSAB___.otf" id="2_5wtbq"]
+[ext_resource type="Texture2D" uid="uid://clr33odf13405" path="res://assets/rectanglebuttongd.svg" id="3_2lj7h"]
+[ext_resource type="Texture2D" uid="uid://cjhmqr08gd07" path="res://assets/textsspritesheet1.png" id="4_066rk"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_i2uum"]
 bg_color = Color(1, 1, 1, 1)
@@ -12,12 +14,28 @@ spacing_glyph = 2
 
 [sub_resource type="LabelSettings" id="LabelSettings_66blk"]
 font = SubResource("FontVariation_grgw0")
-font_size = 91
+font_size = 56
 outline_size = 18
 outline_color = Color(0, 0, 0, 1)
 shadow_size = 7
 shadow_color = Color(0, 0, 0, 0.333333)
 shadow_offset = Vector2(7.89, 4.055)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xqcso"]
+atlas = ExtResource("4_066rk")
+region = Rect2(3628, 16, 282, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_elmju"]
+atlas = ExtResource("4_066rk")
+region = Rect2(2466, 16, 450, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hy2m7"]
+atlas = ExtResource("4_066rk")
+region = Rect2(1494, 15, 240, 97)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4er2c"]
+atlas = ExtResource("4_066rk")
+region = Rect2(451, 15, 173, 97)
 
 [node name="customlevelpanel" type="Panel"]
 self_modulate = Color(0.760784, 0.447059, 0.247059, 1)
@@ -38,49 +56,90 @@ vertical_alignment = 1
 
 [node name="editbtn" type="Button" parent="."]
 layout_mode = 0
-offset_left = 664.0
-offset_top = 10.0
-offset_right = 776.0
-offset_bottom = 57.0
-theme_override_font_sizes/font_size = 28
-text = "Edit"
+offset_left = 660.0
+offset_top = 4.0
+offset_right = 833.0
+offset_bottom = 89.0
+scale = Vector2(0.7, 0.7)
+focus_mode = 0
+icon = ExtResource("3_2lj7h")
+flat = true
+
+[node name="text" type="TextureRect" parent="editbtn"]
+layout_mode = 0
+offset_left = 30.0
+offset_top = 21.4286
+offset_right = 147.0
+offset_bottom = 61.4286
+texture = SubResource("AtlasTexture_xqcso")
+expand_mode = 1
 
 [node name="deletebtn" type="Button" parent="."]
 layout_mode = 0
-offset_left = 664.0
-offset_top = 66.0
-offset_right = 776.0
-offset_bottom = 113.0
+offset_left = 660.0
+offset_top = 64.0
+offset_right = 833.0
+offset_bottom = 149.0
+scale = Vector2(0.7, 0.7)
+focus_mode = 0
 theme_override_font_sizes/font_size = 28
-text = "Delete"
+icon = ExtResource("3_2lj7h")
+flat = true
+
+[node name="text" type="TextureRect" parent="deletebtn"]
+layout_mode = 0
+offset_left = 25.7143
+offset_top = 25.7143
+offset_right = 150.714
+offset_bottom = 56.7143
+texture = SubResource("AtlasTexture_elmju")
+expand_mode = 1
 
 [node name="yesbtn" type="Button" parent="."]
 visible = false
 layout_mode = 0
-offset_left = 664.0
-offset_top = 10.0
-offset_right = 776.0
-offset_bottom = 57.0
-theme_override_colors/font_hover_color = Color(1, 0, 0, 1)
-theme_override_colors/font_color = Color(1, 0, 0, 1)
-theme_override_colors/font_focus_color = Color(1, 0, 0, 1)
-theme_override_colors/font_pressed_color = Color(1, 0, 0, 1)
+offset_left = 660.0
+offset_top = 4.0
+offset_right = 772.0
+offset_bottom = 51.0
+scale = Vector2(0.7, 0.7)
+focus_mode = 0
 theme_override_font_sizes/font_size = 28
-text = "Yes"
+icon = ExtResource("3_2lj7h")
+flat = true
+
+[node name="text" type="TextureRect" parent="yesbtn"]
+self_modulate = Color(1, 0.688729, 0.639383, 1)
+layout_mode = 0
+offset_left = 41.4286
+offset_top = 22.8571
+offset_right = 132.429
+offset_bottom = 62.8571
+texture = SubResource("AtlasTexture_hy2m7")
+expand_mode = 1
 
 [node name="nobtn" type="Button" parent="."]
 visible = false
 layout_mode = 0
-offset_left = 664.0
-offset_top = 66.0
-offset_right = 776.0
-offset_bottom = 113.0
-theme_override_colors/font_hover_color = Color(0, 1, 0, 1)
-theme_override_colors/font_color = Color(0, 1, 0, 1)
-theme_override_colors/font_focus_color = Color(0, 1, 0, 1)
-theme_override_colors/font_pressed_color = Color(0, 1, 0, 1)
+offset_left = 660.0
+offset_top = 64.0
+offset_right = 833.0
+offset_bottom = 149.0
+scale = Vector2(0.7, 0.7)
+focus_mode = 0
 theme_override_font_sizes/font_size = 28
-text = "No"
+icon = ExtResource("3_2lj7h")
+flat = true
+
+[node name="text" type="TextureRect" parent="nobtn"]
+self_modulate = Color(0.58261, 1, 0.551537, 1)
+layout_mode = 0
+offset_left = 52.8571
+offset_top = 24.2857
+offset_right = 126.857
+offset_bottom = 62.2857
+texture = SubResource("AtlasTexture_4er2c")
+expand_mode = 1
 
 [connection signal="pressed" from="editbtn" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="deletebtn" to="." method="_on_deletebtn_pressed"]

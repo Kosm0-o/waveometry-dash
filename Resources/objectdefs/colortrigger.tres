@@ -1,13 +1,19 @@
-[gd_resource type="Resource" script_class="ObjectResource" load_steps=3 format=3 uid="uid://deutaaiypdo3"]
+[gd_resource type="Resource" script_class="ObjectResource" load_steps=5 format=3 uid="uid://deutaaiypdo3"]
 
+[ext_resource type="Texture2D" uid="uid://b8vr4anp6aaie" path="res://assets/icons-ui-buttons-spritesheet2.png" id="1_kh778"]
 [ext_resource type="PackedScene" uid="uid://dt262mckdh27t" path="res://scenes/colortrigger.tscn" id="1_pplil"]
 [ext_resource type="Script" uid="uid://b7ivepggsojwl" path="res://scripts/objectresource.gd" id="2_kh778"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0g4kk"]
+atlas = ExtResource("1_kh778")
+region = Rect2(1586, 360, 103, 93)
 
 [resource]
 script = ExtResource("2_kh778")
 id = "colortrigger"
 display_name = "Color Trigger"
 scene = ExtResource("1_pplil")
+icon = SubResource("AtlasTexture_0g4kk")
 category = "triggers"
 max_amount = 0
 metadata/_custom_type_script = "uid://b7ivepggsojwl"

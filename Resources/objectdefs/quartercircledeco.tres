@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="ObjectResource" load_steps=5 format=3 uid="uid://bu82eipp25ogp"]
+
+[ext_resource type="Texture2D" uid="uid://vffedftkysfq" path="res://assets/icons-decos-ui-spritesheet.png" id="1_ipxeg"]
+[ext_resource type="PackedScene" uid="uid://bsj7mygtuxgjl" path="res://scenes/deco.tscn" id="2_2qi30"]
+[ext_resource type="Script" uid="uid://b7ivepggsojwl" path="res://scripts/objectresource.gd" id="3_rj0ny"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fptk1"]
+atlas = ExtResource("1_ipxeg")
+region = Rect2(1882, 1744, 81, 81)
+
+[resource]
+script = ExtResource("3_rj0ny")
+id = "quartercircledeco"
+display_name = "Quarter-Circle Deco"
+scene = ExtResource("2_2qi30")
+icon = SubResource("AtlasTexture_fptk1")
+category = "deco"
+max_amount = 0
+metadata/_custom_type_script = "uid://b7ivepggsojwl"

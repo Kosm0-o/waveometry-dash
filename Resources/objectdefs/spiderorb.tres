@@ -1,12 +1,19 @@
-[gd_resource type="Resource" script_class="ObjectResource" load_steps=3 format=3 uid="uid://lb84oma3km3l"]
+[gd_resource type="Resource" script_class="ObjectResource" load_steps=5 format=3 uid="uid://lb84oma3km3l"]
 
 [ext_resource type="PackedScene" uid="uid://fa7xrx36wu6v" path="res://scenes/orb.tscn" id="1_em7k4"]
+[ext_resource type="Texture2D" uid="uid://bpf2svg517x6b" path="res://assets/orbsspritesheet.png" id="1_typwh"]
 [ext_resource type="Script" uid="uid://b7ivepggsojwl" path="res://scripts/objectresource.gd" id="2_typwh"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qteve"]
+atlas = ExtResource("1_typwh")
+region = Rect2(923, 363, 107, 106)
 
 [resource]
 script = ExtResource("2_typwh")
 id = "spiderorb"
 display_name = "Spider Orb"
 scene = ExtResource("1_em7k4")
+icon = SubResource("AtlasTexture_qteve")
 category = "interactables"
+max_amount = 0
 metadata/_custom_type_script = "uid://b7ivepggsojwl"

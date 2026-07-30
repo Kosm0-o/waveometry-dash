@@ -5,12 +5,14 @@ var safe_timer : float = 0.0
 var fading : bool = false
 
 func _ready() -> void:
+	RenderingServer.set_default_clear_color(Color.BLACK)
+	EditorGlobal.editing = false
 	randomize()
 	for btn in $foregroundui.get_children():
 		if btn is Button:
 			btn.mouse_entered.connect(
 				func():
-					btn.modulate *= 1.5
+					btn.modulate *= 1.3
 			)
 			btn.mouse_exited.connect(
 				func():

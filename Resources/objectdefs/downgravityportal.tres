@@ -1,13 +1,19 @@
-[gd_resource type="Resource" script_class="ObjectResource" load_steps=3 format=3 uid="uid://buul2c6bo7clf"]
+[gd_resource type="Resource" script_class="ObjectResource" load_steps=5 format=3 uid="uid://buul2c6bo7clf"]
 
+[ext_resource type="Texture2D" uid="uid://be0pr2htcknmm" path="res://assets/iconsforportalsspritesheetrecompilation.png" id="1_coj61"]
 [ext_resource type="PackedScene" uid="uid://dr1xtmfnp78gl" path="res://scenes/gravityportal.tscn" id="1_qs076"]
 [ext_resource type="Script" uid="uid://b7ivepggsojwl" path="res://scripts/objectresource.gd" id="2_coj61"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u5tt1"]
+atlas = ExtResource("1_coj61")
+region = Rect2(673, 50, 131, 215)
 
 [resource]
 script = ExtResource("2_coj61")
 id = "downgravityportal"
 display_name = "Down Gravity Portal"
 scene = ExtResource("1_qs076")
+icon = SubResource("AtlasTexture_u5tt1")
 category = "portals"
 max_amount = 0
 metadata/_custom_type_script = "uid://b7ivepggsojwl"

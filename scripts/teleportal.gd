@@ -49,4 +49,5 @@ func _on_area_2d_area_entered(area) -> void:
 					area.global_position = t.global_position - Vector2(50, 0)
 					global.portal_entered.emit(t)
 					break
-		area.trail_node.reset()
+		if not EditorGlobal.playtest:
+			area.trail_node.reset()

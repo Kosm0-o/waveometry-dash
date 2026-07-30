@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="ObjectResource" load_steps=5 format=3 uid="uid://bssectmqo7p0r"]
+
+[ext_resource type="Texture2D" uid="uid://vffedftkysfq" path="res://assets/icons-decos-ui-spritesheet.png" id="1_uil8q"]
+[ext_resource type="PackedScene" uid="uid://bsj7mygtuxgjl" path="res://scenes/deco.tscn" id="2_3lnsy"]
+[ext_resource type="Script" uid="uid://b7ivepggsojwl" path="res://scripts/objectresource.gd" id="3_yxehd"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b7uq5"]
+atlas = ExtResource("1_uil8q")
+region = Rect2(4415, 1203, 143, 143)
+
+[resource]
+script = ExtResource("3_yxehd")
+id = "squaredeco"
+display_name = "Square Deco"
+scene = ExtResource("2_3lnsy")
+icon = SubResource("AtlasTexture_b7uq5")
+category = "deco"
+max_amount = 0
+metadata/_custom_type_script = "uid://b7ivepggsojwl"

@@ -1,13 +1,19 @@
-[gd_resource type="Resource" script_class="ObjectResource" load_steps=3 format=3 uid="uid://b6hd522nxjnh0"]
+[gd_resource type="Resource" script_class="ObjectResource" load_steps=5 format=3 uid="uid://b6hd522nxjnh0"]
 
+[ext_resource type="Texture2D" uid="uid://be0pr2htcknmm" path="res://assets/iconsforportalsspritesheetrecompilation.png" id="1_7nfko"]
 [ext_resource type="PackedScene" uid="uid://w8nqdwu7crdh" path="res://scenes/sizeportal.tscn" id="1_klxo6"]
 [ext_resource type="Script" uid="uid://b7ivepggsojwl" path="res://scripts/objectresource.gd" id="2_7nfko"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eag7d"]
+atlas = ExtResource("1_7nfko")
+region = Rect2(29, 45, 154, 227)
 
 [resource]
 script = ExtResource("2_7nfko")
 id = "minisizeportal"
 display_name = "Mini Size Portal"
 scene = ExtResource("1_klxo6")
+icon = SubResource("AtlasTexture_eag7d")
 category = "portals"
 max_amount = 0
 metadata/_custom_type_script = "uid://b7ivepggsojwl"

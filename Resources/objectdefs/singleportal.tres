@@ -1,13 +1,19 @@
-[gd_resource type="Resource" script_class="ObjectResource" load_steps=3 format=3 uid="uid://3fplx8soygac"]
+[gd_resource type="Resource" script_class="ObjectResource" load_steps=5 format=3 uid="uid://3fplx8soygac"]
 
 [ext_resource type="PackedScene" uid="uid://de38yi3l0x16g" path="res://scenes/dualportal.tscn" id="1_j74jx"]
+[ext_resource type="Texture2D" uid="uid://be0pr2htcknmm" path="res://assets/iconsforportalsspritesheetrecompilation.png" id="1_yao4k"]
 [ext_resource type="Script" uid="uid://b7ivepggsojwl" path="res://scripts/objectresource.gd" id="2_yao4k"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a0kam"]
+atlas = ExtResource("1_yao4k")
+region = Rect2(260, 686, 113, 207)
 
 [resource]
 script = ExtResource("2_yao4k")
 id = "singleportal"
 display_name = "Single Portal"
 scene = ExtResource("1_j74jx")
+icon = SubResource("AtlasTexture_a0kam")
 category = "portals"
 max_amount = 0
 metadata/_custom_type_script = "uid://b7ivepggsojwl"

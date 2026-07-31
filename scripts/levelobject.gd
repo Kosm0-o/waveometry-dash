@@ -59,7 +59,7 @@ func add_group(id : int, type_is_group : bool):
 		if targets.has(id) or (single_target and targets.size() > 0):
 			if single_target:
 				$targetpopup.visible = true
-				await get_tree().create_timer(1.0).timeout
+				await get_tree().create_timer(1.5).timeout
 				$targetpopup.visible = false
 			return
 		targets.append(id)

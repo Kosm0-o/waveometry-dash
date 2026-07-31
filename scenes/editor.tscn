@@ -1,4 +1,4 @@
-[gd_scene load_steps=101 format=3 uid="uid://dvicnlxkttgiw"]
+[gd_scene load_steps=105 format=3 uid="uid://dvicnlxkttgiw"]
 
 [ext_resource type="Script" uid="uid://db3arps08nl6q" path="res://scripts/editor.gd" id="1_b1cmn"]
 [ext_resource type="Texture2D" uid="uid://b5c16qc8con4y" path="res://assets/editortabunselectedgd (1).svg" id="2_2w0at"]
@@ -17,6 +17,8 @@
 [ext_resource type="Texture2D" uid="uid://1ey5id0qygtu" path="res://assets/customtogglebuttongdoff.svg" id="8_sdh1e"]
 [ext_resource type="Texture2D" uid="uid://clr33odf13405" path="res://assets/rectanglebuttongd.svg" id="11_5tdu1"]
 [ext_resource type="Texture2D" uid="uid://lgi1kob385sm" path="res://assets/xbuttongd.svg" id="14_q8l03"]
+[ext_resource type="Texture2D" uid="uid://b70rp6rhhsr76" path="res://assets/finaliconsspritesheet.png" id="17_8g6du"]
+[ext_resource type="PackedScene" uid="uid://bbcbd104d3odj" path="res://scenes/exportpanel.tscn" id="18_aa8l6"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_v24q3"]
 content_margin_left = 50.0
@@ -378,12 +380,12 @@ shadow_size = 7
 shadow_color = Color(0, 0, 0, 0.333333)
 shadow_offset = Vector2(7.89, 4.055)
 
-[sub_resource type="FontVariation" id="FontVariation_5lcyj"]
+[sub_resource type="FontVariation" id="FontVariation_0xjnn"]
 base_font = ExtResource("3_xg7d5")
 spacing_glyph = 2
 
 [sub_resource type="LabelSettings" id="LabelSettings_74j0u"]
-font = SubResource("FontVariation_5lcyj")
+font = SubResource("FontVariation_0xjnn")
 font_size = 32
 outline_size = 18
 outline_color = Color(0, 0, 0, 1)
@@ -405,8 +407,16 @@ region = Rect2(550, 0, 50, 98)
 atlas = ExtResource("4_3vi5u")
 region = Rect2(3040, 138, 330, 234)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_1mc7a"]
+atlas = ExtResource("17_8g6du")
+region = Rect2(654, 136, 113, 114)
+
+[sub_resource type="FontVariation" id="FontVariation_8g6du"]
+base_font = ExtResource("3_xg7d5")
+spacing_glyph = 2
+
 [sub_resource type="LabelSettings" id="LabelSettings_q8l03"]
-font = SubResource("FontVariation_5lcyj")
+font = SubResource("FontVariation_8g6du")
 font_size = 65
 outline_size = 18
 outline_color = Color(0, 0, 0, 1)
@@ -418,7 +428,7 @@ shadow_offset = Vector2(7.89, 4.055)
 content_margin_top = 10.0
 
 [sub_resource type="LabelSettings" id="LabelSettings_8g6du"]
-font = SubResource("FontVariation_5lcyj")
+font = SubResource("FontVariation_8g6du")
 font_size = 45
 outline_size = 18
 outline_color = Color(0, 0, 0, 1)
@@ -427,7 +437,7 @@ shadow_color = Color(0, 0, 0, 0.333333)
 shadow_offset = Vector2(7.89, 4.055)
 
 [sub_resource type="LabelSettings" id="LabelSettings_0u1f5"]
-font = SubResource("FontVariation_5lcyj")
+font = SubResource("FontVariation_8g6du")
 font_size = 22
 outline_size = 7
 outline_color = Color(0, 0, 0, 1)
@@ -436,7 +446,7 @@ shadow_color = Color(0, 0, 0, 0.333333)
 shadow_offset = Vector2(7.89, 4.055)
 
 [sub_resource type="LabelSettings" id="LabelSettings_aa8l6"]
-font = SubResource("FontVariation_5lcyj")
+font = SubResource("FontVariation_8g6du")
 font_size = 18
 outline_size = 4
 outline_color = Color(0, 0, 0, 1)
@@ -1661,13 +1671,13 @@ mouse_filter = 2
 texture = SubResource("AtlasTexture_mxdmd")
 
 [node name="levelsettingsui" type="Control" parent="gui"]
+visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="settingspanel" type="Panel" parent="gui/levelsettingsui"]
-visible = false
 layout_mode = 0
 offset_left = 109.0
 offset_top = 27.0
@@ -1844,6 +1854,27 @@ focus_mode = 0
 theme_override_font_sizes/font_size = 51
 icon = ExtResource("14_q8l03")
 flat = true
+
+[node name="exportlevel" type="Button" parent="gui/levelsettingsui"]
+layout_mode = 0
+offset_left = 960.0
+offset_top = 506.0
+offset_right = 1082.0
+offset_bottom = 628.0
+focus_mode = 0
+theme_override_font_sizes/font_size = 66
+icon = SubResource("AtlasTexture_1mc7a")
+flat = true
+
+[node name="exportpanel" parent="gui/levelsettingsui" instance=ExtResource("18_aa8l6")]
+visible = false
+z_index = 1
+layout_mode = 1
+offset_left = 35.0
+offset_top = 36.0
+offset_right = 14.0
+offset_bottom = -3.0
+scale = Vector2(0.9, 0.9)
 
 [node name="controlstutorialui" type="Control" parent="gui"]
 layout_mode = 3
@@ -2260,3 +2291,4 @@ script = ExtResource("2_pxqd5")
 
 [connection signal="pressed" from="gui/playtest" to="." method="_on_playtest_pressed"]
 [connection signal="pressed" from="gui/navigationui/menubtnoffset/MenuButton/PanelContainer/VBoxContainer/savenplaybtn" to="." method="_on_savenplaybtn_pressed"]
+[connection signal="pressed" from="gui/levelsettingsui/exportlevel" to="." method="_on_exportlevel_pressed"]

@@ -1,8 +1,10 @@
-[gd_scene load_steps=11 format=3 uid="uid://bbv13iaydmst7"]
+[gd_scene load_steps=14 format=3 uid="uid://bbv13iaydmst7"]
 
 [ext_resource type="Script" uid="uid://baw1k6g8ptp5n" path="res://scripts/editorlevelmenu.gd" id="1_i2uum"]
 [ext_resource type="FontFile" uid="uid://c21leaucdjxc0" path="res://assets/fonts/PUSAB___.otf" id="2_b5g28"]
 [ext_resource type="Texture2D" uid="uid://vffedftkysfq" path="res://assets/icons-decos-ui-spritesheet.png" id="2_kf2fo"]
+[ext_resource type="Texture2D" uid="uid://b70rp6rhhsr76" path="res://assets/finaliconsspritesheet.png" id="4_34syu"]
+[ext_resource type="PackedScene" uid="uid://cvisiulrmibf1" path="res://scenes/importpanel.tscn" id="5_ewmrj"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_34syu"]
 atlas = ExtResource("2_kf2fo")
@@ -31,6 +33,10 @@ region = Rect2(1866, 198, 114, 114)
 [sub_resource type="AtlasTexture" id="AtlasTexture_6agnp"]
 atlas = ExtResource("2_kf2fo")
 region = Rect2(5733, 1750, 71, 71)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wnno8"]
+atlas = ExtResource("4_34syu")
+region = Rect2(2076, 136, 113, 114)
 
 [node name="editorlevelmenu" type="Control"]
 layout_mode = 3
@@ -64,9 +70,9 @@ flat = true
 
 [node name="substitutelevelpanel" type="Control" parent="."]
 anchors_preset = 0
-offset_left = -22.0
+offset_left = -11.0
 offset_top = -15.0
-offset_right = 18.0
+offset_right = 29.0
 offset_bottom = 25.0
 
 [node name="ColorRect2" type="ColorRect" parent="substitutelevelpanel"]
@@ -145,6 +151,26 @@ offset_right = 100.0
 offset_bottom = 96.0
 texture = SubResource("AtlasTexture_6agnp")
 
+[node name="importlevel" type="Button" parent="."]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 524.0
+offset_right = 132.0
+offset_bottom = 646.0
+focus_mode = 0
+theme_override_font_sizes/font_size = 66
+icon = SubResource("AtlasTexture_wnno8")
+flat = true
+
+[node name="importpanel" parent="." instance=ExtResource("5_ewmrj")]
+visible = false
+layout_mode = 1
+offset_left = 42.0
+offset_top = 40.0
+offset_right = 144.0
+offset_bottom = 87.0
+scale = Vector2(0.885, 0.885)
+
 [node name="trans" type="CanvasLayer" parent="."]
 layer = 128
 
@@ -160,3 +186,4 @@ color = Color(0, 0, 0, 1)
 
 [connection signal="pressed" from="back" to="." method="_on_back_pressed"]
 [connection signal="pressed" from="newlvl" to="." method="_on_newlvl_pressed"]
+[connection signal="pressed" from="importlevel" to="." method="_on_importlevel_pressed"]

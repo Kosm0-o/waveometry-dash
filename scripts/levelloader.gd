@@ -1,5 +1,46 @@
 extends Node2D
 
+func validate_level_file(file_data : String):
+	var data = JSON.parse_string(file_data)
+	if data == null or typeof(data) != TYPE_DICTIONARY:
+		return false
+	if not data.has("objects"):
+		return false
+	if typeof(data.objects) != TYPE_ARRAY:
+		return false
+	for obj in data.objects:
+		if typeof(obj) != TYPE_DICTIONARY:
+			return false
+		var req_keys : Array = [
+			"id",
+			"x",
+			"y",
+			"group_ids",
+			"targets",
+			"mod",
+			"rotation",
+			"scale_x",
+			"scale_y",
+			"zindex",
+			"target_color",
+			"duration",
+			"move_x",
+			"move_y",
+			"targ_rot",
+			"targ_scale_x",
+			"targ_scale_y",
+			"objecttext",
+			"font_size"
+		]
+		for key in req_keys:
+			if not obj.has(key):
+				return false
+				
+		if not EditorGlobal.object_defintions.has(obj.id):
+			return false
+	
+	return true
+
 func get_level_data(objects_node : Node2D, settings_dictionary : Dictionary):
 	var level_data : Dictionary = {
 		"level_name": settings_dictionary.get("level_name"),

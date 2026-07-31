@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://btrtpdonnmiig"]
+[gd_scene load_steps=34 format=3 uid="uid://btrtpdonnmiig"]
 
 [ext_resource type="PackedScene" uid="uid://d2yi0cqbfih7l" path="res://scenes/player.tscn" id="1_uwrxv"]
 [ext_resource type="Script" uid="uid://dy525wqc8vffw" path="res://scripts/gamemanager.gd" id="1_yqjtg"]
@@ -8,10 +8,10 @@
 [ext_resource type="LabelSettings" uid="uid://dh4mtswsaqy2r" path="res://Resources/visuals/pusabcustomized.tres" id="6_dinhu"]
 [ext_resource type="Texture2D" uid="uid://b3rl17jtvbpoq" path="res://assets/pausemenuspritesheet.png" id="6_trtic"]
 [ext_resource type="PackedScene" uid="uid://bek88ijduqy2k" path="res://scenes/dblock.tscn" id="7_gee14"]
-[ext_resource type="Theme" uid="uid://dume7nemxq63b" path="res://Resources/visuals/editablepusab.tres" id="7_kvuet"]
 [ext_resource type="Texture2D" uid="uid://vffedftkysfq" path="res://assets/icons-decos-ui-spritesheet.png" id="8_trtic"]
 [ext_resource type="FontFile" uid="uid://c21leaucdjxc0" path="res://assets/fonts/PUSAB___.otf" id="9_ir15t"]
 [ext_resource type="Texture2D" uid="uid://b8vr4anp6aaie" path="res://assets/icons-ui-buttons-spritesheet2.png" id="10_ca42v"]
+[ext_resource type="PackedScene" uid="uid://578uulm3t51s" path="res://scenes/endscreenpanel.tscn" id="11_kvuet"]
 
 [sub_resource type="Environment" id="Environment_trtic"]
 background_mode = 3
@@ -76,30 +76,13 @@ region = Rect2(144, 156, 144, 156)
 atlas = ExtResource("6_trtic")
 region = Rect2(432, 0, 144, 156)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_rysoc"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_sww3w"]
 atlas = ExtResource("8_trtic")
-region = Rect2(1698, 746, 450, 38)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_bhx41"]
-atlas = ExtResource("8_trtic")
-region = Rect2(416, 746, 450, 38)
+region = Rect2(3040, 138, 330, 234)
 
 [sub_resource type="FontVariation" id="FontVariation_5lcyj"]
 base_font = ExtResource("9_ir15t")
 spacing_glyph = 2
-
-[sub_resource type="LabelSettings" id="LabelSettings_qnb83"]
-font = SubResource("FontVariation_5lcyj")
-font_size = 35
-outline_size = 6
-outline_color = Color(0, 0, 0, 1)
-shadow_size = 7
-shadow_color = Color(0, 0, 0, 0.333333)
-shadow_offset = Vector2(7.89, 4.055)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_sww3w"]
-atlas = ExtResource("8_trtic")
-region = Rect2(3040, 138, 330, 234)
 
 [sub_resource type="LabelSettings" id="LabelSettings_suyxu"]
 font = SubResource("FontVariation_5lcyj")
@@ -259,27 +242,6 @@ focus_mode = 0
 texture_normal = SubResource("AtlasTexture_e1j6l")
 texture_pressed = SubResource("AtlasTexture_pl11u")
 
-[node name="ProgressBar" type="TextureProgressBar" parent="GUI/PauseMenu"]
-layout_mode = 0
-offset_left = 170.0
-offset_top = 171.0
-offset_right = 620.0
-offset_bottom = 219.0
-scale = Vector2(1.825, 1.245)
-theme = ExtResource("7_kvuet")
-texture_under = SubResource("AtlasTexture_rysoc")
-texture_progress = SubResource("AtlasTexture_bhx41")
-
-[node name="percentage" type="Label" parent="GUI/PauseMenu/ProgressBar"]
-layout_mode = 0
-offset_left = 203.479
-offset_top = 11.2447
-offset_right = 257.479
-offset_bottom = 38.2447
-scale = Vector2(0.548, 0.8)
-text = "0%"
-label_settings = SubResource("LabelSettings_qnb83")
-
 [node name="border" type="TextureRect" parent="GUI/PauseMenu"]
 layout_mode = 0
 offset_left = 74.0
@@ -394,6 +356,12 @@ min_value = -55.0
 max_value = 6.0
 step = 0.5
 
+[node name="endscreenpanel" parent="GUI" instance=ExtResource("11_kvuet")]
+visible = false
+offset_left = 1.0
+offset_top = 1.0
+offset_bottom = -11.0
+
 [node name="Map" type="Node2D" parent="."]
 
 [node name="Borders" type="Node2D" parent="Map"]
@@ -413,6 +381,17 @@ z_index = 1
 [node name="Player" parent="Map/players" instance=ExtResource("1_uwrxv")]
 
 [node name="objects" type="Node2D" parent="Map"]
+
+[node name="trans" type="CanvasLayer" parent="."]
+layer = 128
+
+[node name="ColorRect" type="ColorRect" parent="trans"]
+offset_left = -159.0
+offset_top = -92.0
+offset_right = 1424.0
+offset_bottom = 781.0
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
 
 [connection signal="toggled" from="GUI/PauseMenu/Buttons/HboxContainer/PracticeModeBtn" to="GUI" method="_on_practice_mode_btn_toggled"]
 [connection signal="pressed" from="GUI/PauseMenu/Buttons/HboxContainer/MenuBtn" to="GUI" method="_on_menu_btn_pressed"]

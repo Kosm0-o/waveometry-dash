@@ -181,16 +181,20 @@ func _physics_process(delta: float) -> void:
 	var particle_bool : bool = sliding or (stairsmaster["particle_trigger"])
 	$grounded.speed_scale = 1 if particle_bool else 5
 	$grounded.emitting = particle_bool
-	
+	handle_gamemode_indicator(delta)
 	
 
 
 
 
 func die():
-	visible = false
-	trail_node.visible = false
+	$deathparticles.emitting = true
+	$deathsfx.play()
 	speed = 0
+	$visualoffset.visible = false
+	$Area2D/CollisionShape2D.set_deferred("disabled", true)
+	trail_node.visible = false
+	await $deathparticles.finished
 	if EditorGlobal.playtest:
 		EditorGlobal.playtest = false
 		EditorGlobal.trail_points = trail_node.points
@@ -212,7 +216,8 @@ func die():
 		angle = 45
 		trail_node.reset()
 		trail_node.set_starter_frames(1000)
-	visible = true
+	$visualoffset.visible = true
+	$Area2D/CollisionShape2D.set_deferred("disabled", false)
 	trail_node.visible = true
 	if global.practice_mode:
 		Engine.time_scale = 0.3
@@ -274,3 +279,22 @@ func place_checkpoint():
 								}
 	get_tree().current_scene.get_node("Map").add_child(checkpoint)
 	checkpoint.global_position = global_position
+
+func win():
+	hide()
+	var tween = create_tween().set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
+	tween.tween_property(trail_node, "modulate:a", 0.0, 0.5)
+	global.level_complete.emit()
+	speedmod = 0
+
+func handle_gamemode_indicator(delta):
+	$UI/gamemodeidentifierui.visible = global.gamemodeindicator
+	var icon = $UI/gamemodeidentifierui/Panel/icon
+	if ricochet.active:
+		icon.frame = 3
+	elif stairsmaster.active:
+		icon.frame = 2
+	elif flux:
+		icon.frame = 1
+	else:
+		icon.frame = 0

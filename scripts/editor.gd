@@ -71,6 +71,7 @@ var dragging : bool = false
 
 
 func _ready() -> void:
+	MainSaveFile.save_user_data()
 	#LevelLoader.save_level(EditorGlobal.current_lvl, $levelobjects, {})
 	EditorGlobal.editing = true
 	global.trans_rect = $trans/ColorRect
@@ -213,7 +214,7 @@ func connect_signals():
 	$gui/groupsui/groupspanel/btns/addgroupbtn.pressed.connect(_generate_group.bind(true))
 	$gui/groupsui/groupspanel/X.pressed.connect(func(): $gui/groupsui/groupspanel.visible = false)
 	$gui/groupsui/globalgroupspanel/X.pressed.connect(func(): $gui/groupsui/groupspanel.visible = false; $gui/groupsui/globalgroupspanel.visible = false)
-	$gui/levelsettingsui/settingspanel/X.pressed.connect(func(): $gui/levelsettingsui/settingspanel.visible = false)
+	$gui/levelsettingsui/settingspanel/X.pressed.connect(func(): $gui/levelsettingsui.visible = false)
 	$gui/groupsui/groupspanel/groupscategories.tab_selected.connect(_group_category_changed)
 	$gui/groupsui/globalgroupspanel/btns/findgroupbtn.pressed.connect(_find_group_row)
 	$gui/groupsui/globalgroupspanel/btns/selectallbtn.pressed.connect(_select_all_in_group)
@@ -237,7 +238,7 @@ func connect_signals():
 	durationedit.text_submitted.connect(func(txt): EditorGlobal.selected_obj.duration = float(txt))
 	$gui/levelsettingsui/settingspanel/org/choosesong.item_selected.connect(func(idx : int): song_id = SongDatabase.song_definitions[idx].id)
 	$gui/levelsettingsui/settingspanel/org/speedbtn.pressed.connect(_next_speed)
-	$gui/navigationui/menubtnoffset/MenuButton/PanelContainer/VBoxContainer/levelsettingsbtn.pressed.connect(func(): $gui/levelsettingsui/settingspanel.visible = true)
+	$gui/navigationui/menubtnoffset/MenuButton/PanelContainer/VBoxContainer/levelsettingsbtn.pressed.connect(func(): $gui/levelsettingsui.visible = true)
 	$gui/levelsettingsui/settingspanel/org/lvlnameenter.text_changed.connect(func(txt : String): lvl_name = txt)
 	$gui/navigationui/menubtnoffset/MenuButton.toggled.connect(_menu_button_toggled)
 	$gui/navigationui/menubtnoffset/MenuButton/PanelContainer/VBoxContainer/controlsbtn.pressed.connect(func(): $gui/controlstutorialui/controlspanel.visible = true)
@@ -944,3 +945,7 @@ func setup_buttons():
 			btn.focus_mode = Control.FOCUS_NONE
 	$gui/levelslider.mouse_entered.connect(highlight.bind($gui/levelslider, true))
 	$gui/levelslider.mouse_exited.connect(highlight.bind($gui/levelslider, false))
+
+
+func _on_exportlevel_pressed() -> void:
+	$gui/levelsettingsui/exportpanel.show()

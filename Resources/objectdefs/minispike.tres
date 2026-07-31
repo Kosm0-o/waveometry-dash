@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="ObjectResource" load_steps=5 format=3 uid="uid://b8rrg2jobfej7"]
+
+[ext_resource type="Texture2D" uid="uid://vffedftkysfq" path="res://assets/icons-decos-ui-spritesheet.png" id="1_psksg"]
+[ext_resource type="PackedScene" uid="uid://ua1xsyvsg1h5" path="res://scenes/minispike.tscn" id="2_tpn2o"]
+[ext_resource type="Script" uid="uid://b7ivepggsojwl" path="res://scripts/objectresource.gd" id="3_fg3ik"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fg3ik"]
+atlas = ExtResource("1_psksg")
+region = Rect2(1858, 1246, 128, 56)
+
+[resource]
+script = ExtResource("3_fg3ik")
+id = "minispike"
+display_name = "Spike"
+scene = ExtResource("2_tpn2o")
+icon = SubResource("AtlasTexture_fg3ik")
+category = "hazards"
+max_amount = 0
+metadata/_custom_type_script = "uid://b7ivepggsojwl"

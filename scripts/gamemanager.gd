@@ -18,10 +18,13 @@ var speeds : Dictionary[String, float] = {
 	"quad": 2.19
 }
 var time_alive : float = 0.0
+var attempts : int = 0
+var time_passed : float = 0.0
 
 func _ready() -> void:
 	EditorGlobal.editing = false
 	global.portal_entered.connect(_shift_camera)
+	global.level_complete.connect(_endscreen)
 	global.died.connect(reset_level)
 	global.pnode = $Map/players
 	global.bg = $bg/bgtexture
@@ -31,6 +34,8 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 #	Engine.time_scale = 0.1
+	time_passed += delta
+	global.time_passed = time_passed
 	if Engine.time_scale >= 0.99 and Engine.time_scale != 1:
 		Engine.time_scale = 1.0
 	elif Engine.time_scale < 1:
@@ -84,6 +89,11 @@ func _process(delta: float) -> void:
 	
 	past_rotation_tweening = global.rotation_tweening
 	time_alive += delta
+	
+	if global.main_level:
+		var progress = abs(player.global_position.x - global.startpos.x) / abs(global.startpos.x - global.endpos.global_position.x) * 100
+		if progress > global.progress[global.main_level_id] and not global.practice_mode:
+			global.progress[global.main_level_id] = progress
 
 func _shift_camera(portal):
 	if abs(portal.global_position.y - cam.global_position.y) < 100:
@@ -109,3 +119,11 @@ func reset_level():
 	player.speedmod = speeds[lvl_data.start_speed]
 	player.ogspeedmod = speeds[lvl_data.start_speed]
 	player.global_position = global.startpos
+	target_shift_pos.y = global.startpos.y
+	$bg/bgtexture.modulate = Color("#00009b")
+	attempts += 1
+	global.attempts = attempts
+	MainSaveFile.save_user_data()
+
+func _endscreen():
+	$GUI.endscreen()

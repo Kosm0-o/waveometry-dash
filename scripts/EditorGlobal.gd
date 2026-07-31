@@ -57,7 +57,9 @@ var object_defintions : Dictionary = {
 	"triplespeedportal": load("res://Resources/objectdefs/triplespeedportal.tres"),
 	"upgravityportal": load("res://Resources/objectdefs/upgravityportal.tres"),
 	"yelloworb": load("res://Resources/objectdefs/yelloworb.tres"),
-	"yellowpad": load("res://Resources/objectdefs/yellowpad.tres")
+	"yellowpad": load("res://Resources/objectdefs/yellowpad.tres"),
+	"endpos": load("res://Resources/objectdefs/endpos.tres"),
+	"minispike": load("res://Resources/objectdefs/minispike.tres")
 }
 var custom_objects : Dictionary
 var editor_selection : Resource

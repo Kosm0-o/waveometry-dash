@@ -1,14 +1,17 @@
 extends Control
 
 func _ready() -> void:
+	MainSaveFile.save_user_data()
 	RenderingServer.set_default_clear_color(Color.BLACK)
 	EditorGlobal.editing = false
+	global.main_level = false
 	global.trans_rect = $trans/ColorRect
 	global.fade_tween(false)
 	setup_custom_level_panels()
 	for btn in [
 		$back,
-		$newlvl
+		$newlvl,
+		$importlevel
 	]:
 		if btn is Button:
 			btn.mouse_entered.connect(
@@ -19,10 +22,11 @@ func _ready() -> void:
 				func():
 					btn.modulate = Color.WHITE
 			)
-
+	$importpanel.fake_objects_node = $fakeobjectsnode
 
 func _process(delta: float) -> void:
 	$substitutelevelpanel/Label.visible = $substitutelevelpanel/ScrollContainer/customlevels.get_children().size() <= 0
+	$importlevel.disabled = $importpanel.visible
 
 func _on_back_pressed() -> void:
 	await global.fade_tween(true)
@@ -42,7 +46,7 @@ func setup_custom_level_panels():
 
 
 func _on_newlvl_pressed() -> void:
-	var newlvlname : String = "NewLevel"  + str(EditorGlobal.custom_levels.size())
+	var newlvlname : String = "NewLevel_"  + str(Time.get_unix_time_from_system())
 	var path : String = "user://customlevels/" + newlvlname + ".json"
 	LevelLoader.save_level(path, $fakeobjectsnode, {"level_name": newlvlname})
 	EditorGlobal.custom_levels.append(path)
@@ -51,3 +55,7 @@ func _on_newlvl_pressed() -> void:
 func switch_to_editor():
 	await global.fade_tween(true)
 	get_tree().change_scene_to_file("res://scenes/editor.tscn")
+
+
+func _on_importlevel_pressed() -> void:
+	$importpanel.show()

@@ -7,6 +7,12 @@ extends CanvasLayer
 
 
 func _ready() -> void:
+	global.trans_rect = $"../trans/ColorRect"
+	$PauseMenu/musicslidernode/slider/musicslider.value = AudioServer.get_bus_volume_db(AudioServer.get_bus_index("Music"))
+	$PauseMenu/musicslidernode/slider/sliderfill.value = $PauseMenu/musicslidernode/slider/musicslider.value
+	$PauseMenu/sfxslidernode/slider/sfxslider.value = AudioServer.get_bus_volume_db(AudioServer.get_bus_index("SFX"))
+	$PauseMenu/sfxslidernode/slider/sliderfill.value = $PauseMenu/sfxslidernode/slider/sfxslider.value
+	await global.fade_tween(false, 0.7)
 	$PauseBtn.pressed.connect(_handle_pausing.bind(true))
 	$PauseMenu/Buttons/PlayBtn.pressed.connect(_handle_pausing.bind(false))
 	practice_mode_btn.mouse_entered.connect(_scale_tween.bind(practice_mode_btn, true))
@@ -40,6 +46,10 @@ func _on_practice_mode_btn_toggled(toggled_on: bool) -> void:
 	global.practice_mode = toggled_on
 
 func _on_menu_btn_pressed() -> void:
+	await global.fade_tween(true)
+	global.players.front().trail_node.queue_free()
+	global.players.front().queue_free()
+	global.practice_mode = false
 	get_tree().paused = false
 	get_tree().change_scene_to_packed(load("res://scenes/mainmenu.tscn"))
 
@@ -66,3 +76,6 @@ func _scale_tween(button, hover : bool):
 
 func highlight(node : Node, entered : bool):
 	node.modulate = Color.WHITE if not entered else Color.WHITE * 1.3
+
+func endscreen():
+	$endscreenpanel.show()

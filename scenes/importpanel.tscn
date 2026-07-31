@@ -1,0 +1,203 @@
+[gd_scene load_steps=16 format=3 uid="uid://cvisiulrmibf1"]
+
+[ext_resource type="Script" uid="uid://72lie4ua5cja" path="res://scripts/importpanel.gd" id="1_pb6lx"]
+[ext_resource type="Texture2D" uid="uid://dl856a0k2vsfn" path="res://assets/font1 - Import level.png" id="2_icasa"]
+[ext_resource type="Texture2D" uid="uid://vffedftkysfq" path="res://assets/icons-decos-ui-spritesheet.png" id="5_he7pr"]
+[ext_resource type="Texture2D" uid="uid://b70rp6rhhsr76" path="res://assets/finaliconsspritesheet.png" id="5_icasa"]
+[ext_resource type="Texture2D" uid="uid://lgi1kob385sm" path="res://assets/xbuttongd.svg" id="6_griv8"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pb6lx"]
+bg_color = Color(0.760784, 0.447059, 0.247059, 1)
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_icasa"]
+bg_color = Color(0.611286, 0.345997, 0.173944, 1)
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_lxvc8"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0a66r"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wbfhx"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_icasa"]
+font_size = 26
+font_color = Color(1, 1, 1, 0.737255)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yv6mx"]
+atlas = ExtResource("5_he7pr")
+region = Rect2(3040, 138, 330, 234)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lxvc8"]
+atlas = ExtResource("5_icasa")
+region = Rect2(2076, 136, 113, 114)
+
+[sub_resource type="LabelSettings" id="LabelSettings_0a66r"]
+font_size = 24
+font_color = Color(0.8, 0, 0.192157, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_lxvc8"]
+font_size = 24
+font_color = Color(0, 0.592157, 0.282353, 1)
+
+[node name="importpanel" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_pb6lx")
+
+[node name="importpanelstuff" type="Panel" parent="."]
+layout_mode = 0
+offset_left = 250.0
+offset_top = 25.0
+offset_right = 929.0
+offset_bottom = 627.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_pb6lx")
+
+[node name="Label" type="TextureRect" parent="importpanelstuff"]
+layout_mode = 0
+offset_left = 46.0
+offset_top = 22.0
+offset_right = 642.0
+offset_bottom = 92.0
+texture = ExtResource("2_icasa")
+expand_mode = 1
+
+[node name="texteditpanel" type="Panel" parent="importpanelstuff"]
+layout_mode = 0
+offset_left = 41.0
+offset_top = 113.0
+offset_right = 659.0
+offset_bottom = 551.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_icasa")
+
+[node name="filedataedit" type="TextEdit" parent="importpanelstuff/texteditpanel"]
+layout_mode = 0
+offset_left = 17.0
+offset_top = 11.0
+offset_right = 601.0
+offset_bottom = 428.0
+theme_override_font_sizes/font_size = 26
+theme_override_styles/normal = SubResource("StyleBoxEmpty_lxvc8")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_0a66r")
+theme_override_styles/read_only = SubResource("StyleBoxEmpty_wbfhx")
+context_menu_enabled = false
+emoji_menu_enabled = false
+selecting_enabled = false
+deselect_on_focus_loss_enabled = false
+drag_and_drop_selection_enabled = false
+virtual_keyboard_enabled = false
+middle_mouse_paste_enabled = false
+empty_selection_clipboard_enabled = false
+wrap_mode = 1
+caret_blink = true
+
+[node name="Label" type="Label" parent="importpanelstuff/texteditpanel/filedataedit"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 2.0
+offset_right = 275.0
+offset_bottom = 38.0
+text = "[Enter Level File Here]"
+label_settings = SubResource("LabelSettings_icasa")
+
+[node name="customborder" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 236.0
+offset_top = -34.0
+offset_right = 965.0
+offset_bottom = 669.0
+mouse_filter = 2
+texture = SubResource("AtlasTexture_yv6mx")
+
+[node name="X" type="Button" parent="."]
+layout_mode = 0
+offset_left = 874.0
+offset_top = -44.0
+offset_right = 1026.0
+offset_bottom = 112.0
+scale = Vector2(0.725, 0.725)
+focus_mode = 0
+theme_override_font_sizes/font_size = 51
+icon = ExtResource("6_griv8")
+flat = true
+
+[node name="importlevel" type="Button" parent="."]
+offset_left = 872.0
+offset_top = 525.0
+offset_right = 994.0
+offset_bottom = 647.0
+focus_mode = 0
+theme_override_font_sizes/font_size = 66
+icon = SubResource("AtlasTexture_lxvc8")
+flat = true
+
+[node name="invalidpopup" type="CanvasLayer" parent="."]
+layer = 128
+visible = false
+
+[node name="ColorRect2" type="ColorRect" parent="invalidpopup"]
+offset_left = 333.0
+offset_top = 34.0
+offset_right = 845.0
+offset_bottom = 117.0
+color = Color(0.801154, 0, 0.191583, 1)
+
+[node name="ColorRect" type="ColorRect" parent="invalidpopup"]
+offset_left = 345.0
+offset_top = 44.0
+offset_right = 833.0
+offset_bottom = 105.0
+color = Color(1, 0.386421, 0.41284, 1)
+
+[node name="Label" type="Label" parent="invalidpopup"]
+offset_left = 347.0
+offset_top = 58.0
+offset_right = 833.0
+offset_bottom = 92.0
+text = "Invalid File Entered!"
+label_settings = SubResource("LabelSettings_0a66r")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="successpopup" type="CanvasLayer" parent="."]
+layer = 128
+visible = false
+
+[node name="ColorRect2" type="ColorRect" parent="successpopup"]
+offset_left = 333.0
+offset_top = 34.0
+offset_right = 845.0
+offset_bottom = 117.0
+color = Color(1.15514e-06, 0.593321, 0.283665, 1)
+
+[node name="ColorRect" type="ColorRect" parent="successpopup"]
+offset_left = 345.0
+offset_top = 44.0
+offset_right = 833.0
+offset_bottom = 105.0
+color = Color(0, 0.851522, 0.133508, 1)
+
+[node name="Label" type="Label" parent="successpopup"]
+offset_left = 347.0
+offset_top = 58.0
+offset_right = 833.0
+offset_bottom = 92.0
+text = "Import Success!"
+label_settings = SubResource("LabelSettings_lxvc8")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="pressed" from="X" to="." method="_on_x_pressed"]
+[connection signal="pressed" from="importlevel" to="." method="_on_importlevel_pressed"]

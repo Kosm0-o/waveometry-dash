@@ -1,6 +1,11 @@
-[gd_scene load_steps=11 format=3 uid="uid://d2yi0cqbfih7l"]
+[gd_scene load_steps=26 format=3 uid="uid://d2yi0cqbfih7l"]
 
 [ext_resource type="Script" uid="uid://cw0fb5kagdow8" path="res://scripts/player.gd" id="1_3vyb7"]
+[ext_resource type="Texture2D" uid="uid://b70rp6rhhsr76" path="res://assets/finaliconsspritesheet.png" id="2_dqkch"]
+[ext_resource type="Texture2D" uid="uid://dc5luvhx3oew6" path="res://assets/particlesquare.svg" id="2_g2els"]
+[ext_resource type="Texture2D" uid="uid://d0v7wtqtxarh7" path="res://assets/addcheckpointbuttongd.svg" id="2_tuyoq"]
+[ext_resource type="Texture2D" uid="uid://i48tgj31tout" path="res://assets/deletecheckpointbuttongd.svg" id="3_fjrip"]
+[ext_resource type="AudioStream" uid="uid://cxgqir20t0lte" path="res://assets/geometry-dash-death-sound-effect.mp3" id="3_qhqgy"]
 
 [sub_resource type="Gradient" id="Gradient_65dh0"]
 offsets = PackedFloat32Array(0, 0.188525, 0.631148)
@@ -38,12 +43,80 @@ unicode = 120
 [sub_resource type="Shortcut" id="Shortcut_qlg0r"]
 events = [SubResource("InputEventKey_dqkch")]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_dqkch"]
+atlas = ExtResource("2_dqkch")
+region = Rect2(0, 386, 1422, 386)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qlg0r"]
+atlas = ExtResource("2_dqkch")
+region = Rect2(1422, 386, 1422, 386)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tuyoq"]
+atlas = ExtResource("2_dqkch")
+region = Rect2(2844, 386, 1422, 386)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fjrip"]
+atlas = ExtResource("2_dqkch")
+region = Rect2(0, 772, 1422, 386)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_smehm"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dqkch")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qlg0r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tuyoq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fjrip")
+}],
+"loop": false,
+"name": &"default",
+"speed": 0.0
+}]
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6w21d"]
 size = Vector2(28, 13)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_3vyb7"]
 radius = 0.25
 height = 1.5
+
+[sub_resource type="Gradient" id="Gradient_qhqgy"]
+offsets = PackedFloat32Array(0, 0.272727, 0.863636, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0.905263, 0.905263, 0.905263, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_dqkch"]
+gradient = SubResource("Gradient_qhqgy")
+
+[sub_resource type="Curve" id="Curve_qlg0r"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.926471, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_tuyoq"]
+curve = SubResource("Curve_qlg0r")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_fjrip"]
+particle_flag_disable_z = true
+angle_min = -720.0
+angle_max = 47.5
+spread = 180.0
+initial_velocity_min = -200.0
+initial_velocity_max = 200.0
+angular_velocity_min = -45.0
+angular_velocity_max = 45.0
+gravity = Vector3(0, 0, 0)
+linear_accel_min = 100.0
+linear_accel_max = 100.0
+scale_curve = SubResource("CurveTexture_tuyoq")
+color = Color(0.292905, 0.960241, 0.999999, 1)
+color_ramp = SubResource("GradientTexture1D_dqkch")
+hue_variation_min = -0.01
+hue_variation_max = 0.00999998
 
 [node name="Player" type="CharacterBody2D"]
 z_index = 2
@@ -76,30 +149,51 @@ process_material = SubResource("ParticleProcessMaterial_p2ug2")
 visible = false
 layout_mode = 3
 anchors_preset = 0
-offset_right = 40.0
+offset_left = 402.0
+offset_right = 442.0
 offset_bottom = 40.0
 
 [node name="add" type="Button" parent="UI/CheckpointsUI"]
 layout_mode = 0
-offset_left = 338.0
 offset_top = 468.0
-offset_right = 507.0
-offset_bottom = 637.0
+offset_right = 137.0
+offset_bottom = 581.0
+scale = Vector2(1.445, 1.445)
 focus_mode = 0
 theme_override_font_sizes/font_size = 111
 shortcut = SubResource("Shortcut_qhqgy")
-text = "Z"
+icon = ExtResource("2_tuyoq")
+flat = true
 
 [node name="remove" type="Button" parent="UI/CheckpointsUI"]
 layout_mode = 0
-offset_left = 625.0
+offset_left = 195.0
 offset_top = 468.0
-offset_right = 794.0
-offset_bottom = 637.0
+offset_right = 288.0
+offset_bottom = 581.0
+scale = Vector2(1.445, 1.445)
 focus_mode = 0
 theme_override_font_sizes/font_size = 111
 shortcut = SubResource("Shortcut_qlg0r")
-text = "X"
+icon = ExtResource("3_fjrip")
+flat = true
+
+[node name="gamemodeidentifierui" type="Control" parent="UI"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Panel" type="Panel" parent="UI/gamemodeidentifierui"]
+layout_mode = 0
+offset_right = 74.0
+offset_bottom = 74.0
+
+[node name="icon" type="AnimatedSprite2D" parent="UI/gamemodeidentifierui/Panel"]
+position = Vector2(32, 39)
+scale = Vector2(0.238342, 0.238342)
+sprite_frames = SubResource("SpriteFrames_smehm")
+frame = 3
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_mask = 0
@@ -112,3 +206,19 @@ shape = SubResource("RectangleShape2D_6w21d")
 position = Vector2(-7.25, 0)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_3vyb7")
+
+[node name="deathparticles" type="GPUParticles2D" parent="."]
+position = Vector2(-8, 0)
+emitting = false
+amount = 50
+texture = ExtResource("2_g2els")
+lifetime = 0.5
+one_shot = true
+speed_scale = 1.8
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_fjrip")
+
+[node name="deathsfx" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_qhqgy")
+volume_db = 16.0
+bus = &"SFX"

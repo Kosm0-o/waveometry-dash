@@ -6,6 +6,7 @@ var current_info : Panel
 
 func _ready() -> void:
 	global.trans_rect = $trans/ColorRect
+	global.main_level = true
 	global.fade_tween(false)
 	infos = $main.get_children()
 	current_info = infos.front()
@@ -53,3 +54,10 @@ func arrow_tween(dir : int = 1):
 	infos.append(infos.pop_front())
 	current_info = infos.front()
 	tweening = false
+
+
+func _on_time_leaper_button_pressed() -> void:
+	global.main_level_id = "time_leaper"
+	EditorGlobal.current_lvl = "res://Resources/mainlevels/timeleaper.json"
+	await global.fade_tween(true)
+	get_tree().change_scene_to_file("res://scenes/game.tscn")

@@ -5,6 +5,7 @@ var safe_timer : float = 0.0
 var fading : bool = false
 
 func _ready() -> void:
+	MainSaveFile.save_user_data()
 	RenderingServer.set_default_clear_color(Color.BLACK)
 	EditorGlobal.editing = false
 	randomize()
@@ -54,6 +55,7 @@ func spawn_player():
 	
 
 func _on_quitbtn_pressed() -> void:
+	MainSaveFile.save_user_data()
 	await global.fade_tween(true)
 	get_tree().quit()
 

@@ -1,11 +1,15 @@
-[gd_scene load_steps=17 format=3 uid="uid://c8dkls50qsedm"]
+[gd_scene load_steps=30 format=3 uid="uid://c8dkls50qsedm"]
 
 [ext_resource type="Script" uid="uid://bft1tp3vnxaud" path="res://scripts/settingspanel.gd" id="1_5kjfj"]
 [ext_resource type="Texture2D" uid="uid://cjhmqr08gd07" path="res://assets/textsspritesheet1.png" id="2_dfh7l"]
 [ext_resource type="Texture2D" uid="uid://vffedftkysfq" path="res://assets/icons-decos-ui-spritesheet.png" id="2_uk3nw"]
 [ext_resource type="FontFile" uid="uid://c21leaucdjxc0" path="res://assets/fonts/PUSAB___.otf" id="3_5bu7b"]
 [ext_resource type="Texture2D" uid="uid://b8vr4anp6aaie" path="res://assets/icons-ui-buttons-spritesheet2.png" id="4_5bu7b"]
+[ext_resource type="Texture2D" uid="uid://c0pmd0qk5k6hk" path="res://assets/customtogglebuttongdon.svg" id="5_6ln5c"]
 [ext_resource type="Texture2D" uid="uid://lgi1kob385sm" path="res://assets/xbuttongd.svg" id="6_6erqq"]
+[ext_resource type="Texture2D" uid="uid://1ey5id0qygtu" path="res://assets/customtogglebuttongdoff.svg" id="6_c78yj"]
+[ext_resource type="Texture2D" uid="uid://b70rp6rhhsr76" path="res://assets/finaliconsspritesheet.png" id="7_ohfe3"]
+[ext_resource type="Theme" uid="uid://dume7nemxq63b" path="res://Resources/visuals/editablepusab.tres" id="8_mw1hb"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6erqq"]
 atlas = ExtResource("2_dfh7l")
@@ -51,9 +55,62 @@ shadow_size = 7
 shadow_color = Color(0, 0, 0, 0.333333)
 shadow_offset = Vector2(7.89, 4.055)
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0xjnn"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_vb3dd"]
+font = SubResource("FontVariation_5lcyj")
+font_size = 33
+outline_size = 18
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 7
+shadow_color = Color(0, 0, 0, 0.333333)
+shadow_offset = Vector2(7.89, 4.055)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_byer7"]
+content_margin_left = 122.0
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_yv6mx"]
 atlas = ExtResource("2_uk3nw")
 region = Rect2(3040, 138, 330, 234)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6ln5c"]
+atlas = ExtResource("7_ohfe3")
+region = Rect2(3456, 154, 197, 77)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c78yj"]
+bg_color = Color(0.760784, 0.447059, 0.247059, 1)
+border_width_left = 7
+border_width_top = 7
+border_width_right = 7
+border_width_bottom = 7
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+
+[sub_resource type="FontVariation" id="FontVariation_0xjnn"]
+base_font = ExtResource("3_5bu7b")
+spacing_glyph = 2
+
+[sub_resource type="LabelSettings" id="LabelSettings_o5vd7"]
+font = SubResource("FontVariation_0xjnn")
+font_size = 65
+outline_size = 18
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 7
+shadow_color = Color(0, 0, 0, 0.333333)
+shadow_offset = Vector2(7.89, 4.055)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vb3dd"]
+atlas = ExtResource("2_uk3nw")
+region = Rect2(3040, 138, 330, 234)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0sa1r"]
+content_margin_left = 5.0
+content_margin_top = 10.0
+content_margin_right = 5.0
+content_margin_bottom = 25.0
 
 [node name="settingspanel" type="Control"]
 layout_mode = 3
@@ -87,6 +144,7 @@ offset_left = 20.0
 offset_top = 127.0
 offset_right = 656.0
 offset_bottom = 573.0
+theme_override_constants/v_separation = 15
 columns = 2
 
 [node name="musicv" type="Label" parent="settingspanel/org"]
@@ -183,6 +241,48 @@ max_value = 6.0
 step = 0.5
 value = -7.5
 
+[node name="gamemodeindicator" type="Label" parent="settingspanel/org"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 41
+theme_override_styles/normal = SubResource("StyleBoxEmpty_0xjnn")
+text = "Show Gamemode
+Indicator"
+label_settings = SubResource("LabelSettings_vb3dd")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="gmitoggle" type="CheckButton" parent="settingspanel/org"]
+layout_mode = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_byer7")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_byer7")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_byer7")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_byer7")
+theme_override_icons/checked = ExtResource("5_6ln5c")
+theme_override_icons/unchecked = ExtResource("6_c78yj")
+flat = true
+
+[node name="lowdetailmode" type="Label" parent="settingspanel/org"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 41
+theme_override_styles/normal = SubResource("StyleBoxEmpty_0xjnn")
+text = "Low-Detail
+Mode"
+label_settings = SubResource("LabelSettings_vb3dd")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ldmtoggle" type="CheckButton" parent="settingspanel/org"]
+layout_mode = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_byer7")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_byer7")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_byer7")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_byer7")
+theme_override_icons/checked = ExtResource("5_6ln5c")
+theme_override_icons/unchecked = ExtResource("6_c78yj")
+flat = true
+
 [node name="customborder" type="TextureRect" parent="."]
 layout_mode = 0
 offset_left = 236.0
@@ -204,4 +304,128 @@ theme_override_font_sizes/font_size = 51
 icon = ExtResource("6_6erqq")
 flat = true
 
+[node name="tutorial" type="Button" parent="."]
+layout_mode = 0
+offset_left = 433.0
+offset_top = 445.0
+offset_right = 638.0
+offset_bottom = 530.0
+scale = Vector2(1.69, 1.69)
+focus_mode = 0
+icon = SubResource("AtlasTexture_6ln5c")
+flat = true
+
+[node name="controlspanel" type="Panel" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 322.0
+offset_top = 24.0
+offset_right = 880.0
+offset_bottom = 600.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_c78yj")
+
+[node name="X" type="Button" parent="controlspanel"]
+z_index = 1
+layout_mode = 0
+offset_left = 484.0
+offset_top = -27.0
+offset_right = 636.0
+offset_bottom = 129.0
+scale = Vector2(0.725, 0.725)
+focus_mode = 0
+theme_override_font_sizes/font_size = 51
+icon = ExtResource("6_6erqq")
+flat = true
+
+[node name="Label" type="Label" parent="controlspanel"]
+layout_mode = 2
+offset_left = 7.0
+offset_top = 49.0
+offset_right = 551.0
+offset_bottom = 133.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 61
+text = "Tutorial"
+label_settings = SubResource("LabelSettings_o5vd7")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="customborder" type="TextureRect" parent="controlspanel"]
+layout_mode = 0
+offset_left = -20.0
+offset_top = -15.0
+offset_right = 578.0
+offset_bottom = 2425.0
+scale = Vector2(1, 0.25)
+mouse_filter = 2
+texture = SubResource("AtlasTexture_vb3dd")
+
+[node name="stuff" type="RichTextLabel" parent="controlspanel"]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 126.0
+offset_right = 523.0
+offset_bottom = 500.0
+theme = ExtResource("8_mw1hb")
+theme_override_font_sizes/normal_font_size = 29
+theme_override_styles/fill = SubResource("StyleBoxEmpty_0sa1r")
+theme_override_styles/background = SubResource("StyleBoxEmpty_0sa1r")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_0sa1r")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_0sa1r")
+bbcode_enabled = true
+text = "[rainbow freq=0.05 val=3.0 sat=0.8][font_size=34]Welcome to Waveometry Dash - Geometry Dash Wave Fangame![/font_size][/rainbow]
+
+
+The [color=green]only button[/color] you'll need for gameplay is [color=green]mouse left click[/color].
+
+
+There are [color=violet]4[/color] different playable gamemodes:
+
+- [color=yellowgreen]Normal[/color]: Click/Hold to go [color=yellow]UP[/color], Release to go [color=skyblue]DOWN[/color]
+
+- [color=purple]Flux[/color]: Click to change DIRECTION
+
+- [color=cyan]Stairsmaster[/color]: Automatically fly straight.
+Click/Hold to go [color=yellow]UP[/color] but you can only hold for a certain amount of time.
+When you hit the top, you go all the way back [color=skyblue]DOWN[/color]
+
+- [color=red]Ricochet[/color]: Always bounce between the top and the bottom.
+Click to fly straight.
+
+
+There are [color=violet]3[/color] different player sizes (affect vertical speed):
+
+- [color=pink]Mini[/color]: Smaller hitbox, faster vertical speed.
+
+- [color=yellowgreen]Normal[/color]: What you start out as.
+
+- [color=blue]Mega[/color]: Bigger hitbox, slower vertical speed.
+
+
+There are 6 different speeds the player can go (affect horizontal speed):
+
+- Slow, Normal, Double, Triple, Quadruple, and Burst.
+
+- [color=orange]Burst[/color]: Gives you a lot of speed for a short amount of time.
+
+There are 3 different gravity portals (affect direction):
+
+- [color=yellow]Up[/color], [color=skyblue]Down[/color], and [color=green]Flip[/color]
+
+- [color=green]Flip[/color]: Reverses gravity (up > down) (down > up)
+
+
+Orbs can be activated when clicking while touching them (circular/octagonal shape).
+
+
+Pads are activated upon touching them.
+
+
+Orbs and Pads can boost your vertical movement very briefly, up or down."
+horizontal_alignment = 1
+
+[connection signal="toggled" from="settingspanel/org/gmitoggle" to="." method="_on_gmitoggle_toggled"]
+[connection signal="toggled" from="settingspanel/org/ldmtoggle" to="." method="_on_ldmtoggle_toggled"]
 [connection signal="pressed" from="X" to="." method="_on_x_pressed"]
+[connection signal="pressed" from="tutorial" to="." method="_on_tutorial_pressed"]
+[connection signal="pressed" from="controlspanel/X" to="." method="_on_controls_x_pressed"]

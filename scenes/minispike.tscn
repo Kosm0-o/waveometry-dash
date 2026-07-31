@@ -1,0 +1,44 @@
+[gd_scene load_steps=5 format=3 uid="uid://ua1xsyvsg1h5"]
+
+[ext_resource type="Script" uid="uid://coa7c8o2o00jy" path="res://scripts/obstacle.gd" id="1_sfwib"]
+[ext_resource type="Texture2D" uid="uid://vffedftkysfq" path="res://assets/icons-decos-ui-spritesheet.png" id="2_sfwib"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k2n4w"]
+atlas = ExtResource("2_sfwib")
+region = Rect2(1858, 1246, 128, 56)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cx2lw"]
+size = Vector2(20, 18)
+
+[node name="minispike" type="Node2D"]
+script = ExtResource("1_sfwib")
+group_bools = {
+"groups": true,
+"targets": false
+}
+
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
+position = Vector2(0.499997, 1)
+scale = Vector2(3.45, 2)
+enable_node_path = NodePath("../Area2D/CollisionShape2D")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, 1)
+scale = Vector2(0.5, 0.5)
+texture = SubResource("AtlasTexture_k2n4w")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, 5)
+shape = SubResource("RectangleShape2D_cx2lw")
+
+[node name="clickdetector" type="Area2D" parent="."]
+collision_layer = 32
+collision_mask = 0
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="clickdetector"]
+polygon = PackedVector2Array(0, -14, -32, 15, 32, 15)
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

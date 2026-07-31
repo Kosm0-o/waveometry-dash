@@ -40,6 +40,7 @@ grow_vertical = 2
 script = ExtResource("1_5mbse")
 
 [node name="background" type="CanvasLayer" parent="."]
+layer = 2
 
 [node name="bgcolortimer" type="Timer" parent="background"]
 wait_time = 10.0
@@ -73,6 +74,7 @@ texture = ExtResource("2_85riq")
 expand_mode = 1
 
 [node name="playerback" type="CanvasLayer" parent="."]
+layer = 2
 
 [node name="playerstuff" type="Node2D" parent="playerback"]
 scale = Vector2(0.75, 0.75)
@@ -101,7 +103,7 @@ scale = Vector2(20.825, 1)
 environment = SubResource("Environment_natt5")
 
 [node name="foregroundui" type="CanvasLayer" parent="."]
-layer = 2
+layer = 3
 
 [node name="playbtn" type="Button" parent="foregroundui"]
 offset_left = 489.0
@@ -170,9 +172,11 @@ offset_bottom = 64.0
 scale = Vector2(0.805, 0.805)
 
 [node name="trans" type="CanvasLayer" parent="."]
+process_mode = 3
 layer = 128
 
 [node name="ColorRect" type="ColorRect" parent="trans"]
+process_mode = 3
 offset_left = -159.0
 offset_top = -92.0
 offset_right = 1424.0

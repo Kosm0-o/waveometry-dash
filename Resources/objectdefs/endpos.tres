@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="ObjectResource" load_steps=4 format=3 uid="uid://c6d1ja2ugi7e3"]
+
+[ext_resource type="Texture2D" uid="uid://8kmgb5ipomxs" path="res://assets/endposgd.svg" id="1_ghncs"]
+[ext_resource type="PackedScene" uid="uid://camqb3hvpys3e" path="res://scenes/endpos.tscn" id="2_sg5vt"]
+[ext_resource type="Script" uid="uid://b7ivepggsojwl" path="res://scripts/objectresource.gd" id="3_slh2y"]
+
+[resource]
+script = ExtResource("3_slh2y")
+id = "endpos"
+display_name = "End Position"
+scene = ExtResource("2_sg5vt")
+icon = ExtResource("1_ghncs")
+category = "triggers"
+max_amount = 1
+metadata/_custom_type_script = "uid://b7ivepggsojwl"

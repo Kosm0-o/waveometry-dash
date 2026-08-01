@@ -1,291 +1,103 @@
 # Waveometry Dash
-
-A Geometry Dash-inspired wave level editor created in Godot that allows players to design, edit, test, save, and share their own custom wave levels.
-
-Created by **Kosm0-o**
-
----
-
-# Overview
-
-**Waveometry Dash** is a custom-built level editor focused on the wave gameplay style found in rhythm-based platforming games.
-
-The goal of this project was to create a tool that gives players the ability to create their own wave challenges through an accessible and flexible editor. Instead of only playing existing levels, users can become creators by designing their own layouts, experimenting with gameplay ideas, and sharing their creations with others.
-
-Waveometry Dash was built from the ground up in Godot, including the gameplay system, editor interface, object system, saving system, and level management.
-
-The project focuses on providing a complete creation workflow:
-
-1. Create a level
-2. Place and customize objects
-3. Add gameplay elements and effects
-4. Test the level instantly
-5. Save the level
-6. Share the level with others
-
----
-
-# Main Features
-
-## Custom Level Editor
-
-The core feature of Waveometry Dash is its built-in level editor.
-
-The editor allows users to create levels without modifying code or project files. Instead, everything is handled through an in-game interface designed specifically for level creation.
-
-Current editor features include:
-
-* Placing objects into levels
-* Selecting and modifying placed objects
-* Moving and editing level elements
-* Organizing objects into categories
-* Creating custom layouts
-* Testing levels directly from the editor
-* Saving and loading custom creations
-
-The editor was designed around fast iteration, allowing creators to quickly experiment with gameplay ideas and immediately test changes.
-
----
-
-# Wave Gameplay System
-
-Waveometry Dash focuses specifically on wave-style gameplay.
-
-The player controls a continuously moving wave object and changes direction to navigate through obstacles. The goal of the gameplay system is to create challenging and precise movement patterns that can be designed through the editor.
-
-Features include:
-
-* Smooth wave movement
-* Adjustable movement speed
-* Obstacle-based gameplay
-* Custom level testing
-* Support for creator-designed challenges
-
-By focusing on one gameplay mode, the project allows the editor and gameplay systems to be more polished and specialized.
-
----
-
-# Object System
-
-Waveometry Dash uses a custom resource-based object system to manage editor content.
-
-Instead of hardcoding every object individually, objects are stored as reusable resources containing their own information and behavior.
-
-Objects are organized into categories:
-
-* Blocks
-* Hazards
-* Portals
-* Interactables
-* Decorations
-* Triggers
-
-This system makes it easier to expand the editor by adding new objects without needing to rewrite the core editor logic.
-
-Each object can contain information such as:
-
-* Object type
-* Visual appearance
-* Gameplay behavior
-* Editor settings
-* Additional properties
-
----
-
-# Trigger System
-
-The editor includes a trigger system for creating more dynamic levels.
-
-Triggers allow level creators to change parts of the gameplay experience during a level instead of relying only on static objects.
-
-Examples include:
-
-* Background changes
-* Object movement
-* Object rotation
-* Gameplay effects
-
-The trigger system provides a foundation for creating levels with more variety and progression.
-
----
-
-# Level Saving System
-
-Waveometry Dash includes a custom level saving and loading system.
-
-Levels are stored as data files rather than being permanently created inside the game scene. This allows levels to be easily saved, transferred, and loaded later.
-
-The saving system stores information such as:
-
-* Object positions
-* Object types
-* Object properties
-* Level settings
-* Gameplay information
-
-This allows the editor to rebuild a level from saved data whenever it is loaded.
-
----
-
-# Level Sharing
-
-Waveometry Dash supports simple file-based level sharing.
-
-Instead of requiring online accounts or servers, levels can be exported as files and shared directly between users.
-
-The workflow is:
-
-1. Create a level in the editor
-2. Export the level file
-3. Send the file to another player
-4. Import the file
-5. Play or continue editing the level
-
-This keeps sharing simple, lightweight, and accessible.
-
----
-
-# Technical Details
-
-Waveometry Dash was created using:
-
-* **Engine:** Godot
-* **Programming Language:** GDScript
-* **Platforms:** Desktop and Web exports
-
-Major technical systems include:
-
-## Custom Resources
-
-Godot's Resource system is used for storing editor data, including:
-
-* Object definitions
-* Music definitions
-* Editor assets
-
-This allows content to be separated from the core code and makes the project easier to expand.
-
-## Data-Based Level Architecture
-
-Levels are stored using structured data rather than manually created scenes.
-
-This allows:
-
-* Easy saving and loading
-* Sharing between users
-* Future expansion
-* Efficient level management
-
-## Modular Design
-
-The project was designed around independent systems, including:
-
-* Object management
-* Level management
-* Editor controls
-* Trigger handling
-* Resource loading
-
-This structure makes future additions easier and keeps the project organized.
-
----
-
-# Development Process
-
-Waveometry Dash was created as a challenge to build a complete level creation tool from scratch.
-
-Some of the main goals during development were:
-
-* Learning how professional editors handle assets and data
-* Creating reusable systems instead of one-off solutions
-* Building a flexible object architecture
-* Learning serialization and file management
-* Creating a tool that other people can use
-
-A major focus was balancing features and polish. Rather than adding many unfinished systems, development focused on creating a strong foundation with working editor tools and a complete creation workflow.
-
----
-
-# Design Goals
-
-The main design goals of Waveometry Dash were:
-
-## Accessibility
-
-The editor should allow users to quickly create levels without needing programming knowledge.
-
-## Flexibility
-
-The object and trigger systems should allow creators to experiment with different level ideas.
-
-## Expandability
-
-The project should have a structure that allows future additions, such as more objects, effects, and gameplay features.
-
-## Creativity
-
-The main purpose of the project is to encourage users to create and share their own challenges.
-
----
-
-# Future Improvements
-
-Possible future additions include:
-
-* More object types
-* Additional trigger effects
-* More customization options
-* Improved editor tools
-* More advanced level settings
-* Better level browsing
-* Community sharing features
-* Additional gameplay modes
-
-The current version focuses on establishing the foundation for a full level creation platform.
-
----
-
+A Geometry Dash-inspired fangame focused entirely on the Wave gamemode, built from scratch in Godot 4.4.1. It features four playable gamemodes, custom mechanics, and a fully featured in-game level editor.
+Link: https://kosm0-o.itch.io/waveometry-dash
+___
+# Origins
+I've always liked the game Geometry Dash (GD) and my friend showed me the game Space Waves. I had only started game dev 4 months ago, so I kept the idea that I could make something better than Space Waves and add the challenge of somewhat recreating GD. The wave gamemode is also one of the most fun and highly skill capped gamemodes in GD. I was just experimenting around with Godot before I started the project, and a month after I got the idea, I saw Macondo. I had joined Hack Club for the game jams, but realized there were You Ship We Ships (YSWS) as well, and the prize of a macbook gave me thorough motivation. I started creating the idea, being too ambitious, thinking of things like Newgrounds API, Backend-based Online Level Sharing, and such. But all I really wanted from this project was to learn more about making games; from polish to making an editor. And a few months later, we have the final version. At first, I just wanted a macbook since my computer was 8 years old, but later on this just turned out as a passion project where I had learned commitment. I spent 5 hours a day for 2 weeks in a row just making things here, even when the burnout took hold of me. I've never been prouder of myself until I made this project. (Also no version 2 coming, as of now)
+___
+# Features
+Here are the features of the game (replicated from GD and original):
+- GD Inspired Main Menu (with Settings and a Tutorial)
+- GD Inspired Level Selection (with Progress Saving)
+- **Custom Demo Level made in the Waveometry Dash Editor** [Time Leaper]
+- Custom User Level Management (Levels save automatically, import custom levels)
+- A Full GD-inspired Editor including:
+  - Dynamic Object Loading
+  - Editable levels
+  - Custom Level Settings (Level Name, Song, Speed, etc.)
+  - Editor Keyboard Shortcuts for Efficiency
+  - Playtesting and Helpful Editor Addons
+  - Navigation UI
+  - Custom Level Exporting (to share levels)
+- 3 Unique Custom Gamemodes (Flux, Stairsmaster, Ricochet)
+- Low-Detail Mode
+- Gamemode Indicator
+- Unique Burst Speed Portal
+- Orbs and Pads Interaction
+- Animation Triggers
+- GD Inspired UI
+- Practice Mode (a bit buggy)
+- And More!
+___
+# Media
+<img width="1782" height="1006" alt="image" src="https://github.com/user-attachments/assets/83ce6ca8-0c1f-4a80-a24c-7a7b3727b3da" />
+<img width="1786" height="1007" alt="image" src="https://github.com/user-attachments/assets/19c92af1-deb5-4269-9a13-36f1531784b8" />
+<img width="1786" height="1007" alt="image" src="https://github.com/user-attachments/assets/4f34242b-915c-4320-82f7-6a3f6e6637da" />
+<img width="1790" height="1002" alt="image" src="https://github.com/user-attachments/assets/ebae0fc2-6b0d-4695-9f53-8bfd2f1ae081" />
+<img width="1786" height="996" alt="image" src="https://github.com/user-attachments/assets/7ec2ac01-c2f0-4818-a858-a6861d4794b6" />
+<img width="1785" height="1001" alt="image" src="https://github.com/user-attachments/assets/1eaaf749-f3e3-4800-aa47-faa818a049b2" />
+<img width="1441" height="803" alt="image" src="https://github.com/user-attachments/assets/c76cdc7b-6af6-470a-a63f-d46eecf038c2" />
+___
 # Controls
-
-## Editor
-
-* Mouse: Select, place, and interact with objects
-* Additional controls may vary depending on editor mode
-
-## Playtest
-
-* Mouse input: Control the wave
-
----
-
-# Installation / Running
-
-Download the latest available build and launch the application.
-
-For web versions, open the provided webpage and allow the game to load.
-
----
-
+- Left Click/Space/W/Up Arrow = Main Game Input
+- Esc = Pause Menu In-Game
+- Left Click = Main Editor Input
+- Q = Editor Select Mode
+- W = Editor Drag/Move Mode
+- E = Editor Add Mode
+- R = Editor Delete Mode
+- Scroll Wheel = Editor Camera Zoom In/Out
+- Right Click + Drag = Editor Camera Move
+- Ctrl + S = Editor Save Level
+- T = Editor Playtest
+- Ctrl + D = Duplicate Editor Object
+- Del/Backspace = Delete Editor Object
+- More in Game!
+___
+# Technical Stuff
+- Made in Godot 4.4.1 Stable
+- Saving using JSON Formatting
+- File-Based Level Sharing (Export/Import)
+- Grouping system for mechanics
+- Trigger system animates with Tweens
+- 4 Autoloads for communication
+- Built Entirely in GD Script
+___
+# Challenges
+Challenges include adding sliding (bro this genuinely made me wanna quit. there was all this annoying collision stuff, angles, bugs, just so much, took forever to work and is still a bit buggy), using files (got used to DirAccess and FileAccess, level saving/loading, etc.), learning Godot quirks (like shared resources), making sure every mechanic works, exporting resources (I had to manually load each one instead of dynamically), and making the demo level (took a while, had lots of bypasses I had to fix).
+___
+# Lessons Learned
+- Data Save and Load
+- Commitment
+- Intertwining Mechanics
+- Physics Interactions
+- Debugging
+- Game Architecture
+___
+# Future Ideas
+**(If I ever come back to this project)**
+- Backend-based Level Sharing
+- HTTP Requesting to Newgrounds for Audio Data
+- More objects, portals, and unique mechanics
+- Better editor
+- Better organization
+- More
+___
 # Credits
-
-## Creator
-
-**Kosm0-o**
-
-## Built With
-
-**Godot Engine**
-
-## Inspiration
-
-Inspired by the creativity and level-building systems of rhythm platforming games, especially the idea of allowing players to become level creators.
-
----
-
-# Final Notes
-
-Waveometry Dash represents a complete level creation workflow, combining gameplay, editing tools, resource management, saving, and sharing into one project.
-
-The project was built with the goal of creating not only a game, but a tool that allows other people to create their own experiences.
-
-Thank you for checking out **Waveometry Dash**!
+**(This is a pure fangame, will never be sold, and is dedicated to anyone in the credits)**
+Based on: Geometry Dash by Robtop Games; Space Waves by Egor Zakharov
+Main Menu Theme: Robtop Games
+Death SFX: Robtop Games
+Time Leaper, Realms, Skystrike: Hinkik
+Flow, Dimension, Sphere: Creo
+Unstable Geometry: Waterflame
+Every End, At the Speed of Light: Dimrain47
+Most Art: Kosm0-o (me); Inspired by GD by Robtop Games
+Rest of Art (Dark Timothy, Dark Flat Spike, Dark Saw): To Be Named (Guy on Scratch I think, but my friend gave them to me, I'm asking who the original maker was)
+Code: Kosm0-o (Me)
+___
+# Stats
+Development Time: ~ 165+ Hours
+Official Demo Level Time: 1:08 (68 seconds)
+Official Demo Level Objects: ~ 1293+ Objects
+Official Demo Level File: 27524 lines

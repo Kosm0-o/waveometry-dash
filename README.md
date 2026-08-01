@@ -95,6 +95,7 @@ Every End, At the Speed of Light: Dimrain47
 Most Art: Kosm0-o (me); Inspired by GD by Robtop Games
 Rest of Art (Dark Timothy, Dark Flat Spike, Dark Saw): Riamo (a.k.a. ARandomPsi)
 Code: Kosm0-o (Me)
+Fonts and Stuff: https://gdcolon.com/gdfont (Website by GDColon, Fonts from GD)
 ___
 # Stats
 Development Time: ~ 165+ Hours

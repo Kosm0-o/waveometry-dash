@@ -93,7 +93,7 @@ Flow, Dimension, Sphere: Creo
 Unstable Geometry: Waterflame
 Every End, At the Speed of Light: Dimrain47
 Most Art: Kosm0-o (me); Inspired by GD by Robtop Games
-Rest of Art (Dark Timothy, Dark Flat Spike, Dark Saw): To Be Named (Guy on Scratch I think, but my friend gave them to me, I'm asking who the original maker was)
+Rest of Art (Dark Timothy, Dark Flat Spike, Dark Saw): Riamo (a.k.a. ARandomPsi)
 Code: Kosm0-o (Me)
 ___
 # Stats

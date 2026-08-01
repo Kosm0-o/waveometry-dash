@@ -5,6 +5,7 @@ var tweening : bool = false
 var current_info : Panel
 
 func _ready() -> void:
+	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	global.trans_rect = $trans/ColorRect
 	global.main_level = true
 	global.fade_tween(false)

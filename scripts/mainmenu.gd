@@ -5,6 +5,7 @@ var safe_timer : float = 0.0
 var fading : bool = false
 
 func _ready() -> void:
+	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	MainSaveFile.save_user_data()
 	RenderingServer.set_default_clear_color(Color.BLACK)
 	EditorGlobal.editing = false

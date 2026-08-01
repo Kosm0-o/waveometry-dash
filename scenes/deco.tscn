@@ -15,6 +15,10 @@ size = Vector2(89, 89)
 [node name="deco" type="Node2D"]
 script = ExtResource("1_uwo68")
 deco = 6
+group_bools = {
+"groups": true,
+"targets": false
+}
 metadata/_custom_type_script = "uid://vj5rshmf5d5h"
 
 [node name="sprite" type="TextureRect" parent="."]

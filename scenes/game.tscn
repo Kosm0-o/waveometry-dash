@@ -120,6 +120,7 @@ environment = SubResource("Environment_trtic")
 
 [node name="bg" type="Parallax2D" parent="."]
 z_index = -4096
+scroll_scale = Vector2(0.99, 0.99)
 repeat_size = Vector2(2304, 1296)
 repeat_times = 10
 

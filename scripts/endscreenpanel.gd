@@ -15,8 +15,8 @@ func _on_menubutton_pressed() -> void:
 
 func _on_replaybutton_pressed() -> void:
 	global.practice_mode = false
+	if EditorGlobal.playtest: global.players.front().die(); await get_tree().create_timer(2.5).timeout
 	get_tree().change_scene_to_packed(load("res://scenes/game.tscn"))
-	
 
 func highlight(node : Node, entered : bool):
 	node.modulate = Color.WHITE if not entered else Color.WHITE * 1.3

@@ -1,6 +1,6 @@
 extends LevelObject
 
-func _ready() -> void:
+func object_ready() -> void:
 	global.endpos = self
 
 func _process(delta: float) -> void:

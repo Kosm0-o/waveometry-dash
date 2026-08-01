@@ -1,10 +1,11 @@
-[gd_scene load_steps=14 format=3 uid="uid://bbv13iaydmst7"]
+[gd_scene load_steps=15 format=3 uid="uid://bbv13iaydmst7"]
 
 [ext_resource type="Script" uid="uid://baw1k6g8ptp5n" path="res://scripts/editorlevelmenu.gd" id="1_i2uum"]
 [ext_resource type="FontFile" uid="uid://c21leaucdjxc0" path="res://assets/fonts/PUSAB___.otf" id="2_b5g28"]
 [ext_resource type="Texture2D" uid="uid://vffedftkysfq" path="res://assets/icons-decos-ui-spritesheet.png" id="2_kf2fo"]
 [ext_resource type="Texture2D" uid="uid://b70rp6rhhsr76" path="res://assets/finaliconsspritesheet.png" id="4_34syu"]
 [ext_resource type="PackedScene" uid="uid://cvisiulrmibf1" path="res://scenes/importpanel.tscn" id="5_ewmrj"]
+[ext_resource type="AudioStream" uid="uid://c5cpkag0fagl7" path="res://assets/music/gdmenuoncrack.wav" id="6_6agnp"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_34syu"]
 atlas = ExtResource("2_kf2fo")
@@ -183,6 +184,12 @@ mouse_filter = 2
 color = Color(0, 0, 0, 1)
 
 [node name="fakeobjectsnode" type="Node2D" parent="."]
+
+[node name="bgmusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_6agnp")
+pitch_scale = 1.14
+autoplay = true
+bus = &"Music"
 
 [connection signal="pressed" from="back" to="." method="_on_back_pressed"]
 [connection signal="pressed" from="newlvl" to="." method="_on_newlvl_pressed"]

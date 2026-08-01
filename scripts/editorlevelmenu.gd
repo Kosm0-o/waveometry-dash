@@ -1,6 +1,7 @@
 extends Control
 
 func _ready() -> void:
+	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	MainSaveFile.save_user_data()
 	RenderingServer.set_default_clear_color(Color.BLACK)
 	EditorGlobal.editing = false

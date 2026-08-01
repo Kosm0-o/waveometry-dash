@@ -55,6 +55,7 @@ func object_ready():
 		"linedeco":
 			deco = DECO.LINE
 	sprite.texture = sprite.texture.duplicate()
+	sprite.material = sprite.material.duplicate()
 	var reg = atlas_regions[deco].region
 	sprite.texture.region = reg
 	sprite.size = reg.size

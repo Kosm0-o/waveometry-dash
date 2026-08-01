@@ -22,6 +22,7 @@ var attempts : int = 0
 var time_passed : float = 0.0
 
 func _ready() -> void:
+	Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
 	EditorGlobal.editing = false
 	global.portal_entered.connect(_shift_camera)
 	global.level_complete.connect(_endscreen)

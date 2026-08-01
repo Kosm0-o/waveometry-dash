@@ -63,6 +63,10 @@ func _handle_pausing(paused : bool):
 	get_tree().paused = paused
 	$PauseBtn.visible = not paused
 	$PauseMenu.visible = paused
+	if $PauseMenu.visible:
+		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+	else:
+		Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
 
 func _scale_tween(button, hover : bool):
 	var m = 1.0 if not hover else 1.15
@@ -78,4 +82,5 @@ func highlight(node : Node, entered : bool):
 	node.modulate = Color.WHITE if not entered else Color.WHITE * 1.3
 
 func endscreen():
+	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	$endscreenpanel.show()

@@ -68,9 +68,11 @@ var lvl_name : String = ""
 var glow_enabled : bool = false
 var click_start_pos : Vector2
 var dragging : bool = false
+var autosave_timer : float = 0.0
 
 
 func _ready() -> void:
+	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	MainSaveFile.save_user_data()
 	#LevelLoader.save_level(EditorGlobal.current_lvl, $levelobjects, {})
 	EditorGlobal.editing = true
@@ -91,6 +93,7 @@ func _ready() -> void:
 	setup_buttons()
 	await global.fade_tween(false)
 	RenderingServer.set_default_clear_color(Color("#292929"))
+	cam.global_position = global.startpos
 #	for song in SongDatabase.song_definitions:
 #		print(song.display_name, ": ", song.audio)
 
@@ -145,6 +148,10 @@ func _process(delta: float) -> void:
 	$gui/navigationui/menubtnoffset/MenuButton.icon.region = Rect2(288.0, 4.0, 144.0, 148.0) if not $gui/navigationui/menubtnoffset/MenuButton.button_pressed else Rect2(0.0, 156.0, 144.0, 156.0)
 	$gui/navigationui/menubtnoffset.rotation_degrees = lerpf($gui/navigationui/menubtnoffset.rotation_degrees, -90 if $gui/navigationui/menubtnoffset/MenuButton.button_pressed else 0, 12 * delta)
 	$gui/groupsui/customborder.visible = $gui/groupsui/globalgroupspanel.visible or $gui/groupsui/groupspanel.visible
+	autosave_timer += delta
+	if autosave_timer >= 5.0:
+		LevelLoader.save_level(EditorGlobal.current_lvl, $levelobjects, generate_settings_dictionary())
+		autosave_timer = 0.0
 
 func connect_signals():
 	EditorGlobal.object_deleted.connect(_object_deleted)

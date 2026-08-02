@@ -37,7 +37,9 @@ ___
 <img width="1786" height="996" alt="image" src="https://github.com/user-attachments/assets/7ec2ac01-c2f0-4818-a858-a6861d4794b6" />
 <img width="1785" height="1001" alt="image" src="https://github.com/user-attachments/assets/1eaaf749-f3e3-4800-aa47-faa818a049b2" />
 <img width="1441" height="803" alt="image" src="https://github.com/user-attachments/assets/c76cdc7b-6af6-470a-a63f-d46eecf038c2" />
-___
+
+_____
+
 # Controls
 - Left Click/Space/W/Up Arrow = Main Game Input
 - Esc = Pause Menu In-Game
